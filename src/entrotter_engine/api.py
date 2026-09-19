@@ -13,7 +13,7 @@ from .store import ArtifactStore, StoreBusy, StoreFull
 from .models import ValidationError
 from .rpc import RPCError
 from .evm import ExecutionError
-from .runner import run
+from .runner import run, run_native
 
 MAX_BODY = 262144
 MAX_CONNECTIONS = 8
@@ -32,18 +32,14 @@ class EngineServer(ThreadingHTTPServer):
         *,
         token: str = "",
         output: str | Path = "artifacts",
-        isolated: bool = False,
+        isolated: bool = True,
     ):
         self.token, self.output = token, Path(output).resolve()
         self.store = ArtifactStore(self.output)
         self.slot = threading.BoundedSemaphore(1)
         self.connections = threading.BoundedSemaphore(MAX_CONNECTIONS)
-        if isolated:
-            from .isolated import run_isolated
-
-            self.runner = run_isolated
-        else:
-            self.runner = run
+        # This switch belongs to the trusted operator, never to request JSON.
+        self.runner = run if isolated else run_native
         super().__init__(("127.0.0.1", port), Handler)
 
     def process_request(self, request, client_address):

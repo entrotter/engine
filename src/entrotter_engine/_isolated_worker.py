@@ -5,7 +5,7 @@ import signal
 import sys
 
 from entrotter_engine.artifact import canonical
-from entrotter_engine.runner import run
+from entrotter_engine.runner import run_native
 
 MAX_INPUT = 262144
 MAX_OUTPUT = 8 * 1024 * 1024
@@ -23,7 +23,7 @@ def main():
         raw = sys.stdin.buffer.read(MAX_INPUT + 1)
         if not raw or len(raw) > MAX_INPUT:
             raise ValueError("Worker input limit exceeded")
-        result = run(json.loads(raw))
+        result = run_native(json.loads(raw))
         output = canonical(result)
         if len(output) > MAX_OUTPUT:
             raise ValueError("Worker output limit exceeded")

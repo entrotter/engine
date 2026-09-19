@@ -12,7 +12,7 @@ from unittest.mock import patch
 from entrotter_engine.artifact import seal
 from entrotter_engine.evm import ExecutionError
 from entrotter_engine.isolated import run_isolated, worker_args, verify_daemon
-from entrotter_engine.runner import run
+from entrotter_engine.runner import run_native as run
 
 IMAGE = 'sha256:' + 'a' * 64
 

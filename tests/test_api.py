@@ -10,7 +10,7 @@ class APITests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.temp=tempfile.TemporaryDirectory()
-        cls.server=EngineServer(0,token='test-only',output=cls.temp.name)
+        cls.server=EngineServer(0,token='test-only',output=cls.temp.name,isolated=False)
         cls.thread=threading.Thread(target=cls.server.serve_forever,daemon=True);cls.thread.start()
         cls.fixture=json.loads((Path(__file__).parent/'data/fixture.json').read_text())
     @classmethod
@@ -29,7 +29,7 @@ class APITests(unittest.TestCase):
         status,result=self.request('POST','/v1/runs',self.fixture);self.assertEqual(status,201)
         status,again=self.request('GET','/v1/runs/'+result['artifact_id']);self.assertEqual(status,200);self.assertEqual(result,again)
     def test_report_filename_must_match_content_hash(self):
-        from entrotter_engine.runner import run
+        from entrotter_engine.runner import run_native as run
         report = run(self.fixture)
         path = Path(self.temp.name) / ('f' * 64 + '.json')
         path.write_text(json.dumps(report))

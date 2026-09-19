@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 from entrotter_engine.evm import AnvilSession, ExecutionError
 from entrotter_engine.rpc import RPC, RPCError
-from entrotter_engine.runner import run
+from entrotter_engine.runner import run_native as run
 
 
 @unittest.skipUnless(shutil.which("anvil"), "Real Anvil executable required")
