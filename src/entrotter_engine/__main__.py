@@ -5,6 +5,7 @@ import os
 import sys
 from .api import EngineServer
 from .artifact import write_report
+from .export_budget import ExportBudget
 from .runner import run, run_native, load
 from .evm import ExecutionError
 from .rpc import RPCError
@@ -13,6 +14,7 @@ from .rpc import RPCError
 def main(argv=None):
     p = argparse.ArgumentParser(description="Entrotter local simulation engine")
     s = p.add_subparsers(dest="command", required=True)
+    s.add_parser("exports", help="Inspect shared export quota and charged paths")
     r = s.add_parser("run")
     r.add_argument("scenario")
     r.add_argument("-o", "--output", required=True)
@@ -36,6 +38,9 @@ def main(argv=None):
         )
     args = p.parse_args(argv)
     try:
+        if args.command == "exports":
+            print(json.dumps(ExportBudget().snapshot(), indent=2))
+            return 0
         if args.command == "run":
             executor = run if args.isolated else run_native
             result = executor(load(args.scenario))

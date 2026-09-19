@@ -50,3 +50,9 @@ outside coverage. This is broader than the binary's actual linked dependency
 subset and does not establish complete compiler/C-library/build-system coverage
 or reproducible compilation. Keep the inventory and scope visible; never suppress
 an advisory or claim that a signed provenance statement proves software security.
+
+CLI export accounting assumes cooperating versions sharing one private operator
+state directory. Pending reservations survive abrupt process death and remain
+charged. Never reset the ledger while retaining its outputs. Operator file moves,
+other applications, old clients and distinct state roots are outside this budget;
+this is not a whole-filesystem quota. Inspect usage with the exports command.

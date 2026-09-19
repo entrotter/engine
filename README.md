@@ -199,7 +199,7 @@ This caps container worker concurrency per daemon, not Python caller processes,
 Docker overhead, independent daemons, explicit native execution or older clients
 using random worker names. Use matching host code and rebuild the worker image;
 do not mix old and new runners on a shared daemon when relying on this bound.
-Image/VM storage and independent export retention still lack aggregate quotas.
+Image/VM storage remains operator-controlled. CLI exports use the shared budget below.
 The API connection/report bounds below apply in both modes. Remaining limits and independent security review are
 open release gates; this does not make the engine a public multi-tenant service.
 
@@ -239,9 +239,7 @@ filesystem quota against noncooperating programs or filesystem metadata. The
 bounded API store requires POSIX; direct fixture execution remains portable.
 
 CLI file exports also enforce 8 MiB per report and use exclusively created
-private temporary files. A failed write preserves the prior destination. Exports
-to different user-selected directories have no shared aggregate quota; their
-retention and free disk space remain the operator's responsibility.
+private temporary files. A failed write preserves the prior destination. Exports to different user-selected directories share the export budget below.
 
 ## Quality and dependency checks
 
@@ -387,3 +385,48 @@ or bit-for-bit reproducible compilation. The separate image gate covers detected
 OS/interpreter packages; broader security/release gates remain open.
 
 [Upstream pinned release workflow](https://github.com/foundry-rs/foundry/blob/cae51ad458f6abb64852b7709eb784352429825d/.github/workflows/release.yml).
+
+## Shared report export budget
+
+Standalone and engine CLI exports share a private POSIX bookkeeping directory:
+`~/.local/state/entrotter/export-budget-v1`. Operators may set
+`ENTROTTER_EXPORT_STATE_DIR` to one other private directory; all cooperating
+clients must use that same directory. Requested `--output` paths keep their
+existing meaning. No engine/SDK runtime dependency is added by this mechanism.
+
+The budget is 128 MiB of tracked file contents and 128 files across output paths,
+including reserved/incomplete writes. Each report remains at most 8 MiB. Admission
+uses a nonblocking process lock. A durable reservation precedes creation of output
+bytes, and replacement reserves the old file plus the new temporary file. A full
+or busy budget rejects the write without replacing its prior destination. An
+identical complete tracked export is idempotent, including at capacity.
+
+```bash
+python3 -m entrotter_engine exports
+```
+
+The command shows charged paths, pending temporary files and current usage.
+Remove unwanted reports or listed abandoned temporary files locally; subsequent
+admission reconciles missing files. Completed reports are never auto-deleted.
+Do not delete/reset the ledger to free space: that discards tracking of existing
+outputs. Invalid, inaccessible or insecure bookkeeping fails closed.
+
+A process killed before rename can leave a temporary file, whose full reserved
+size remains charged. After rename, the reservation recognizes only an exact
+size/SHA-256 match at the final path. Ambiguous state retains its charge. Ordinary
+exceptions remove only the owned temporary inode. Ledger contents are limited
+to 256 KiB, with at most one additional 256-KiB staging file and an empty lock.
+
+These are application file-content bounds for matching writers using one state
+root. They do not constrain pre-existing untracked files, operator moves/renames,
+noncooperating programs, older clients, separate state roots, filesystem metadata,
+image/VM storage or all host processes. State is private to the local operator;
+paths/report contents are not uploaded. POSIX locking is required even for API-only
+CLI exports. The engine API's dedicated report store retains its separate quota.
+A run can complete before an export is refused; do not blindly retry an API POST.
+
+The stdlib-only `export_budget.py` is deliberately vendored identically in the
+independent engine and CLI packages. Cross-repository CI requires byte equality
+and verifies shared admission using both real CLIs and separate mixed processes.
+Any protocol change must preserve this shared-state contract or use a deliberately
+migrated protocol version; never silently reset existing reservations.
