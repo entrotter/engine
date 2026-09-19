@@ -1,0 +1,39 @@
+name: Isolated worker enforcement
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  isolated:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONPATH: src
+      ENTROTTER_DOCKER_SOCKET: /var/run/docker.sock
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.3
+      - name: Build local worker from digest-verified inputs
+        run: |
+          python scripts/build_worker.py
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          image = json.loads(Path('worker-image.json').read_text())['image_id']
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write('ENTROTTER_WORKER_IMAGE=' + image + '\n')
+          PY
+      - name: Verify real kernel enforcement, API and lifetime cleanup
+        run: python -m unittest discover -s tests_isolated -v
+      - name: Verify no test workers remain
+        if: always()
+        run: |
+          workers=$(docker ps --all --filter label=org.entrotter.worker=true --format '{{.ID}}')
+          test -z "$workers"
