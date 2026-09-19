@@ -135,6 +135,40 @@ class APILimitTests(unittest.TestCase):
                 connection.close()
             self.wait_active(0)
 
+    def test_rejected_trickle_cannot_extend_accept_loop_grace(self):
+        sockets = []
+        stop = threading.Event()
+        sender = None
+        try:
+            for _ in range(8):
+                sockets.append(socket.create_connection(('127.0.0.1', self.server.server_port), timeout=3))
+            self.wait_active(8)
+            with socket.create_connection(('127.0.0.1', self.server.server_port), timeout=3) as client:
+                self.assertTrue(client.recv(4096, socket.MSG_PEEK).startswith(b'HTTP/1.1 503'))
+                sent = []
+                def trickle():
+                    while not stop.wait(.005):
+                        try:
+                            client.sendall(b'x')
+                            sent.append(1)
+                        except OSError:
+                            return
+                sender = threading.Thread(target=trickle, daemon=True)
+                sender.start()
+                started = time.monotonic()
+                self.assertEqual(self.request('GET', '/health')[0], 503)
+                self.assertLess(time.monotonic() - started, 1)
+                self.assertGreaterEqual(len(sent), 2)
+            self.assertEqual(self.server.peak, 8)
+        finally:
+            stop.set()
+            if sender is not None:
+                sender.join(timeout=2)
+                self.assertFalse(sender.is_alive())
+            for connection in sockets:
+                connection.close()
+            self.wait_active(0)
+
     def test_full_store_returns_507_and_retains_saved_report(self):
         self.server.store = ArtifactStore(self.temp.name, max_files=1)
         status, original = self.request('POST', '/v1/runs', self.scenario)
