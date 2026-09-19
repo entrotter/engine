@@ -41,7 +41,8 @@ class RPC:
         self.next_id += 1
         req_id = self.next_id
         body = json.dumps({"jsonrpc": "2.0", "id": req_id, "method": method, "params": params or []}).encode()
-        req = Request(self.url, body, {"Content-Type": "application/json"}, method="POST")
+        req = Request(self.url, body, {"Content-Type": "application/json",
+                                      "User-Agent": "Entrotter/0.1.0"}, method="POST")
         try:
             with self.opener.open(req, timeout=self.timeout) as response:
                 raw = response.read(4 * 1024 * 1024 + 1)

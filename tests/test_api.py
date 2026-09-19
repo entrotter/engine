@@ -36,6 +36,9 @@ class APITests(unittest.TestCase):
         try: self.assertEqual(self.request('POST','/v1/runs',self.fixture)[0],429)
         finally: self.server.slot.release()
     def test_content_type(self): self.assertEqual(self.request('POST','/v1/runs',{}, {'Content-Type':'text/plain'})[0],415)
-    def test_payload_limit(self): self.assertEqual(self.request('POST','/v1/runs',{'large':'x'*270000})[0],413)
+    def test_payload_limit(self):
+        # The server rejects the declared size before reading bytes. Sending a
+        # large body races that close and can reset the client's write on macOS.
+        self.assertEqual(self.request('POST','/v1/runs',headers={'Content-Length':'270000'})[0],413)
 
 if __name__=='__main__': unittest.main()

@@ -14,3 +14,7 @@ artifacts/
 node_modules/
 playwright-report/
 test-results/
+
+# Rebuilt contract test artifacts
+tests/contracts/out/
+tests/contracts/cache/
