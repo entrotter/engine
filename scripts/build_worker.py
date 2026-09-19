@@ -103,9 +103,12 @@ def main():
             "source_files": sources,
             "foundry_version": "1.8.3",
             "foundry_archive_sha256": expected,
+            "anvil_binary_sha256": hashlib.sha256(
+                (context / "anvil").read_bytes()
+            ).hexdigest(),
             "architecture": architecture,
             "published": False,
-            "base_image": "python:3.12-slim-trixie@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9",
+            "base_image": "cgr.dev/chainguard/python@sha256:011e73b4e30e0fe9407a42b82a920b4fa13ebc0bf029a48b714f950df254ca20",
         }
         args.output.write_text(json.dumps(result, indent=2) + "\n")
         print(
