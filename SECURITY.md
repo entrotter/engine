@@ -56,3 +56,17 @@ state directory. Pending reservations survive abrupt process death and remain
 charged. Never reset the ledger while retaining its outputs. Operator file moves,
 other applications, old clients and distinct state roots are outside this budget;
 this is not a whole-filesystem quota. Inspect usage with the exports command.
+
+The bounded agent API accepts only built-in risk decisions or data-only recorded
+replay. The private worker protocol has an exact envelope shape/version, validates
+selection/budgets before node launch, and binds its response to the complete input
+hash. Recordings cannot select code, imports, commands or network destinations.
+The local-EVM worker has no external network; fork workers retain the general
+archive bridge limitation above. Response hashes detect corruption and mismatched
+requests, not a malicious operator-selected image.
+
+`run_agent_native` deliberately executes a trusted caller-supplied provider object
+outside the container. It is never a fallback or selectable from HTTP/scenario
+JSON. Before/after decision deadline checks cannot interrupt a hung arbitrary
+Python callback. Never describe native provider calls as sandboxed. Provider
+metadata/recordings must contain no secrets before saving or sharing a report.

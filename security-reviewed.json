@@ -149,48 +149,48 @@
     {
       "file": "src/entrotter_engine/isolated.py",
       "test_id": "B404",
-      "line": 11,
-      "code_sha256": "acc6cc0af18992f56c2a2af670805f769b91f45342faedb83401bbdd7a2d6686",
+      "line": 12,
+      "code_sha256": "2465a4bcf6e163e04367571748181fc25aed570802df4c31928802bfc843ccde",
       "severity": "LOW",
       "reason": "This module imports subprocess for the fixed, individually reviewed calls below. No shell or scenario-selected executable is accepted; command construction is reviewed at each call site."
     },
     {
       "file": "src/entrotter_engine/isolated.py",
       "test_id": "B603",
-      "line": 43,
-      "code_sha256": "1dd54ce6b876cfb9bf7ebf6b0960879b7459407a003e78901053727c54cbc302",
+      "line": 44,
+      "code_sha256": "926ae5fdbfc99ddb43f6509405e3fc7f11a7ef4fbf80afb70cd525cad68c55d1",
       "severity": "LOW",
       "reason": "Runs a fixed Docker ps query with an anchored constant name and optional generated owner UUID label, shell=False and ten-second timeout. Full container IDs are validated before use. No scenario fields or arbitrary selectors enter this control query."
     },
     {
       "file": "src/entrotter_engine/isolated.py",
       "test_id": "B603",
-      "line": 63,
-      "code_sha256": "61bb7f399f5b7ef49830ad80f5025505552f2b4494b410746bff783bb4690c5d",
+      "line": 64,
+      "code_sha256": "1a3b41991073a58e752c40c59e3a970275412100304cf0b0cd29f5ac4f30234d",
       "severity": "LOW",
       "reason": "Runs fixed docker rm --force with only the validated full immutable container ID obtained from this invocation\u2019s unique owner label. Never removes by the shared name, so a late finalizer cannot delete a replacement worker. Trusted local socket, shell=False and ten-second timeout."
     },
     {
       "file": "src/entrotter_engine/isolated.py",
       "test_id": "B108",
-      "line": 119,
-      "code_sha256": "cd2ac3d0bfc9b53aadb5d9143e7251097e33c0bb09660ab0bd45e5d0de7654a8",
+      "line": 120,
+      "code_sha256": "dcb9d5ccb79c9df41c14a23f99c4c070415f754ff4ee559c7f6e13e35a67d785",
       "severity": "MEDIUM",
       "reason": "This is a Docker tmpfs mount specification for /tmp inside the disposable container, not an insecure host temporary filename. The mount has a 64 MiB limit with noexec/nosuid/nodev; the host uses tempfile for exclusive temporary creation. Real kernel enforcement tests cover the mount."
     },
     {
       "file": "src/entrotter_engine/isolated.py",
       "test_id": "B603",
-      "line": 137,
-      "code_sha256": "1f14afc03787ab5355670aa04f997dbba4c11ef0da9b6b5113d57c67d2a4fe77",
+      "line": 138,
+      "code_sha256": "1d793d54afe136e47fb8db1761ec4330cabe017b5479c3b47f3ef6bf34d146ac",
       "severity": "LOW",
       "reason": "Runs a fixed docker info query through the verified local Unix socket, with an absolute operator-trusted Docker executable, empty client configuration, shell=False and ten-second timeout. No scenario fields enter the arguments."
     },
     {
       "file": "src/entrotter_engine/isolated.py",
       "test_id": "B603",
-      "line": 187,
-      "code_sha256": "c44f4a0bf496e5c6a267d8c5411d0946934348b2f7bd39ff905d9ed143049bd6",
+      "line": 205,
+      "code_sha256": "8049b4a008f83eab6c4fe763d8b73882f2254371a75c1ae939c3f46e4d759de6",
       "severity": "LOW",
       "reason": "Launches fixed Docker worker options, a constant daemon-wide slot name, generated owner label and operator-owned immutable image ID. Scenario JSON uses bounded stdin, never command text. No shell or scenario-selected command/image is allowed; cleanup verifies exact ownership."
     }
@@ -199,22 +199,24 @@
     "src/entrotter_engine/__init__.py": "11f3961a518c3a40429472d8582270a306114419f588008729d8759d8da83db6",
     "src/entrotter_engine/__main__.py": "1310849fd72ef7f9072a31db68da443b5901c007fdfb9161440753f27ab0ef97",
     "src/entrotter_engine/_guardian.py": "3758412adb3e8761a3c82eac89cbf5a72bac7d0dad5c492a6825b4bb2a5f9ddf",
-    "src/entrotter_engine/_isolated_worker.py": "eb8062f0b477793f8d489f376d04b8cf445a3b00decb3c58ae13bbf983698e7a",
+    "src/entrotter_engine/_isolated_worker.py": "ec3ae2219ce1bce01e9d9aa97d67a0f1cbc354abcdda3e5514d028b0dfc271de",
+    "src/entrotter_engine/agent.py": "de16734bc3a9dac08d51efc7721bf5bb0c0671266df8883910dc0ac64374a01c",
     "src/entrotter_engine/api.py": "cab74cd6a4e62230e5d6ce5c386a341e290fb1658ba8fc75892d02f859ebae3c",
     "src/entrotter_engine/artifact.py": "a76cfe6d83e28f2f15ef7fb4f9b06dc5c5d51db0c89c7fa9c9e627161527787c",
     "src/entrotter_engine/defi.py": "f4f5e6e50ad3745426c7d0fbc08b5fa42c79fd4daa225667821814f95acb7fde",
-    "src/entrotter_engine/evm.py": "7f8fdde9bc96f0bdcdbba7f04b4ff5175808943c547e47d97662abee2392b443",
+    "src/entrotter_engine/evm.py": "a9ac4ba7704c2bca5360c981a725a7bc9c5586c95dce0c913594db8ee3e9af47",
+    "src/entrotter_engine/export_budget.py": "2bebd29413cb86bf25acdc108d87b3f13a3ecd6ed447cd04a86a4e6a9e28614f",
     "src/entrotter_engine/fixture.py": "1f771e23c8b8311bf1f5e9cc56bf30f7b369f8f617513d99024876688e809647",
-    "src/entrotter_engine/isolated.py": "5a1079194380ea0e84433a506be88636aa464aa7a3d1131bdf954520e5065800",
+    "src/entrotter_engine/isolated.py": "0f3181c70f96fdb4282d089e54de96f803977d00d792d4e625c365ccbb344780",
     "src/entrotter_engine/models.py": "1383a7d508e22210217af4515c664c82a861f8a23dcef9dd9ec8f831966ae9b7",
     "src/entrotter_engine/rpc.py": "f19af9a2af2f924c65595f609e7d320d75109e0b5f09c5ae032c0bbff43b7d46",
-    "src/entrotter_engine/runner.py": "a890c229194685551fe52904954527147002f9b1a3715588e0e646570feadce8",
+    "src/entrotter_engine/runner.py": "d483df0825e3185548e68d6ead02d9e3fb89d8a12d9b0134b04b1a6a57d4d3df",
     "src/entrotter_engine/store.py": "25a6b9fe252cd0c8eef00ce5c3eb869d3a54044b00e9a67653a5c00b41749b3b",
+    "src/entrotter_engine/worker_protocol.py": "14bbaa33e89bd30a3bbcf6d0f437bb1347d806d93155b1279729f011c759afd5",
     "scripts/build_worker.py": "4e0bf0c9b6a7eb7b3181b98a1e5a2aca96ac852ad29d39393368c3b711d05f23",
     "scripts/check_dependency_manifest.py": "d9c90b75f8c26ef0aa3723ab07580f05c7391a78ef12fcf20b99e80ef198deef",
     "scripts/check_image_security.py": "e84d1c8d37c33a176706b6cad3fe32c5f3b1f8faf96422f694cc088763ea8261",
-    "scripts/check_security.py": "515db8c5988e21ff3910e93cb08c8f53dec3ce557d6a5a09377583f4fb6fe1a7",
     "scripts/check_native_security.py": "f32a97e5c0b7fd3cd611d31f83dc98c5150b0ec6249669ac2ad17d8ca5f4c29d",
-    "src/entrotter_engine/export_budget.py": "2bebd29413cb86bf25acdc108d87b3f13a3ecd6ed447cd04a86a4e6a9e28614f"
+    "scripts/check_security.py": "515db8c5988e21ff3910e93cb08c8f53dec3ce557d6a5a09377583f4fb6fe1a7"
   }
 }

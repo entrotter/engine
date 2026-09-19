@@ -430,3 +430,71 @@ independent engine and CLI packages. Cross-repository CI requires byte equality
 and verifies shared admission using both real CLIs and separate mixed processes.
 Any protocol change must preserve this shared-state contract or use a deliberately
 migrated protocol version; never silently reset existing reservations.
+
+## Bounded causal agent decisions and recorded replay
+
+`runner.run_agent` runs the built-in current-state risk policy, or replays a JSON
+recording, inside the same default worker. Build the image from this checkout
+before use. It shares the daemon admission slot, quotas, lifecycle and cleanup
+with ordinary runs; Docker failures never fall back to native execution.
+
+```python
+import json
+from pathlib import Path
+from entrotter_engine.runner import run_agent
+
+scenario = json.loads(Path("tests/data/local.json").read_text())
+report = run_agent(scenario, decision_steps=[0, 1])
+replayed = run_agent(scenario, decision_steps=[0, 1], recording=report["agent"])
+assert replayed == report
+
+# Reproduce the already recorded model decisions without calling a model:
+recorded = json.loads(Path("tests/data/agent-recorded-local.json").read_text())
+assert run_agent(recorded["scenario"], decision_steps=[0, 1],
+                 recording=recorded["agent"]) == recorded
+```
+
+The policy sees the current proposal, current node state, completed actions and
+current-state `eth_call`; it cannot see future steps, scenario labels or future
+prices. It chooses only `hold` or execution of the unchanged allowlisted proposal.
+Responses bind to the observation hash. Selection is limited to 1–32 unique steps;
+the cumulative requested-gas budget defaults to 2,000,000 (21,000–64,000,000 allowed).
+Shared setup is outside that budget. Preflight uses the current block while the
+actual action mines 12 seconds later, so a successful preflight is not a promise
+of successful execution. No valuation, market response, MEV or later-block replay
+is introduced. Recorded replay requires identical observations and consumes all
+selected decisions; changing initial state or the budget fails explicitly.
+
+Scenario and public v0.1 result/agent JSON contracts are unchanged. The internal
+agent worker envelope has its own version (`1`) and binds the response to the
+entire request digest, including selection, gas budget and recording. Scenarios
+remain at most 256 KiB; agent observations are 64 KiB, responses 4 KiB, recordings
+3 MiB, and the complete agent envelope is at most 4 MiB. The worker bounded read
+therefore admits 4 MiB before dispatch; ordinary raw scenario requests still fail
+above 256 KiB. Complete worker output, including the envelope, remains capped at
+8 MiB. These are transport/storage limits, not a memory sandbox for host Python
+callers serializing objects. No agent endpoint is added to HTTP or the CLI.
+
+This integrates the **unmerged experimental** causal-agent prototype
+`bb8b3e8d32c7cbd49629d337758f30bfdf805045` with the hardened worker. Its previous
+`run_agent(scenario, controller)` Python call becomes explicitly
+`run_agent_native(scenario, controller)` for trusted custom providers. The new
+bounded entrypoint accepts keyword-only decision data and never a Python provider
+object, module, command, model name, URL or image. This is an experimental Python
+API migration, not a change to a published package or the v0.1 wire schema. Existing
+frozen benchmark checkouts and scripts remain pinned to their original version.
+
+`AgentController` / `RiskPolicy` / `ReplayPolicy` remain available for the explicit
+native developer API. Controllers are single-use, including after failure.
+Custom `decide` calls execute trusted caller code in the host process; they have
+no whole-process CPU/RSS/egress bound. Providers must implement their own bounded
+transport. Do not use this path for untrusted code or a hosted service. Generation
+can be nondeterministic; replay is exact only for matching observations. Recorded
+provider metadata is provenance data, never an instruction to load a provider.
+
+The native suite and dedicated Docker suite both replay the checked-in original
+model report exactly. The Docker suite additionally exercises a recording larger
+than 256 KiB, gas-budget refusal, state divergence, cleanup/recovery and equality
+with native risk decisions. Offline protocol faults do not replace those real
+executions. All integrated production modules receive the same unsuppressed
+lint/type/security checks; independent PR review remains required.
