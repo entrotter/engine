@@ -8,7 +8,7 @@ import unittest
 import uuid
 
 from entrotter_engine.isolated import client, run_isolated, worker_args
-from entrotter_engine.runner import run
+from entrotter_engine.runner import run, run_native
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -46,7 +46,7 @@ class IsolatedWorkerTests(unittest.TestCase):
         for name in ['fixture', 'local']:
             with self.subTest(case=name):
                 scenario = json.loads((ROOT / f'tests/data/{name}.json').read_text())
-                self.assertEqual(run_isolated(scenario), run(scenario))
+                self.assertEqual(run(scenario), run_native(scenario))
 
     def test_kernel_controls_mounts_and_privileges(self):
         result, _ = self.probe('''import json,os
@@ -215,14 +215,14 @@ class IsolatedAPITests(unittest.TestCase):
         import sys
         from entrotter_engine.api import EngineServer
         scenario = json.loads((ROOT / 'tests/data/local.json').read_text())
-        expected = run(scenario)
+        expected = run_native(scenario)
         with tempfile.TemporaryDirectory() as directory:
             target = Path(directory) / 'cli.json'
             subprocess.run([sys.executable, '-m', 'entrotter_engine', 'run',
-                            str(ROOT / 'tests/data/local.json'), '--isolated', '-o', str(target)],
+                            str(ROOT / 'tests/data/local.json'), '-o', str(target)],
                            check=True, capture_output=True, timeout=30)
             self.assertEqual(json.loads(target.read_text()), expected)
-            server = EngineServer(0, output=Path(directory) / 'api', isolated=True)
+            server = EngineServer(0, output=Path(directory) / 'api')
             thread = threading.Thread(target=server.serve_forever, daemon=True)
             thread.start()
             connection = http.client.HTTPConnection('127.0.0.1', server.server_port, timeout=30)

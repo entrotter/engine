@@ -36,7 +36,7 @@ class ObservedServer(EngineServer):
 class APILimitTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
-        self.server = ObservedServer(0, output=self.temp.name)
+        self.server = ObservedServer(0, output=self.temp.name, isolated=False)
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
         self.scenario = json.loads((Path(__file__).parent / 'data/fixture.json').read_text())

@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 import unittest
 from unittest.mock import patch, MagicMock
-from entrotter_engine.runner import run
+from entrotter_engine.runner import run_native as run
 from entrotter_engine.artifact import seal, verify, canonical
 from entrotter_engine.models import validate, ValidationError, number
 from entrotter_engine.rpc import RPC, RPCError

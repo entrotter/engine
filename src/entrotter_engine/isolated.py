@@ -1,4 +1,4 @@
-"""Opt-in bounded local Docker execution. All image/socket settings are operator-owned."""
+"""Default bounded local Docker execution. All image/socket settings are operator-owned."""
 
 from contextlib import contextmanager
 import json

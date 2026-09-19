@@ -5,7 +5,7 @@ import os
 import sys
 from .api import EngineServer
 from .artifact import write_report
-from .runner import run, load
+from .runner import run, run_native, load
 from .evm import ExecutionError
 from .rpc import RPCError
 
@@ -19,25 +19,25 @@ def main(argv=None):
     a = s.add_parser("serve")
     a.add_argument("--port", type=int, default=8787)
     a.add_argument("--output", default="artifacts")
-    r.add_argument(
-        "--isolated",
-        action="store_true",
-        help="Use the configured bounded local Docker worker",
-    )
-    a.add_argument(
-        "--isolated",
-        action="store_true",
-        help="Run API experiments in the bounded local Docker worker",
-    )
+    for command in (r, a):
+        mode = command.add_mutually_exclusive_group()
+        mode.add_argument(
+            "--isolated",
+            dest="isolated",
+            action="store_true",
+            default=True,
+            help="Use the configured bounded local Docker worker (default)",
+        )
+        mode.add_argument(
+            "--native",
+            dest="isolated",
+            action="store_false",
+            help="Trusted development only: bypass whole-process Docker resource limits",
+        )
     args = p.parse_args(argv)
     try:
         if args.command == "run":
-            if args.isolated:
-                from .isolated import run_isolated
-
-                executor = run_isolated
-            else:
-                executor = run
+            executor = run if args.isolated else run_native
             result = executor(load(args.scenario))
             write_report(result, args.output)
             print(

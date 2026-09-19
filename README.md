@@ -8,6 +8,12 @@ multi-tenant service. See SECURITY.md before running it.
 
 ## Run from a checkout
 
+The public runner, CLI and API now use the configured bounded Docker worker by
+default, including synthetic fixtures. Follow the worker setup below first.
+Docker absence or an invalid image fails execution; there is no native fallback.
+Unit/native tests use explicit native execution and do not require a daemon.
+
+
 ```bash
 export PYTHONPATH="$PWD/src"
 python3 -m unittest discover -s tests -v
@@ -48,10 +54,10 @@ arbitrary Python, shell commands, downloaded agent code or LLM tool calls.
 
 ## EVM verification
 
-Install Foundry/Anvil before:
+Install Foundry/Anvil for the explicit native developer path and native tests:
 
 ```bash
-PYTHONPATH=src python3 -m entrotter_engine run tests/data/local.json -o local.json
+PYTHONPATH=src python3 -m entrotter_engine run tests/data/local.json --native -o local.json
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
@@ -97,8 +103,8 @@ an explicit unsafe-policy comparison, not a recommended trading setting.
 
 Anvil starts without default funded developer accounts, binds only to loopback,
 disables persistent upstream storage caching and caps EVM memory to 64 MiB per
-execution. This is not a whole-process memory/CPU sandbox; those quotas remain
-open. Arbitrary agent code stays disabled.
+execution in native mode. Native mode is not a whole-process memory/CPU sandbox.
+The default worker adds the kernel limits below. Arbitrary agent code stays disabled.
 
 The minimal local token test fixture is deliberately deposit-only and cannot
 return funds. It exists only on disposable test nodes. Rebuild its runtime with
@@ -125,7 +131,7 @@ but does not yet provide whole-run CPU/RSS/disk quotas. Simultaneously killing b
 the owner and guardian is outside this native guardian's protection. EVM lifecycle
 support currently requires POSIX; synthetic fixture execution remains portable.
 
-## Opt-in isolated local worker
+## Default bounded local worker
 
 A local Linux Docker daemon can enforce per-experiment resource limits. On macOS,
 a separately configured Linux VM is required. Keep Docker accessible only to
@@ -140,8 +146,8 @@ export PYTHONPATH="$PWD/src"
 export ENTROTTER_DOCKER_SOCKET=/var/run/docker.sock
 python3 scripts/build_worker.py --output worker-image.json
 export ENTROTTER_WORKER_IMAGE="$(python3 -c 'import json; print(json.load(open("worker-image.json"))["image_id"])')"
-python3 -m entrotter_engine run tests/data/local.json --isolated -o report.json
-python3 -m entrotter_engine serve --isolated --port 8787
+python3 -m entrotter_engine run tests/data/local.json -o report.json
+python3 -m entrotter_engine serve --port 8787
 python3 -m unittest discover -s tests_isolated -v
 ```
 
@@ -170,9 +176,10 @@ The URL can be inspected by trusted Docker administrators. Arbitrary user code,
 agent imports and user-selected commands/images remain disabled. The image and
 socket are operator configuration, never accepted from scenario JSON or HTTP.
 
-Native execution remains the default, and these quotas apply only with
-`--isolated`. Image/VM storage and total work launched by independent CLI
-invocations do not yet have aggregate quotas. The API connection/report bounds
+These per-experiment quotas apply by default to `runner.run`, engine `run`, and
+`serve`/`EngineServer`. `--isolated` remains an accepted explicit spelling.
+Image/VM storage and total work launched by independent CLI invocations do not
+yet have aggregate quotas. The API connection/report bounds
 below apply in both modes. Remaining limits and independent security review are
 open release gates; this does not make the engine a public multi-tenant service.
 
@@ -261,3 +268,34 @@ hand-remove findings or suppress scanner rules to turn CI green. Review changed
 source and the full scan before refreshing finding/source fingerprints, then
 request independent review. The job uploads scan/audit reports and the built wheel.
 GitHub Actions in this repository use immutable commit IDs.
+
+## Migrating from the native default
+
+The JSON v0.1 contract and deterministic artifacts are unchanged. Execution
+prerequisites change: build a worker image from this checkout and configure its
+immutable ID and local Docker Unix socket before running normal commands. Rebuild
+when source changes; an old image is not evidence for the new source. The host
+requires Docker/cgroup v2, while Anvil is supplied inside the image.
+
+For trusted development, deliberately opt out with `run --native` or `serve
+--native`. Python callers can explicitly use `runner.run_native(scenario)` or
+`EngineServer(..., isolated=False)`. These paths retain native lifetime cleanup,
+input/report bounds and API connection/storage limits, but have no whole-process
+CPU/RSS sandbox. A container uses run_native internally because Docker already
+enforces its limits; it does not try to start nested Docker.
+
+```bash
+# Trusted offline native example, explicitly outside the worker resource sandbox:
+PYTHONPATH=src python3 -m entrotter_engine run tests/data/fixture.json --native -o report.json
+```
+
+Neither HTTP request JSON nor scenario data can select native execution. Local
+scenario files must be regular files and reads stop after 256 KiB plus one byte;
+FIFOs/devices cannot block waiting for input. This does not impose host filesystem
+quotas or prevent a noncooperating local administrator changing files/processes.
+
+The native test suite explicitly selects the native primitive to retain its
+original coverage. Separate real-Docker tests exercise default public runner,
+CLI and API entrypoints, complete artifact equality and actual kernel limits.
+No daemon is required for the regression tests proving all defaults reject an
+unavailable worker without writing or replacing reports.
