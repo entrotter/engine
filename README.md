@@ -178,9 +178,29 @@ socket are operator configuration, never accepted from scenario JSON or HTTP.
 
 These per-experiment quotas apply by default to `runner.run`, engine `run`, and
 `serve`/`EngineServer`. `--isolated` remains an accepted explicit spelling.
-Image/VM storage and total work launched by independent CLI invocations do not
-yet have aggregate quotas. The API connection/report bounds
-below apply in both modes. Remaining limits and independent security review are
+All cooperating default runners, CLI invocations and API instances on the same
+configured daemon share one worker slot. Docker atomically reserves the fixed
+name `entrotter-active-worker`; an existing container, including a stopped one,
+occupies the slot. Preflight rejection returns API 429 (`worker_busy_retry_later`);
+the CLI fails without replacing its export. There is no queue or automatic retry. A
+creation race may return the normal execution failure (API 422), because Docker
+can reserve a name before its container is queryable. Failed starts are not
+classified as safe-to-retry busy rejections; callers must not blindly retry a POST.
+
+Cleanup checks the invocation's unique owner label and removes only its full
+immutable container ID, never the shared name. A losing contender cannot delete
+the winner. The independent 180-second timer bounds a started idle worker after
+owner loss; the slot remains occupied until Docker removes it. A daemon failure
+or a container abandoned before its entrypoint starts may require operator
+inspection/removal of that exact ID. Failed admission/cleanup queries fail closed.
+Do not clear the shared name merely because a client has exited.
+
+This caps container worker concurrency per daemon, not Python caller processes,
+Docker overhead, independent daemons, explicit native execution or older clients
+using random worker names. Use matching host code and rebuild the worker image;
+do not mix old and new runners on a shared daemon when relying on this bound.
+Image/VM storage and independent export retention still lack aggregate quotas.
+The API connection/report bounds below apply in both modes. Remaining limits and independent security review are
 open release gates; this does not make the engine a public multi-tenant service.
 
 
