@@ -1,6 +1,7 @@
 """Default bounded local Docker execution. All image/socket settings are operator-owned."""
 
 from contextlib import contextmanager
+from hashlib import sha256
 import json
 import os
 from pathlib import Path
@@ -167,6 +168,23 @@ def run_isolated(scenario):
     payload = canonical(scenario)
     if len(payload) > MAX_INPUT:
         raise ExecutionError("Isolated scenario exceeds 256 KiB")
+    # Bind verification and network selection to the admitted snapshot as well.
+    return _run_worker(json.loads(payload), payload)
+
+
+def run_agent_isolated(scenario: dict, configuration: dict) -> dict:
+    from .worker_protocol import encode_agent_request
+
+    payload = encode_agent_request(scenario, configuration)
+    snapshot = json.loads(payload)
+    return _run_worker(
+        snapshot["scenario"], payload, request_id=sha256(payload).hexdigest()
+    )
+
+
+def _run_worker(
+    scenario: dict, payload: bytes, *, request_id: str | None = None
+) -> dict:
     image = os.environ.get("ENTROTTER_WORKER_IMAGE", "")
     owner = uuid.uuid4().hex
     with client() as prefix, tempfile.TemporaryFile() as stdin:
@@ -226,7 +244,29 @@ def run_isolated(scenario):
                 report = json.loads(output)
             except (ValueError, UnicodeError, RecursionError):
                 raise ExecutionError("Invalid isolated worker response") from None
-            if not verify(report) or report.get("scenario") != json.loads(payload):
+            if request_id is not None:
+                from .agent import AgentError, ReplayPolicy
+                from .worker_protocol import WORKER_VERSION
+
+                if (
+                    not isinstance(report, dict)
+                    or set(report) != {"worker_version", "request_id", "report"}
+                    or report["worker_version"] != WORKER_VERSION
+                    or report["request_id"] != request_id
+                ):
+                    raise ExecutionError("Agent worker request binding failed")
+                report = report["report"]
+                try:
+                    if not isinstance(report, dict) or not isinstance(
+                        report.get("agent"), dict
+                    ):
+                        raise AgentError("Missing agent recording")
+                    ReplayPolicy(report["agent"])
+                except AgentError:
+                    raise ExecutionError("Invalid agent worker recording") from None
+            elif isinstance(report, dict) and "agent" in report:
+                raise ExecutionError("Unexpected agent worker response")
+            if not verify(report) or report.get("scenario") != scenario:
                 raise ExecutionError(
                     "Isolated response integrity or scenario binding failed"
                 )
