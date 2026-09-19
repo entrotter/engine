@@ -17,7 +17,9 @@ def check(project, lock_text):
     locked = {
         canonicalize_name(name): version
         for name, version in re.findall(
-            r"^([A-Za-z0-9_.-]+)==([^\s\\]+)", lock_text, re.MULTILINE
+            r"^([A-Za-z0-9_.-]+)(?:\[[A-Za-z0-9_,.-]+\])?==([^\s\\]+)",
+            lock_text,
+            re.MULTILINE,
         )
     }
     if not locked or "--hash=sha256:" not in lock_text:

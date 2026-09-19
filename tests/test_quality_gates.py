@@ -58,6 +58,10 @@ class QualityPolicyTests(unittest.TestCase):
             with self.subTest(requirement=requirement), self.assertRaises(ValueError):
                 dependencies.check(self.project, self.lock)
 
+    def test_locked_extras_are_counted_as_audited_packages(self):
+        locked = self.lock + 'cachecontrol[filecache]==0.14.4 \\\n --hash=sha256:example\n'
+        self.assertEqual(dependencies.check(self.project, locked)['audited_locked_packages'], 2)
+
     def test_optional_runtime_dependencies_are_not_missed(self):
         self.project['project']['optional-dependencies'] = {'feature': ['unexpected==1.0']}
         with self.assertRaises(ValueError):

@@ -139,7 +139,7 @@
     "src/entrotter_engine/runner.py": "12973985f7b3b4bc3913a2d2d7962a0408f6cead57682ddc86dbf85ec383868e",
     "src/entrotter_engine/store.py": "25a6b9fe252cd0c8eef00ce5c3eb869d3a54044b00e9a67653a5c00b41749b3b",
     "scripts/build_worker.py": "0c8b3bc3c744b900714fc82ae121585107bddf83c79065b6b9a8c16e5422c284",
-    "scripts/check_dependency_manifest.py": "1c2559d5b0e219b5e0c5f896e8e310cd6b1384de3549a82153a6b9b7001ceebc",
+    "scripts/check_dependency_manifest.py": "d9c90b75f8c26ef0aa3723ab07580f05c7391a78ef12fcf20b99e80ef198deef",
     "scripts/check_security.py": "515db8c5988e21ff3910e93cb08c8f53dec3ce557d6a5a09377583f4fb6fe1a7"
   }
 }
