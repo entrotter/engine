@@ -7,6 +7,7 @@ import subprocess
 import time
 from .rpc import RPC, RPCError, RPCRejected
 from .artifact import VERSION, seal
+from .defi import read_uint, token_balances
 
 class ExecutionError(RuntimeError):
     pass
@@ -24,9 +25,11 @@ class AnvilSession:
             s.bind(("127.0.0.1", 0))
             port = s.getsockname()[1]
         args = [binary, "--host", "127.0.0.1", "--port", str(port), "--chain-id", "31337",
-                "--no-mining", "--silent"]
+                "--no-mining", "--silent", "--accounts", "0",
+                "--memory-limit", "67108864"]
         if self.source:
-            args += ["--fork-url", self.rpc_url, "--fork-block-number", str(self.source["block_number"])]
+            args += ["--fork-url", self.rpc_url, "--fork-block-number", str(self.source["block_number"]),
+                     "--no-storage-caching"]
         else:
             args += ["--timestamp", "1700000000", "--hardfork", "cancun"]
         self.process = subprocess.Popen(args, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
@@ -91,7 +94,13 @@ def run_branch(scenario: dict, branch: str, source: dict | None, url: str | None
             rpc.call("anvil_setCode", [addr, code])
         rpc.call("anvil_impersonateAccount", [actor])
         initial = int(rpc.call("eth_getBalance", [actor, "latest"]), 16)
-        receipts, total_gas, failed, rejected = [], 0, 0, 0
+        tokens = scenario.get("tracked_tokens", [])
+        for token in tokens:
+            if read_uint(rpc, token["address"], "0x313ce567") != token["decimals"]:
+                raise ExecutionError("Token decimals differ from the scenario pin")
+        initial_tokens = token_balances(rpc, tokens, actor)
+        previous_tokens = initial_tokens
+        receipts, total_gas, gas_cost, failed, rejected = [], 0, 0, 0, 0
         for i, slot in enumerate(scenario["steps"]):
             if time.monotonic() > deadline:
                 raise ExecutionError("Execution budget exceeded")
@@ -115,17 +124,32 @@ def run_branch(scenario: dict, branch: str, source: dict | None, url: str | None
                 ok = int(receipt["status"], 16) == 1
                 used = int(receipt["gasUsed"], 16)
                 total_gas += used
+                cost = used * int(receipt["effectiveGasPrice"], 16)
+                gas_cost += cost
                 failed += int(not ok)
                 record.update({"status": "success" if ok else "reverted", "gas_used": str(used),
+                               "gas_cost_wei": str(cost),
                                "transaction_hash": tx_hash, "receipt": receipt})
             record["actor_balance_wei"] = str(int(rpc.call("eth_getBalance", [actor, "latest"]), 16))
+            if tokens:
+                balances = token_balances(rpc, tokens, actor)
+                record["token_balances_raw"] = balances
+                record["token_deltas_raw"] = {addr: str(int(value)-int(previous_tokens[addr]))
+                                               for addr, value in balances.items()}
+                previous_tokens = balances
             receipts.append(record)
         final = int(rpc.call("eth_getBalance", [actor, "latest"]), 16)
         rpc.call("anvil_stopImpersonatingAccount", [actor])
         return {"tool_version": session.version, "start_block": start_block,
                 "start_timestamp": timestamp, "trace": receipts,
+                "tokens": [{**token, "initial_balance_raw": initial_tokens[token["address"].lower()],
+                            "final_balance_raw": previous_tokens[token["address"].lower()],
+                            "balance_delta_raw": str(int(previous_tokens[token["address"].lower()])-
+                                                     int(initial_tokens[token["address"].lower()]))}
+                           for token in tokens],
                 "metrics": {"initial_balance_wei": str(initial), "final_balance_wei": str(final),
                             "balance_delta_wei": str(final-initial), "gas_used": str(total_gas),
+                            "gas_cost_wei": str(gas_cost),
                             "reverted_transactions": failed, "rejected_transactions": rejected}}
 
 def run_evm(scenario: dict) -> dict:
@@ -140,5 +164,5 @@ def run_evm(scenario: dict) -> dict:
                                  "Actor native balance is overridden equally and account impersonation is local only.",
                                  "This re-executes supplied actions, not subsequent historical blocks or market responses.",
                                  "Each slot mines one block at a fixed 12-second interval. Transaction order is supplied.",
-                                 "Native balance change is not profit or portfolio valuation; token balances are not tracked.",
+                                 "Native and tracked token changes are exact units, not profit or portfolio valuation. Unlisted assets are not tracked.",
                                  "No LLM agent, MEV, mempool, external price or bridge model is provided."]})

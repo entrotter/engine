@@ -57,7 +57,7 @@ def validate(raw: Any) -> dict:
         raise ValidationError("Scenario must be finite JSON") from e
     raw = keys(raw, {"schema_version", "id", "title", "mode", "provenance", "market",
                      "baseline", "candidate", "source", "actor", "actor_balance_wei",
-                     "allowed_targets", "steps", "local_contracts"}, "scenario")
+                     "allowed_targets", "steps", "local_contracts", "tracked_tokens"}, "scenario")
     if raw.get("schema_version") != "0.1.0":
         raise ValidationError("Unsupported schema_version; expected 0.1.0")
     if not isinstance(raw.get("id"), str) or not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}", raw["id"]):
@@ -69,7 +69,7 @@ def validate(raw: Any) -> dict:
         raise ValidationError("A provenance description is required")
     mode = raw.get("mode")
     if mode == "fixture":
-        if any(k in raw for k in ["source", "actor", "actor_balance_wei", "allowed_targets", "steps", "local_contracts"]):
+        if any(k in raw for k in ["source", "actor", "actor_balance_wei", "allowed_targets", "steps", "local_contracts", "tracked_tokens"]):
             raise ValidationError("EVM fields are not permitted in fixture mode")
         if prov.get("kind") != "synthetic":
             raise ValidationError("v0.1 fixture paths must be explicitly labelled synthetic")
@@ -100,6 +100,19 @@ def validate(raw: Any) -> dict:
         if not isinstance(targets, list) or not 1 <= len(targets) <= 32:
             raise ValidationError("allowed_targets needs 1-32 addresses")
         allow = {address(t, "target") for t in targets}
+        tokens = raw.get("tracked_tokens", [])
+        if not isinstance(tokens, list) or len(tokens) > 8:
+            raise ValidationError("tracked_tokens supports at most 8 tokens")
+        seen_tokens = set()
+        for token in tokens:
+            keys(token, {"address", "symbol", "decimals"}, "tracked token")
+            addr = address(token.get("address"), "token address")
+            if addr in seen_tokens or addr not in allow:
+                raise ValidationError("Tracked token must be unique and allowlisted")
+            seen_tokens.add(addr)
+            integer(token.get("decimals"), "token decimals", 0, 36)
+            if not isinstance(token.get("symbol"), str) or not re.fullmatch(r"[A-Z0-9_-]{1,12}", token["symbol"]):
+                raise ValidationError("Token symbol must be 1-12 uppercase alphanumeric characters")
         steps = raw.get("steps")
         if not isinstance(steps, list) or not 1 <= len(steps) <= 32:
             raise ValidationError("steps needs 1-32 slots")

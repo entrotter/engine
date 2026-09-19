@@ -73,3 +73,32 @@ stream, ERC-20 valuation, bridge state, MEV or independent security sandbox.
 Do not interpret alternate transactions as the real future that would occur.
 Contribute these capabilities with source provenance, fixtures, tests and
 explicit assumptions. Do not add generic shell execution to the HTTP API.
+
+## Token observations and Uniswap v3
+
+The optional `tracked_tokens` v0.1 extension accepts at most eight allowlisted
+`{address, symbol, decimals}` objects. Existing scenarios remain valid. Older
+engine checkouts reject this extension; use the matching engine/scenario commits.
+Decimals are verified with `eth_call`; malformed or failing token reads fail the
+experiment. Reports include exact initial/final raw balances, per-slot deltas,
+and gas cost derived from receipt gas usage and effective gas price. Token symbols
+are user-supplied labels, not verified identities. Unlisted assets are excluded.
+
+`entrotter_engine.defi` builds WETH deposits, exact ERC-20 approvals and Uniswap
+v3 `ISwapRouter.exactInputSingle` calls with explicit deadlines and output floors.
+It generates bounded JSON actions; it cannot broadcast. SwapRouter02 has a
+different ABI and is not supported by this builder. Fee-on-transfer/rebasing
+assets and price/portfolio valuation are not modeled. A zero output floor is
+an explicit unsafe-policy comparison, not a recommended trading setting.
+
+Anvil starts without default funded developer accounts, binds only to loopback,
+disables persistent upstream storage caching and caps EVM memory to 64 MiB per
+execution. This is not a whole-process memory/CPU sandbox; those quotas remain
+open. Arbitrary agent code stays disabled.
+
+The minimal local token test fixture is deliberately deposit-only and cannot
+return funds. It exists only on disposable test nodes. Rebuild its runtime with
+Foundry v1.8.3: `cd tests/contracts && forge build`; solc 0.8.30 and the Cancun
+EVM target are pinned in `foundry.toml`. The checked-in runtime allows offline
+real-Anvil tests without downloading a compiler. ABI encoding is independently
+compared with Foundry cast when available.
