@@ -7,6 +7,7 @@ import json
 import re
 import socket
 import threading
+import time
 from pathlib import Path
 from .store import ArtifactStore, StoreBusy, StoreFull
 from .models import ValidationError
@@ -17,6 +18,8 @@ from .runner import run
 MAX_BODY = 262144
 MAX_CONNECTIONS = 8
 MAX_CONNECTION_SECONDS = 240
+MAX_REJECTION_SECONDS = 0.1
+MAX_REJECTION_BYTES = MAX_BODY + 65536
 
 
 class EngineServer(ThreadingHTTPServer):
@@ -46,7 +49,8 @@ class EngineServer(ThreadingHTTPServer):
     def process_request(self, request, client_address):
         if not self.connections.acquire(blocking=False):
             try:
-                request.settimeout(0.1)
+                deadline = time.monotonic() + MAX_REJECTION_SECONDS
+                request.settimeout(MAX_REJECTION_SECONDS)
                 body = b'{"error":"connection_limit"}'
                 response = (
                     "HTTP/1.1 503 Service Unavailable\r\nContent-Type: application/json\r\n"
@@ -54,6 +58,21 @@ class EngineServer(ThreadingHTTPServer):
                     "Cache-Control: no-store\r\nRetry-After: 1\r\n\r\n"
                 ).encode() + body
                 request.sendall(response)
+                # A client can still be writing its POST body. Closing with
+                # unread bytes can reset TCP and hide the already-sent 503.
+                # Half-close our output, then discard bounded pending input;
+                # never admit work or create another handler for this socket.
+                request.shutdown(socket.SHUT_WR)
+                remaining_bytes = MAX_REJECTION_BYTES
+                while remaining_bytes:
+                    remaining_time = deadline - time.monotonic()
+                    if remaining_time <= 0:
+                        break
+                    request.settimeout(remaining_time)
+                    chunk = request.recv(min(65536, remaining_bytes))
+                    if not chunk:
+                        break
+                    remaining_bytes -= len(chunk)
             except OSError:
                 pass
             finally:

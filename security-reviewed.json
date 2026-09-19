@@ -128,7 +128,7 @@
     "src/entrotter_engine/__main__.py": "3f28f07b44fca498d6cd1a5b189ec98e5a0edd4e91387305c866476b795e9ad5",
     "src/entrotter_engine/_guardian.py": "3758412adb3e8761a3c82eac89cbf5a72bac7d0dad5c492a6825b4bb2a5f9ddf",
     "src/entrotter_engine/_isolated_worker.py": "ba28520ea1f611e1fd8d1064e28993793b695d98b89d8bb387d91d818856afed",
-    "src/entrotter_engine/api.py": "427244a4e415b7fcda26987c3f339e6c51ecfb094b16fd21294b3619ff5d07d0",
+    "src/entrotter_engine/api.py": "81e4c0bda9ed7d1555da9b238ff45addfb0748b54c4020c7c29f0d4f67168ba6",
     "src/entrotter_engine/artifact.py": "69a6cb7cb312f0159f7fb8c2231606d49997c6375c665b753ca2bf4c7378150e",
     "src/entrotter_engine/defi.py": "f4f5e6e50ad3745426c7d0fbc08b5fa42c79fd4daa225667821814f95acb7fde",
     "src/entrotter_engine/evm.py": "7f8fdde9bc96f0bdcdbba7f04b4ff5175808943c547e47d97662abee2392b443",

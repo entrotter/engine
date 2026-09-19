@@ -92,6 +92,83 @@ class APILimitTests(unittest.TestCase):
                 connection.close()
         self.assertEqual(self.request('GET', '/health')[0], 200)
 
+    def test_overload_response_survives_post_body_sent_after_headers(self):
+        sockets = []
+        try:
+            for _ in range(8):
+                sockets.append(socket.create_connection(('127.0.0.1', self.server.server_port), timeout=3))
+            self.wait_active(8)
+            with socket.create_connection(('127.0.0.1', self.server.server_port), timeout=3) as client:
+                client.sendall(b'POST /v1/runs HTTP/1.1\r\nHost: localhost\r\n'
+                               b'Content-Length: 12288\r\n\r\n')
+                # The server has already responded, while the client is still
+                # sending its body (as urllib/http.client can be doing).
+                self.assertTrue(client.recv(4096, socket.MSG_PEEK).startswith(b'HTTP/1.1 503'))
+                for _ in range(3):
+                    time.sleep(.01)
+                    client.sendall(b'x' * 4096)
+                response = http.client.HTTPResponse(client)
+                response.begin()
+                self.assertEqual(response.status, 503)
+                self.assertEqual(json.loads(response.read()), {'error': 'connection_limit'})
+            self.assertEqual(self.server.peak, 8)
+            self.assertEqual(list(Path(self.temp.name).glob('*.json')), [])
+        finally:
+            for connection in sockets:
+                connection.close()
+            self.wait_active(0)
+
+    def test_overload_client_that_never_sends_cannot_block_accept_loop(self):
+        sockets = []
+        try:
+            for _ in range(8):
+                sockets.append(socket.create_connection(('127.0.0.1', self.server.server_port), timeout=3))
+            self.wait_active(8)
+            with socket.create_connection(('127.0.0.1', self.server.server_port), timeout=3) as idle:
+                self.assertTrue(idle.recv(4096, socket.MSG_PEEK).startswith(b'HTTP/1.1 503'))
+                started = time.monotonic()
+                self.assertEqual(self.request('GET', '/health')[0], 503)
+                self.assertLess(time.monotonic() - started, 1)
+            self.assertEqual(self.server.peak, 8)
+        finally:
+            for connection in sockets:
+                connection.close()
+            self.wait_active(0)
+
+    def test_rejected_trickle_cannot_extend_accept_loop_grace(self):
+        sockets = []
+        stop = threading.Event()
+        sender = None
+        try:
+            for _ in range(8):
+                sockets.append(socket.create_connection(('127.0.0.1', self.server.server_port), timeout=3))
+            self.wait_active(8)
+            with socket.create_connection(('127.0.0.1', self.server.server_port), timeout=3) as client:
+                self.assertTrue(client.recv(4096, socket.MSG_PEEK).startswith(b'HTTP/1.1 503'))
+                sent = []
+                def trickle():
+                    while not stop.wait(.005):
+                        try:
+                            client.sendall(b'x')
+                            sent.append(1)
+                        except OSError:
+                            return
+                sender = threading.Thread(target=trickle, daemon=True)
+                sender.start()
+                started = time.monotonic()
+                self.assertEqual(self.request('GET', '/health')[0], 503)
+                self.assertLess(time.monotonic() - started, 1)
+                self.assertGreaterEqual(len(sent), 2)
+            self.assertEqual(self.server.peak, 8)
+        finally:
+            stop.set()
+            if sender is not None:
+                sender.join(timeout=2)
+                self.assertFalse(sender.is_alive())
+            for connection in sockets:
+                connection.close()
+            self.wait_active(0)
+
     def test_full_store_returns_507_and_retains_saved_report(self):
         self.server.store = ArtifactStore(self.temp.name, max_files=1)
         status, original = self.request('POST', '/v1/runs', self.scenario)
@@ -121,7 +198,13 @@ class APILimitTests(unittest.TestCase):
                 self.wait_active(1)
                 started = time.monotonic()
                 sender.start()
-                self.assertEqual(connection.recv(1), b'')
+                try:
+                    self.assertEqual(connection.recv(1), b'')
+                except ConnectionResetError:
+                    # An absolute deadline intentionally aborts an incomplete
+                    # request. Platforms may report FIN or reset when the peer
+                    # is still writing; either proves closure, not a timeout.
+                    pass
                 self.assertLess(time.monotonic() - started, 1)
                 self.assertGreaterEqual(len(sent), 3)
                 self.wait_active(0)
