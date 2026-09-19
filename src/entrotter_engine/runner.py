@@ -16,3 +16,17 @@ def load(path: str | Path) -> dict:
     if len(data) > 262144:
         raise ValueError("Scenario exceeds 256 KiB")
     return validate(json.loads(data))
+
+
+def run_agent(scenario: dict, controller) -> dict:
+    """Trusted, local provider object; no provider import or command in wire JSON."""
+    validate(scenario)
+    if scenario["mode"] not in {"evm-local", "evm-fork"}:
+        raise ValueError("Agent execution currently requires an EVM scenario")
+    if any(step >= len(scenario["steps"]) for step in controller.steps):
+        raise ValueError("Agent decision step is outside the scenario")
+    if any(scenario["steps"][step]["candidate"] is None for step in controller.steps):
+        raise ValueError("Agent decision step needs a candidate proposal")
+    snapshot = json.loads(json.dumps(scenario, allow_nan=False))
+    controller.start()
+    return run_evm(snapshot, controller=controller)

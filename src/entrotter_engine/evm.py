@@ -80,7 +80,7 @@ def resolve_source(scenario: dict) -> tuple[dict | None, str | None]:
     return {"chain_id": spec["chain_id"], "block_number": spec["block_number"],
             "block_hash": block["hash"], "timestamp": int(block["timestamp"], 16)}, url
 
-def run_branch(scenario: dict, branch: str, source: dict | None, url: str | None) -> dict:
+def run_branch(scenario: dict, branch: str, source: dict | None, url: str | None, *, controller=None) -> dict:
     deadline = time.monotonic() + 120
     with AnvilSession(source, url) as session:
         rpc = session.rpc
@@ -105,7 +105,15 @@ def run_branch(scenario: dict, branch: str, source: dict | None, url: str | None
             if time.monotonic() > deadline:
                 raise ExecutionError("Execution budget exceeded")
             action = slot[branch]
+            decision = None
+            if controller is not None:
+                action, decision = controller.choose(rpc, step=i, actor=actor, action=action,
+                                                     tokens=tokens, balances=previous_tokens, previous=receipts)
+                if time.monotonic() > deadline:
+                    raise ExecutionError("Execution budget exceeded during agent decision")
             record = {"step": i, "action": action, "status": "noop", "gas_used": "0"}
+            if decision is not None:
+                record["agent_decision"] = decision
             rpc.call("evm_setNextBlockTimestamp", [timestamp + 12*(i+1)])
             tx_hash = None
             if action is not None:
@@ -152,11 +160,11 @@ def run_branch(scenario: dict, branch: str, source: dict | None, url: str | None
                             "gas_cost_wei": str(gas_cost),
                             "reverted_transactions": failed, "rejected_transactions": rejected}}
 
-def run_evm(scenario: dict) -> dict:
+def run_evm(scenario: dict, *, controller=None) -> dict:
     source, url = resolve_source(scenario)
     baseline = run_branch(scenario, "baseline", source, url)
-    candidate = run_branch(scenario, "candidate", source, url)
-    return seal({"schema_version": VERSION, "engine_version": VERSION,
+    candidate = run_branch(scenario, "candidate", source, url, controller=controller)
+    body = {"schema_version": VERSION, "engine_version": VERSION,
                  "mode": scenario["mode"], "scenario": scenario, "source": source,
                  "local_chain_id": 31337, "baseline": baseline, "candidate": candidate,
                  "comparison": {"final_balance_delta_wei": str(int(candidate["metrics"]["final_balance_wei"])-int(baseline["metrics"]["final_balance_wei"]))},
@@ -165,4 +173,10 @@ def run_evm(scenario: dict) -> dict:
                                  "This re-executes supplied actions, not subsequent historical blocks or market responses.",
                                  "Each slot mines one block at a fixed 12-second interval. Transaction order is supplied.",
                                  "Native and tracked token changes are exact units, not profit or portfolio valuation. Unlisted assets are not tracked.",
-                                 "No LLM agent, MEV, mempool, external price or bridge model is provided."]})
+                                 "No LLM agent, MEV, mempool, external price or bridge model is provided."]}
+    if controller is not None:
+        body["agent"] = controller.recording()
+        body["assumptions"][-1] = "No MEV, mempool, external price or bridge model is provided."
+        body["assumptions"].append("Agent sees the current proposal, completed actions and current-state eth_call only; generation may be nondeterministic. Replay requires identical observations.")
+        body["assumptions"].append("Preflight uses the current block; the execution block advances 12 seconds. Success is not guaranteed. Shared setup is outside the agent requested-gas budget.")
+    return seal(body)

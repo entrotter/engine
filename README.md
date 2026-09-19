@@ -39,8 +39,9 @@ calls from a write-capable local client. `evm.py` owns the Anvil processes and
 runs baseline/candidate branches from identical starts. `artifact.py` seals
 results. Public source RPC URLs are never embedded in artifacts.
 
-The runner admits only JSON-defined, built-in actions. It does not execute
-arbitrary Python, shell commands, downloaded agent code or LLM tool calls.
+The wire API admits only JSON-defined, built-in actions. It does not execute
+arbitrary Python, shell commands or downloaded agent code. The optional local
+Python controller below can accept typed decisions from a trusted provider.
 
 ## EVM verification
 
@@ -102,3 +103,49 @@ Foundry v1.8.3: `cd tests/contracts && forge build`; solc 0.8.30 and the Cancun
 EVM target are pinned in `foundry.toml`. The checked-in runtime allows offline
 real-Anvil tests without downloading a compiler. ABI encoding is independently
 compared with Foundry cast when available.
+
+## Causal decisions and exact replay (experimental local Python API)
+
+```python
+from entrotter_engine.agent import AgentController, RiskPolicy, ReplayPolicy
+from entrotter_engine.runner import load, run_agent
+
+scenario = load("tests/data/local.json")
+report = run_agent(scenario, AgentController(RiskPolicy(), [0, 1]))
+replayed = run_agent(scenario, AgentController(ReplayPolicy(report["agent"]), [0, 1]))
+assert report == replayed
+```
+
+Only selected candidate slots are decisions; other slots are shared operator
+setup. The provider receives current balances, completed-action summaries, the
+current validated proposal, a current-state `eth_call`, and a requested-gas budget.
+It returns exactly `request_id`, `choice` (`execute` or `hold`), and a bounded
+`reason`. It cannot change the target, calldata, value or gas. Requests exclude
+the scenario title, provenance and future slots. The operator must also keep
+proposal construction causal; this interface cannot detect hindsight embedded in
+operator inputs or a model's training data.
+
+`RiskPolicy` executes only if preflight succeeds and the proposal fits its gas
+budget. Preflight is at the current block; mining advances 12 seconds. Time-sensitive
+contracts can therefore behave differently at execution. This policy prevents
+some obvious failures, not all failures, losses or malicious approvals. No future
+prices or portfolio valuation are available, so there is no defensible drawdown
+or profit metric for this EVM example.
+
+`agent` is an optional result extension with its own `agent_version: 0.1.0`,
+provider metadata and ordered request/response exchanges. The scenario contract
+and existing non-agent results are unchanged. The content hash covers the record;
+it is tamper detection, not provider authentication. Replay requires exact
+observations, rejects missing/extra decisions, and uses no model call. A changed
+balance or preflight fails replay even if the proposed action is unchanged.
+Controllers are single-use, including after failed execution.
+
+Providers passed as Python objects must be operator-trusted code. The HTTP API
+and scenario JSON cannot name a provider, import module or executable. This is
+not an untrusted-code sandbox. Request/response/recording bounds are 64 KiB,
+4 KiB and 3 MiB; 1–32 selected slots and a cumulative requested-gas budget are
+enforced. Gas spent on shared setup is reported but is outside that budget.
+Trusted providers must impose their own hard response timeout: the branch checks
+its 120-second deadline before and after decisions but cannot interrupt an
+arbitrary in-process callable. Model generation may be nondeterministic; only
+recorded-decision replay is expected to reproduce exactly.
