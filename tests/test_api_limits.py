@@ -198,7 +198,13 @@ class APILimitTests(unittest.TestCase):
                 self.wait_active(1)
                 started = time.monotonic()
                 sender.start()
-                self.assertEqual(connection.recv(1), b'')
+                try:
+                    self.assertEqual(connection.recv(1), b'')
+                except ConnectionResetError:
+                    # An absolute deadline intentionally aborts an incomplete
+                    # request. Platforms may report FIN or reset when the peer
+                    # is still writing; either proves closure, not a timeout.
+                    pass
                 self.assertLess(time.monotonic() - started, 1)
                 self.assertGreaterEqual(len(sent), 3)
                 self.wait_active(0)
