@@ -38,3 +38,5 @@ jobs:
         with:
           name: engine-quality-reports
           path: .quality/
+          include-hidden-files: true
+          if-no-files-found: error
