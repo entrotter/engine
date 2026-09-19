@@ -120,3 +120,55 @@ the owned process group if the guardian fails. This improves lifecycle guarantee
 but does not yet provide whole-run CPU/RSS/disk quotas. Simultaneously killing both
 the owner and guardian is outside this native guardian's protection. EVM lifecycle
 support currently requires POSIX; synthetic fixture execution remains portable.
+
+## Opt-in isolated local worker
+
+A local Linux Docker daemon can enforce per-experiment resource limits. On macOS,
+a separately configured Linux VM is required. Keep Docker accessible only to
+trusted local operators. Build the image locally; the build script downloads a
+SHA-256-verified Foundry v1.8.3 archive for the daemon's architecture and uses a
+Python base image pinned by digest. It copies only engine source and Anvil into
+the build context, records their hashes, and does not publish an image.
+
+```bash
+export PYTHONPATH="$PWD/src"
+# Set this to your local daemon's absolute Unix socket if different.
+export ENTROTTER_DOCKER_SOCKET=/var/run/docker.sock
+python3 scripts/build_worker.py --output worker-image.json
+export ENTROTTER_WORKER_IMAGE="$(python3 -c 'import json; print(json.load(open("worker-image.json"))["image_id"])')"
+python3 -m entrotter_engine run tests/data/local.json --isolated -o report.json
+python3 -m entrotter_engine serve --isolated --port 8787
+python3 -m unittest discover -s tests_isolated -v
+```
+
+An unavailable daemon, invalid immutable image ID, exceeded budget or invalid
+worker response fails the run; there is no native fallback. The host verifies
+the complete report hash and exact input scenario before accepting the result.
+Docker uses a temporary empty client configuration rather than stored registry
+credentials. The dedicated Docker tests fail if the daemon/image is unavailable;
+they are separate from offline and native-Anvil tests and require cgroup v2.
+The owner-loss test can take approximately three minutes.
+
+Each worker has one CPU quota, 512 MiB RAM, no swap, 128 process/thread slots,
+a read-only root, a 64 MiB no-exec temporary filesystem and 16 MiB shared memory.
+It runs as UID 65534 with all capabilities dropped and no new privileges. There
+are no host bind mounts, exposed ports or persistent Docker logs. Input is
+limited to 256 KiB and output to 8 MiB. A worker timer expires at 180 seconds;
+the host stops waiting after 190 seconds and requests removal of its exact owned
+container. Signal handling/Anvil cleanup can add a short termination grace. The
+host checks that the container is absent; a daemon cleanup failure is explicit.
+Daemon or VM failure is outside these application-level lifecycle guarantees.
+
+Fixture/local-EVM workers have no external network. Historical forks enable the
+Docker bridge for archive reads, with the operator's `ENTROTTER_RPC_URL` passed
+as an environment variable. This is **not an archive-host egress allowlist**.
+The URL can be inspected by trusted Docker administrators. Arbitrary user code,
+agent imports and user-selected commands/images remain disabled. The image and
+socket are operator configuration, never accepted from scenario JSON or HTTP.
+
+Native execution remains the default, and these quotas apply only with
+`--isolated`. Host artifact storage, image/VM storage and total work launched by
+independent CLI invocations do not yet have aggregate quotas. The API admits one
+experiment at a time, but its accepted connection threads are not globally
+bounded. These remaining limits and independent security review are open release
+gates; this feature does not make the engine a public multi-tenant service.

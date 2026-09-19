@@ -19,11 +19,15 @@ class EngineServer(ThreadingHTTPServer):
     daemon_threads = True
     request_queue_size = 8
 
-    def __init__(self, port: int = 8787, *, token: str = "", output: str | Path = "artifacts"):
+    def __init__(self, port: int = 8787, *, token: str = "", output: str | Path = "artifacts", isolated: bool = False):
         super().__init__(("127.0.0.1", port), Handler)
         self.token, self.output = token, Path(output).resolve()
         self.slot = threading.BoundedSemaphore(1)
-        self.runner = run
+        if isolated:
+            from .isolated import run_isolated
+            self.runner = run_isolated
+        else:
+            self.runner = run
 
 class Handler(BaseHTTPRequestHandler):
     server: EngineServer
@@ -103,7 +107,7 @@ class Handler(BaseHTTPRequestHandler):
         except (ValidationError, json.JSONDecodeError, UnicodeDecodeError, RecursionError):
             self.reply(400, {"error": "invalid_scenario"})
         except (ExecutionError, RPCError):
-            self.reply(422, {"error": "execution_failed", "hint": "Check Anvil installation, archive RPC and pinned source. No fallback was used."})
+            self.reply(422, {"error": "execution_failed", "hint": "Check the configured runtime, resource limits, archive RPC and pinned source. No fallback was used."})
         except (OSError, TimeoutError):
             self.reply(500, {"error": "io_or_timeout_error"})
         finally:
