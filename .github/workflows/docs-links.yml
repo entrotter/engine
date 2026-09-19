@@ -1,0 +1,17 @@
+name: Documentation links
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  docs-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: entrotter/entrotter/.github/actions/docs-links@ea74aec66c5234edb935e4b12c14ec686dc73f80
