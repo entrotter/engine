@@ -19,7 +19,8 @@ be visible to other processes owned by your OS user; run on a trusted machine.
 The opt-in `--isolated` worker adds tested per-experiment Linux kernel quotas,
 non-root/read-only execution and no network for non-fork modes. Fork workers
 still use a general bridge network; arbitrary code execution stays disabled.
-Native execution remains the default. Host artifact/VM storage and aggregate
-CLI concurrency are not capped. See README.md for the exact boundaries and
+Native execution remains the default. The local API bounds connection handlers
+and dedicated report storage; individual CLI exports are size-limited. Aggregate
+CLI concurrency/export retention and image/VM storage are not capped. See README.md for the exact boundaries and
 operator-trusted Docker image/socket requirements. Docker administrator access
 can reveal the archive URL; never use a production signing key in this tool.

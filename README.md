@@ -15,7 +15,8 @@ python3 -m entrotter_engine serve --port 8787
 
 `ENTROTTER_API_TOKEN` optionally enables bearer authentication for the local API.
 The server always binds to 127.0.0.1, rejects browser Origin headers, validates
-Host, bounds the request body to 256 KiB, and permits one concurrent experiment.
+Host, bounds the request body to 256 KiB, admits at most eight connection handlers,
+and permits one concurrent experiment.
 It is built on the standard-library development HTTP server; do not use it as
 an Internet-facing server, even behind a reverse proxy.
 
@@ -29,7 +30,8 @@ an Internet-facing server, even behind a reverse proxy.
 
 Status codes: 201 created; 400 invalid scenario; 401 bad token; 403 disallowed
 Host/Origin; 413 request too large; 415 wrong media type; 422 execution failed;
-429 busy. Clients must not blindly retry a POST. There is no public job queue.
+429 experiment busy; 503 connection/store busy; 507 artifact storage full.
+Clients must not blindly retry a POST. There is no public job queue.
 
 ## Modules
 
@@ -167,8 +169,41 @@ agent imports and user-selected commands/images remain disabled. The image and
 socket are operator configuration, never accepted from scenario JSON or HTTP.
 
 Native execution remains the default, and these quotas apply only with
-`--isolated`. Host artifact storage, image/VM storage and total work launched by
-independent CLI invocations do not yet have aggregate quotas. The API admits one
-experiment at a time, but its accepted connection threads are not globally
-bounded. These remaining limits and independent security review are open release
-gates; this feature does not make the engine a public multi-tenant service.
+`--isolated`. Image/VM storage and total work launched by independent CLI
+invocations do not yet have aggregate quotas. The API connection/report bounds
+below apply in both modes. Remaining limits and independent security review are
+open release gates; this does not make the engine a public multi-tenant service.
+
+
+## Local API connection and report budgets
+
+Both native and isolated servers admit at most eight connection handlers and one
+experiment at a time. Extra connections receive 503 with `Retry-After: 1` without
+creating a new handler. Each admitted connection has a ten-second inactivity
+timeout and a 240-second absolute transport deadline. Trickle traffic cannot
+extend that deadline. At expiry the socket is shut down; an already admitted
+experiment completes or fails under its own execution budget before its handler
+releases capacity. Closing the socket does not force-kill native Python work.
+Each handler has at most one timer thread, joined before its slot is released.
+
+`serve --output` is a dedicated trusted local report directory. The server limits
+it to 128 MiB of file contents and 128 files, including unrelated files and
+crash-leftover temporary files. A zero-byte `.store.lock` file is excluded. POSIX
+file locks serialize cooperating writers even across separate local processes;
+a busy lock returns 503. Temporary writes are included in capacity admission,
+then atomically renamed. Reports are at most 8 MiB. A full store returns 507,
+retains prior artifacts and never silently deletes reports. An identical saved
+report can be returned again without consuming additional storage.
+
+Export or remove unwanted files locally to reclaim space; there is no HTTP
+endpoint that deletes reports. Startup rejects an already over-budget directory.
+Stored report reads are bounded to 8 MiB and must match the requested content ID.
+Symlinks, hard links, directories and special files are rejected. The directory
+must be owned by the trusted operator; these are application quotas, not a host
+filesystem quota against noncooperating programs or filesystem metadata. The
+bounded API store requires POSIX; direct fixture execution remains portable.
+
+CLI file exports also enforce 8 MiB per report and use exclusively created
+private temporary files. A failed write preserves the prior destination. Exports
+to different user-selected directories have no shared aggregate quota; their
+retention and free disk space remain the operator's responsibility.
