@@ -207,3 +207,49 @@ CLI file exports also enforce 8 MiB per report and use exclusively created
 private temporary files. A failed write preserves the prior destination. Exports
 to different user-selected directories have no shared aggregate quota; their
 retention and free disk space remain the operator's responsibility.
+
+## Quality and dependency checks
+
+Production Python files in `src/` and `scripts/` are checked by Ruff lint/format,
+mypy (including unannotated function bodies), and a full Bandit scan. Install the
+pinned developer tools in a separate environment; runtime dependencies remain
+empty. The complete tool/build graph is version- and SHA-256-locked.
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install --require-hashes --only-binary=:all: --index-url https://pypi.org/simple -r requirements-quality.txt
+.venv/bin/python -m pip check
+.venv/bin/python -m ruff check src scripts
+.venv/bin/python -m ruff format --check src scripts
+.venv/bin/python -m mypy src scripts
+.venv/bin/python scripts/check_security.py
+.venv/bin/python scripts/check_dependency_manifest.py
+.venv/bin/python -m pip_audit --strict --require-hashes --disable-pip -r requirements-quality.txt --progress-spinner off -f json -o .quality/dependencies.json
+.venv/bin/python -m build --no-isolation --wheel --outdir .quality/wheels
+```
+
+The security scan uses every default Bandit rule with `--ignore-nosec` and keeps
+all findings in `.quality/bandit.json`. `security-reviewed.json` records exact
+finding fingerprints, per-finding rationales and hashes of every production
+source/script. New, disappeared or changed findings, changed source, failed or
+partial scans and scanner-version drift fail the review policy. The current 15
+findings (13 low, two medium) concern trusted subprocess launches, a literal HTTPS
+release download and an in-container tmpfs specification. Their author-written
+rationales still require independent PR review; a matching policy is not an
+independent security audit or evidence that the software has no vulnerabilities.
+
+The dependency-manifest gate requires every declared runtime, optional-runtime
+and build requirement to be exactly pinned in the audited lock. `pip-audit`
+queries current Python advisories for the complete locked graph, fails collection
+errors and uses no ignored-vulnerability list. Native Anvil, the Python runtime,
+container OS packages and the Docker daemon are outside that Python scan's scope.
+Mypy checks normal typing rules; JSON boundaries still use runtime schema checks
+and are not claimed to be fully statically typed. Tests run separately, including
+actual native Anvil and Docker enforcement; offline checks cannot replace them.
+
+To update tools, edit `requirements-quality.in`, regenerate the complete hashed
+lock with the pinned `pip-compile`, and rerun the entire quality workflow. Do not
+hand-remove findings or suppress scanner rules to turn CI green. Review changed
+source and the full scan before refreshing finding/source fingerprints, then
+request independent review. The job uploads scan/audit reports and the built wheel.
+GitHub Actions in this repository use immutable commit IDs.

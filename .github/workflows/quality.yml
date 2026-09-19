@@ -1,0 +1,40 @@
+name: Engine quality and Python dependency audit
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Install only hash-verified locked tool wheels
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install --require-hashes --only-binary=:all: --index-url https://pypi.org/simple -r requirements-quality.txt
+          .venv/bin/python -m pip check
+      - name: Lint and formatting across production source and scripts
+        run: |
+          .venv/bin/python -m ruff check src scripts
+          .venv/bin/python -m ruff format --check src scripts
+      - name: Check types including unannotated function bodies
+        run: .venv/bin/python -m mypy src scripts
+      - name: Full security scan and exact finding review policy
+        run: .venv/bin/python scripts/check_security.py
+      - name: Verify declared dependency coverage and query Python advisories
+        run: |
+          .venv/bin/python scripts/check_dependency_manifest.py
+          .venv/bin/python -m pip_audit --strict --require-hashes --disable-pip -r requirements-quality.txt --progress-spinner off -f json -o .quality/dependencies.json
+      - name: Build wheel with the pinned build dependency
+        run: .venv/bin/python -m build --no-isolation --wheel --outdir .quality/wheels
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: engine-quality-reports
+          path: .quality/
