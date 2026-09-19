@@ -4,7 +4,8 @@ Experimental research software. Do not use production keys, custody real
 funds, or expose the local engine port or Anvil JSON-RPC to the Internet.
 This is not a trading execution service. Mainnet broadcast is not supported.
 
-The engine runs only built-in policies. A Python import or a subprocess is
+The wire API runs only built-in policies. Optional local Python decision
+providers must be operator-trusted; they cannot be selected by scenario JSON. A Python import or a subprocess is
 not a security sandbox for untrusted agent code. Container/process sandboxing,
 egress controls, authenticated multi-tenancy and a production job queue remain
 release gates before any hosted service is made available.
