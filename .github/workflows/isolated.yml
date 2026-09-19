@@ -37,3 +37,14 @@ jobs:
         run: |
           workers=$(docker ps --all --filter label=org.entrotter.worker=true --format '{{.ID}}')
           test -z "$workers"
+      - name: Verify base signature and audit every detected worker package
+        run: python scripts/check_image_security.py --manifest worker-image.json --output .quality/image-security
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: worker-image-security
+          path: |
+            .quality/image-security/
+            worker-image.json
+          include-hidden-files: true
+          if-no-files-found: error

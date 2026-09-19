@@ -32,7 +32,7 @@ class IsolatedWorkerTests(unittest.TestCase):
                     ('--memory-swap=' + memory) if x.startswith('--memory-swap=') else
                     ('--pids-limit=' + str(pids)) if x.startswith('--pids-limit=') else x for x in args]
             try:
-                result = subprocess.run([*args[:-1], '--entrypoint=python', args[-1], '-c', code],
+                result = subprocess.run([*args[:-1], '--entrypoint=python3', args[-1], '-c', code],
                                         stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=15)
                 details = None
                 if keep:
@@ -65,6 +65,17 @@ print(json.dumps({"cpu":(c/'cpu.max').read_text().strip(),"memory":(c/'memory.ma
         self.assertIn('CapEff:\t0000000000000000', d['status'])
         self.assertIn('NoNewPrivs:\t1', d['status'])
         self.assertIn('Seccomp:\t2', d['status'])
+
+    def test_runtime_has_python_and_anvil_without_shell_or_package_commands(self):
+        result, _ = self.probe('''import importlib.util,json,shutil,sys
+print(json.dumps({"python":list(sys.version_info[:2]),"commands":{name:shutil.which(name) for name in ['anvil','sh','bash','apt','apk','pip','pip3']},"pip_importable":importlib.util.find_spec('pip') is not None}))
+''')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        observed = json.loads(result.stdout)
+        self.assertEqual(observed['python'], [3, 14])
+        self.assertIsNotNone(observed['commands'].pop('anvil'))
+        self.assertTrue(all(value is None for value in observed['commands'].values()))
+        self.assertFalse(observed['pip_importable'])
 
     def test_memory_limit_actually_oom_kills_overallocation(self):
         result, details = self.probe('x=bytearray(128*1024*1024); print(len(x))', memory='64m', keep=True)
@@ -122,13 +133,15 @@ def stats(): return dict(line.split() for line in p.read_text().splitlines())
 def busy():
     end=time.monotonic()+2
     while time.monotonic()<end: pass
-before=stats(); children=[multiprocessing.Process(target=busy) for _ in range(3)]
+before=stats(); context=multiprocessing.get_context('fork'); children=[context.Process(target=busy) for _ in range(3)]
 for x in children: x.start()
 for x in children: x.join()
-after=stats();print(json.dumps({"throttled":int(after['nr_throttled'])-int(before['nr_throttled'])}))
+after=stats();print(json.dumps({"throttled":int(after['nr_throttled'])-int(before['nr_throttled']),"exitcodes":[x.exitcode for x in children]}))
 ''')
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertGreater(json.loads(result.stdout)['throttled'], 0)
+        measured = json.loads(result.stdout)
+        self.assertEqual(measured['exitcodes'], [0, 0, 0])
+        self.assertGreater(measured['throttled'], 0)
 
 
 class WorkerLifetimeTests(unittest.TestCase):

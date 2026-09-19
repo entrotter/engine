@@ -27,6 +27,46 @@
       "reason": "Docker executable/socket are trusted local operator configuration. Arguments are a fixed build operation plus a private temporary context and computed source hash; shell=False. Source is local trusted checkout, no supplied scenario command is executed."
     },
     {
+      "file": "scripts/check_image_security.py",
+      "test_id": "B404",
+      "line": 17,
+      "code_sha256": "68abf03a7679cd5e5c4197174020270680e2ff401776e2204e72a4b8fd0429ba",
+      "severity": "LOW",
+      "reason": "This module imports subprocess for the individually reviewed fixed verification/scanning commands below. No shell, supplied scenario executable or unverified downloaded tool is executed."
+    },
+    {
+      "file": "scripts/check_image_security.py",
+      "test_id": "B310",
+      "line": 72,
+      "code_sha256": "37a50ce912a0e9d63299950a7e24dfe4d11654b068c114a71dca3b93b9aa6a83",
+      "severity": "MEDIUM",
+      "reason": "Both callers construct literal HTTPS GitHub release URLs from pinned versions and fixed platform lookup tables. Downloads are bounded to 256 MiB and must match a committed SHA-256 before execution; TLS validation stays enabled. Optional local inputs receive the same digest check."
+    },
+    {
+      "file": "scripts/check_image_security.py",
+      "test_id": "B603",
+      "line": 245,
+      "code_sha256": "37351c7739e1c2c9f0dd1113feb35b9a3c31b179d11be39f119aafc120e3275b",
+      "severity": "LOW",
+      "reason": "Executes a SHA-256-verified Cosign binary with a digest-pinned base image, exact official certificate identity and issuer. shell=False, private empty Docker configuration, minimal environment and 120-second timeout; signatures must bind to the exact requested digest."
+    },
+    {
+      "file": "scripts/check_image_security.py",
+      "test_id": "B603",
+      "line": 268,
+      "code_sha256": "c4b6cdef7f9e5697b50ac02261c5ef21759f95b31c402a4a25495c554ccf2c90",
+      "severity": "LOW",
+      "reason": "Runs fixed Docker image inspect through the validated local Unix socket and empty client configuration. Only an immutable image ID passes validation. The source label must match the checked-out files and build manifest; shell=False and ten-second timeout."
+    },
+    {
+      "file": "scripts/check_image_security.py",
+      "test_id": "B603",
+      "line": 315,
+      "code_sha256": "579f3dd892a051d69a28f1a63f5662244e290d7d3f552263c89dd6f5792fdf9f",
+      "severity": "LOW",
+      "reason": "Executes the checksum-verified Trivy binary with a fixed full vulnerability scan of an immutable local image ID, private empty config/ignore files and minimal environment. No user suppression or VEX inputs are accepted. shell=False and a 330-second process timeout bound the command."
+    },
+    {
       "file": "scripts/check_security.py",
       "test_id": "B404",
       "line": 13,
@@ -138,8 +178,9 @@
     "src/entrotter_engine/rpc.py": "f19af9a2af2f924c65595f609e7d320d75109e0b5f09c5ae032c0bbff43b7d46",
     "src/entrotter_engine/runner.py": "a890c229194685551fe52904954527147002f9b1a3715588e0e646570feadce8",
     "src/entrotter_engine/store.py": "25a6b9fe252cd0c8eef00ce5c3eb869d3a54044b00e9a67653a5c00b41749b3b",
-    "scripts/build_worker.py": "0c8b3bc3c744b900714fc82ae121585107bddf83c79065b6b9a8c16e5422c284",
+    "scripts/build_worker.py": "4e0bf0c9b6a7eb7b3181b98a1e5a2aca96ac852ad29d39393368c3b711d05f23",
     "scripts/check_dependency_manifest.py": "d9c90b75f8c26ef0aa3723ab07580f05c7391a78ef12fcf20b99e80ef198deef",
+    "scripts/check_image_security.py": "e84d1c8d37c33a176706b6cad3fe32c5f3b1f8faf96422f694cc088763ea8261",
     "scripts/check_security.py": "515db8c5988e21ff3910e93cb08c8f53dec3ce557d6a5a09377583f4fb6fe1a7"
   }
 }

@@ -2,7 +2,7 @@
 
 [Workspace setup](https://github.com/entrotter/entrotter#quick-start-without-dependencies-or-an-api-key) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [MIT license](LICENSE)
 
-MIT-licensed, Python 3.11+ local simulation software with no third-party runtime
+MIT-licensed, Python 3.11+ local simulation software with no third-party Python package runtime
 dependencies. This is an experimental local developer tool, not a secure public
 multi-tenant service. See SECURITY.md before running it.
 
@@ -267,8 +267,8 @@ The security scan uses every default Bandit rule with `--ignore-nosec` and keeps
 all findings in `.quality/bandit.json`. `security-reviewed.json` records exact
 finding fingerprints, per-finding rationales and hashes of every production
 source/script. New, disappeared or changed findings, changed source, failed or
-partial scans and scanner-version drift fail the review policy. The current 15
-findings (13 low, two medium) concern trusted subprocess launches, a literal HTTPS
+partial scans and scanner-version drift fail the review policy. The current 20
+findings (17 low, three medium) concern trusted subprocess launches, a literal HTTPS
 release download and an in-container tmpfs specification. Their author-written
 rationales still require independent PR review; a matching policy is not an
 independent security audit or evidence that the software has no vulnerabilities.
@@ -319,3 +319,40 @@ original coverage. Separate real-Docker tests exercise default public runner,
 CLI and API entrypoints, complete artifact equality and actual kernel limits.
 No daemon is required for the regression tests proving all defaults reject an
 unavailable worker without writing or replacing reports.
+
+## Worker image supply chain and advisory gate
+
+The worker uses a digest-pinned public Chainguard Python 3.14 image with its
+runtime libraries. It has no installed shell, package-manager commands or importable pip module. The
+upstream pip bootstrap wheel is inventoried as an OS package. Anvil remains the
+same checksum-verified Foundry 1.8.3 binary; build manifests also record its SHA-256.
+The host supports Python 3.11 through 3.14; native and container runtimes are
+separately tested. No registry account or paid image tag is used.
+
+After building, run the advisory gate from the checkout:
+
+```bash
+PYTHONPATH=src python3 scripts/check_image_security.py --manifest worker-image.json --output .quality/image-security
+```
+
+This downloads checksum-pinned Trivy 0.74.0 and Cosign 3.1.3 binaries, verifies the
+base image's exact digest and official signing identity, and scans the actual
+locally built image ID. It uses empty private configuration/ignore files and does
+not inherit scanner environment overrides or registry credentials. The complete
+OS/language package inventory, all vulnerability severities, base signatures,
+scanner/database hashes and database timestamps are retained. A database older
+than one day, expired update window, unexpected image/source/interpreter/libc/TLS
+inventory, scanner failure or any finding fails the gate. Unfixed/low/unknown
+findings are not ignored. The real-Docker CI uploads reports even on failure.
+
+The scan covers detected packages, including the packaged Python interpreter and
+shared libraries. It does not establish native Anvil dependency coverage when no
+Rust inventory is detected, audit the Docker/VM/host kernel, or prove the absence
+of vulnerabilities. Native dependency coverage and independent review remain
+release gates. Base-image/provider availability and public advisory data can
+change; update the immutable digest deliberately and rerun signature, package,
+real worker and complete-report equivalence checks. Never weaken filters or
+suppress findings to restore a passing job.
+
+Upstream references: [image provenance](https://images.chainguard.dev/directory/image/python/provenance),
+[Trivy Rust inventory coverage](https://github.com/aquasecurity/trivy/blob/v0.74.0/docs/guide/coverage/language/rust.md).

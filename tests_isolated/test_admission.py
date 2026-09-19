@@ -40,7 +40,7 @@ def occupied_slot(*, start=True):
 def delayed_args(original, *args, **kwargs):
     values = original(*args, **kwargs)
     # Timing-only fault injection: real Docker flags and the real worker run.
-    return [*values[:-1], '--entrypoint=python', values[-1], '-c',
+    return [*values[:-1], '--entrypoint=python3', values[-1], '-c',
             'import time; time.sleep(5); from entrotter_engine._isolated_worker import main; raise SystemExit(main())']
 
 

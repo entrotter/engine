@@ -29,9 +29,16 @@ README.md for the exact boundaries and operator-trusted Docker image/socket
 requirements. Docker administrator access
 can reveal the archive URL; never use a production signing key in this tool.
 
-The quality workflow publishes the full Bandit report, including 15 explicitly
+The quality workflow publishes the full Bandit report, including 20 explicitly
 reviewed expected findings, and audits the hash-locked Python tool/build graph.
 It does not suppress Bandit rules or advisory IDs. Exact source/finding changes
 invalidate the review manifest. These author-provided rationales require human
 review and do not establish security of native binaries, OS packages, container
 isolation or arbitrary external code. See README.md for scope and reproduction.
+
+The worker image additionally has a strict package advisory gate and verified
+base signature. Every detected vulnerability fails, including unfixed and low
+severity findings; raw reports remain visible. Coverage requires the packaged
+interpreter/libc/TLS inventory and a current vulnerability database. Anvil's
+native dependency graph, the Docker daemon and host kernel/VM are not proven
+covered by a zero-finding image package scan. See README.md for exact boundaries.
