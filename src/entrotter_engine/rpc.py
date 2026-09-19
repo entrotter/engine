@@ -52,9 +52,9 @@ class RPC:
             if not isinstance(result, dict) or result.get("id") != req_id:
                 raise RPCError("Invalid RPC response")
             if "error" in result:
-                # Never propagate upstream messages: they may contain an API key/URL.
-                code = result["error"].get("code") if isinstance(result["error"], dict) else None
-                raise RPCRejected(f"RPC rejected {method} (code {code})")
+                # Every provider field is untrusted, including nominally numeric codes.
+                # Keep only the locally allowlisted method in user-facing diagnostics.
+                raise RPCRejected(f"RPC rejected {method}")
             if "result" not in result:
                 raise RPCError("RPC response has no result")
             return result["result"]
