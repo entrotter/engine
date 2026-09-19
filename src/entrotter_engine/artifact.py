@@ -3,11 +3,10 @@
 from __future__ import annotations
 import hashlib
 import json
-import os
 import re
 from pathlib import Path
 from typing import Any
-import tempfile
+from .export_budget import ExportBudget
 
 VERSION = "0.1.0"
 MAX_REPORT_BYTES = 8 * 1024 * 1024
@@ -44,20 +43,4 @@ def write_report(report: dict, path: str | Path) -> None:
     ).encode()
     if len(raw) > MAX_REPORT_BYTES:
         raise ValueError("Report exceeds 8 MiB")
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    # Exclusive temporary creation does not follow a predictable .tmp symlink.
-    descriptor, temp = tempfile.mkstemp(
-        prefix=".report-", suffix=".tmp", dir=path.parent
-    )
-    try:
-        with os.fdopen(descriptor, "wb") as output:
-            output.write(raw)
-            output.flush()
-            os.fsync(output.fileno())
-        os.replace(temp, path)
-    finally:
-        try:
-            os.unlink(temp)
-        except FileNotFoundError:
-            pass
+    ExportBudget().write(raw, path)

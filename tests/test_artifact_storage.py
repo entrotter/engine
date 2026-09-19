@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -37,7 +38,12 @@ class ArtifactWriteTests(unittest.TestCase):
             path = Path(directory) / 'report.json'
             original = seal({'schema_version': '0.1.0', 'example': 1})
             write_report(original, path)
-            with patch('entrotter_engine.artifact.os.replace', side_effect=OSError('injected disk failure')):
+            replace = os.replace
+            def fail_report(source, destination):
+                if Path(source).name.startswith('.report-'):
+                    raise OSError('injected disk failure')
+                return replace(source, destination)
+            with patch('entrotter_engine.export_budget.os.replace', side_effect=fail_report):
                 with self.assertRaises(OSError):
                     write_report(seal({'schema_version': '0.1.0', 'example': 2}), path)
             self.assertEqual(json.loads(path.read_bytes()), original)
