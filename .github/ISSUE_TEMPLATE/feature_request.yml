@@ -1,0 +1,16 @@
+name: Feature request
+description: A scoped, testable contribution
+title: "feat: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Proposed behavior and acceptance tests
+    validations:
+      required: true

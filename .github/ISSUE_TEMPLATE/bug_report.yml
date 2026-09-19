@@ -1,0 +1,16 @@
+name: Bug report
+description: A reproducible failure, without private keys or credentials
+title: "bug: "
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include version, command, sanitized fixture, expected and observed results.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Environment and tests
+      description: OS, Python/Anvil versions and which checks ran. Never paste RPC secrets.

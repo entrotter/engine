@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.1.0",
+  "id": "liquidity-shock",
+  "title": "Synthetic liquidity shock",
+  "mode": "fixture",
+  "provenance": {
+    "kind": "synthetic",
+    "description": "An invented drawdown path. Not prices from a real token or historical crisis."
+  },
+  "market": {
+    "prices": [
+      "100",
+      "103",
+      "101",
+      "94",
+      "86",
+      "65",
+      "49",
+      "53",
+      "58"
+    ],
+    "initial_cash": "0",
+    "initial_units": "100",
+    "fee_bps": 30,
+    "slippage_bps": 20,
+    "symbol": "TEST"
+  },
+  "baseline": {
+    "type": "hold"
+  },
+  "candidate": {
+    "type": "circuit_breaker",
+    "drawdown_trigger": "0.12"
+  }
+}

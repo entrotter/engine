@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1.0",
+  "id": "ethereum-state-fork",
+  "title": "Ethereum pinned-state execution template",
+  "mode": "evm-fork",
+  "provenance": {
+    "kind": "historical-fork",
+    "description": "Starts from a real archived Ethereum block, but the actor funding and intervention are synthetic. This template needs an archive RPC and has not yet been validated on one."
+  },
+  "source": {
+    "chain_id": 1,
+    "block_number": 19000000
+  },
+  "actor": "0x1000000000000000000000000000000000000001",
+  "actor_balance_wei": "10000000000000000000",
+  "allowed_targets": [
+    "0x2000000000000000000000000000000000000002"
+  ],
+  "steps": [
+    {
+      "baseline": null,
+      "candidate": {
+        "to": "0x2000000000000000000000000000000000000002",
+        "value_wei": "1000000000000000000",
+        "gas": 21000
+      }
+    }
+  ]
+}
