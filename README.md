@@ -102,3 +102,21 @@ Foundry v1.8.3: `cd tests/contracts && forge build`; solc 0.8.30 and the Cancun
 EVM target are pinned in `foundry.toml`. The checked-in runtime allows offline
 real-Anvil tests without downloading a compiler. ABI encoding is independently
 compared with Foundry cast when available.
+
+## Owned process lifetime
+
+On POSIX systems, each Anvil process runs under a small standard-library guardian.
+The owner holds a lifetime pipe; closing it or terminating the owner causes the
+guardian to terminate and reap Anvil, including after owner SIGTERM or SIGKILL.
+A separate watchdog expires after 150 seconds per node, followed by up to two
+seconds of graceful termination before a forced kill. The normal branch deadline
+and RPC timeouts still apply. Output is discarded, and the helper accepts no
+commands over its lifetime pipe. Only the trusted executable/arguments constructed
+by the engine are launched; it is not an arbitrary-agent code sandbox.
+
+Tests send real OS signals to owners running real Anvil, kill the guardian itself,
+and let the watchdog expire without owner cooperation. The owner's cleanup kills
+the owned process group if the guardian fails. This improves lifecycle guarantees
+but does not yet provide whole-run CPU/RSS/disk quotas. Simultaneously killing both
+the owner and guardian is outside this native guardian's protection. EVM lifecycle
+support currently requires POSIX; synthetic fixture execution remains portable.

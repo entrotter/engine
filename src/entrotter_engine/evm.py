@@ -1,6 +1,9 @@
 """Paired private Anvil branches. Historical-state execution, NOT future market replay."""
 from __future__ import annotations
 import os
+from pathlib import Path
+import signal
+import sys
 import shutil
 import socket
 import subprocess
@@ -13,11 +16,16 @@ class ExecutionError(RuntimeError):
     pass
 
 class AnvilSession:
-    def __init__(self, source: dict | None = None, rpc_url: str | None = None):
+    def __init__(self, source: dict | None = None, rpc_url: str | None = None, *, lifetime: float = 150):
+        if type(lifetime) not in (int, float) or not .1 <= lifetime <= 150:
+            raise ExecutionError("Anvil lifetime must be between 0.1 and 150 seconds")
+        self.lifetime = lifetime
         self.source, self.rpc_url, self.process = source, rpc_url, None
         self.rpc = None
 
     def __enter__(self):
+        if os.name != "posix":
+            raise ExecutionError("Owned Anvil lifecycle currently requires POSIX process groups")
         binary = shutil.which("anvil")
         if not binary:
             raise ExecutionError("Anvil is not installed. Install Foundry, then retry. No fallback simulation was used.")
@@ -32,7 +40,9 @@ class AnvilSession:
                      "--no-storage-caching"]
         else:
             args += ["--timestamp", "1700000000", "--hardfork", "cancun"]
-        self.process = subprocess.Popen(args, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+        guardian = str(Path(__file__).with_name("_guardian.py"))
+        self.process = subprocess.Popen([sys.executable, guardian, str(self.lifetime), *args],
+                                        stdin=subprocess.PIPE, stdout=subprocess.DEVNULL,
                                         stderr=subprocess.DEVNULL, start_new_session=True)
         self.rpc = RPC(f"http://127.0.0.1:{port}", local=True, timeout=10)
         deadline = time.monotonic() + 25
@@ -54,13 +64,26 @@ class AnvilSession:
             raise
 
     def __exit__(self, *exc):
-        if self.process and self.process.poll() is None:
-            self.process.terminate()
-            try:
-                self.process.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                self.process.kill()
-                self.process.wait(timeout=5)
+        if self.process is None:
+            return
+        # Closing the lifetime pipe also works if no signal handler can run in the
+        # owner (SIGKILL, os._exit, or a daemon request thread at interpreter exit).
+        if self.process.stdin is not None and not self.process.stdin.closed:
+            self.process.stdin.close()
+        try:
+            self.process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            self._kill_group()
+            self.process.wait(timeout=5)
+        if self.process.returncode != 0:
+            # A failed/killed guardian may not have completed its own finally block.
+            self._kill_group()
+
+    def _kill_group(self):
+        try:
+            os.killpg(self.process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
 
 def resolve_source(scenario: dict) -> tuple[dict | None, str | None]:
     if scenario["mode"] == "evm-local":
