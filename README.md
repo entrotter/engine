@@ -1,5 +1,7 @@
 # Entrotter Engine
 
+[Workspace setup](https://github.com/entrotter/entrotter#quick-start-without-dependencies-or-an-api-key) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [MIT license](LICENSE)
+
 MIT-licensed, Python 3.11+ local simulation software with no third-party runtime
 dependencies. This is an experimental local developer tool, not a secure public
 multi-tenant service. See SECURITY.md before running it.
