@@ -7,7 +7,7 @@ import subprocess
 import unittest
 import uuid
 
-from entrotter_engine.isolated import client, run_isolated, worker_args
+from entrotter_engine.isolated import client, run_isolated, worker_args, WORKER_NAME, WorkerBusy
 from entrotter_engine.runner import run, run_native
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -135,14 +135,18 @@ class WorkerLifetimeTests(unittest.TestCase):
     def test_detached_idle_worker_expires_without_host_cooperation(self):
         import time
         image = os.environ['ENTROTTER_WORKER_IMAGE']
-        name = 'entrotter-watchdog-' + uuid.uuid4().hex
+        name = WORKER_NAME
+        scenario = json.loads((ROOT / 'tests/data/fixture.json').read_text())
+        container = None
         with client() as prefix:
             args = worker_args(prefix, image, name)
             args.insert(-1, '--detach')
             start = time.monotonic()
             try:
-                subprocess.run(args, check=True, stdin=subprocess.DEVNULL,
-                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=10)
+                container = subprocess.check_output(args, stdin=subprocess.DEVNULL,
+                                                    text=True, stderr=subprocess.DEVNULL, timeout=10).strip()
+                with self.assertRaises(WorkerBusy):
+                    run(scenario)
                 while time.monotonic() - start < 190:
                     active = subprocess.check_output(
                         [*prefix, 'ps', '--all', '--filter', 'name=^/' + name + '$', '--format', '{{.ID}}'],
@@ -156,8 +160,10 @@ class WorkerLifetimeTests(unittest.TestCase):
                 else:
                     self.fail('Worker timer did not remove detached idle container')
             finally:
-                subprocess.run([*prefix, 'rm', '--force', name], stdout=subprocess.DEVNULL,
-                               stderr=subprocess.DEVNULL, timeout=10)
+                if container:
+                    subprocess.run([*prefix, 'rm', '--force', container], stdout=subprocess.DEVNULL,
+                                   stderr=subprocess.DEVNULL, timeout=10)
+        self.assertEqual(run(scenario), run_native(scenario))
 
     def test_sigterm_ends_idle_worker_and_removes_container(self):
         self.check_lifetime(kill_client=False)

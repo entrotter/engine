@@ -13,6 +13,7 @@ from .store import ArtifactStore, StoreBusy, StoreFull
 from .models import ValidationError
 from .rpc import RPCError
 from .evm import ExecutionError
+from .isolated import WorkerBusy
 from .runner import run, run_native
 
 MAX_BODY = 262144
@@ -218,6 +219,8 @@ class Handler(BaseHTTPRequestHandler):
             RecursionError,
         ):
             self.reply(400, {"error": "invalid_scenario"})
+        except WorkerBusy:
+            self.reply(429, {"error": "worker_busy_retry_later"})
         except (ExecutionError, RPCError):
             self.reply(
                 422,

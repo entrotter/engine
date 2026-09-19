@@ -20,6 +20,59 @@ from .models import validate
 MAX_OUTPUT = 8 * 1024 * 1024
 MAX_INPUT = 262144
 HOST_TIMEOUT = 190
+WORKER_NAME = "entrotter-active-worker"
+OWNER_LABEL = "org.entrotter.owner"
+
+
+class WorkerBusy(ExecutionError):
+    """The configured daemon's single worker slot is already occupied."""
+
+
+def _slot(prefix, owner=None):
+    args = [
+        *prefix,
+        "ps",
+        "--all",
+        "--no-trunc",
+        "--filter",
+        "name=^/" + WORKER_NAME + "$",
+    ]
+    if owner is not None:
+        args += ["--filter", "label=" + OWNER_LABEL + "=" + owner]
+    try:
+        result = subprocess.run(
+            [*args, "--format", "{{.ID}}"],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            timeout=10,
+            check=True,
+        )
+        value = result.stdout.decode("ascii").strip()
+        if value and not re.fullmatch(r"[0-9a-f]{64}", value):
+            raise ValueError()
+        return value or None
+    except (OSError, subprocess.SubprocessError, ValueError):
+        raise ExecutionError("Cannot verify local Docker worker admission") from None
+
+
+def _cleanup(prefix, owner):
+    try:
+        container = _slot(prefix, owner)
+        if container is not None:
+            subprocess.run(
+                [*prefix, "rm", "--force", container],
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                timeout=10,
+            )
+        if _slot(prefix, owner) is not None:
+            raise ExecutionError("Owned worker remains")
+    except (OSError, subprocess.SubprocessError, ExecutionError):
+        raise ExecutionError(
+            "Local Docker cleanup could not be confirmed; inspect owned workers"
+        ) from None
 
 
 @contextmanager
@@ -115,10 +168,20 @@ def run_isolated(scenario):
     if len(payload) > MAX_INPUT:
         raise ExecutionError("Isolated scenario exceeds 256 KiB")
     image = os.environ.get("ENTROTTER_WORKER_IMAGE", "")
-    name = "entrotter-run-" + uuid.uuid4().hex
+    owner = uuid.uuid4().hex
     with client() as prefix, tempfile.TemporaryFile() as stdin:
-        args = worker_args(prefix, image, name, fork=scenario["mode"] == "evm-fork")
+        args = worker_args(
+            prefix, image, WORKER_NAME, fork=scenario["mode"] == "evm-fork"
+        )
+        args[len(prefix) + 1 : len(prefix) + 1] = [
+            "--label",
+            OWNER_LABEL + "=" + owner,
+        ]
         verify_daemon(prefix)
+        if _slot(prefix) is not None:
+            raise WorkerBusy(
+                "Local Docker worker busy; retry deliberately after completion"
+            )
         stdin.write(payload)
         stdin.seek(0)
         process = subprocess.Popen(
@@ -153,6 +216,9 @@ def run_isolated(scenario):
             except subprocess.TimeoutExpired:
                 raise ExecutionError("Isolated experiment timed out") from None
             if code != 0:
+                # Name reservation can reject a contender before the winner is
+                # visible to ps. Do not infer safe retry or completed admission
+                # from a Docker exit code; all ambiguous failures stay explicit.
                 raise ExecutionError(
                     "Isolated worker failed or exceeded its resource budget; no fallback"
                 )
@@ -166,39 +232,10 @@ def run_isolated(scenario):
                 )
             return report
         finally:
-            # Normal cancellation and timeout request deletion of this exact owned
-            # container. SIGKILL of this client is additionally bounded by the
-            # worker's independent in-container lifetime timer and --rm.
-            cleanup_failed = False
+            # Stop the client before checking ownership. Never remove by the
+            # shared slot name: a race loser or an old finalizer must not kill a
+            # different invocation. Auto-removal may race removal of our exact ID.
             try:
-                subprocess.run(
-                    [*prefix, "rm", "--force", name],
-                    stdin=subprocess.DEVNULL,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    timeout=10,
-                )
-                cleanup_check = subprocess.run(
-                    [
-                        *prefix,
-                        "ps",
-                        "--all",
-                        "--filter",
-                        "name=^/" + name + "$",
-                        "--format",
-                        "{{.ID}}",
-                    ],
-                    stdin=subprocess.DEVNULL,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.DEVNULL,
-                    timeout=10,
-                )
-                cleanup_failed = cleanup_check.returncode != 0 or bool(
-                    cleanup_check.stdout.strip()
-                )
-            except (OSError, subprocess.TimeoutExpired):
-                cleanup_failed = True
-            finally:
                 if process.poll() is None:
                     process.terminate()
                     try:
@@ -206,9 +243,7 @@ def run_isolated(scenario):
                     except subprocess.TimeoutExpired:
                         process.kill()
                         process.wait(timeout=3)
+            finally:
                 if stream is not None:
                     stream.close()
-            if cleanup_failed:
-                raise ExecutionError(
-                    "Local Docker cleanup could not be confirmed; inspect owned workers"
-                ) from None
+                _cleanup(prefix, owner)

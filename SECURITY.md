@@ -20,10 +20,13 @@ The default isolated worker adds tested per-experiment Linux kernel quotas,
 non-root/read-only execution and no network for non-fork modes. Fork workers
 still use a general bridge network; arbitrary code execution stays disabled.
 Native execution requires an explicit trusted-development opt-out (`--native`
-or `run_native`); it is not a whole-process CPU/RSS sandbox. The local API bounds connection handlers
-and dedicated report storage; individual CLI exports are size-limited. Aggregate
-CLI concurrency/export retention and image/VM storage are not capped. See README.md for the exact boundaries and
-operator-trusted Docker image/socket requirements. Docker administrator access
+or `run_native`); it is not a whole-process CPU/RSS sandbox. The local API bounds
+connection handlers and dedicated report storage; individual CLI exports are
+size-limited. Default worker concurrency is capped to one container per daemon.
+Explicit native/older clients and separate daemons do not share this bound; host
+process overhead, CLI export retention and image/VM storage are not capped. See
+README.md for the exact boundaries and operator-trusted Docker image/socket
+requirements. Docker administrator access
 can reveal the archive URL; never use a production signing key in this tool.
 
 The quality workflow publishes the full Bandit report, including 15 explicitly
