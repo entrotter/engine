@@ -1,4 +1,5 @@
 """Container entrypoint for bounded JSON-only experiments; never imports supplied code."""
+
 import json
 import signal
 import sys
@@ -11,7 +12,7 @@ MAX_OUTPUT = 8 * 1024 * 1024
 
 
 def expired(signum, frame):
-    raise TimeoutError('Worker lifetime exceeded')
+    raise TimeoutError("Worker lifetime exceeded")
 
 
 def main():
@@ -21,11 +22,11 @@ def main():
     try:
         raw = sys.stdin.buffer.read(MAX_INPUT + 1)
         if not raw or len(raw) > MAX_INPUT:
-            raise ValueError('Worker input limit exceeded')
+            raise ValueError("Worker input limit exceeded")
         result = run(json.loads(raw))
         output = canonical(result)
         if len(output) > MAX_OUTPUT:
-            raise ValueError('Worker output limit exceeded')
+            raise ValueError("Worker output limit exceeded")
         sys.stdout.buffer.write(output)
         sys.stdout.buffer.flush()
         return 0
@@ -38,5 +39,5 @@ def main():
         signal.setitimer(signal.ITIMER_REAL, 0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise SystemExit(main())

@@ -24,3 +24,10 @@ and dedicated report storage; individual CLI exports are size-limited. Aggregate
 CLI concurrency/export retention and image/VM storage are not capped. See README.md for the exact boundaries and
 operator-trusted Docker image/socket requirements. Docker administrator access
 can reveal the archive URL; never use a production signing key in this tool.
+
+The quality workflow publishes the full Bandit report, including 15 explicitly
+reviewed expected findings, and audits the hash-locked Python tool/build graph.
+It does not suppress Bandit rules or advisory IDs. Exact source/finding changes
+invalidate the review manifest. These author-provided rationales require human
+review and do not establish security of native binaries, OS packages, container
+isolation or arbitrary external code. See README.md for scope and reproduction.

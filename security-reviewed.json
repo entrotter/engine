@@ -1,0 +1,145 @@
+{
+  "scanner_version": "1.9.4",
+  "review_scope": "Author-reviewed expected findings; independent PR review required. This policy is not a claim of absence of vulnerabilities.",
+  "findings": [
+    {
+      "file": "scripts/build_worker.py",
+      "test_id": "B404",
+      "line": 9,
+      "code_sha256": "51cfd9459757d0c73b099a22c4192c661aac54ae599a79e860bf7684b4155921",
+      "severity": "LOW",
+      "reason": "This module imports subprocess for the fixed, individually reviewed calls below. No shell or scenario-selected executable is accepted; command construction is reviewed at each call site."
+    },
+    {
+      "file": "scripts/build_worker.py",
+      "test_id": "B310",
+      "line": 51,
+      "code_sha256": "201e14e90dccf895dcba3185565608924059fd0993eb23aec435ffcc3e614e15",
+      "severity": "MEDIUM",
+      "reason": "The URL is constructed from a literal HTTPS GitHub release origin and a fixed architecture lookup, not user input. TLS validation remains enabled and the complete downloaded archive must match its pinned SHA-256 before extraction. Only the regular anvil member is copied."
+    },
+    {
+      "file": "scripts/build_worker.py",
+      "test_id": "B603",
+      "line": 85,
+      "code_sha256": "c1e16916ee0bd755958a11696c9a03952c1225203b74cc6ed877eb32631988cf",
+      "severity": "LOW",
+      "reason": "Docker executable/socket are trusted local operator configuration. Arguments are a fixed build operation plus a private temporary context and computed source hash; shell=False. Source is local trusted checkout, no supplied scenario command is executed."
+    },
+    {
+      "file": "scripts/check_security.py",
+      "test_id": "B404",
+      "line": 13,
+      "code_sha256": "24bcab9f2150a0b92b0a4c7feb6e1310ce58e8e714699ac5be61d19137e8619b",
+      "severity": "LOW",
+      "reason": "This module imports subprocess for the fixed, individually reviewed calls below. No shell or scenario-selected executable is accepted; command construction is reviewed at each call site."
+    },
+    {
+      "file": "scripts/check_security.py",
+      "test_id": "B603",
+      "line": 58,
+      "code_sha256": "53ce483f50f5bf289bb96254f5b8412dcfa6a979561acda97ed42fabed6d6ba8",
+      "severity": "LOW",
+      "reason": "Executes the current trusted Python interpreter with a fixed Bandit module/argument list and a 120-second timeout. No external input is interpolated into executable arguments; shell=False. Scan reports remain visible and policy checks run afterward."
+    },
+    {
+      "file": "src/entrotter_engine/_guardian.py",
+      "test_id": "B404",
+      "line": 11,
+      "code_sha256": "61ff3320ab7078b126ecf14d2c8f2517c8692088d64928e10432d7bcc8ed0c25",
+      "severity": "LOW",
+      "reason": "This module imports subprocess for the fixed, individually reviewed calls below. No shell or scenario-selected executable is accepted; command construction is reviewed at each call site."
+    },
+    {
+      "file": "src/entrotter_engine/_guardian.py",
+      "test_id": "B603",
+      "line": 28,
+      "code_sha256": "a2099229bc365629539c15dc88f499ca0f8197e8838968a517620bb1332b8875",
+      "severity": "LOW",
+      "reason": "This internal helper receives argv only from AnvilSession, which selects the trusted local Anvil executable and fixed node options. The lifetime pipe carries no commands. It is not reachable as arbitrary command execution through scenario JSON or HTTP; shell=False."
+    },
+    {
+      "file": "src/entrotter_engine/evm.py",
+      "test_id": "B404",
+      "line": 10,
+      "code_sha256": "70961004f889c7226101517d3b392abe8f4f5b18d7b7d5d33cfb180ce6e7f9f1",
+      "severity": "LOW",
+      "reason": "This module imports subprocess for the fixed, individually reviewed calls below. No shell or scenario-selected executable is accepted; command construction is reviewed at each call site."
+    },
+    {
+      "file": "src/entrotter_engine/evm.py",
+      "test_id": "B603",
+      "line": 77,
+      "code_sha256": "9c19d979fa38ccecaca1e7488d4f8c7c429752ef72b3150dc2de0a626599940f",
+      "severity": "LOW",
+      "reason": "Launches the current trusted Python interpreter and an absolute internal guardian file, with an Anvil path resolved from the trusted operator PATH. Scenario data only fills typed fixed options after validation. No shell, user code import or JSON-provided command is allowed."
+    },
+    {
+      "file": "src/entrotter_engine/isolated.py",
+      "test_id": "B404",
+      "line": 11,
+      "code_sha256": "acc6cc0af18992f56c2a2af670805f769b91f45342faedb83401bbdd7a2d6686",
+      "severity": "LOW",
+      "reason": "This module imports subprocess for the fixed, individually reviewed calls below. No shell or scenario-selected executable is accepted; command construction is reviewed at each call site."
+    },
+    {
+      "file": "src/entrotter_engine/isolated.py",
+      "test_id": "B108",
+      "line": 66,
+      "code_sha256": "29f1b82802643c97ceea403aaffa9f7739e2ebfdef0de31fdecb8506d69960bf",
+      "severity": "MEDIUM",
+      "reason": "This is a Docker tmpfs mount specification for /tmp inside the disposable container, not an insecure host temporary filename. The mount has a 64 MiB limit with noexec/nosuid/nodev; the host uses tempfile for exclusive temporary creation. Real kernel enforcement tests cover the mount."
+    },
+    {
+      "file": "src/entrotter_engine/isolated.py",
+      "test_id": "B603",
+      "line": 84,
+      "code_sha256": "ee9f5ce7ebf16a837264e0f24bd86e59bc43157f87cc69147b254366e6796aa0",
+      "severity": "LOW",
+      "reason": "Runs a fixed docker info query through the verified local Unix socket, with an absolute operator-trusted Docker executable, empty client configuration, shell=False and ten-second timeout. No scenario fields enter the arguments."
+    },
+    {
+      "file": "src/entrotter_engine/isolated.py",
+      "test_id": "B603",
+      "line": 124,
+      "code_sha256": "26180540d434291456edb16765fa59e78b9d771a9b851d4f384388e0e6d0bb78",
+      "severity": "LOW",
+      "reason": "Arguments come only from worker_args: fixed resource/network flags, an operator-owned immutable image ID and a generated UUID name. Scenario JSON goes to bounded stdin, never command text. No shell or arbitrary image/command can be selected through HTTP."
+    },
+    {
+      "file": "src/entrotter_engine/isolated.py",
+      "test_id": "B603",
+      "line": 174,
+      "code_sha256": "ace30aab3859e7abc8fbd066f02b64766ff862077a83d1a9b51b2de96e109c34",
+      "severity": "LOW",
+      "reason": "Runs fixed docker rm --force against this invocation\u2019s generated UUID container name through the trusted local socket, shell=False and ten-second timeout. No arbitrary user-supplied container selector is used."
+    },
+    {
+      "file": "src/entrotter_engine/isolated.py",
+      "test_id": "B603",
+      "line": 181,
+      "code_sha256": "9cd2abf187a581ab0cc8d0f64f9851f4594daf013de2495482866d2cd1d0b94c",
+      "severity": "LOW",
+      "reason": "Runs a fixed docker ps query with an anchored filter for the same owned UUID to verify cleanup, shell=False and ten-second timeout. Scenario input cannot alter the filter or executable."
+    }
+  ],
+  "source_sha256": {
+    "src/entrotter_engine/__init__.py": "11f3961a518c3a40429472d8582270a306114419f588008729d8759d8da83db6",
+    "src/entrotter_engine/__main__.py": "3f28f07b44fca498d6cd1a5b189ec98e5a0edd4e91387305c866476b795e9ad5",
+    "src/entrotter_engine/_guardian.py": "3758412adb3e8761a3c82eac89cbf5a72bac7d0dad5c492a6825b4bb2a5f9ddf",
+    "src/entrotter_engine/_isolated_worker.py": "ba28520ea1f611e1fd8d1064e28993793b695d98b89d8bb387d91d818856afed",
+    "src/entrotter_engine/api.py": "427244a4e415b7fcda26987c3f339e6c51ecfb094b16fd21294b3619ff5d07d0",
+    "src/entrotter_engine/artifact.py": "69a6cb7cb312f0159f7fb8c2231606d49997c6375c665b753ca2bf4c7378150e",
+    "src/entrotter_engine/defi.py": "f4f5e6e50ad3745426c7d0fbc08b5fa42c79fd4daa225667821814f95acb7fde",
+    "src/entrotter_engine/evm.py": "7f8fdde9bc96f0bdcdbba7f04b4ff5175808943c547e47d97662abee2392b443",
+    "src/entrotter_engine/fixture.py": "1f771e23c8b8311bf1f5e9cc56bf30f7b369f8f617513d99024876688e809647",
+    "src/entrotter_engine/isolated.py": "b8353d72a185b452a4dc4cd8e8d1de6611936e714c904db1b74583f43121853c",
+    "src/entrotter_engine/models.py": "1383a7d508e22210217af4515c664c82a861f8a23dcef9dd9ec8f831966ae9b7",
+    "src/entrotter_engine/rpc.py": "f19af9a2af2f924c65595f609e7d320d75109e0b5f09c5ae032c0bbff43b7d46",
+    "src/entrotter_engine/runner.py": "12973985f7b3b4bc3913a2d2d7962a0408f6cead57682ddc86dbf85ec383868e",
+    "src/entrotter_engine/store.py": "25a6b9fe252cd0c8eef00ce5c3eb869d3a54044b00e9a67653a5c00b41749b3b",
+    "scripts/build_worker.py": "0c8b3bc3c744b900714fc82ae121585107bddf83c79065b6b9a8c16e5422c284",
+    "scripts/check_dependency_manifest.py": "d9c90b75f8c26ef0aa3723ab07580f05c7391a78ef12fcf20b99e80ef198deef",
+    "scripts/check_security.py": "515db8c5988e21ff3910e93cb08c8f53dec3ce557d6a5a09377583f4fb6fe1a7"
+  }
+}

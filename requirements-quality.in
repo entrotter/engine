@@ -1,0 +1,9 @@
+# Developer/CI tools only; production runtime remains standard-library-only.
+ruff==0.15.16
+mypy==1.18.2
+bandit==1.9.4
+pip-audit==2.10.1
+pip-tools==7.6.1
+setuptools==84.0.0
+pip==26.2.1
+build==1.6.1
