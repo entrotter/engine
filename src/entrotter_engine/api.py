@@ -1,33 +1,74 @@
 """Loopback-only development API. Not an Internet-facing multi-tenant server."""
 from __future__ import annotations
-from contextlib import contextmanager
 import hmac
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import re
+import socket
 import threading
 from pathlib import Path
-from .artifact import verify, write_report
+from .store import ArtifactStore, StoreBusy, StoreFull
 from .models import ValidationError
 from .rpc import RPCError
 from .evm import ExecutionError
 from .runner import run
 
 MAX_BODY = 262144
+MAX_CONNECTIONS = 8
+MAX_CONNECTION_SECONDS = 240
 
 class EngineServer(ThreadingHTTPServer):
     daemon_threads = True
     request_queue_size = 8
 
     def __init__(self, port: int = 8787, *, token: str = "", output: str | Path = "artifacts", isolated: bool = False):
-        super().__init__(("127.0.0.1", port), Handler)
         self.token, self.output = token, Path(output).resolve()
+        self.store = ArtifactStore(self.output)
         self.slot = threading.BoundedSemaphore(1)
+        self.connections = threading.BoundedSemaphore(MAX_CONNECTIONS)
         if isolated:
             from .isolated import run_isolated
             self.runner = run_isolated
         else:
             self.runner = run
+        super().__init__(("127.0.0.1", port), Handler)
+
+    def process_request(self, request, client_address):
+        if not self.connections.acquire(blocking=False):
+            try:
+                request.settimeout(.1)
+                body = b'{"error":"connection_limit"}'
+                response = ('HTTP/1.1 503 Service Unavailable\r\nContent-Type: application/json\r\n'
+                            f'Content-Length: {len(body)}\r\nConnection: close\r\n'
+                            'Cache-Control: no-store\r\nRetry-After: 1\r\n\r\n').encode() + body
+                request.sendall(response)
+            except OSError:
+                pass
+            finally:
+                self.shutdown_request(request)
+            return
+        try:
+            super().process_request(request, client_address)
+        except BaseException:
+            self.connections.release()
+            raise
+
+    def process_request_thread(self, request, client_address):
+        def expire():
+            try:
+                request.shutdown(socket.SHUT_RDWR)
+            except OSError:
+                pass
+        timer = threading.Timer(MAX_CONNECTION_SECONDS, expire)
+        timer.daemon = True
+        try:
+            timer.start()
+            super().process_request_thread(request, client_address)
+        finally:
+            timer.cancel()
+            if timer.ident is not None:
+                timer.join()
+            self.connections.release()
 
 class Handler(BaseHTTPRequestHandler):
     server: EngineServer
@@ -36,6 +77,14 @@ class Handler(BaseHTTPRequestHandler):
     def setup(self):
         super().setup()
         self.connection.settimeout(10)
+
+    def handle(self):
+        try:
+            super().handle()
+        except (BrokenPipeError, ConnectionResetError):
+            # A disconnected/expired client is normal and must not emit a
+            # traceback or keep its connection slot after bounded work ends.
+            return
 
     def log_message(self, *args):
         # Avoid logging payloads, paths, or credentials.
@@ -69,13 +118,11 @@ class Handler(BaseHTTPRequestHandler):
             self.reply(200, {"status": "ok", "version": "0.1.0", "scope": "local-development"}); return
         match = re.fullmatch(r"/v1/runs/([0-9a-f]{64})", self.path)
         if match:
-            path = self.server.output / (match[1]+".json")
-            if not path.is_file():
-                self.reply(404, {"error": "not_found"}); return
             try:
-                data = json.loads(path.read_bytes())
-                if not verify(data): raise ValueError("invalid artifact")
-            except (OSError, ValueError):
+                data = self.server.store.get(match[1])
+            except FileNotFoundError:
+                self.reply(404, {"error": "not_found"}); return
+            except (OSError, ValueError, RecursionError):
                 self.reply(500, {"error": "invalid_stored_artifact"}); return
             self.reply(200, data); return
         self.reply(404, {"error": "not_found"})
@@ -102,12 +149,18 @@ class Handler(BaseHTTPRequestHandler):
             if len(data) != size: raise ValidationError("Incomplete request body")
             scenario = json.loads(data)
             result = self.server.runner(scenario)
-            write_report(result, self.server.output / (result["artifact_id"]+".json"))
+            self.server.store.put(result)
             self.reply(201, result)
+        except StoreFull:
+            self.reply(507, {"error": "artifact_store_full", "hint": "Export or remove saved reports locally before retrying."})
+        except StoreBusy:
+            self.reply(503, {"error": "artifact_store_busy"})
         except (ValidationError, json.JSONDecodeError, UnicodeDecodeError, RecursionError):
             self.reply(400, {"error": "invalid_scenario"})
         except (ExecutionError, RPCError):
             self.reply(422, {"error": "execution_failed", "hint": "Check the configured runtime, resource limits, archive RPC and pinned source. No fallback was used."})
+        except ValueError:
+            self.reply(500, {"error": "invalid_stored_artifact"})
         except (OSError, TimeoutError):
             self.reply(500, {"error": "io_or_timeout_error"})
         finally:
