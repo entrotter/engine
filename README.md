@@ -267,8 +267,8 @@ The security scan uses every default Bandit rule with `--ignore-nosec` and keeps
 all findings in `.quality/bandit.json`. `security-reviewed.json` records exact
 finding fingerprints, per-finding rationales and hashes of every production
 source/script. New, disappeared or changed findings, changed source, failed or
-partial scans and scanner-version drift fail the review policy. The current 20
-findings (17 low, three medium) concern trusted subprocess launches, a literal HTTPS
+partial scans and scanner-version drift fail the review policy. The current 24
+findings (20 low, four medium) concern trusted subprocess launches, a literal HTTPS
 release download and an in-container tmpfs specification. Their author-written
 rationales still require independent PR review; a matching policy is not an
 independent security audit or evidence that the software has no vulnerabilities.
@@ -356,3 +356,34 @@ suppress findings to restore a passing job.
 
 Upstream references: [image provenance](https://images.chainguard.dev/directory/image/python/provenance),
 [Trivy Rust inventory coverage](https://github.com/aquasecurity/trivy/blob/v0.74.0/docs/guide/coverage/language/rust.md).
+
+
+## Native Foundry release inventory
+
+The separate native gate verifies the upstream Foundry 1.8.3 SLSA provenance and
+archive-bound signed SPDX inventory. It requires the exact release workflow,
+OIDC issuer and source commit, archive checksum, and the builder's extracted
+Anvil checksum. The downloaded SBOM must equal the cryptographically verified
+predicate. Cosign and Trivy use the same checksum pins as the image gate.
+
+```bash
+PYTHONPATH=src python3 scripts/check_native_security.py --manifest worker-image.json --output .quality/native-security
+```
+
+Every Cargo name/version/package URL in the signed inventory must appear exactly
+in the scanner result. A current, unexpired advisory database and all severities
+are required; every reported finding fails. Raw signatures, inventories, findings
+and hashes are uploaded by the actual-worker CI. Optional `GH_TOKEN` authenticates
+only the upstream public attestation API, preventing anonymous rate limits; it is
+not passed to Cosign/Trivy or recorded in reports.
+
+The upstream workflow scans the entire Foundry checkout. This verifies advisory
+coverage of its 1,126 inventoried Cargo packages, not the precise feature/target
+subset linked into Anvil. The 172 entries without Cargo URLs, including local
+workspace code and Actions, are listed explicitly outside this scan. Compiler,
+C libraries, missing/uninventoried dependencies and upstream build compromise
+remain limitations. Provenance proves origin/claims, not independent code review
+or bit-for-bit reproducible compilation. The separate image gate covers detected
+OS/interpreter packages; broader security/release gates remain open.
+
+[Upstream pinned release workflow](https://github.com/foundry-rs/foundry/blob/cae51ad458f6abb64852b7709eb784352429825d/.github/workflows/release.yml).

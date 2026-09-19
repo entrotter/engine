@@ -67,6 +67,38 @@
       "reason": "Executes the checksum-verified Trivy binary with a fixed full vulnerability scan of an immutable local image ID, private empty config/ignore files and minimal environment. No user suppression or VEX inputs are accepted. shell=False and a 330-second process timeout bound the command."
     },
     {
+      "file": "scripts/check_native_security.py",
+      "test_id": "B404",
+      "line": 16,
+      "code_sha256": "90abb97783a4c209955f0544d92b72886945d6413dd6de61281b2a4a1e2537a2",
+      "severity": "LOW",
+      "reason": "Imports subprocess solely for the checksum-verified Cosign and Trivy commands reviewed below. Commands are fixed argument arrays with shell=False; no supplied scenario code or raw shell is executed."
+    },
+    {
+      "file": "scripts/check_native_security.py",
+      "test_id": "B310",
+      "line": 56,
+      "code_sha256": "58149b2c46388542dcb3f15a35d730f0ced5169aceefe94c779169d7b0c022c1",
+      "severity": "MEDIUM",
+      "reason": "Both callers use fixed HTTPS GitHub release/API endpoints for the pinned Foundry release. Reads stop after 16 MiB plus one byte with TLS validation enabled. The optional GitHub token is accepted only for the fixed public upstream API and never passed to subprocesses or written into evidence. The SBOM is checksum-pinned and both claims are cryptographically verified before use."
+    },
+    {
+      "file": "scripts/check_native_security.py",
+      "test_id": "B603",
+      "line": 269,
+      "code_sha256": "008e980dfbe0f8d86f4ec84f7e7c55ba37e6d067e2d47c9e8cd5ee1983738de5",
+      "severity": "LOW",
+      "reason": "Runs checksum-pinned Cosign with the exact upstream release workflow identity, OIDC issuer, source commit, predicate type and immutable archive digest. Minimal environment excludes credentials/scanner overrides; shell=False, private cwd and a 120-second deadline. Additional checks bind the Anvil binary digest and exact signed SBOM."
+    },
+    {
+      "file": "scripts/check_native_security.py",
+      "test_id": "B603",
+      "line": 316,
+      "code_sha256": "8f1fedf196de14dd86f5b0198357dfa8266dd922d3e1cf032260448de62432a7",
+      "severity": "LOW",
+      "reason": "Runs checksum-pinned Trivy over the signature-verified SPDX file with empty private config/ignore files and all vulnerability severities including unfixed. shell=False, minimal environment and a 330-second deadline. Every signed Cargo name/version/PURL must appear exactly once and every finding fails; raw reports retain all findings."
+    },
+    {
       "file": "scripts/check_security.py",
       "test_id": "B404",
       "line": 13,
@@ -181,6 +213,7 @@
     "scripts/build_worker.py": "4e0bf0c9b6a7eb7b3181b98a1e5a2aca96ac852ad29d39393368c3b711d05f23",
     "scripts/check_dependency_manifest.py": "d9c90b75f8c26ef0aa3723ab07580f05c7391a78ef12fcf20b99e80ef198deef",
     "scripts/check_image_security.py": "e84d1c8d37c33a176706b6cad3fe32c5f3b1f8faf96422f694cc088763ea8261",
-    "scripts/check_security.py": "515db8c5988e21ff3910e93cb08c8f53dec3ce557d6a5a09377583f4fb6fe1a7"
+    "scripts/check_security.py": "515db8c5988e21ff3910e93cb08c8f53dec3ce557d6a5a09377583f4fb6fe1a7",
+    "scripts/check_native_security.py": "f32a97e5c0b7fd3cd611d31f83dc98c5150b0ec6249669ac2ad17d8ca5f4c29d"
   }
 }
