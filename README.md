@@ -181,7 +181,13 @@ open release gates; this does not make the engine a public multi-tenant service.
 
 Both native and isolated servers admit at most eight connection handlers and one
 experiment at a time. Extra connections receive 503 with `Retry-After: 1` without
-creating a new handler. Each admitted connection has a ten-second inactivity
+creating a new handler. After sending 503, the server half-closes its output and
+allows at most 100 milliseconds (including the send) to discard at most 320 KiB
+of arriving request bytes. This bounded grace lets ordinary clients finish a POST
+body without a TCP reset hiding the rejection. It neither admits an experiment
+nor starts another thread. Slow/oversized senders can still observe a transport
+error after the grace expires; overload is never a reason to retry POST blindly.
+Each admitted connection has a ten-second inactivity
 timeout and a 240-second absolute transport deadline. Trickle traffic cannot
 extend that deadline. At expiry the socket is shut down; an already admitted
 experiment completes or fails under its own execution budget before its handler
