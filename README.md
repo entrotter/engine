@@ -44,6 +44,30 @@ arbitrary Python, shell commands, downloaded agent code or LLM tool calls.
 
 ## EVM verification
 
+### Reading transaction outcomes
+
+Each candidate or baseline trace step has one of four statuses. The source of
+truth is [`evm.py`](src/entrotter_engine/evm.py):
+
+| Status | Meaning | `gas_used` | Transaction counters |
+| --- | --- | --- | --- |
+| `success` | The node accepted the submission, mined it, and the receipt status is successful. | Adds the receipt's gas. | Does not increment either failure counter. |
+| `reverted` | The node accepted and mined the transaction, but the receipt reports a revert. | Adds the receipt's gas; reverted transactions still consume gas. | Increments `reverted_transactions`. |
+| `rejected` | The node rejected the submission before returning a transaction hash. No receipt is available. | Adds no receipt gas. | Increments `rejected_transactions`. |
+| `noop` | The scenario step has no action, so no transaction is submitted. | Remains zero for the step. | Increments neither counter. |
+
+The `gas_used` metric is the sum of receipt gas for `success` and `reverted`
+steps. Rejections and no-ops are counted separately from mined transactions.
+Native-coin and token balance deltas are raw state changes on the selected
+chain, not profit or a portfolio valuation; gas cost is reported separately.
+
+[`tests/data/local.json`](tests/data/local.json) is a synthetic local test
+scenario, not historical evidence. The optional
+[`test_native_transfer_and_revert`](tests/test_engine.py) test checks a
+receipt-bearing success and revert when Anvil is installed; without Anvil it is
+skipped. The fixture itself is illustrative input, while a passing test run is
+the evidence that those assertions were exercised on that revision.
+
 Install Foundry/Anvil before:
 
 ```bash
