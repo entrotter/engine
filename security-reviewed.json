@@ -5,24 +5,24 @@
     {
       "file": "scripts/build_worker.py",
       "test_id": "B404",
-      "line": 9,
-      "code_sha256": "51cfd9459757d0c73b099a22c4192c661aac54ae599a79e860bf7684b4155921",
+      "line": 11,
+      "code_sha256": "7cb9f5b524bc8242a0294e079a51fc328d77f98ea0583a0b72e0b93c1e971901",
       "severity": "LOW",
       "reason": "This module imports subprocess for the fixed, individually reviewed calls below. No shell or scenario-selected executable is accepted; command construction is reviewed at each call site."
     },
     {
       "file": "scripts/build_worker.py",
       "test_id": "B310",
-      "line": 51,
-      "code_sha256": "201e14e90dccf895dcba3185565608924059fd0993eb23aec435ffcc3e614e15",
+      "line": 96,
+      "code_sha256": "f0c1868eea23895bcf9e363bce2d980fffff1c4246c492c744627207be4c1bc4",
       "severity": "MEDIUM",
       "reason": "The URL is constructed from a literal HTTPS GitHub release origin and a fixed architecture lookup, not user input. TLS validation remains enabled and the complete downloaded archive must match its pinned SHA-256 before extraction. Only the regular anvil member is copied."
     },
     {
       "file": "scripts/build_worker.py",
       "test_id": "B603",
-      "line": 85,
-      "code_sha256": "c1e16916ee0bd755958a11696c9a03952c1225203b74cc6ed877eb32631988cf",
+      "line": 127,
+      "code_sha256": "65cfc116741cf6692a2a4b4bbf6d9afd5fb5c7a77679150f9528af63b5bb92e1",
       "severity": "LOW",
       "reason": "Docker executable/socket are trusted local operator configuration. Arguments are a fixed build operation plus a private temporary context and computed source hash; shell=False. Source is local trusted checkout, no supplied scenario command is executed."
     },
@@ -213,7 +213,7 @@
     "src/entrotter_engine/runner.py": "d483df0825e3185548e68d6ead02d9e3fb89d8a12d9b0134b04b1a6a57d4d3df",
     "src/entrotter_engine/store.py": "25a6b9fe252cd0c8eef00ce5c3eb869d3a54044b00e9a67653a5c00b41749b3b",
     "src/entrotter_engine/worker_protocol.py": "14bbaa33e89bd30a3bbcf6d0f437bb1347d806d93155b1279729f011c759afd5",
-    "scripts/build_worker.py": "4e0bf0c9b6a7eb7b3181b98a1e5a2aca96ac852ad29d39393368c3b711d05f23",
+    "scripts/build_worker.py": "084f9ba63465ecf99b781d57869603d142373c5c8d0fc5ad210f0b42d9fed3c7",
     "scripts/check_dependency_manifest.py": "d9c90b75f8c26ef0aa3723ab07580f05c7391a78ef12fcf20b99e80ef198deef",
     "scripts/check_image_security.py": "e84d1c8d37c33a176706b6cad3fe32c5f3b1f8faf96422f694cc088763ea8261",
     "scripts/check_native_security.py": "f32a97e5c0b7fd3cd611d31f83dc98c5150b0ec6249669ac2ad17d8ca5f4c29d",

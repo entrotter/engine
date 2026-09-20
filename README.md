@@ -140,6 +140,16 @@ SHA-256-verified Foundry v1.8.3 archive for the daemon's architecture and uses a
 Python base image pinned by digest. It copies only engine source and Anvil into
 the build context, records their hashes, and does not publish an image.
 
+Archive staging is limited to 256 MiB, with at most 1 MiB read chunks and a
+streaming SHA-256 check before extraction. `--archive` accepts regular files;
+FIFOs and devices are rejected without waiting for a writer. The same byte bound
+applies to downloads and files that grow while being copied. A 300-second transfer
+budget is checked between reads; HTTP operations use a ten-second socket timeout.
+This is not a hard whole-build deadline: connection/DNS, blocked filesystem I/O,
+extraction and Docker builds are outside that transfer timer. Temporary staging is
+cleaned on ordinary failure; SIGKILL can leave temporary files. Docker image/build
+cache, total VM disk and caller-process quotas remain separate operator limits.
+
 ```bash
 export PYTHONPATH="$PWD/src"
 # Set this to your local daemon's absolute Unix socket if different.

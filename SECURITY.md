@@ -4,6 +4,11 @@ Experimental research software. Do not use production keys, custody real
 funds, or expose the local engine port or Anvil JSON-RPC to the Internet.
 This is not a trading execution service. Mainnet broadcast is not supported.
 
+Worker setup stages at most 256 MiB of a Foundry archive and verifies its pinned
+digest in bounded chunks before extraction. Local archive inputs must be regular
+files. Transfer time checks and socket timeouts do not provide a hard whole-build
+deadline, a total temporary-directory quota after SIGKILL, or image/VM disk limits.
+
 The engine runs only built-in policies. A Python import or a subprocess is
 not a security sandbox for untrusted agent code. Container/process sandboxing,
 egress controls, authenticated multi-tenancy and a production job queue remain

@@ -1,0 +1,184 @@
+{
+  "checked_at": "2026-09-20T01:09:46.685438+00:00",
+  "source_commit": "abb4662ce960e08b2aa3a2c8a1c10719339edccc",
+  "worktree_dirty": true,
+  "checker": "lychee 0.24.2",
+  "checker_sha256": "af111b5890746a863e60b4929720ab383337843ed15b701515871aa6e8817c2b",
+  "files": {
+    ".github/PULL_REQUEST_TEMPLATE.md": "f8840c1975bc5aabfdedbd13d69de905fc19b7c9ad4c9b965f48e2b4c20b405d",
+    "AGENTS.md": "d1d8e6c41d67cbcd2ee82f7dcbb50568189acfcf92508b60731eed8de480e303",
+    "CONTRIBUTING.md": "93b12d0e124c7c07dcc389404a02732272c2b22dd7967c97b9e10b82658243b1",
+    "README.md": "f3308cb41aabbd578ccbcde1552cf58886bfbc52c33239ff1729a9886af2f376",
+    "SECURITY.md": "bf9b4912e8defd5dc4a8784e70a1a15529b766654ea70d892c10bb708595c54c",
+    "tests/data/README.md": "52bde1fe33291c1afe442964b8b019391d66664953b0bd40365430b6524e6ee0"
+  },
+  "lychee_exit_code": 0,
+  "passed": true,
+  "path_redaction": "Local checkout prefix replaced with /workspace/repository",
+  "report": {
+    "total": 9,
+    "unique": 9,
+    "successful": 9,
+    "unknown": 0,
+    "unsupported": 0,
+    "timeouts": 0,
+    "redirects": 0,
+    "remaps": 0,
+    "excludes": 0,
+    "errors": 0,
+    "cached": 0,
+    "success_map": {
+      "CONTRIBUTING.md": [
+        {
+          "url": "file:///workspace/repository/README.md",
+          "status": {
+            "text": "200 OK",
+            "code": 200
+          },
+          "span": {
+            "line": 5,
+            "column": 28
+          },
+          "duration": {
+            "secs": 0,
+            "nanos": 1437375
+          }
+        }
+      ],
+      "README.md": [
+        {
+          "url": "file:///workspace/repository/SECURITY.md",
+          "status": {
+            "text": "200 OK",
+            "code": 200
+          },
+          "span": {
+            "line": 3,
+            "column": 142
+          },
+          "duration": {
+            "secs": 0,
+            "nanos": 4584
+          }
+        },
+        {
+          "url": "https://github.com/foundry-rs/foundry/blob/cae51ad458f6abb64852b7709eb784352429825d/.github/workflows/release.yml",
+          "status": {
+            "text": "200 OK",
+            "code": 200
+          },
+          "span": {
+            "line": 397,
+            "column": 1
+          },
+          "duration": {
+            "secs": 0,
+            "nanos": 816611292
+          }
+        },
+        {
+          "url": "https://images.chainguard.dev/directory/image/python/provenance",
+          "status": {
+            "text": "200 OK",
+            "code": 200
+          },
+          "span": {
+            "line": 365,
+            "column": 22
+          },
+          "duration": {
+            "secs": 0,
+            "nanos": 961933292
+          }
+        },
+        {
+          "url": "https://github.com/aquasecurity/trivy/blob/v0.74.0/docs/guide/coverage/language/rust.md",
+          "status": {
+            "text": "200 OK",
+            "code": 200
+          },
+          "span": {
+            "line": 366,
+            "column": 1
+          },
+          "duration": {
+            "secs": 1,
+            "nanos": 31205708
+          }
+        },
+        {
+          "url": "file:///workspace/repository/CONTRIBUTING.md",
+          "status": {
+            "text": "200 OK",
+            "code": 200
+          },
+          "span": {
+            "line": 3,
+            "column": 108
+          },
+          "duration": {
+            "secs": 0,
+            "nanos": 17083
+          }
+        },
+        {
+          "url": "https://github.com/entrotter/entrotter#quick-start-without-dependencies-or-an-api-key",
+          "status": {
+            "text": "200 OK",
+            "code": 200
+          },
+          "span": {
+            "line": 3,
+            "column": 1
+          },
+          "duration": {
+            "secs": 0,
+            "nanos": 971459250
+          }
+        },
+        {
+          "url": "file:///workspace/repository/LICENSE",
+          "status": {
+            "text": "200 OK",
+            "code": 200
+          },
+          "span": {
+            "line": 3,
+            "column": 168
+          },
+          "duration": {
+            "secs": 0,
+            "nanos": 5084
+          }
+        }
+      ],
+      "tests/data/README.md": [
+        {
+          "url": "https://github.com/entrotter/entrotter/blob/062cce134ad1e55396587992823654705a669849/evidence/agent-local-codex.json",
+          "status": {
+            "text": "200 OK",
+            "code": 200
+          },
+          "span": {
+            "line": 4,
+            "column": 1
+          },
+          "duration": {
+            "secs": 0,
+            "nanos": 858205583
+          }
+        }
+      ]
+    },
+    "error_map": {},
+    "timeout_map": {},
+    "suggestion_map": {},
+    "redirect_map": {},
+    "excluded_map": {},
+    "duration": {
+      "secs": 1,
+      "nanos": 679449167
+    },
+    "detailed_stats": true
+  }
+}
