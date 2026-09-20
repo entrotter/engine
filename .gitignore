@@ -18,3 +18,11 @@ test-results/
 # Rebuilt contract test artifacts
 tests/contracts/out/
 tests/contracts/cache/
+
+# Locally built worker provenance
+worker-image.json
+
+# Quality tool reports and caches
+.quality/
+.mypy_cache/
+.ruff_cache/

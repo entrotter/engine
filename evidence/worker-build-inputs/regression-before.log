@@ -1,0 +1,19 @@
+test_oversized_archive_rejected_before_digest_or_extraction (test_worker_build.WorkerBuildTests.test_oversized_archive_rejected_before_digest_or_extraction) ... FAIL
+
+======================================================================
+FAIL: test_oversized_archive_rejected_before_digest_or_extraction (test_worker_build.WorkerBuildTests.test_oversized_archive_rejected_before_digest_or_extraction)
+----------------------------------------------------------------------
+ValueError: Foundry release archive digest mismatch
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<engine-checkout>/tests/test_worker_build.py", line 27, in test_oversized_archive_rejected_before_digest_or_extraction
+    self.assertRaisesRegex(ValueError, "archive exceeds"),
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "archive exceeds" does not match "Foundry release archive digest mismatch"
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

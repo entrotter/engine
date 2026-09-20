@@ -10,7 +10,7 @@ class APITests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.temp=tempfile.TemporaryDirectory()
-        cls.server=EngineServer(0,token='test-only',output=cls.temp.name)
+        cls.server=EngineServer(0,token='test-only',output=cls.temp.name,isolated=False)
         cls.thread=threading.Thread(target=cls.server.serve_forever,daemon=True);cls.thread.start()
         cls.fixture=json.loads((Path(__file__).parent/'data/fixture.json').read_text())
     @classmethod
@@ -28,6 +28,18 @@ class APITests(unittest.TestCase):
     def test_roundtrip(self):
         status,result=self.request('POST','/v1/runs',self.fixture);self.assertEqual(status,201)
         status,again=self.request('GET','/v1/runs/'+result['artifact_id']);self.assertEqual(status,200);self.assertEqual(result,again)
+    def test_report_filename_must_match_content_hash(self):
+        from entrotter_engine.runner import run_native as run
+        report = run(self.fixture)
+        path = Path(self.temp.name) / ('f' * 64 + '.json')
+        path.write_text(json.dumps(report))
+        try:
+            status, data = self.request('GET', '/v1/runs/' + 'f' * 64)
+            self.assertEqual(status, 500)
+            self.assertEqual(data['error'], 'invalid_stored_artifact')
+        finally:
+            path.unlink()
+
     def test_invalid_scenario(self): self.assertEqual(self.request('POST','/v1/runs',{})[0],400)
     def test_missing_report(self): self.assertEqual(self.request('GET','/v1/runs/'+'a'*64)[0],404)
     def test_path_traversal(self): self.assertEqual(self.request('GET','/v1/runs/../../etc/passwd')[0],404)

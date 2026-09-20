@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<engine-checkout>/scripts/check_security.py", line 106, in <module>
+    main()
+    ~~~~^^
+  File "<engine-checkout>/scripts/check_security.py", line 96, in main
+    raise ValueError(
+        "Production sources changed; refresh the security review with the full scan"
+    )
+ValueError: Production sources changed; refresh the security review with the full scan

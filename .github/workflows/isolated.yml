@@ -1,0 +1,55 @@
+name: Isolated worker enforcement
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  isolated:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONPATH: src
+      ENTROTTER_DOCKER_SOCKET: /var/run/docker.sock
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - uses: foundry-rs/foundry-toolchain@908c540300062bd5a7e473851cdb4282204cee09 # v1
+        with:
+          version: v1.8.3
+      - name: Build local worker from digest-verified inputs
+        run: |
+          python scripts/build_worker.py
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          image = json.loads(Path('worker-image.json').read_text())['image_id']
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write('ENTROTTER_WORKER_IMAGE=' + image + '\n')
+          PY
+      - name: Verify real kernel enforcement, API and lifetime cleanup
+        run: python -m unittest discover -s tests_isolated -v
+      - name: Verify no test workers remain
+        if: always()
+        run: |
+          workers=$(docker ps --all --filter label=org.entrotter.worker=true --format '{{.ID}}')
+          test -z "$workers"
+      - name: Verify base signature and audit every detected worker package
+        run: python scripts/check_image_security.py --manifest worker-image.json --output .quality/image-security
+      - name: Verify native release provenance and signed Cargo inventory
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/check_native_security.py --manifest worker-image.json --output .quality/native-security
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: worker-image-security
+          path: |
+            .quality/image-security/
+            .quality/native-security/
+            worker-image.json
+          include-hidden-files: true
+          if-no-files-found: error

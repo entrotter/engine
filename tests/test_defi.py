@@ -10,7 +10,7 @@ from entrotter_engine.defi import approve, exact_input_single, read_uint, uint_w
 from entrotter_engine.evm import ExecutionError
 from entrotter_engine.models import ValidationError, validate
 from entrotter_engine.rpc import RPCError
-from entrotter_engine.runner import run
+from entrotter_engine.runner import run_native as run
 
 DATA = Path(__file__).parent / "data"
 TOKEN = "0x" + "a" * 40

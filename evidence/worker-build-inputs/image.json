@@ -1,0 +1,30 @@
+{
+  "image_id": "sha256:626ca28986b4ca5da93df1438a705f1757bb35afcd42f77b539bab7d66d7a485",
+  "source_digest": "fba06f6dd633858f91dd89d4f48a51c8447696f32e9eb3820302d09bcb379f42",
+  "source_files": {
+    "__init__.py": "11f3961a518c3a40429472d8582270a306114419f588008729d8759d8da83db6",
+    "__main__.py": "1310849fd72ef7f9072a31db68da443b5901c007fdfb9161440753f27ab0ef97",
+    "_guardian.py": "3758412adb3e8761a3c82eac89cbf5a72bac7d0dad5c492a6825b4bb2a5f9ddf",
+    "_isolated_worker.py": "ec3ae2219ce1bce01e9d9aa97d67a0f1cbc354abcdda3e5514d028b0dfc271de",
+    "agent.py": "de16734bc3a9dac08d51efc7721bf5bb0c0671266df8883910dc0ac64374a01c",
+    "api.py": "cab74cd6a4e62230e5d6ce5c386a341e290fb1658ba8fc75892d02f859ebae3c",
+    "artifact.py": "a76cfe6d83e28f2f15ef7fb4f9b06dc5c5d51db0c89c7fa9c9e627161527787c",
+    "defi.py": "f4f5e6e50ad3745426c7d0fbc08b5fa42c79fd4daa225667821814f95acb7fde",
+    "evm.py": "a9ac4ba7704c2bca5360c981a725a7bc9c5586c95dce0c913594db8ee3e9af47",
+    "export_budget.py": "2bebd29413cb86bf25acdc108d87b3f13a3ecd6ed447cd04a86a4e6a9e28614f",
+    "fixture.py": "1f771e23c8b8311bf1f5e9cc56bf30f7b369f8f617513d99024876688e809647",
+    "isolated.py": "0f3181c70f96fdb4282d089e54de96f803977d00d792d4e625c365ccbb344780",
+    "models.py": "1383a7d508e22210217af4515c664c82a861f8a23dcef9dd9ec8f831966ae9b7",
+    "rpc.py": "f19af9a2af2f924c65595f609e7d320d75109e0b5f09c5ae032c0bbff43b7d46",
+    "runner.py": "d483df0825e3185548e68d6ead02d9e3fb89d8a12d9b0134b04b1a6a57d4d3df",
+    "store.py": "25a6b9fe252cd0c8eef00ce5c3eb869d3a54044b00e9a67653a5c00b41749b3b",
+    "worker_protocol.py": "14bbaa33e89bd30a3bbcf6d0f437bb1347d806d93155b1279729f011c759afd5",
+    "Dockerfile": "b2e8192261465bd1ba454345ed1c43917cbb05fffc9ad4f5cc526eb5eea912cc"
+  },
+  "foundry_version": "1.8.3",
+  "foundry_archive_sha256": "93fc23be26c8a902ca58fe54aa6ca28c880b58af95d052674933161df7928e6d",
+  "anvil_binary_sha256": "61ae6eeff626ffe4c265f3119ac4f534991ac8637008e76fd25d7284a685186f",
+  "architecture": "arm64",
+  "published": false,
+  "base_image": "cgr.dev/chainguard/python@sha256:011e73b4e30e0fe9407a42b82a920b4fa13ebc0bf029a48b714f950df254ca20"
+}

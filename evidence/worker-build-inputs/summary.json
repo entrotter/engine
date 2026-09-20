@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-09-20T01:10:49.992725+00:00",
+  "base_commit": "abb4662ce960e08b2aa3a2c8a1c10719339edccc",
+  "change": "Bound and stream verified Foundry archive staging before extraction",
+  "archive_limit_bytes": 268435456,
+  "read_limit_bytes": 1048576,
+  "transfer_budget_seconds": 300,
+  "socket_timeout_seconds": 10,
+  "whole_build_deadline": false,
+  "local_regular_archive_bytes": 121395735,
+  "unit_native_tests": 196,
+  "new_regressions": 7,
+  "regression_failed_before": true,
+  "quality": {
+    "ruff": "passed",
+    "mypy_sources": 22,
+    "bandit_findings_retained": 24,
+    "stale_source_review_rejected": true
+  },
+  "actual_docker_fixture_exact_native_equality": true,
+  "worker_source_digest_unchanged": "fba06f6dd633858f91dd89d4f48a51c8447696f32e9eb3820302d09bcb379f42",
+  "ci": "See pull request checks at the committed head; not yet claimed passed in this pre-CI record",
+  "limits": [
+    "Transfer checks do not interrupt blocked filesystem I/O or bound DNS/connection/extraction/Docker build time",
+    "SIGKILL can leave staging directories",
+    "Docker image/cache and VM storage plus host caller quotas remain open",
+    "No new model or historical performance evaluation"
+  ],
+  "log_normalization": "Engine checkout path replaced with <engine-checkout>",
+  "sources": {
+    "scripts/build_worker.py": "084f9ba63465ecf99b781d57869603d142373c5c8d0fc5ad210f0b42d9fed3c7",
+    "tests/test_worker_build.py": "3af858d322c9099383ed90e54c6be162955e28b8bfea068b042e02f4aeb3e180",
+    "security-reviewed.json": "af24e7059333189b649a36b7db99f2315b34958db0c7170d254ba3e7833385af"
+  },
+  "files": {
+    "docs-links.json": "23eeb308fa8d914d92c0528bf07d1270051b46ac7770aab121db16843b9af0ff",
+    "image.json": "552c2cb7ad4cd6546577b464b9d52cacedeaeba79e4296bcae36861721d4ed6d",
+    "regression-before.log": "e9fcf58a06124fc7edfb5f602efb3671bf0dc917876d5acdc7565ca1ac3b30ec",
+    "smoke.json": "87773047c7b2e7e788e92ffa78a8814fbee0c2ed77d29ee9b0ff800d84128610",
+    "source-drift-rejection.log": "119f614375a77a04c99d9f822d529e3b5600f66f922b13e22e80a2fd1e3b63a3",
+    "tests-after.log": "db59c5f57263631255f4067c8effb5c029254257e0c67064796bd9fc3ed27ef6"
+  }
+}
