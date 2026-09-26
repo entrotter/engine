@@ -102,3 +102,7 @@ Foundry v1.8.3: `cd tests/contracts && forge build`; solc 0.8.30 and the Cancun
 EVM target are pinned in `foundry.toml`. The checked-in runtime allows offline
 real-Anvil tests without downloading a compiler. ABI encoding is independently
 compared with Foundry cast when available.
+
+## ETHGlobal Tokyo 2026 addition
+
+The [Tokyo comparison CLI](tokyo/README.md) adds four-action, same-snapshot Uniswap decision testing. It is an experimental Continuity addition; the existing v0.1 runtime and Colosseum candidates remain unchanged.
