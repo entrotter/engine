@@ -1,0 +1,19 @@
+test_unpinned_or_ambiguous_base_refused_before_docker_build (test_worker_build.WorkerBuildTests.test_unpinned_or_ambiguous_base_refused_before_docker_build) ... 
+  test_unpinned_or_ambiguous_base_refused_before_docker_build (test_worker_build.WorkerBuildTests.test_unpinned_or_ambiguous_base_refused_before_docker_build) (dockerfile='FROM cgr.dev/chainguard/python@sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\nFRO\\\nM other:latest\n') ... FAIL
+
+======================================================================
+FAIL: test_unpinned_or_ambiguous_base_refused_before_docker_build (test_worker_build.WorkerBuildTests.test_unpinned_or_ambiguous_base_refused_before_docker_build) (dockerfile='FROM cgr.dev/chainguard/python@sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\nFRO\\\nM other:latest\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$WORKSPACE_ROOT/.worktrees/engine-consumer-observations/tests/test_worker_build.py", line 81, in test_unpinned_or_ambiguous_base_refused_before_docker_build
+    self.simulated_image_preparation(dockerfile,rejected=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "$WORKSPACE_ROOT/.worktrees/engine-consumer-observations/tests/test_worker_build.py", line 54, in simulated_image_preparation
+    with self.assertRaisesRegex(ValueError,'pinned base'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.054s
+
+FAILED (failures=1)

@@ -1,0 +1,40 @@
+{
+  "base": "cgr.dev/chainguard/python@sha256:89281daac77a3d91ef298d70ce3b7a6ccb2ebf268c084fa9a9bda1c92e71c64d",
+  "platforms": [
+    {
+      "platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "manifest_digest": "sha256:c718c6a5ab1a3721d604dbb95ba21d6f7f45b7b7a18da7a9ceb0ed23f5c7036f",
+      "config_digest": "sha256:1ac9a3dcb741d8742ec0cf8d8f2c89b002a3fadb5639b1db162ffe958135a630"
+    },
+    {
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux"
+      },
+      "manifest_digest": "sha256:8b2c4096fab058fd44a209fbf3ae83e66d05570fcc2e288971ac816f61f9b6c2",
+      "config_digest": "sha256:df690891bc713d4049cb4efc870e0727b63dee996d875ee613345c897ad66863"
+    }
+  ],
+  "wolfi_commit": "33ef989cce781d62740a768d0f5e7a63c193edde",
+  "recipe_sha256": "b32eb02fb9421b13cdf79ca9acb2e70fc04dfde561b6edae98b36562190e68e3",
+  "files": {
+    "arm64-manifest.json": "8b2c4096fab058fd44a209fbf3ae83e66d05570fcc2e288971ac816f61f9b6c2",
+    "discover-corrected.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "discover-auth-first.py": "e1539c98a0ccffeb65d93372cce88a6dbb8e4d24ce2ed2c611146e2a2fbed795",
+    "signature.log": "6d9c64498e2e5a42a6a11c47aabcf5d6c8fc338e35cdcf5ef365231c2a2ba13d",
+    "py3-pip.yaml": "b32eb02fb9421b13cdf79ca9acb2e70fc04dfde561b6edae98b36562190e68e3",
+    "amd64-manifest.json": "c718c6a5ab1a3721d604dbb95ba21d6f7f45b7b7a18da7a9ceb0ed23f5c7036f",
+    "latest-index.json": "89281daac77a3d91ef298d70ce3b7a6ccb2ebf268c084fa9a9bda1c92e71c64d",
+    "discover.py": "83e050690a3e0f9a3c72d788a6e0fee5ce09ebc5d28bab53821d91ea233c2f1b",
+    "amd64-config.json": "1ac9a3dcb741d8742ec0cf8d8f2c89b002a3fadb5639b1db162ffe958135a630",
+    "wolfi-commit.json": "e43043af60293006d74ffd739053a7f96e78195f11b0d6aaad8c23cd4e3c6f63",
+    "arm64-config.json": "df690891bc713d4049cb4efc870e0727b63dee996d875ee613345c897ad66863",
+    "candidate.txt": "2db7bd5bc0163d822dd16aef98c05140a7f8ba202c51fb5cb70ba0d8ddfdb4ae",
+    "discover.log": "e37fc27dd8c8fb7a63e2189e439e146dad3c35b2a3edf93305b26b4e2ed6943e",
+    "signature.json": "940f2ecc7612498f63c55259d0eca8dff899377f994ef7eaba05e5dd51c018a7",
+    "discover-initial.py": "11c73aaebaa68241e8823e058b69ba496d47797624f953b25b721fcadb2360f0"
+  }
+}

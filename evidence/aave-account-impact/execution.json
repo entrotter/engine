@@ -1,0 +1,66 @@
+{
+  "return_code": 0,
+  "host_seconds": 95.48663045885041,
+  "owned_worker_slot_absent": true,
+  "classification": {
+    "base_unit": 100000000,
+    "baseline": {
+      "available_borrows_base": 16845329769548,
+      "health_factor_wad": 2103240994573506125,
+      "liquidation_threshold_bps": 8300,
+      "ltv_bps": 8050,
+      "total_collateral_base": 41049031017510,
+      "total_debt_base": 16199140199548
+    },
+    "baseline_health_status": "at_or_above_one",
+    "candidate": {
+      "available_borrows_base": 16926958735672,
+      "health_factor_wad": 2107093164381383462,
+      "liquidation_threshold_bps": 8300,
+      "ltv_bps": 8050,
+      "total_collateral_base": 41175556915484,
+      "total_debt_base": 16219364581293
+    },
+    "candidate_health_status": "at_or_above_one",
+    "complete_account_views": true,
+    "differences": {
+      "available_borrows_base": 81628966124,
+      "health_factor_wad": 3852169807877337,
+      "liquidation_threshold_bps": 0,
+      "ltv_bps": 0,
+      "total_collateral_base": 126525897974,
+      "total_debt_base": 20224381745
+    },
+    "health_factor_unit": 1000000000000000000,
+    "unproven_reasons": []
+  },
+  "price_classification": {
+    "baseline_price": 256292441874,
+    "baseline_receipts_verified": true,
+    "candidate_price": 257082415000,
+    "complete_price_views": true,
+    "price_difference": 789973126,
+    "unproven_reasons": []
+  },
+  "trace_runtime_seconds": 92.565119,
+  "position_artifact_id": "5c67c4bcf4fc4de614153fc86c0c3814c188b4551212ce55ec9f533fa3e2ad4f",
+  "nested_price_artifact_id": "678309d700aa919ac87501a60278053777c062f1b597922ca6da910b125086f5",
+  "trace_artifact_id": "52044d0f2292fad47d150e0f1cfc46d3346667705d3f43ef25641bc35f5a9737",
+  "original_baseline_receipts": 13,
+  "candidate_statuses": [
+    "executed",
+    "executed",
+    "executed",
+    "executed",
+    "executed",
+    "executed",
+    "executed",
+    "executed",
+    "executed",
+    "executed",
+    "executed",
+    "executed",
+    "skipped"
+  ],
+  "output_sha256": "cd96e04c837fa1dcc6b6cf009d58adffe3ffdaebc9fbd5b3b900d71cd2912978"
+}

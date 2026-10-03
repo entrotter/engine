@@ -1,0 +1,30 @@
+{
+  "status": "one_actionable_test_cleanup_finding",
+  "reviewer": "review_cli_agent",
+  "files": {
+    "tests/test_trace_diagnostic.py": "2ef907fd3edc494342567995cd1c384cfec3b38a52f02249a58cb6671673e026",
+    "tests_isolated/diagnose_trace_worker.py": "d24ffd710a28308008a98a3655d9d592376bef686ce5e48d46d70d3bdf666af1"
+  },
+  "diff_sha256": "669698521f2f467594ef12a43567205bd6cd9dca3983bb062da207a13c6fa3af",
+  "findings": [
+    {
+      "priority": 3,
+      "file": "tests/test_trace_diagnostic.py",
+      "line": 152,
+      "trigger": "Diagnostic returns cleanup_verifiedTrue but its owned client remains live.",
+      "issue": "New assertIsNotNone(process.poll()) raises before fallback kill/wait, so a failing cleanup regression can leave its owned30s client/session alive. Existing closed-stdout assertion can likewise skip rescue.",
+      "requested_fix": "Run assertions in try/finally and guarantee current exact-owned-process fallback kill/reap in finally; retain failed verification assertion and all timeout/output limits."
+    }
+  ],
+  "otherwise_reviewed": [
+    "Added JSON logs only existing finite host_error/cleanup_error/docker_exit_code/cleanup_verified fields, no worker/rawstderr/providerargs/messages.",
+    "Original immediateexit outputlimit control and every originalassertion preserved; new32KiB+30s client ensures naturalexit cannot masquerade as cleanup.",
+    "Current test-only HOST_TIMEOUT2 and runtime190/16KiB/sharedslot/lifecycle code unchanged.",
+    "Diagnostic runtime helper bytes unchanged vsGitHEAD; no runtimefix or original352 failurecause claimed."
+  ],
+  "limits": [
+    "No tests/scanner/network/process/CI rerun by reviewer.",
+    "Root diagnostic-controls-002 still owned byroot; no runstatus inferred or result rebound to changedsource.",
+    "Original352fullfailure remains immutable;353full/currentCI pending."
+  ]
+}

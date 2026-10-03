@@ -23,10 +23,22 @@ def main(argv=None):
     )
     t.add_argument("plan")
     t.add_argument("-o", "--output", required=True)
+    c = s.add_parser(
+        "trace-observe",
+        help="Export fixed owned Aave/WETH views with bounded trace replay",
+    )
+    c.add_argument("plan")
+    c.add_argument("-o", "--output", required=True)
+    position = s.add_parser(
+        "trace-position",
+        help="Compare fixed Aave account views on owned historical branches",
+    )
+    position.add_argument("plan")
+    position.add_argument("-o", "--output", required=True)
     a = s.add_parser("serve")
     a.add_argument("--port", type=int, default=8787)
     a.add_argument("--output", default="artifacts")
-    for command in (r, t, a):
+    for command in (r, t, c, position, a):
         mode = command.add_mutually_exclusive_group()
         mode.add_argument(
             "--isolated",
@@ -55,6 +67,63 @@ def main(argv=None):
                     {
                         "artifact_id": result["artifact_id"],
                         "mode": result["mode"],
+                        "output": args.output,
+                    }
+                )
+            )
+        elif args.command == "trace-position":
+            from .consumer_observations import ObservationStopped
+            from .position_observations import (
+                load_plan,
+                run_position,
+                run_position_native,
+                write_position,
+            )
+
+            try:
+                position_executor = (
+                    run_position if args.isolated else run_position_native
+                )
+                result = position_executor(load_plan(args.plan))
+            except ObservationStopped as stop:
+                print("Error: Owned account observation stopped", file=sys.stderr)
+                return 124 if stop.code == "deadline" else 130
+            write_position(result, args.output)
+            print(
+                json.dumps(
+                    {
+                        "artifact_id": result["artifact_id"],
+                        "classification": result["classification"],
+                        "output": args.output,
+                    }
+                )
+            )
+        elif args.command == "trace-observe":
+            from .consumer_observations import (
+                ObservationStopped,
+                run_trace_observed,
+                run_trace_observed_native,
+                write_observed_trace,
+            )
+            from .trace import load_trace
+
+            try:
+                observed_executor = (
+                    run_trace_observed if args.isolated else run_trace_observed_native
+                )
+                result = observed_executor(load_trace(args.plan))
+            except ObservationStopped as stop:
+                print("Error: Owned consumer observation stopped", file=sys.stderr)
+                return 124 if stop.code == "deadline" else 130
+            write_observed_trace(result, args.output)
+            print(
+                json.dumps(
+                    {
+                        "artifact_id": result["artifact_id"],
+                        "trace_artifact_id": result["trace_artifact_id"],
+                        "complete_price_views": result["classification"][
+                            "complete_price_views"
+                        ],
                         "output": args.output,
                     }
                 )

@@ -1,0 +1,202 @@
+{
+  "source_head": "e9d629e1e4bfdcefd678fe40387e4376b1374f3c",
+  "single_actual_attempt": true,
+  "normalization": "Only literal actual workspace prefix replaced with $WORKSPACE_ROOT, preserving separate original/copy hashes. No unavailable initial readiness bytes reconstructed.",
+  "files": [
+    {
+      "source": ".quality/supported-historical-001/plan.json",
+      "copy": "plan.json",
+      "original_sha256": "2e5e8dee72e27c327ffd77e259962e7d96f1ea972a2f98118b508cda64c3bc94",
+      "copy_sha256": "2e5e8dee72e27c327ffd77e259962e7d96f1ea972a2f98118b508cda64c3bc94",
+      "bytes": 241,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/environment.json",
+      "copy": "environment.json",
+      "original_sha256": "4a81a177e7420dc553641c88be070665b8cd43a683722000becb150ddd6a0ccb",
+      "copy_sha256": "4a81a177e7420dc553641c88be070665b8cd43a683722000becb150ddd6a0ccb",
+      "bytes": 500,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/readiness.json",
+      "copy": "readiness.json",
+      "original_sha256": "57d3359655a5964db816977d792085e26952c050a9e004a2a0ce613184152626",
+      "copy_sha256": "b650b1b9b5454efbcfdcbd3a45a4e48689af5b77b1ffe65d99dc06315f6b0c19",
+      "bytes": 5128,
+      "transformation": "workspace-prefix-only"
+    },
+    {
+      "source": ".quality/supported-historical-001/cli-child.py",
+      "copy": "cli-child.py",
+      "original_sha256": "72a86a72f628fc07e106ec5cc6f6822b8f98149ed408a6243db21e13d4cedc73",
+      "copy_sha256": "72a86a72f628fc07e106ec5cc6f6822b8f98149ed408a6243db21e13d4cedc73",
+      "bytes": 3253,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/run.py",
+      "copy": "run.py",
+      "original_sha256": "e6c340d619b0a52ea7f2b9945facaf72407977eb568c6d1d8ab5c91fe1a7ca82",
+      "copy_sha256": "e6c340d619b0a52ea7f2b9945facaf72407977eb568c6d1d8ab5c91fe1a7ca82",
+      "bytes": 4493,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/observed-trace.json",
+      "copy": "observed-trace.json",
+      "original_sha256": "7010848300c353310fb78dab7f377daea4226633e49af3c1a384bcb3a579ba9d",
+      "copy_sha256": "7010848300c353310fb78dab7f377daea4226633e49af3c1a384bcb3a579ba9d",
+      "bytes": 659504,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/stdout.log",
+      "copy": "stdout.log",
+      "original_sha256": "7d412afaff2d27a271f2cf624fbead45df89120573e83c02b0fa3a71265bc831",
+      "copy_sha256": "590f9577ba64ab23bdd8d75819eb76110f6dfd2255b406b4834dd0b2681dad19",
+      "bytes": 326,
+      "transformation": "workspace-prefix-only"
+    },
+    {
+      "source": ".quality/supported-historical-001/stderr.log",
+      "copy": "stderr.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/child-terminal.json",
+      "copy": "child-terminal.json",
+      "original_sha256": "91af61969ea41d3d62de6f5de468a00bb0a5874521e0e41a0d20b548c8bde937",
+      "copy_sha256": "91af61969ea41d3d62de6f5de468a00bb0a5874521e0e41a0d20b548c8bde937",
+      "bytes": 1064,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/host-terminal.json",
+      "copy": "host-terminal.json",
+      "original_sha256": "fb34b6e6d8077f849688ae5f96faf6b45e812eec164a02dc7984e76b7fc7f40c",
+      "copy_sha256": "fb34b6e6d8077f849688ae5f96faf6b45e812eec164a02dc7984e76b7fc7f40c",
+      "bytes": 817,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/owned-ledger.json",
+      "copy": "owned-ledger.json",
+      "original_sha256": "390823a6da65b58c2d42a9e494eb91635ad4737c0b199a1b8dda36e824b93049",
+      "copy_sha256": "390823a6da65b58c2d42a9e494eb91635ad4737c0b199a1b8dda36e824b93049",
+      "bytes": 218,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/verified-result.json",
+      "copy": "verified-result.json",
+      "original_sha256": "f01670b19bebd64290cc4baed4fb95edca5833830be4286f7113a1849d5db13d",
+      "copy_sha256": "f01670b19bebd64290cc4baed4fb95edca5833830be4286f7113a1849d5db13d",
+      "bytes": 5171,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/verify-result.py",
+      "copy": "verify-result.py",
+      "original_sha256": "1fa337b8f6f641c28bc275c3eb283e4ec8e1ecc2a7854d5c12a05c5f8edb1615",
+      "copy_sha256": "1fa337b8f6f641c28bc275c3eb283e4ec8e1ecc2a7854d5c12a05c5f8edb1615",
+      "bytes": 5070,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/independent-prelaunch-review.json",
+      "copy": "independent-prelaunch-review.json",
+      "original_sha256": "6186ef7df2eacce2b9a68bed9c58b3a971762239c40f77b45e647235aaf98abf",
+      "copy_sha256": "6186ef7df2eacce2b9a68bed9c58b3a971762239c40f77b45e647235aaf98abf",
+      "bytes": 3148,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/independent-prelaunch-final-review.json",
+      "copy": "independent-prelaunch-final-review.json",
+      "original_sha256": "3df81f674f92639002321648d9ba63422e1d414c091f7ca7c35db3d15cdd3c84",
+      "copy_sha256": "3df81f674f92639002321648d9ba63422e1d414c091f7ca7c35db3d15cdd3c84",
+      "bytes": 7622,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/test_harness.py",
+      "copy": "test_harness.py",
+      "original_sha256": "7f6d9a85eea6e56e75e6ecbe8e02d7e41413d7af45928ad35734833859211703",
+      "copy_sha256": "7f6d9a85eea6e56e75e6ecbe8e02d7e41413d7af45928ad35734833859211703",
+      "bytes": 4436,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/fault-controls.log",
+      "copy": "fault-controls.log",
+      "original_sha256": "2e580e6d39bd5bd2bd7a402f784f95d5f3652850a47e6177df166e5462f00666",
+      "copy_sha256": "2e580e6d39bd5bd2bd7a402f784f95d5f3652850a47e6177df166e5462f00666",
+      "bytes": 1464,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/independent-execution-review.json",
+      "copy": "independent-execution-review.json",
+      "original_sha256": "9c9d6437bcd82b72c5b12164d316d81a001d4ad5c5d9b276b1400f7d349c0e97",
+      "copy_sha256": "9c9d6437bcd82b72c5b12164d316d81a001d4ad5c5d9b276b1400f7d349c0e97",
+      "bytes": 9589,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/independent-execution-review.py",
+      "copy": "independent-execution-review.py",
+      "original_sha256": "e759a093f8eb8a5a793ff1b9c52b278040ebfb9936fde6d603b4ee52556ca7a0",
+      "copy_sha256": "e759a093f8eb8a5a793ff1b9c52b278040ebfb9936fde6d603b4ee52556ca7a0",
+      "bytes": 11400,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/supported-historical-001/readiness-pre-final.json",
+      "copy": "readiness-pre-final.json",
+      "original_sha256": "087725c11a75409575f37523e0eccfe7b8f3eab1eb98934dbea02273f7dcf141",
+      "copy_sha256": "e8e6165de4e830c75faf196b85f95ab1a10fda8fe6bc48984908ab47fb32f825",
+      "bytes": 4301,
+      "transformation": "workspace-prefix-only"
+    },
+    {
+      "source": ".quality/bounded-admission/root-ci-e9-review.json",
+      "copy": "root-ci-e9-review.json",
+      "original_sha256": "04ea2a105e2498e604e7395bde7d32be038d53b3474acadb24cd348a8b41442a",
+      "copy_sha256": "04ea2a105e2498e604e7395bde7d32be038d53b3474acadb24cd348a8b41442a",
+      "bytes": 6423,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/bounded-admission/root-ci-e9-review.py",
+      "copy": "root-ci-e9-review.py",
+      "original_sha256": "cb6f663db888bc1f59b77cf2c38a232c6ea148e32cf15e0206c7e493b543a03a",
+      "copy_sha256": "cb6f663db888bc1f59b77cf2c38a232c6ea148e32cf15e0206c7e493b543a03a",
+      "bytes": 7526,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/bounded-admission/child-ci-e9-review.json",
+      "copy": "child-ci-e9-review.json",
+      "original_sha256": "639598c792aa845462760e793cb2ae8b41920bd15b70ab5cb294da31d9a1e3c1",
+      "copy_sha256": "639598c792aa845462760e793cb2ae8b41920bd15b70ab5cb294da31d9a1e3c1",
+      "bytes": 22015,
+      "transformation": "byte-identical"
+    },
+    {
+      "source": ".quality/bounded-admission/child-ci-e9-review.py",
+      "copy": "child-ci-e9-review.py",
+      "original_sha256": "263876bed9dc88c47de47dfee96cb724834a3d1d80e8f8d3d6b2c51f02385c5e",
+      "copy_sha256": "263876bed9dc88c47de47dfee96cb724834a3d1d80e8f8d3d6b2c51f02385c5e",
+      "bytes": 18100,
+      "transformation": "byte-identical"
+    }
+  ],
+  "original_runtime_inputs": "31production/policy/workflow/plan source bindings plus5harness/plan/verification/fault-control inputs retained from final readiness57d335; docs changes follow execution.",
+  "timing_scope": "Actual CLI module with passive profile; native, not uninstrumented speed test or whole-process CPU/RSS sandbox.",
+  "original_input_scope": "32-of181/skip12/150seconds; never narrower substituted run."
+}

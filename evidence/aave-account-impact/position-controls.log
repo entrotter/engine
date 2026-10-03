@@ -1,0 +1,20 @@
+test_cli_default_native_and_stop_preserve_existing_export (test_position_observations.PositionTests.test_cli_default_native_and_stop_preserve_existing_export) ... ok
+test_collector_only_four_extra_fixed_reads_and_finite_errors (test_position_observations.PositionTests.test_collector_only_four_extra_fixed_reads_and_finite_errors) ... ok
+test_exact_collector_only_and_no_caller_subclass (test_position_observations.PositionTests.test_exact_collector_only_and_no_caller_subclass) ... ok
+test_full_binding_and_exact_delta (test_position_observations.PositionTests.test_full_binding_and_exact_delta) ... ok
+test_full_result_checker_rejects_resealed_unbound_source_change (test_position_observations.PositionTests.test_full_result_checker_rejects_resealed_unbound_source_change) ... ok
+test_host_rejects_other_valid_resealed_account_and_wrong_request (test_position_observations.PositionTests.test_host_rejects_other_valid_resealed_account_and_wrong_request) ... ok
+test_late_account_success_cannot_continue_and_restores_timeout (test_position_observations.PositionTests.test_late_account_success_cannot_continue_and_restores_timeout) ... ok
+test_loader_duplicate_and_fifo_bound_and_atomic_quota (test_position_observations.PositionTests.test_loader_duplicate_and_fifo_bound_and_atomic_quota) ... ok
+test_missing_changed_initial_code_or_price_never_zero_fills (test_position_observations.PositionTests.test_missing_changed_initial_code_or_price_never_zero_fills) ... ok
+test_no_debt_sentinel_not_infinite_financial_improvement (test_position_observations.PositionTests.test_no_debt_sentinel_not_infinite_financial_improvement) ... ok
+test_only_versioned_trace_and_nonzero_account_admitted (test_position_observations.PositionTests.test_only_versioned_trace_and_nonzero_account_admitted) ... ok
+test_pool_oracle_binding_mismatch_or_missing_is_unproven (test_position_observations.PositionTests.test_pool_oracle_binding_mismatch_or_missing_is_unproven) ... ok
+test_resealed_account_head_and_diagnostic_coverage_rejected (test_position_observations.PositionTests.test_resealed_account_head_and_diagnostic_coverage_rejected) ... ok
+test_six_word_exact_uints_and_no_float (test_position_observations.PositionTests.test_six_word_exact_uints_and_no_float) ... ok
+test_worker_envelope_binds_account_and_no_untrusted_hooks (test_position_observations.PositionTests.test_worker_envelope_binds_account_and_no_untrusted_hooks) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 8.395s
+
+OK

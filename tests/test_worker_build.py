@@ -13,6 +13,7 @@ import signal
 import subprocess
 import sys
 import tempfile
+import tarfile
 import threading
 import time
 import unittest
@@ -28,6 +29,57 @@ spec.loader.exec_module(builder)
 
 
 class WorkerBuildTests(unittest.TestCase):
+    def simulated_image_preparation(self, dockerfile, *, rejected=False):
+        """Real input copying/hashes/manifest; Docker and release identity simulated."""
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);checkout=root/'checkout'
+            (checkout/'container').mkdir(parents=True)
+            (checkout/'container/Dockerfile').write_text(dockerfile)
+            (checkout/'src/entrotter_engine').mkdir(parents=True)
+            (checkout/'src/entrotter_engine/__init__.py').write_text('# synthetic test module\n')
+            archive=root/'foundry.tar.gz'
+            with tarfile.open(archive,'w:gz') as tar:
+                member=tarfile.TarInfo('anvil');member.size=4
+                tar.addfile(member,io.BytesIO(b'test'))
+            expected=hashlib.sha256(archive.read_bytes()).hexdigest()
+            image='sha256:'+'a'*64;work=root/'build';work.mkdir()
+            def docker(command,**kwargs):
+                self.assertEqual(command[:2],['docker','build'])
+                Path(command[command.index('--iidfile')+1]).write_text(image)
+            with patch.object(builder,'ROOT',checkout), \
+                 patch.object(builder,'ARCHIVES',{'x86_64':('amd64',expected)}), \
+                 patch.object(builder,'verify_daemon',return_value={'Architecture':'x86_64'}), \
+                 patch.object(builder,'run_build_command',side_effect=docker) as launch:
+                if rejected:
+                    with self.assertRaisesRegex(ValueError,'pinned base'):
+                        builder.prepare_image(['docker'],work,archive)
+                    launch.assert_not_called()
+                    self.assertFalse((work/'manifest.json').exists())
+                    return
+                builder.prepare_image(['docker'],work,archive);launch.assert_called_once()
+            result=json.loads((work/'manifest.json').read_text())
+            self.assertEqual(result['image_id'],image)
+            self.assertEqual(result['source_files']['Dockerfile'],hashlib.sha256(dockerfile.encode()).hexdigest())
+            self.assertEqual((work/'context/Dockerfile').read_text(),dockerfile)
+            self.assertEqual(result['source_digest'],hashlib.sha256(json.dumps(result['source_files'],sort_keys=True).encode()).hexdigest())
+            return result
+
+    def test_image_manifest_records_actual_copied_immutable_base(self):
+        current=(ROOT/'container/Dockerfile').read_text()
+        for dockerfile in [current,'FROM cgr.dev/chainguard/python@sha256:'+'b'*64+'\n']:
+            with self.subTest(base=dockerfile.splitlines()[0]):
+                result=self.simulated_image_preparation(dockerfile)
+                self.assertEqual(result['base_image'],dockerfile.splitlines()[0].split()[1])
+
+    def test_unpinned_or_ambiguous_base_refused_before_docker_build(self):
+        base='FROM cgr.dev/chainguard/python@sha256:'+'b'*64
+        for dockerfile in ['FROM cgr.dev/chainguard/python:latest\n',
+            'FROM other/python@sha256:'+'b'*64+'\n',base[:-1]+'z\n',
+            base+' AS build\n',base+'\nFROM other:latest\n',
+            'ARG BASE\n'+base+'\n',base+'\nFRO\\\nM other:latest\n','']:
+            with self.subTest(dockerfile=dockerfile):
+                self.simulated_image_preparation(dockerfile,rejected=True)
+
     def test_noisy_command_has_bounded_diagnostics_and_preserves_failure(self):
         code = """import subprocess,sys
 sys.path.insert(0,'scripts')

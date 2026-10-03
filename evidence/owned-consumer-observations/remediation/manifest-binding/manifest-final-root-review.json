@@ -1,0 +1,55 @@
+{
+  "source": [
+    "scripts/build_worker.py"
+  ],
+  "source_sha256": "fe2dd9a1104582758f072413f3d0455397b5dc3f685e4df328cdc44ede9ffef8",
+  "test_sha256": "2e70a20cc7a428b2ce56031a63de725b5ee668dc9d1acebd78712c876d99eeec",
+  "scan_sha256": "bd1aab2abc2655424ac88e72d813a6a0c21dbfceda58349b13187e91b2ba309b",
+  "all26_scanned": true,
+  "all25_fingerprints_and_rationales_unchanged": true,
+  "nosec": 0,
+  "skipped": 0,
+  "errors": [],
+  "existing_audit_guard_source_unchanged": "e84d1c8d37c33a176706b6cad3fe32c5f3b1f8faf96422f694cc088763ea8261",
+  "tests": {
+    "methods": 20,
+    "seconds": 5.094,
+    "source": "tests/test_worker_build.py",
+    "scope": "18existing boundedbuild tests plus2new copiedbase provenance/rejection controls; Docker/release identity simulated, no actualimage/runtime/security claim."
+  },
+  "before": {
+    "methods": 1,
+    "failed_variants": 2,
+    "log_sha256": "b10c844b72a80b77de84aacf2f1bbe73326d5d4f38c6ef5a5bf4bc4c47e73b12"
+  },
+  "after_log_sha256": "dced0dd5af9ea10b1215f64b745810e10491080db3fa69915dfe09f1edf07074",
+  "original_isolated_failure": {
+    "run": 37029712364,
+    "head": "7b50af23e608ea219e08833c6ff23cf736c8563d",
+    "manifest_base": "011e73b4e30e0fe9407a42b82a920b4fa13ebc0bf029a48b714f950df254ca20",
+    "copied_Docker_base": "89281daac77a3d91ef298d70ce3b7a6ccb2ebf268c084fa9a9bda1c92e71c64d",
+    "guard_correctly_rejected": true,
+    "actual_kernel_methods": 25,
+    "actual_kernel_seconds": 218.049,
+    "later_image_Cargo_audits": "not reached"
+  },
+  "limits": [
+    "The parent354native result belongs to7b50; newestexpected356fullsuite/currentCI pending.",
+    "Newmetadatafix is not a repeatimageaudit or explanationofolderunknowncleanup/rejection.",
+    "Currentauditguards/signature/allfindingspolicy unchanged; no waiver."
+  ],
+  "existing_audit_negative_controls": {
+    "methods": 7,
+    "scope": "Allseverity/unfixed/malformed/missinginventory/stalefutureDB/toolmodified cases; audit source unchanged; no realimage scan."
+  },
+  "final_source_sha256": "fe2dd9a1104582758f072413f3d0455397b5dc3f685e4df328cdc44ede9ffef8",
+  "final_test_sha256": "2e70a20cc7a428b2ce56031a63de725b5ee668dc9d1acebd78712c876d99eeec",
+  "final_policy_sha256": "4246bb3fa23b744d022b17699e7762d9783b6bbe2ec2bc4ec67199f006418aa1",
+  "final_scan_sha256": "bd1aab2abc2655424ac88e72d813a6a0c21dbfceda58349b13187e91b2ba309b",
+  "final_all25_fingerprints_rationales_unchanged": true,
+  "review_correction": "Reject continued instructions under fixedflatDockerprofile; new splitFROMnegative initiallypassedguard/failedassert beforecorrection; bothbasecontrols2PASS0.075s after. Current7-lineDockerfile unaffected; no Dockerparseracceptanceclaim.",
+  "appropriate_checks": "Prefinalwholeworker20PASS5.094s; postcorrectionbothbase2PASS0.075s, existingauditnegative7PASS; final lint/format/types26PASS; fullBandit26/all25exact/0nosec0skips0errors.",
+  "prefinal_source_sha256": "072d30222c5f68536168e9e2f3197461ddfe545b6d8cee414dccf7befd5cd0d0",
+  "prefinal_test_sha256": "f59ec7941c35807c186e41bf9263417aea2279015bb121cb0e0898b1282839c8",
+  "prefinal_scan_sha256": "c15cb8476abfacb4753c1627b2bb3bebf34f935290c768d16e5757e813f71c38"
+}

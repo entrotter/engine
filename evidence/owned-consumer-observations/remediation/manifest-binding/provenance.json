@@ -1,0 +1,117 @@
+{
+  "scope": "Copies preserve original outcomes; only workspace-root path normalization where declared. Parent evidence unchanged. New current-head mandatory CI pending.",
+  "files": [
+    {
+      "source": ".quality/bounded-admission/base-manifest-before.log",
+      "published": "base-manifest-before.log",
+      "original_sha256": "b10c844b72a80b77de84aacf2f1bbe73326d5d4f38c6ef5a5bf4bc4c47e73b12",
+      "public_sha256": "74ac450294444eb9e22bb74d85cc6264485f4744e90822f70a166b48d94635bc",
+      "normalization": "workspace root only"
+    },
+    {
+      "source": ".quality/bounded-admission/base-manifest-after.log",
+      "published": "base-manifest-after.log",
+      "original_sha256": "dced0dd5af9ea10b1215f64b745810e10491080db3fa69915dfe09f1edf07074",
+      "public_sha256": "dced0dd5af9ea10b1215f64b745810e10491080db3fa69915dfe09f1edf07074",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/base-continuation-before.log",
+      "published": "base-continuation-before.log",
+      "original_sha256": "4bf5309172237f9bb2a5ea0a0d5e8fe1424a3dcf9638d696693c50c191a93996",
+      "public_sha256": "91c9a6795cbb0368df6e600b3686a92301b24d2e78fab19ff055c6521adc07ce",
+      "normalization": "workspace root only"
+    },
+    {
+      "source": ".quality/bounded-admission/base-continuation-after.log",
+      "published": "base-continuation-after.log",
+      "original_sha256": "cc41eaca9a4373d1b47a06329531a7e6d07756fd5228331e4da535d43eb05585",
+      "public_sha256": "cc41eaca9a4373d1b47a06329531a7e6d07756fd5228331e4da535d43eb05585",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/manifest-audit-controls.log",
+      "published": "manifest-audit-controls.log",
+      "original_sha256": "bb07618a42383e6282214393dd84c9595137c8497772e604460b6a483eac0c60",
+      "public_sha256": "bb07618a42383e6282214393dd84c9595137c8497772e604460b6a483eac0c60",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/manifest-final-lint.log",
+      "published": "manifest-final-lint.log",
+      "original_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "public_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/manifest-final-format.log",
+      "published": "manifest-final-format.log",
+      "original_sha256": "cdd24684b33e5200a213c89093e8da4cb81a0de0085a4684d20923e852610123",
+      "public_sha256": "cdd24684b33e5200a213c89093e8da4cb81a0de0085a4684d20923e852610123",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/manifest-final-types.log",
+      "published": "manifest-final-types.log",
+      "original_sha256": "5107f9446510710cfc458474a6bae8746bf7ed9a2bccb85b1de3b0a14e84c8ad",
+      "public_sha256": "5107f9446510710cfc458474a6bae8746bf7ed9a2bccb85b1de3b0a14e84c8ad",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/manifest-final-bandit.json",
+      "published": "manifest-final-bandit.json",
+      "original_sha256": "bd1aab2abc2655424ac88e72d813a6a0c21dbfceda58349b13187e91b2ba309b",
+      "public_sha256": "bd1aab2abc2655424ac88e72d813a6a0c21dbfceda58349b13187e91b2ba309b",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/manifest-final-root-review.json",
+      "published": "manifest-final-root-review.json",
+      "original_sha256": "69f387c1449be83e202e5cc620cbcba9930fb75819b951d008ec83b9dc47940f",
+      "public_sha256": "69f387c1449be83e202e5cc620cbcba9930fb75819b951d008ec83b9dc47940f",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/child-manifest-source-review.json",
+      "published": "child-manifest-source-review.json",
+      "original_sha256": "fab05b092ce1317bf35ffcc9a05403d2e1e0ba30bfda9f912d07e9c4ecf12094",
+      "public_sha256": "fab05b092ce1317bf35ffcc9a05403d2e1e0ba30bfda9f912d07e9c4ecf12094",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/child-ci-isolated-7b50-cause-review.json",
+      "published": "child-ci-isolated-7b50-cause-review.json",
+      "original_sha256": "995af1b362fc6735017736b47e0340a9a0162261a68b1fc1487a1cf72d8ae19e",
+      "public_sha256": "995af1b362fc6735017736b47e0340a9a0162261a68b1fc1487a1cf72d8ae19e",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/ci-partial-7b50-review.json",
+      "published": "ci-partial-7b50-review.json",
+      "original_sha256": "2b7e84ca4e560dea0de52bda3a7f2154abc681510b7e1aed81de94dfbf8f12fb",
+      "public_sha256": "2b7e84ca4e560dea0de52bda3a7f2154abc681510b7e1aed81de94dfbf8f12fb",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/ci-isolated-7b50-failed.log",
+      "published": "ci-isolated-7b50-failed.log",
+      "original_sha256": "bca73de840e69e5824dde43a4a196b0ddaa75fed431861e18301d6337df52d35",
+      "public_sha256": "bca73de840e69e5824dde43a4a196b0ddaa75fed431861e18301d6337df52d35",
+      "normalization": "none"
+    },
+    {
+      "source": ".quality/bounded-admission/ci-isolated-7b50/worker-image-security/worker-image.json",
+      "published": "old-worker-image.json",
+      "original_sha256": "7e0e53f90edbdf8dc03a32c7f57b8a1bde69cca054896fa84da0829a716a994d",
+      "public_sha256": "7e0e53f90edbdf8dc03a32c7f57b8a1bde69cca054896fa84da0829a716a994d",
+      "normalization": "none"
+    }
+  ],
+  "time_bound_review_reference": {
+    "independent_source_review_root_metadata_sha256": "14611c622bfebf8fb9be2aec2cd8bd01b3b6c0929aa58deaad2bff44d55d5bd1",
+    "current_original_root_metadata_sha256": "69f387c1449be83e202e5cc620cbcba9930fb75819b951d008ec83b9dc47940f",
+    "change": "Primary source/test/scan hash aliases refreshed to final hashes; prior values moved to prefinal fields. Actual source/test/policy/scanner hashes unchanged.",
+    "original_metadata_bytes_retained": false,
+    "disclosure": "Do not reinterpret old metadata hash as current artifact or reconstruct unavailable historical bytes; latest publication review binds current metadata."
+  }
+}

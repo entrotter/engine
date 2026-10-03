@@ -1,0 +1,6 @@
+test_actual_missing_aave_code_reads_unproven_without_replay_fallback (test_consumer_observations_evm.ConsumerObservationEVMTests.test_actual_missing_aave_code_reads_unproven_without_replay_fallback) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.464s
+
+OK

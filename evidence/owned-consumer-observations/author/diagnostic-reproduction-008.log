@@ -1,0 +1,7 @@
+test_output_limit_stops_client_and_attempts_owner_cleanup (test_trace_diagnostic.DiagnosticHostTests.test_output_limit_stops_client_and_attempts_owner_cleanup) ... ok
+test_collector_deadline_kills_descendant_retaining_stdout (test_trace_observer.CollectorTests.test_collector_deadline_kills_descendant_retaining_stdout) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 3.253s
+
+OK

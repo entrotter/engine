@@ -1,0 +1,58 @@
+{
+  "goal": "active",
+  "status": "actual execution independently reviewed; publication and current CI still pending",
+  "prelaunch_review_sha256": "8bc16dedf8d735664c8f12e33de256e7397e58b3ec77cf4641fb996d6e06a0ef",
+  "actual_review_sha256": "6e4857196f48d72e534d5bf2d223f6aef8a80dd97ff16fcc42bdd19bf4785059",
+  "actual_review_scope": "Original raw execution/source/image/receipt/account values. README snapshot later changed only broken fragment link; exact reviewed prior README retained locally. Final stage review must bind final current documentation/tests/CI.",
+  "local_native": {
+    "tests": 379,
+    "seconds": 97.3,
+    "failures": 0,
+    "skips": 0,
+    "scope": "Final27 production sources; then test-only state-dir variable and addedhostbinding repaired, final14targeted pass2.004s"
+  },
+  "full_security": {
+    "sources": 27,
+    "retained_findings": 25,
+    "new_findings": 0,
+    "policy": "All unchanged25 rationales; one unmodifiedPopen code context has numeric line shift"
+  },
+  "dependencies": "Same42locked tool identities/no runtime dependencies; prior c2eb advisory proof reused locally, current CI will query anew",
+  "retained_failures": {
+    "native_initial": "374/103.769 one prior-style macOS diagnostic cleanup os_error; unchangedfocused1pass/later379pass; causeunknown",
+    "docker_initial": "26/236.974 three native-comparison failures under an unpinned host Anvil PATH; pinned1.8.3 same-image full26 nowPASS. Initialcomparisonlogs retained; no image/runtime-code change or kernel suppression.",
+    "wheel_initial": "pip inheritedPYTHONPATH and regarded sourceegg-info sameversioninstalled; -I isolatedpip actualinstall/current22modulereader/CLIhelp nowPASS. Initialpip/failurelogs retained.",
+    "docs_initial": "First24/293 had badPoolfragment; removedfragment, final24/293allPASS withnoexclusions.",
+    "actual_host_setup": "Dockerfilepathmissing before image/source check andlaunch; fixbefore sole actualattempt"
+  },
+  "local_docker": {
+    "tests": 26,
+    "failures": 0,
+    "skips": 0,
+    "scope": "Finalsame23input image2a0f; pinnedhostAnvil1.8.3 and actualkernel/memory/cpu/PID/tmpfs/lifetime/admission/oldagent/oldtrace/API controls; separatefrom actual13",
+    "seconds": 239.737
+  },
+  "wheel": {
+    "sha256": "395276f9403ea313c6bf6a78edead7d5bf875f3e998dae255fb8e35ae0a7b9b8",
+    "modules": 22,
+    "all_record_entries": 26,
+    "full_utf8_readme": true,
+    "fresh_I_installed_reader_and_CLI_help": true
+  },
+  "docs": {
+    "tracked_files": 24,
+    "links": 295,
+    "success": 295,
+    "errors": 0,
+    "timeouts": 0,
+    "exclusions": 0,
+    "scope": "Finaltrackedpackage24/295; allcurrentMarkdown hashes bound by finalscanner afterchecker-scope documentationfix"
+  },
+  "final_position_controls": {
+    "tests": 15,
+    "seconds": 8.395,
+    "failures": 0,
+    "scope": "Aftertest-onlystate-dir/hostbindings and offlinecomparator-source fix; no EVM/RPC/scanner rerun"
+  },
+  "checker_fix": "Independent finalstage found fullgoldencomparison omitted stable trace source/assumptions. Checker now compares entire nestedtrace except runtime/artifactid, plus fullaccount/price fields. Resealedchangedblock_transaction_count remains structurallyvalid but newcheck rejects; final15 controls pass."
+}

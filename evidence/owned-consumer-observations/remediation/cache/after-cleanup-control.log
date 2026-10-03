@@ -1,0 +1,6 @@
+test_brief_handler_overlap_admits_next_read_without_extra_active_handlers (test_parent_cache.ParentCacheTests.test_brief_handler_overlap_admits_next_read_without_extra_active_handlers) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.588s
+
+OK

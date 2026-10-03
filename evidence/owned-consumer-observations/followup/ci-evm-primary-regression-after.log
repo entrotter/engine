@@ -1,0 +1,6 @@
+test_primary_baseline_observation_error_preserves_exception_and_cleanup (test_consumer_observations_evm.ConsumerObservationEVMTests.test_primary_baseline_observation_error_preserves_exception_and_cleanup) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.302s
+
+OK

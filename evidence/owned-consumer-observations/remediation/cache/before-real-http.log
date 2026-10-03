@@ -1,0 +1,62 @@
+test_brief_handler_overlap_admits_next_read_without_extra_threads (test_parent_cache.ParentCacheTests.test_brief_handler_overlap_admits_next_read_without_extra_threads) ... Exception in thread Thread-3 (release_one):
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "$WORKSPACE_ROOT/.worktrees/engine-consumer-observations/tests/test_parent_cache.py", line 209, in release_one
+    idle[0].shutdown(socket.SHUT_RDWR)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+OSError: [Errno 9] Bad file descriptor
+ERROR
+test_persistent_handler_pressure_refuses_without_extending_deadline (test_parent_cache.ParentCacheTests.test_persistent_handler_pressure_refuses_without_extending_deadline) ... ok
+
+======================================================================
+ERROR: test_brief_handler_overlap_admits_next_read_without_extra_threads (test_parent_cache.ParentCacheTests.test_brief_handler_overlap_admits_next_read_without_extra_threads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$WORKSPACE_ROOT/.worktrees/engine-consumer-observations/tests/test_parent_cache.py", line 226, in test_brief_handler_overlap_admits_next_read_without_extra_threads
+    value = json.loads(post(url, request("eth_chainId", [], rid=5)))
+                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "$WORKSPACE_ROOT/.worktrees/engine-consumer-observations/tests/test_parent_cache.py", line 143, in post
+    .open(
+     ~~~~^
+        Request(
+        ^^^^^^^^
+    ...<2 lines>...
+        timeout=5,
+        ^^^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/urllib/request.py", line 489, in open
+    response = self._open(req, data)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/urllib/request.py", line 506, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/urllib/request.py", line 466, in _call_chain
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/urllib/request.py", line 1348, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/urllib/request.py", line 1323, in do_open
+    r = h.getresponse()
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+ConnectionResetError: [Errno 54] Connection reset by peer
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.517s
+
+FAILED (errors=1)

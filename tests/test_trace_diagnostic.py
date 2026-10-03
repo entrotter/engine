@@ -143,10 +143,16 @@ class DiagnosticHostTests(unittest.TestCase):
                     result=diagnostic.run_diagnostic(PLAN)
             else: result=diagnostic.run_diagnostic(PLAN)
         verify.assert_called_once();self.assertEqual(len(owners),1)
+        cleanup_summary=json.dumps({key:result.get(key) for key in
+            ('host_error','cleanup_error','docker_exit_code','cleanup_verified')},sort_keys=True)
         for process in processes:
-            self.assertTrue(process.stdout.closed,'Diagnostic output descriptor remains open')
-            if process.poll() is None:
-                os.killpg(process.pid,signal.SIGKILL);process.wait(timeout=2)
+            try:
+                self.assertTrue(process.stdout.closed,'Diagnostic output descriptor remains open; '+cleanup_summary)
+                if result['cleanup_verified']:
+                    self.assertIsNotNone(process.poll(),'Verified cleanup left owned client running; '+cleanup_summary)
+            finally:
+                if process.poll() is None:
+                    os.killpg(process.pid,signal.SIGKILL);process.wait(timeout=2)
         self.assertNotIn(SECRET,json.dumps(result))
         return result,launches,owners
 
@@ -172,7 +178,29 @@ class DiagnosticHostTests(unittest.TestCase):
     def test_output_limit_stops_client_and_attempts_owner_cleanup(self):
         result,_,_=self.run_mock_client("import os;os.write(1,b'x'*32768)")
         self.assertIsNone(result['worker']);self.assertEqual(result['host_error']['category'],'value_error')
-        self.assertTrue(result['cleanup_verified'])
+        self.assertTrue(result['cleanup_verified'],json.dumps({key:result.get(key) for key in
+            ('host_error','cleanup_error','docker_exit_code','cleanup_verified')},sort_keys=True))
+
+    def test_output_limit_kills_live_client_and_reaps_owned_process(self):
+        result,_,_=self.run_mock_client("import os,time;os.write(1,b'x'*32768);time.sleep(30)")
+        self.assertIsNone(result['worker']);self.assertEqual(result['host_error']['category'],'value_error')
+        self.assertTrue(result['cleanup_verified'],json.dumps({key:result.get(key) for key in
+            ('host_error','cleanup_error','docker_exit_code','cleanup_verified')},sort_keys=True))
+
+    def test_false_cleanup_verification_fails_and_still_rescues_owned_client(self):
+        real_popen=subprocess.Popen;original=diagnostic.run_diagnostic;processes=[]
+        def spawn(*args,**kwargs):
+            process=real_popen(*args,**kwargs);processes.append(process);return process
+        def falsely_verified(plan):
+            result=original(plan);result['cleanup_verified']=True;return result
+        with patch.object(diagnostic.subprocess,'Popen',side_effect=spawn), \
+             patch.object(diagnostic,'run_diagnostic',side_effect=falsely_verified):
+            with self.assertRaisesRegex(AssertionError,'Verified cleanup left owned client running'):
+                self.run_mock_client("import os,time;os.write(1,b'x'*32768);time.sleep(30)",
+                    stop_error=PermissionError(SECRET))
+        self.assertEqual(len(processes),1)
+        self.assertIsNotNone(processes[0].poll())
+        self.assertTrue(processes[0].stdout.closed)
 
     @unittest.skipUnless(hasattr(os,'fork'),'POSIX descendant-held pipe required')
     def test_descendant_held_stdout_timeout_kills_owned_session(self):

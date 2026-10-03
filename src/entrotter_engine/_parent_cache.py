@@ -28,6 +28,7 @@ MAX_ENTRY = 1024 * 1024
 MAX_ENTRIES = 1024
 MAX_REQUESTS = 4096
 MAX_HANDLERS = 4
+MAX_ADMISSION_WAIT = 0.1
 METHODS = frozenset(
     {
         "eth_chainId",
@@ -347,6 +348,7 @@ class Server(ThreadingHTTPServer):
     daemon_threads = True
     block_on_close = False
     allow_reuse_address = False
+    request_queue_size = MAX_HANDLERS
 
     def __init__(self, bridge, token):
         self.bridge, self.token = bridge, token
@@ -354,7 +356,13 @@ class Server(ThreadingHTTPServer):
         super().__init__(("127.0.0.1", 0), Handler)
 
     def process_request(self, request, address):
-        if not self.slots.acquire(blocking=False):
+        # The accepting thread can hold one socket briefly while a completed
+        # handler releases its slot. No fifth handler or unbounded wait queue is
+        # created; sustained pressure still closes the connection without I/O.
+        remaining = self.bridge.deadline - time.monotonic()
+        if remaining <= 0 or not self.slots.acquire(
+            timeout=min(MAX_ADMISSION_WAIT, remaining)
+        ):
             self.bridge.increment("refused_handlers")
             self.shutdown_request(request)
             return

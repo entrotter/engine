@@ -1,0 +1,86 @@
+{
+  "status": "passed_no_remaining_actionable_prelaunch_findings",
+  "reviewer": "review_cli_agent",
+  "head": "e9d629e1e4bfdcefd678fe40387e4376b1374f3c",
+  "readiness_sha256": "57d3359655a5964db816977d792085e26952c050a9e004a2a0ce613184152626",
+  "source_bindings": {
+    "src/entrotter_engine/fixture.py": "1f771e23c8b8311bf1f5e9cc56bf30f7b369f8f617513d99024876688e809647",
+    "src/entrotter_engine/store.py": "25a6b9fe252cd0c8eef00ce5c3eb869d3a54044b00e9a67653a5c00b41749b3b",
+    "src/entrotter_engine/trace.py": "809bc631b0e8f7394e3a1185d54dd6100cb6cfffd6957de253688072e41bd033",
+    "src/entrotter_engine/runner.py": "d483df0825e3185548e68d6ead02d9e3fb89d8a12d9b0134b04b1a6a57d4d3df",
+    "src/entrotter_engine/export_budget.py": "2bebd29413cb86bf25acdc108d87b3f13a3ecd6ed447cd04a86a4e6a9e28614f",
+    "src/entrotter_engine/evm.py": "1ec41f147a517c4372bdf72fb5763bde1adc3075e462786ba656ff87c26dba55",
+    "src/entrotter_engine/artifact.py": "a76cfe6d83e28f2f15ef7fb4f9b06dc5c5d51db0c89c7fa9c9e627161527787c",
+    "src/entrotter_engine/models.py": "80de1f5ab1e52f9dd00c0f3deaa3ea1a16a0ae159eab50c0a130a2431084b7e7",
+    "src/entrotter_engine/_parent_cache.py": "56844c41bfdab2ec43e741942726b88af95702806a2a8be1476f873deb1b90da",
+    "src/entrotter_engine/isolated.py": "61f99e799a7056f009e2181bd4df42da9c2a9a57ae8e7c642a46c46cd94fa70d",
+    "src/entrotter_engine/__init__.py": "11f3961a518c3a40429472d8582270a306114419f588008729d8759d8da83db6",
+    "src/entrotter_engine/api.py": "cab74cd6a4e62230e5d6ce5c386a341e290fb1658ba8fc75892d02f859ebae3c",
+    "src/entrotter_engine/rpc.py": "3e3f9c593d3a26a483c4f8f1e220bd32f959b4e87def846868b7491e70312a52",
+    "src/entrotter_engine/consumer_observations.py": "ef05dd36b0c5e88afe2dd703d08cec554d1de4c08c68ee1108cda1439abe6e83",
+    "src/entrotter_engine/agent.py": "de16734bc3a9dac08d51efc7721bf5bb0c0671266df8883910dc0ac64374a01c",
+    "src/entrotter_engine/_guardian.py": "3758412adb3e8761a3c82eac89cbf5a72bac7d0dad5c492a6825b4bb2a5f9ddf",
+    "src/entrotter_engine/defi.py": "f4f5e6e50ad3745426c7d0fbc08b5fa42c79fd4daa225667821814f95acb7fde",
+    "src/entrotter_engine/parent_cache.py": "73ba002c6cce32a8a7acd6580aa432af3ebdb5aa292432f7751dbd35ac080706",
+    "src/entrotter_engine/__main__.py": "647c3c8138a47cfb4b3bd833537ce2d624c0ba3d28f375ba4f218b5523ec4e1b",
+    "src/entrotter_engine/worker_protocol.py": "7f5f1320aab5c4fe987ba7d4af06ac83d9d08fef4f51912108950ffe2bfbb313",
+    "src/entrotter_engine/_isolated_worker.py": "ec3ae2219ce1bce01e9d9aa97d67a0f1cbc354abcdda3e5514d028b0dfc271de",
+    "scripts/check_image_security.py": "e84d1c8d37c33a176706b6cad3fe32c5f3b1f8faf96422f694cc088763ea8261",
+    "scripts/check_dependency_manifest.py": "d9c90b75f8c26ef0aa3723ab07580f05c7391a78ef12fcf20b99e80ef198deef",
+    "scripts/build_worker.py": "fe2dd9a1104582758f072413f3d0455397b5dc3f685e4df328cdc44ede9ffef8",
+    "scripts/check_native_security.py": "f32a97e5c0b7fd3cd611d31f83dc98c5150b0ec6249669ac2ad17d8ca5f4c29d",
+    "scripts/check_security.py": "515db8c5988e21ff3910e93cb08c8f53dec3ce557d6a5a09377583f4fb6fe1a7",
+    "security-reviewed.json": "4246bb3fa23b744d022b17699e7762d9783b6bbe2ec2bc4ec67199f006418aa1",
+    ".github/workflows/isolated.yml": "6e64ba15e26eb7917fdc9be764d9639d102211ea614bae8ba5549bc47828cee5",
+    "container/Dockerfile": "2fc42c30c4aac2e760db25c5306def65d294236307bd09348ee8646f83a33fd1",
+    "evidence/aave-consumer-price/native-006/plan.json": "2e5e8dee72e27c327ffd77e259962e7d96f1ea972a2f98118b508cda64c3bc94",
+    "tests/data/canonical-mainnet-prefix.json": "ccde28ce34f51c55e8c68789f2deecdf394417e05e81a738c52e140950b83031"
+  },
+  "input_bindings": {
+    "run.py": "e6c340d619b0a52ea7f2b9945facaf72407977eb568c6d1d8ab5c91fe1a7ca82",
+    "cli-child.py": "72a86a72f628fc07e106ec5cc6f6822b8f98149ed408a6243db21e13d4cedc73",
+    "plan.json": "2e5e8dee72e27c327ffd77e259962e7d96f1ea972a2f98118b508cda64c3bc94",
+    "verify-result.py": "1fa337b8f6f641c28bc275c3eb283e4ec8e1ecc2a7854d5c12a05c5f8edb1615",
+    "test_harness.py": "7f6d9a85eea6e56e75e6ecbe8e02d7e41413d7af45928ad35734833859211703"
+  },
+  "auxiliary_bindings": {
+    "readiness-pre-final.json": "087725c11a75409575f37523e0eccfe7b8f3eab1eb98934dbea02273f7dcf141",
+    "fault-controls.log": "2e580e6d39bd5bd2bd7a402f784f95d5f3652850a47e6177df166e5462f00666",
+    "independent-prelaunch-review.json": "6186ef7df2eacce2b9a68bed9c58b3a971762239c40f77b45e647235aaf98abf"
+  },
+  "anvil_sha256": "2ae79126940817dc8393bbb680faa6880226ea3424593828435b7128f4c07147",
+  "CA_sha256": "9cc2a774b5198dcff14d9be1e66091f538975d867ce029a96bce15a55dfd730f",
+  "prior_comparison_report_sha256": "2e4cc3966185ed92f40b3507a397269ad44d098a65b8bf2dcb57b331f33a2d79",
+  "resolved_findings": [
+    {
+      "priority": 2,
+      "issue": "Telemetry errors could replace CLI execution outcomes.",
+      "resolution": "Ordinary ledger/port/terminal observation failures become finite secondary enum values; atomic records bounded16KiB; BaseException stops propagate rather than continuing replay; verifier requires zero telemetry errors for success."
+    },
+    {
+      "priority": 2,
+      "issue": "Host did not unconditionally reap owned child on cancellation/wait/exit race.",
+      "resolution": "Owned Popen lifetime enclosed in try/finally; guarded TERM5 then KILL/reap under shared10s cleanup deadline, explicit primary finite cause retained. Ledger grandchildren receive only signal0 and loopback closure observations. Existing190s host and150s product replay budgets retained."
+    },
+    {
+      "priority": 3,
+      "issue": "Verifier treated code identity dictionary as hexadecimal bytes.",
+      "resolution": "Verifier retains validated sha256/length identity dictionaries, separate from prior research raw-code layout."
+    }
+  ],
+  "inspection": [
+    "Actual runpy module/argv uses supported trace-observe --native fixed plan; no production callbacks replaced, new RPC calls, signatures/state/nonce/balance/header repairs or model/archive call performed by reviewer.",
+    "All31 source and5 input SHA bindings current; pinnedAnvil and locked-quality certifi CA bytes match. Fixed original32/skip12/block18999892 unchanged.",
+    "Reviewed5 fault test AST and retained PASS0.042s log: real owned sleeping subprocess cancellation and exit-race reaped, PermissionError/malformed-port secondary, BaseException propagation. Did not repeat tests.",
+    "Result verifier demands complete original32 source/baseline/candidate equality to historical native006,31 executed/skip12,19 exact structural receipt changes, four strict price/source/unit/code/head views, zero telemetry/cleanup error and three owned closure records.",
+    "Initial review6186 remains byte-identical; unavailable initial readiness37eb bytes explicitly disclosed. Intermediate readiness087 retained and bound; no reconstruction of lost bytes accepted."
+  ],
+  "findings": [],
+  "limits": [
+    "Prelaunch review only; no actual supported historical CLI execution or success is asserted.",
+    "Python profile observation adds timing/I/O overhead; this is an instrumented native execution of unchanged CLI, not an uninstrumented performance benchmark or default Docker32 proof.",
+    "Native mode is not CPU/RSS sandboxed. Read-only price dependence does not demonstrate signed consumer action, strategy/profit, full181-block/state-root/opcode replay or provider authentication.",
+    "Five fault controls are retained author-run evidence; this review did not launch processes, tests, network services, archive or CI.",
+    "Independent software review is separate from mandatory protected-main GitHub human approval."
+  ]
+}

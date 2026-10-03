@@ -1,0 +1,22 @@
+isolated	Verify base signature and audit every detected worker package	﻿2026-10-02T15:54:10.5487672Z ##[group]Run python scripts/check_image_security.py --manifest worker-image.json --output .quality/image-security
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5488730Z [36;1mpython scripts/check_image_security.py --manifest worker-image.json --output .quality/image-security[0m
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5551252Z shell: /usr/bin/bash -e {0}
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5551533Z env:
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5551722Z   PYTHONPATH: src
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5551997Z   ENTROTTER_DOCKER_SOCKET: /var/run/docker.sock
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5552437Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5552967Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5553487Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5553942Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5554405Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5554869Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5555575Z   ENTROTTER_WORKER_IMAGE: sha256:9ce79538cb450b63b9d0b439488c0ecc2cc2213e534174151ec831ff24a112b1
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.5556135Z ##[endgroup]
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.6321001Z Traceback (most recent call last):
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.6329307Z   File "/home/runner/work/engine/engine/scripts/check_image_security.py", line 351, in <module>
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.6331144Z     raise SystemExit(main())
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.6331547Z                      ^^^^^^
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.6332241Z   File "/home/runner/work/engine/engine/scripts/check_image_security.py", line 203, in main
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.6333035Z     raise ValueError("Unexpected base image identity")
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.6333540Z ValueError: Unexpected base image identity
+isolated	Verify base signature and audit every detected worker package	2026-10-02T15:54:10.6444800Z ##[error]Process completed with exit code 1.

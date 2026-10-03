@@ -1,0 +1,469 @@
+{
+  "observation_version": "0.1.0",
+  "profile": "aave-v3-ethereum-weth-price",
+  "trace_report": {
+    "trace_version": "0.1.0",
+    "execution_kind": "canonical_transaction_prefix_replay",
+    "plan": {
+      "skip_indices": [
+        0
+      ],
+      "source": {
+        "block_hash": "0xb908d17fd2fb0b87f76c485483c9fd93b12ca0b59ce356d2d0711c9cc5197997",
+        "block_number": 4,
+        "chain_id": 1
+      },
+      "through_index": 1,
+      "trace_version": "0.1.0"
+    },
+    "source": {
+      "parent": {
+        "chain_id": 1,
+        "block_number": 3,
+        "block_hash": "0xefc49153458a0cac1559cdf77aebbc297c10847fc839dd3fd9d4bbce1a854325"
+      },
+      "header": {
+        "timestamp": 1700000123,
+        "gas_limit": 1000000,
+        "base_fee": 1000000000,
+        "coinbase": "0x4242424242424242424242424242424242424242",
+        "prevrandao": "0x1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "inputs": [
+        {
+          "index": 0,
+          "hash": "0x3bea2694c6d27452537e1bb45b559c1ffab6dbdfa06d572319ddb63abba11572",
+          "sender": "0x36f91566e32196e5b3f305137c85a4d977579f2a",
+          "nonce": 2,
+          "raw": "0xf88402843b9aca00830493e09442dedcf5dbd7aeeeca884c2bb20dfd84bf4b649880a0000000000000000000000000000000000000000000000000000000000000001425a04d75933b545aede3e4a44e1ca51b9f09b5acf63b67e86a54e6f3baf29ada1c74a029226157a8e92c8f70b9e8a1ee18f2dfbc0e35d485d00264e2c5eff8a5abea45",
+          "original_receipt": {
+            "type": "0x0",
+            "status": "0x1",
+            "gasUsed": "0x6637",
+            "cumulativeGasUsed": "0x6637",
+            "effectiveGasPrice": "0x3b9aca00",
+            "transactionIndex": "0x0",
+            "transactionHash": "0x3bea2694c6d27452537e1bb45b559c1ffab6dbdfa06d572319ddb63abba11572",
+            "from": "0x36f91566e32196e5b3f305137c85a4d977579f2a",
+            "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "to": "0x42dedcf5dbd7aeeeca884c2bb20dfd84bf4b6498",
+            "contractAddress": null,
+            "logs": []
+          }
+        },
+        {
+          "index": 1,
+          "hash": "0xf4c62608f6c043bb1757a9257453ea557c71e2c025d019e853a282ddf182659f",
+          "sender": "0x1635ccf1f83799a0328872212c0dbbf76e4b752e",
+          "nonce": 0,
+          "raw": "0xf86480843b9aca00830493e09469caf7485207320db9dbc4862bc38eb97077b079808026a08b315e1b97cbdea3b2d9910f38f642c6db35c05d09c91306fc59759b461038aea0461ae429bbd301b5e3f2e92c5f269cb721440e63f4c91be6a2a4da6b575b7885",
+          "original_receipt": {
+            "type": "0x0",
+            "status": "0x1",
+            "gasUsed": "0x6746",
+            "cumulativeGasUsed": "0xcd7d",
+            "effectiveGasPrice": "0x3b9aca00",
+            "transactionIndex": "0x1",
+            "transactionHash": "0xf4c62608f6c043bb1757a9257453ea557c71e2c025d019e853a282ddf182659f",
+            "from": "0x1635ccf1f83799a0328872212c0dbbf76e4b752e",
+            "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000040000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "to": "0x69caf7485207320db9dbc4862bc38eb97077b079",
+            "contractAddress": null,
+            "logs": [
+              {
+                "address": "0x69caf7485207320db9dbc4862bc38eb97077b079",
+                "topics": [],
+                "data": "0x0000000000000000000000000000000000000000000000000000000000000014"
+              }
+            ]
+          }
+        }
+      ],
+      "block_transaction_count": 2
+    },
+    "baseline": {
+      "anvil_version": "anvil/v1.8.3",
+      "outcomes": [
+        {
+          "index": 0,
+          "hash": "0x3bea2694c6d27452537e1bb45b559c1ffab6dbdfa06d572319ddb63abba11572",
+          "status": "executed",
+          "receipt": {
+            "type": "0x0",
+            "status": "0x1",
+            "gasUsed": "0x6637",
+            "cumulativeGasUsed": "0x6637",
+            "effectiveGasPrice": "0x3b9aca00",
+            "transactionIndex": "0x0",
+            "transactionHash": "0x3bea2694c6d27452537e1bb45b559c1ffab6dbdfa06d572319ddb63abba11572",
+            "from": "0x36f91566e32196e5b3f305137c85a4d977579f2a",
+            "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "to": "0x42dedcf5dbd7aeeeca884c2bb20dfd84bf4b6498",
+            "contractAddress": null,
+            "logs": []
+          },
+          "differing_fields": []
+        },
+        {
+          "index": 1,
+          "hash": "0xf4c62608f6c043bb1757a9257453ea557c71e2c025d019e853a282ddf182659f",
+          "status": "executed",
+          "receipt": {
+            "type": "0x0",
+            "status": "0x1",
+            "gasUsed": "0x6746",
+            "cumulativeGasUsed": "0xcd7d",
+            "effectiveGasPrice": "0x3b9aca00",
+            "transactionIndex": "0x1",
+            "transactionHash": "0xf4c62608f6c043bb1757a9257453ea557c71e2c025d019e853a282ddf182659f",
+            "from": "0x1635ccf1f83799a0328872212c0dbbf76e4b752e",
+            "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000040000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "to": "0x69caf7485207320db9dbc4862bc38eb97077b079",
+            "contractAddress": null,
+            "logs": [
+              {
+                "address": "0x69caf7485207320db9dbc4862bc38eb97077b079",
+                "topics": [],
+                "data": "0x0000000000000000000000000000000000000000000000000000000000000014"
+              }
+            ]
+          },
+          "differing_fields": []
+        }
+      ],
+      "matches_original_receipts": true
+    },
+    "candidate": {
+      "anvil_version": "anvil/v1.8.3",
+      "outcomes": [
+        {
+          "index": 0,
+          "hash": "0x3bea2694c6d27452537e1bb45b559c1ffab6dbdfa06d572319ddb63abba11572",
+          "status": "skipped"
+        },
+        {
+          "index": 1,
+          "hash": "0xf4c62608f6c043bb1757a9257453ea557c71e2c025d019e853a282ddf182659f",
+          "status": "executed",
+          "receipt": {
+            "type": "0x0",
+            "status": "0x0",
+            "gasUsed": "0x64d0",
+            "cumulativeGasUsed": "0x64d0",
+            "effectiveGasPrice": "0x3b9aca00",
+            "transactionIndex": "0x0",
+            "transactionHash": "0xf4c62608f6c043bb1757a9257453ea557c71e2c025d019e853a282ddf182659f",
+            "from": "0x1635ccf1f83799a0328872212c0dbbf76e4b752e",
+            "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "to": "0x69caf7485207320db9dbc4862bc38eb97077b079",
+            "contractAddress": null,
+            "logs": []
+          },
+          "differing_fields": [
+            "status",
+            "gasUsed",
+            "cumulativeGasUsed",
+            "transactionIndex",
+            "logsBloom",
+            "logs"
+          ]
+        }
+      ],
+      "matches_original_receipts": false
+    },
+    "baseline_verified": true,
+    "runtime_seconds": 4.180123,
+    "assumptions": [
+      "Original signed legacy/type-1/type-2 transaction prefix only, Ethereum mainnet Shanghai rules, FIFO order; no new signatures or artificial funding.",
+      "Both branches fork the pinned parent with original timestamp, coinbase, gas limit, base fee and prevrandao. Original transactions supply any in-prefix oracle updates; external responses and later transactions are not invented.",
+      "A bounded experiment-local read-through bridge shares only successful exact-parent-hash state reads and hash-checked parent headers between the isolated branches. Errors, volatile reads and other blocks are not cached; no host disk cache or state repair is used.",
+      "Skipping original transactions preserves every remaining signature/nonce. Nonce conflicts and rejected/unmined transactions are reported, never repaired.",
+      "Owned trace nodes defer parent-state pool balance/fee/gas admission checks to ordered EVM/block execution, allowing earlier in-block funding. Accepted inputs can still remain unmined; no balance/nonce repair or sequential different-block mining is substituted.",
+      "Exact projected receipts include status, gas/cumulative gas, effective price, identities, ordered log bytes and bloom. Divergence is reported; an unmatched baseline is not verified historical replay.",
+      "Missing parent/account state may fail explicitly. Mining-time archive/storage errors may instead leave transactions not_mined and the baseline unverified; receipt absence alone does not identify the cause or attest parent state. No fixture state or oracle response is substituted.",
+      "Block hashes/roots, withdrawals/end-block state, opcode traces, full-block replay and an alternate market are outside this transaction-prefix result.",
+      "The primitive owns bounded-lifetime Anvil. Whole-process CPU/RSS isolation is supplied only by the default Docker worker; explicit native execution opts out. No upstream writes or arbitrary agent code."
+    ],
+    "artifact_id": "3ee2682d3a816ad7a286f01aa03790a81c5a4c46606aaeee2aec39ea67954cc3"
+  },
+  "trace_artifact_id": "3ee2682d3a816ad7a286f01aa03790a81c5a4c46606aaeee2aec39ea67954cc3",
+  "observations": [
+    {
+      "branch": "baseline",
+      "phase": "before",
+      "head": {
+        "number": 3,
+        "timestamp": 1700000000,
+        "hash": "0xefc49153458a0cac1559cdf77aebbc297c10847fc839dd3fd9d4bbce1a854325"
+      },
+      "raw": {},
+      "code": {},
+      "errors": [
+        {
+          "query": "oracle_code",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_getCode"
+          }
+        },
+        {
+          "query": "source",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "price",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "base_currency",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "base_unit",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "source_code",
+          "category": "unavailable"
+        },
+        {
+          "query": "aggregator",
+          "category": "unavailable"
+        },
+        {
+          "query": "latest_round_data",
+          "category": "unavailable"
+        }
+      ]
+    },
+    {
+      "branch": "baseline",
+      "phase": "after",
+      "head": {
+        "number": 4,
+        "timestamp": 1700000123,
+        "hash": "0x7d2a6a7852586de035d8b77d3c2ec8d6dc0b267aad3987ab62cee5f6186cdbfa"
+      },
+      "raw": {},
+      "code": {},
+      "errors": [
+        {
+          "query": "oracle_code",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_getCode"
+          }
+        },
+        {
+          "query": "source",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "price",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "base_currency",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "base_unit",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "source_code",
+          "category": "unavailable"
+        },
+        {
+          "query": "aggregator",
+          "category": "unavailable"
+        },
+        {
+          "query": "latest_round_data",
+          "category": "unavailable"
+        }
+      ]
+    },
+    {
+      "branch": "candidate",
+      "phase": "before",
+      "head": {
+        "number": 3,
+        "timestamp": 1700000000,
+        "hash": "0xefc49153458a0cac1559cdf77aebbc297c10847fc839dd3fd9d4bbce1a854325"
+      },
+      "raw": {},
+      "code": {},
+      "errors": [
+        {
+          "query": "oracle_code",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_getCode"
+          }
+        },
+        {
+          "query": "source",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "price",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "base_currency",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "base_unit",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "source_code",
+          "category": "unavailable"
+        },
+        {
+          "query": "aggregator",
+          "category": "unavailable"
+        },
+        {
+          "query": "latest_round_data",
+          "category": "unavailable"
+        }
+      ]
+    },
+    {
+      "branch": "candidate",
+      "phase": "after",
+      "head": {
+        "number": 4,
+        "timestamp": 1700000123,
+        "hash": "0x60309fb90ade39a03cc27a039c299cadced6df147df037509a87d29b5f05d4b7"
+      },
+      "raw": {},
+      "code": {},
+      "errors": [
+        {
+          "query": "oracle_code",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_getCode"
+          }
+        },
+        {
+          "query": "source",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "price",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "base_currency",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "base_unit",
+          "category": "rpc_error",
+          "diagnostics": {
+            "code": "rejected",
+            "method": "eth_call"
+          }
+        },
+        {
+          "query": "source_code",
+          "category": "unavailable"
+        },
+        {
+          "query": "aggregator",
+          "category": "unavailable"
+        },
+        {
+          "query": "latest_round_data",
+          "category": "unavailable"
+        }
+      ]
+    }
+  ],
+  "classification": {
+    "complete_price_views": false,
+    "baseline_receipts_verified": true,
+    "unproven_reasons": [
+      "aggregator_unavailable",
+      "code_unavailable",
+      "feed_price_unproven",
+      "incomplete_views",
+      "source_unavailable",
+      "unsupported_currency_or_unit"
+    ],
+    "baseline_price": null,
+    "candidate_price": null,
+    "price_difference": null
+  },
+  "scope": "Owned-node read-only price views only; no signed consumer action, strategy, loan/liquidation/trade, benefit/profit, deployed-code/provider authentication, full-block/opcode/state-root proof or whole-process native sandbox.",
+  "artifact_id": "aa1df1fe723925ef6c29877a1794bdde58932217ce00ef9180b3e69e4e94bcb1"
+}

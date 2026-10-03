@@ -1,0 +1,56 @@
+{
+  "tests": 2,
+  "failures": 0,
+  "errors": 0,
+  "signal_events": [
+    {
+      "group": 41492,
+      "signal": 9,
+      "caller_uid": 501,
+      "known_direct_child": true,
+      "leader_group_before": 41492,
+      "result": "returned"
+    },
+    {
+      "group": 41493,
+      "signal": 9,
+      "caller_uid": 501,
+      "known_direct_child": true,
+      "leader_lookup_error": "ProcessLookupError",
+      "result": "returned"
+    },
+    {
+      "group": 41493,
+      "signal": 9,
+      "caller_uid": 501,
+      "known_direct_child": true,
+      "leader_lookup_error": "ProcessLookupError",
+      "result": "ProcessLookupError",
+      "errno": 3,
+      "current_members": []
+    }
+  ],
+  "launched_processes": [
+    {
+      "pid": 41492,
+      "start_new_session": true,
+      "creator_uid": 501
+    },
+    {
+      "pid": 41493,
+      "start_new_session": true,
+      "creator_uid": 501
+    },
+    {
+      "pid": 41519,
+      "start_new_session": false,
+      "creator_uid": 501
+    }
+  ],
+  "scope": "Only two unchanged failed diagnostic methods; fake Docker client, owned loopback descendant fixture, no Anvil/archive/services/real Docker/model; no signal behavior changed",
+  "source_sha256": {
+    "tests/test_trace_diagnostic.py": "0f1a75c80e3c9b6f7351e3fef7e35b51c4810b743c414dff6324b24188d6cca6",
+    "tests/test_trace_observer.py": "454501ab828fe9bb5e8495a19f4c4300738b5ae1d4013535c470e85a9a39c39a",
+    "tests_isolated/diagnose_trace_worker.py": "d24ffd710a28308008a98a3655d9d592376bef686ce5e48d46d70d3bdf666af1"
+  }
+}

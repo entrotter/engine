@@ -1,0 +1,141 @@
+{
+  "artifact_id": "46f8bb711b540b4c91a7211324616840bb7bd67cb47aa17e85cecd0f26e5857f",
+  "profile": "aave-v3-ethereum-weth-price",
+  "integrity_verified": true,
+  "trace": {
+    "artifact_id": "e393c6a62f0e285b17433d17ec3b8a4528e325f7c391aa3f98a9fcbef76f6e51",
+    "baseline_receipts_verified": true,
+    "transaction_count": 32
+  },
+  "classification": {
+    "complete_price_views": true,
+    "baseline_receipts_verified": true,
+    "unproven_reasons": [],
+    "baseline_price": 256292441874,
+    "candidate_price": 257082415000,
+    "price_difference": 789973126
+  },
+  "scope": "Recorded wrapper and nested trace checks; not provider authentication. Read-only price dependence is not signed consumer strategy, profit or full-block/root/opcode proof. Missing or unproven differences are null.",
+  "observations": [
+    {
+      "branch": "baseline",
+      "phase": "before",
+      "head": {
+        "number": 18999891,
+        "hash": "0xa818cfc5b0e63724a8c98bdd7df17ee0d0288954ea69ab0326bfdfa85caae3df",
+        "timestamp": 1705172123
+      },
+      "source": "0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419",
+      "price": 257082415000,
+      "base_currency": "0x0000000000000000000000000000000000000000",
+      "base_unit": 100000000,
+      "aggregator": "0xe62b71cf983019bff55bc83b48601ce8419650cc",
+      "latest_round_data": {
+        "round_id": 110680464442257320173,
+        "answer": 257082415000,
+        "started_at": 1705170659,
+        "updated_at": 1705170659,
+        "answered_in_round": 110680464442257320173
+      },
+      "oracle_code": {
+        "bytes": 3405,
+        "sha256": "dc8079e555204e0b2d7dc8382d6ebd71901f0b43e5940463e22b75b810a37728"
+      },
+      "source_code": {
+        "bytes": 9571,
+        "sha256": "ed698309290de3517c7201fcad9a9dbd4b8cde4a72c9add23129201f299c6f2b"
+      },
+      "errors": []
+    },
+    {
+      "branch": "baseline",
+      "phase": "after",
+      "head": {
+        "number": 18999892,
+        "hash": "0xe8e2d184d92dd5b88e0a67321e22c1158ab95ac0e246dc4b721496a81d8c7ef6",
+        "timestamp": 1705172135
+      },
+      "source": "0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419",
+      "price": 256292441874,
+      "base_currency": "0x0000000000000000000000000000000000000000",
+      "base_unit": 100000000,
+      "aggregator": "0xe62b71cf983019bff55bc83b48601ce8419650cc",
+      "latest_round_data": {
+        "round_id": 110680464442257320174,
+        "answer": 256292441874,
+        "started_at": 1705172135,
+        "updated_at": 1705172135,
+        "answered_in_round": 110680464442257320174
+      },
+      "oracle_code": {
+        "bytes": 3405,
+        "sha256": "dc8079e555204e0b2d7dc8382d6ebd71901f0b43e5940463e22b75b810a37728"
+      },
+      "source_code": {
+        "bytes": 9571,
+        "sha256": "ed698309290de3517c7201fcad9a9dbd4b8cde4a72c9add23129201f299c6f2b"
+      },
+      "errors": []
+    },
+    {
+      "branch": "candidate",
+      "phase": "before",
+      "head": {
+        "number": 18999891,
+        "hash": "0xa818cfc5b0e63724a8c98bdd7df17ee0d0288954ea69ab0326bfdfa85caae3df",
+        "timestamp": 1705172123
+      },
+      "source": "0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419",
+      "price": 257082415000,
+      "base_currency": "0x0000000000000000000000000000000000000000",
+      "base_unit": 100000000,
+      "aggregator": "0xe62b71cf983019bff55bc83b48601ce8419650cc",
+      "latest_round_data": {
+        "round_id": 110680464442257320173,
+        "answer": 257082415000,
+        "started_at": 1705170659,
+        "updated_at": 1705170659,
+        "answered_in_round": 110680464442257320173
+      },
+      "oracle_code": {
+        "bytes": 3405,
+        "sha256": "dc8079e555204e0b2d7dc8382d6ebd71901f0b43e5940463e22b75b810a37728"
+      },
+      "source_code": {
+        "bytes": 9571,
+        "sha256": "ed698309290de3517c7201fcad9a9dbd4b8cde4a72c9add23129201f299c6f2b"
+      },
+      "errors": []
+    },
+    {
+      "branch": "candidate",
+      "phase": "after",
+      "head": {
+        "number": 18999892,
+        "hash": "0x1732adeeead9a5b1c6a8b673b06a611774c1395efbcfb495a00f2cb3a58eab92",
+        "timestamp": 1705172135
+      },
+      "source": "0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419",
+      "price": 257082415000,
+      "base_currency": "0x0000000000000000000000000000000000000000",
+      "base_unit": 100000000,
+      "aggregator": "0xe62b71cf983019bff55bc83b48601ce8419650cc",
+      "latest_round_data": {
+        "round_id": 110680464442257320173,
+        "answer": 257082415000,
+        "started_at": 1705170659,
+        "updated_at": 1705170659,
+        "answered_in_round": 110680464442257320173
+      },
+      "oracle_code": {
+        "bytes": 3405,
+        "sha256": "dc8079e555204e0b2d7dc8382d6ebd71901f0b43e5940463e22b75b810a37728"
+      },
+      "source_code": {
+        "bytes": 9571,
+        "sha256": "ed698309290de3517c7201fcad9a9dbd4b8cde4a72c9add23129201f299c6f2b"
+      },
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+test_resealed_initial_timestamp_mismatch_cannot_claim_complete_views (test_consumer_observations.ConsumerObservationTests.test_resealed_initial_timestamp_mismatch_cannot_claim_complete_views) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.036s
+
+OK

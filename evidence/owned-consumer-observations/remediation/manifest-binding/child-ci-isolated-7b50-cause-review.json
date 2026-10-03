@@ -1,0 +1,56 @@
+{
+  "status": "confirmed_builder_manifest_defect_audit_guard_correct",
+  "head": "7b50af23e608ea219e08833c6ff23cf736c8563d",
+  "finding": {
+    "priority": 2,
+    "file": "scripts/build_worker.py",
+    "line": 387,
+    "trigger": "container/Dockerfile base changes from old011e73 to new89281d, builder retains constantoldbase in manifest.",
+    "evidence": "Downloaded worker-image.json base old011e73 while Dockerfile/source22 hashes and digest bind exact7b50 checkout with new89281d. Audit fails at strict equalityguard line203 before Cosign/Trivy invocation.",
+    "necessary_fix": "Derive strictimmutable singleFROM identity from exactcopied Dockerfile context before build, bind samebytes/hash/resultbase; preserve audit equalityguard and fullsigner/inventory/allfindings policy."
+  },
+  "actual_artifacts": {
+    "image_id": "sha256:9ce79538cb450b63b9d0b439488c0ecc2cc2213e534174151ec831ff24a112b1",
+    "manifest_base": "cgr.dev/chainguard/python@sha256:011e73b4e30e0fe9407a42b82a920b4fa13ebc0bf029a48b714f950df254ca20",
+    "dockerfile_base": "cgr.dev/chainguard/python@sha256:89281daac77a3d91ef298d70ce3b7a6ccb2ebf268c084fa9a9bda1c92e71c64d",
+    "source_file_count": 22,
+    "complete_checkout_source_hashes_match": true,
+    "source_digest_matches": true,
+    "reported_isolated_cases": 25,
+    "reported_seconds": 218.049,
+    "reports": {
+      "mainnet-prefix.json": {
+        "sha256": "9551e6ab14f3262caeb678b32685dbac6fc39cb12c64c77d6ba2b4648d1ee713",
+        "baseline_verified": true,
+        "original_inputs": 1
+      },
+      "mainnet-prefix-four.json": {
+        "sha256": "ca9d47609a9489f9e6ca2c382eddaa441a0257e74608d363da15893971d06dba",
+        "baseline_verified": true,
+        "original_inputs": 4
+      }
+    }
+  },
+  "checks_boundaries": [
+    "Kernel/runtime25 and normaldefaultmainnet1/4 steps passed; strictpackageaudit failed before scan, laternative/Cargo audit not completed.",
+    "No rootinitialmisidentification repeated: this is buildermetadataerror, not scannerpolicy pin, providercause or basevulnerability finding.",
+    "Currentnewbase remote31OS/0finding proof remains independent historicalevidence; actual7b50builtworker inventory/security incomplete."
+  ],
+  "files": {
+    ".quality/bounded-admission/ci-isolated-7b50-metadata.json": "8977d50a1077d7de11f99156555cf42000ba87a1f01c09a7c31bd04b0a55a9c6",
+    ".quality/bounded-admission/ci-isolated-7b50.log": "1315e22e6cbf659e0204a9eae988fafe7dee2398524f3f3b1df2f7927426751e",
+    ".quality/bounded-admission/ci-isolated-7b50-failed.log": "bca73de840e69e5824dde43a4a196b0ddaa75fed431861e18301d6337df52d35",
+    ".quality/bounded-admission/ci-isolated-7b50/worker-image-security/worker-image.json": "7e0e53f90edbdf8dc03a32c7f57b8a1bde69cca054896fa84da0829a716a994d",
+    ".quality/bounded-admission/ci-isolated-7b50/worker-image-security/.quality/build-output-docker.json": "0047c89e086cb97f21863a97d3addf84887d33e66b573795a049b0e4786f57b6"
+  },
+  "git_source_hashes": {
+    "scripts/build_worker.py": "a14f457ff3f701a52530f74818ddeb5db7e06fb6ef0de822d34090fd75f1435a",
+    "scripts/check_image_security.py": "e84d1c8d37c33a176706b6cad3fe32c5f3b1f8faf96422f694cc088763ea8261",
+    "container/Dockerfile": "2fc42c30c4aac2e760db25c5306def65d294236307bd09348ee8646f83a33fd1"
+  },
+  "limits": [
+    "Read-only originalCI artifacts/localimmutableGit/hash and existingoffline traceintegrity inspection; no source/docs/tests/scanner/network/CI/runtime changes or execution.",
+    "Rootnewbuilderimplementation not reviewed by this cause record; will review separately onceprovided.",
+    "No mainapproval/merge/deployment/fullgoalcompletion/currentall8claim."
+  ]
+}

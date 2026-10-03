@@ -1,0 +1,36 @@
+{
+  "code": 0,
+  "cause": "completed",
+  "host_cleanup_errors": [],
+  "host_seconds": 127.92183858319186,
+  "cli_reaped": true,
+  "original_product_cap_seconds": 150,
+  "host_watchdog_seconds": 190,
+  "native_no_CPU_RSS_sandbox": true,
+  "sources_unchanged": true,
+  "inputs_unchanged": true,
+  "owned_host_observations": [
+    {
+      "kind": "ParentCache",
+      "pid": 4158,
+      "port": 59509,
+      "host_group_absent": true,
+      "host_port_closed": true
+    },
+    {
+      "kind": "AnvilSession",
+      "pid": 4159,
+      "port": 59510,
+      "host_group_absent": true,
+      "host_port_closed": true
+    },
+    {
+      "kind": "AnvilSession",
+      "pid": 4744,
+      "port": 61632,
+      "host_group_absent": true,
+      "host_port_closed": true
+    }
+  ],
+  "no_signals_to_grandchild_identifiers": true
+}

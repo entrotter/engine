@@ -1,0 +1,6 @@
+test_empty_code_and_malformed_supported_getters_are_unproven (test_consumer_observations.ConsumerObservationTests.test_empty_code_and_malformed_supported_getters_are_unproven) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+OK

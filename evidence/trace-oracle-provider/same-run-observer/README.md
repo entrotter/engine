@@ -20,7 +20,7 @@ runtime command, arbitrary executable, environment selector, state repair or ret
 The helper substitutes a fixed observed guardian **within its own invocation**.
 It reuses original `supervise` owner-pipe, signal, lifetime and terminate/kill
 behavior, captures both child streams, and sets only `RUST_LOG=backend`.
-[Pinned Anvil tracing initialization](https://github.com/foundry-rs/foundry/blob/cae51ad458f6abb64852b7709eb784352429825d/crates/anvil/src/lib.rs#L471-L506)
+[Pinned Anvil tracing initialization](https://raw.githubusercontent.com/foundry-rs/foundry/cae51ad458f6abb64852b7709eb784352429825d/crates/anvil/src/lib.rs) (source lines 471–506)
 accepts this target filter; the controlled native probe confirms backend events
 without blanket HTTP trace flooding. Each finite row binds the actual worker
 request SHA, baseline/candidate order and captured original transaction indices.

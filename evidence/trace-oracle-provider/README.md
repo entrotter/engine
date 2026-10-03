@@ -44,8 +44,8 @@ five closed proxy threads/ports.
 | Missing storage during mining | [Integrity-valid unverified report](native-missing-storage.json); baseline `not_mined/not_mined`, candidate `skipped/not_mined`, no receipts |
 
 The pinned Foundry executor skips database/execution errors during mining
-([account access](https://github.com/foundry-rs/foundry/blob/cae51ad458f6abb64852b7709eb784352429825d/crates/anvil/src/eth/backend/executor.rs#L610-L617),
-[execution errors](https://github.com/foundry-rs/foundry/blob/cae51ad458f6abb64852b7709eb784352429825d/crates/anvil/src/eth/backend/executor.rs#L717-L726)).
+([account access](https://raw.githubusercontent.com/foundry-rs/foundry/cae51ad458f6abb64852b7709eb784352429825d/crates/anvil/src/eth/backend/executor.rs) (source lines 610–617),
+[execution errors](https://raw.githubusercontent.com/foundry-rs/foundry/cae51ad458f6abb64852b7709eb784352429825d/crates/anvil/src/eth/backend/executor.rs) (source lines 717–726)).
 Thus `evm_mine` need not return an RPC error. The report honestly remains
 unverified. **Receipt absence alone cannot identify the cause or attest parent
 state.** Known fault injection is test evidence, not an inferred report claim.

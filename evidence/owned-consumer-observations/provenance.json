@@ -1,0 +1,445 @@
+{
+  "scope": "Public copies of existing local observations only; no reruns or runtime changes",
+  "substitution": {
+    "input": "actual local Entrotter workspace root, intentionally undisclosed",
+    "output": "/workspace/Entrotter",
+    "operation": "UTF-8 byte replacement only",
+    "sanitizer_sha256": "39a01ee90bc6fc005e59a31a1bd984d5785c2d4dbfe23d32806ef574b45bd2ec"
+  },
+  "copies": [
+    {
+      "public_path": "author/affected-004.log",
+      "original_path": ".quality/owned-consumer-observations/affected-004.log",
+      "original_sha256": "6787b6309461073cba47ab0a4c6d26d94398969e52b0eae5a89e83156459feb0",
+      "public_sha256": "6787b6309461073cba47ab0a4c6d26d94398969e52b0eae5a89e83156459feb0",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/bandit-003.json",
+      "original_path": ".quality/owned-consumer-observations/bandit-003.json",
+      "original_sha256": "e0400c6803831d49b9fd004f00495533b993dc4ed754fe6c2cdd51f9f5f0178f",
+      "public_sha256": "e0400c6803831d49b9fd004f00495533b993dc4ed754fe6c2cdd51f9f5f0178f",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/bandit-006.json",
+      "original_path": ".quality/owned-consumer-observations/bandit-006.json",
+      "original_sha256": "9405c52ed41abe14ac731a2b8fb0dc65d16e10e2abebda2497d55a5c5f92c47e",
+      "public_sha256": "9405c52ed41abe14ac731a2b8fb0dc65d16e10e2abebda2497d55a5c5f92c47e",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/compatibility-004.log",
+      "original_path": ".quality/owned-consumer-observations/compatibility-004.log",
+      "original_sha256": "e5cf9103dc244b47324805f6b509b5cde9ff0955f918e76e29aec1b6c6a70b9b",
+      "public_sha256": "e5cf9103dc244b47324805f6b509b5cde9ff0955f918e76e29aec1b6c6a70b9b",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/diagnostic-reproduction-008.json",
+      "original_path": ".quality/owned-consumer-observations/diagnostic-reproduction-008.json",
+      "original_sha256": "8560f9bc5df02a96397249e79344c2d75ae4505be7fc527d10b2fc3ba40bf73c",
+      "public_sha256": "8560f9bc5df02a96397249e79344c2d75ae4505be7fc527d10b2fc3ba40bf73c",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/diagnostic-reproduction-008.log",
+      "original_path": ".quality/owned-consumer-observations/diagnostic-reproduction-008.log",
+      "original_sha256": "febb9557c725b9836efc9b598752624e3416ca31ce8a0e5d3845b75456d39cdc",
+      "public_sha256": "febb9557c725b9836efc9b598752624e3416ca31ce8a0e5d3845b75456d39cdc",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/format-004.log",
+      "original_path": ".quality/owned-consumer-observations/format-004.log",
+      "original_sha256": "cdd24684b33e5200a213c89093e8da4cb81a0de0085a4684d20923e852610123",
+      "public_sha256": "cdd24684b33e5200a213c89093e8da4cb81a0de0085a4684d20923e852610123",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/format-006.log",
+      "original_path": ".quality/owned-consumer-observations/format-006.log",
+      "original_sha256": "cdd24684b33e5200a213c89093e8da4cb81a0de0085a4684d20923e852610123",
+      "public_sha256": "cdd24684b33e5200a213c89093e8da4cb81a0de0085a4684d20923e852610123",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-007-evidence/cleanup.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-007-evidence/cleanup.json",
+      "original_sha256": "61cf64af032f372e5f278a515a6e69222999f974bda09b58e905e4f1372a9717",
+      "public_sha256": "61cf64af032f372e5f278a515a6e69222999f974bda09b58e905e4f1372a9717",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-007-evidence/synthetic-source.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-007-evidence/synthetic-source.json",
+      "original_sha256": "aa944413482b5da19059645ba5a907edab094790c57aaf19b8498b7598c7019b",
+      "public_sha256": "aa944413482b5da19059645ba5a907edab094790c57aaf19b8498b7598c7019b",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-007-evidence/test_actual_missing_aave_code_reads_unproven_without_replay_fallback-wrapper.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-007-evidence/test_actual_missing_aave_code_reads_unproven_without_replay_fallback-wrapper.json",
+      "original_sha256": "64b4b1c7708de7794b7090099a38f5ce0190551e3865ede111acb02dfd72c408",
+      "public_sha256": "64b4b1c7708de7794b7090099a38f5ce0190551e3865ede111acb02dfd72c408",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-007-evidence/test_real_no_omission_reads_complete_with_zero_price_difference-wrapper.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-007-evidence/test_real_no_omission_reads_complete_with_zero_price_difference-wrapper.json",
+      "original_sha256": "60721eee81fd77b8e36f8ebb301b23e4a3141ecb95c28b2b7f00d65002df91eb",
+      "public_sha256": "60721eee81fd77b8e36f8ebb301b23e4a3141ecb95c28b2b7f00d65002df91eb",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-007-evidence/test_real_paired_receipts_price_effect_and_exact_original_source-wrapper.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-007-evidence/test_real_paired_receipts_price_effect_and_exact_original_source-wrapper.json",
+      "original_sha256": "cdce7c903f2a7391d7852afc8e1a8bc4d29cc93c5916c80cc4f170cc8a719043",
+      "public_sha256": "cdce7c903f2a7391d7852afc8e1a8bc4d29cc93c5916c80cc4f170cc8a719043",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-007-terminal.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-007-terminal.json",
+      "original_sha256": "7b8bcbd0b8f33b7e8dd5a1a91db07d1b8f5c0cd3c5c83c8791c1414e2ded6dba",
+      "public_sha256": "7b8bcbd0b8f33b7e8dd5a1a91db07d1b8f5c0cd3c5c83c8791c1414e2ded6dba",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-007.log",
+      "original_path": ".quality/owned-consumer-observations/full-native-007.log",
+      "original_sha256": "1caa9a26bd0eee8a1ce0540e0886f196c481e0223f7e15ce08c1887b29d7aaa2",
+      "public_sha256": "75fec34725424e66edcacbef143ff2b454a5df16484fe85a11ea0a7f19054a3b",
+      "changed": true,
+      "transformation": "workspace_root_to_portable_root"
+    },
+    {
+      "public_path": "author/full-native-009-evidence/cleanup.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-009-evidence/cleanup.json",
+      "original_sha256": "da45b28b263bf3a925219ba1d37a335e80cf7fbacce9a89e4c777e77519b360f",
+      "public_sha256": "da45b28b263bf3a925219ba1d37a335e80cf7fbacce9a89e4c777e77519b360f",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-009-evidence/synthetic-source.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-009-evidence/synthetic-source.json",
+      "original_sha256": "aa944413482b5da19059645ba5a907edab094790c57aaf19b8498b7598c7019b",
+      "public_sha256": "aa944413482b5da19059645ba5a907edab094790c57aaf19b8498b7598c7019b",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-009-evidence/test_actual_missing_aave_code_reads_unproven_without_replay_fallback-wrapper.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-009-evidence/test_actual_missing_aave_code_reads_unproven_without_replay_fallback-wrapper.json",
+      "original_sha256": "d6a1fbc18828c8ec306f3b14a4e7e52dc230a87bc036146551945f6e4b2b3045",
+      "public_sha256": "d6a1fbc18828c8ec306f3b14a4e7e52dc230a87bc036146551945f6e4b2b3045",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-009-evidence/test_real_no_omission_reads_complete_with_zero_price_difference-wrapper.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-009-evidence/test_real_no_omission_reads_complete_with_zero_price_difference-wrapper.json",
+      "original_sha256": "3a046f026849cf1b1bdab32dd40359c6094588209f195b4a05efabde30b922d2",
+      "public_sha256": "3a046f026849cf1b1bdab32dd40359c6094588209f195b4a05efabde30b922d2",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-009-evidence/test_real_paired_receipts_price_effect_and_exact_original_source-wrapper.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-009-evidence/test_real_paired_receipts_price_effect_and_exact_original_source-wrapper.json",
+      "original_sha256": "696063361ea904a61d13d2d1b404bc1c1823f3b0f62b3be2978261a16c692bf9",
+      "public_sha256": "696063361ea904a61d13d2d1b404bc1c1823f3b0f62b3be2978261a16c692bf9",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-009-terminal.json",
+      "original_path": ".quality/owned-consumer-observations/full-native-009-terminal.json",
+      "original_sha256": "6b59abb277a958c467f269f82cedc6f59bd63a933ffa1fb65e005fef0d7a1f7f",
+      "public_sha256": "6b59abb277a958c467f269f82cedc6f59bd63a933ffa1fb65e005fef0d7a1f7f",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-009.log",
+      "original_path": ".quality/owned-consumer-observations/full-native-009.log",
+      "original_sha256": "a5e96e2bc9bb713091ca9ba76b4bd9bc7cc06427551afdde12eae41252888f24",
+      "public_sha256": "a5e96e2bc9bb713091ca9ba76b4bd9bc7cc06427551afdde12eae41252888f24",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/future-timestamp-006.log",
+      "original_path": ".quality/owned-consumer-observations/future-timestamp-006.log",
+      "original_sha256": "6590c030f24848544f6c3c45a430fe0439a52067cc69d95fce3414f23aecc3e3",
+      "public_sha256": "6590c030f24848544f6c3c45a430fe0439a52067cc69d95fce3414f23aecc3e3",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/head-binding-005.log",
+      "original_path": ".quality/owned-consumer-observations/head-binding-005.log",
+      "original_sha256": "b027f46965747e7ec0b8af8fafed076082fd5c88f4dada7151fe6cf4eb879e35",
+      "public_sha256": "b027f46965747e7ec0b8af8fafed076082fd5c88f4dada7151fe6cf4eb879e35",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/lint-003.log",
+      "original_path": ".quality/owned-consumer-observations/lint-003.log",
+      "original_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "public_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/lint-006.log",
+      "original_path": ".quality/owned-consumer-observations/lint-006.log",
+      "original_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "public_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/native-001.log",
+      "original_path": ".quality/owned-consumer-observations/native-001.log",
+      "original_sha256": "d968c51dddc2fbf82947cd58cbaba51ecfc0a4a29d9193dbacd30cc1598bfa37",
+      "public_sha256": "d968c51dddc2fbf82947cd58cbaba51ecfc0a4a29d9193dbacd30cc1598bfa37",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/native-003/cleanup.json",
+      "original_path": ".quality/owned-consumer-observations/native-003/cleanup.json",
+      "original_sha256": "66039295165b179e1c5891fd43c5783b18cbc487e9a764f52a5e0525053d7118",
+      "public_sha256": "66039295165b179e1c5891fd43c5783b18cbc487e9a764f52a5e0525053d7118",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/native-003/synthetic-source.json",
+      "original_path": ".quality/owned-consumer-observations/native-003/synthetic-source.json",
+      "original_sha256": "aa944413482b5da19059645ba5a907edab094790c57aaf19b8498b7598c7019b",
+      "public_sha256": "aa944413482b5da19059645ba5a907edab094790c57aaf19b8498b7598c7019b",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/native-003/test_actual_missing_aave_code_reads_unproven_without_replay_fallback-wrapper.json",
+      "original_path": ".quality/owned-consumer-observations/native-003/test_actual_missing_aave_code_reads_unproven_without_replay_fallback-wrapper.json",
+      "original_sha256": "2ac36da004e9b13156b8d95ad91dc7e393cd01d4385ce10572652bd7b2092e0a",
+      "public_sha256": "2ac36da004e9b13156b8d95ad91dc7e393cd01d4385ce10572652bd7b2092e0a",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/native-003/test_real_no_omission_reads_complete_with_zero_price_difference-wrapper.json",
+      "original_path": ".quality/owned-consumer-observations/native-003/test_real_no_omission_reads_complete_with_zero_price_difference-wrapper.json",
+      "original_sha256": "7a1076212a2e44a9d277628c634698b35c25f3f3fa967cb87075ea7aa0773cbb",
+      "public_sha256": "7a1076212a2e44a9d277628c634698b35c25f3f3fa967cb87075ea7aa0773cbb",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/native-003/test_real_paired_receipts_price_effect_and_exact_original_source-wrapper.json",
+      "original_path": ".quality/owned-consumer-observations/native-003/test_real_paired_receipts_price_effect_and_exact_original_source-wrapper.json",
+      "original_sha256": "0d727d7fecd0dd27af373c040e44dd9bbe8f7f55950ead795904a19680384c2d",
+      "public_sha256": "0d727d7fecd0dd27af373c040e44dd9bbe8f7f55950ead795904a19680384c2d",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/prelaunch-003.json",
+      "original_path": ".quality/owned-consumer-observations/prelaunch-003.json",
+      "original_sha256": "23fa394f212cebb9f554d0097a882759b60d13353d58322b02721783f35809c5",
+      "public_sha256": "23fa394f212cebb9f554d0097a882759b60d13353d58322b02721783f35809c5",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/prelaunch-full-007.json",
+      "original_path": ".quality/owned-consumer-observations/prelaunch-full-007.json",
+      "original_sha256": "b2197b5b2b4524659710ef69840a074e8927111aa24af381f120d466e53aa09e",
+      "public_sha256": "b2197b5b2b4524659710ef69840a074e8927111aa24af381f120d466e53aa09e",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/prelaunch-full-009.json",
+      "original_path": ".quality/owned-consumer-observations/prelaunch-full-009.json",
+      "original_sha256": "3bbf15527dcaf241c3c10e2c3071bc9245125f1d0cb5f9da03f43776cb142a98",
+      "public_sha256": "3bbf15527dcaf241c3c10e2c3071bc9245125f1d0cb5f9da03f43776cb142a98",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/readiness-004.json",
+      "original_path": ".quality/owned-consumer-observations/readiness-004.json",
+      "original_sha256": "958568ab72df0698461f8be228270e3b0455754b94e3a1d1b28f286c90b982aa",
+      "public_sha256": "958568ab72df0698461f8be228270e3b0455754b94e3a1d1b28f286c90b982aa",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/readiness-addendum-005.json",
+      "original_path": ".quality/owned-consumer-observations/readiness-addendum-005.json",
+      "original_sha256": "7b06979f6f949000190d849a8a82a1e6a6749e985646065c23bad56f1ce4c68d",
+      "public_sha256": "7b06979f6f949000190d849a8a82a1e6a6749e985646065c23bad56f1ce4c68d",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/security-before-refresh-006.log",
+      "original_path": ".quality/owned-consumer-observations/security-before-refresh-006.log",
+      "original_sha256": "97c2a1a871cf8394c3bbb6902c245eb37fb45c685d3b5c797420e7c30d31c411",
+      "public_sha256": "f8c2086cd00273ce2514d4e83f1f7dd4150cbf3d77094ec5ee3c505fa2d0df71",
+      "changed": true,
+      "transformation": "workspace_root_to_portable_root"
+    },
+    {
+      "public_path": "author/security-before-refresh.log",
+      "original_path": ".quality/owned-consumer-observations/security-before-refresh.log",
+      "original_sha256": "97c2a1a871cf8394c3bbb6902c245eb37fb45c685d3b5c797420e7c30d31c411",
+      "public_sha256": "f8c2086cd00273ce2514d4e83f1f7dd4150cbf3d77094ec5ee3c505fa2d0df71",
+      "changed": true,
+      "transformation": "workspace_root_to_portable_root"
+    },
+    {
+      "public_path": "author/security-evaluation-004.log",
+      "original_path": ".quality/owned-consumer-observations/security-evaluation-004.log",
+      "original_sha256": "9ecebf55753908286dfe6b9d587e68f3bf8209fb19b4c4bbffa7f1dd6eec1055",
+      "public_sha256": "9ecebf55753908286dfe6b9d587e68f3bf8209fb19b4c4bbffa7f1dd6eec1055",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/security-evaluation-006.json",
+      "original_path": ".quality/owned-consumer-observations/security-evaluation-006.json",
+      "original_sha256": "d2e3b8a4e9d663134d918c2e7a1a0a97e53c63f290de034b1b21d3a5ba1b260a",
+      "public_sha256": "d2e3b8a4e9d663134d918c2e7a1a0a97e53c63f290de034b1b21d3a5ba1b260a",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/security-reviewed-before.json",
+      "original_path": ".quality/owned-consumer-observations/security-reviewed-before.json",
+      "original_sha256": "28d6c3844d3dac00e148eaaced6b87e40166ad1a5e3afffa96f26e715b61c092",
+      "public_sha256": "28d6c3844d3dac00e148eaaced6b87e40166ad1a5e3afffa96f26e715b61c092",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/targeted-002.log",
+      "original_path": ".quality/owned-consumer-observations/targeted-002.log",
+      "original_sha256": "b92470d5fbd1239249a44515fdbd4ccfa15a134fdc901449ca23992f49a09d4b",
+      "public_sha256": "b92470d5fbd1239249a44515fdbd4ccfa15a134fdc901449ca23992f49a09d4b",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/targeted-003.log",
+      "original_path": ".quality/owned-consumer-observations/targeted-003.log",
+      "original_sha256": "1e8b221cb141b9d73200d1d89d38f3281d917edbb382869d77796c9c6e1287cb",
+      "public_sha256": "e274ad79016958ae16357670c25a7d3633f0299bc3aa5d5bd9c70f6be8f42359",
+      "changed": true,
+      "transformation": "workspace_root_to_portable_root"
+    },
+    {
+      "public_path": "author/types-003.log",
+      "original_path": ".quality/owned-consumer-observations/types-003.log",
+      "original_sha256": "5107f9446510710cfc458474a6bae8746bf7ed9a2bccb85b1de3b0a14e84c8ad",
+      "public_sha256": "5107f9446510710cfc458474a6bae8746bf7ed9a2bccb85b1de3b0a14e84c8ad",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/types-006.log",
+      "original_path": ".quality/owned-consumer-observations/types-006.log",
+      "original_sha256": "5107f9446510710cfc458474a6bae8746bf7ed9a2bccb85b1de3b0a14e84c8ad",
+      "public_sha256": "5107f9446510710cfc458474a6bae8746bf7ed9a2bccb85b1de3b0a14e84c8ad",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/unit-001.log",
+      "original_path": ".quality/owned-consumer-observations/unit-001.log",
+      "original_sha256": "2e46ee7448db48d69ff219674f980da609252199ee7e1a77e801e7630a0df772",
+      "public_sha256": "2e46ee7448db48d69ff219674f980da609252199ee7e1a77e801e7630a0df772",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/wheel-004.log",
+      "original_path": ".quality/owned-consumer-observations/wheel-004.log",
+      "original_sha256": "625da58ef342386a2083731fd50aab6bd7197cdf7c2061b64a0e6960813043d5",
+      "public_sha256": "a8cd1fd49d4ee4a5af4512445f223a82ad19f022c353c56cf1dc8b7363f604c7",
+      "changed": true,
+      "transformation": "workspace_root_to_portable_root"
+    },
+    {
+      "public_path": "author/wheel-010.log",
+      "original_path": ".quality/owned-consumer-observations/wheel-010.log",
+      "original_sha256": "7d7e12b810a674495c818f5a9c78d77eca405216d01d62d97f19f5ead5d7dae7",
+      "public_sha256": "f70d27aa7c707a27fa4b2b4e3014af6cc858ffc1fbf9b48070e7d447980dd88a",
+      "changed": true,
+      "transformation": "workspace_root_to_portable_root"
+    },
+    {
+      "public_path": "author/wheel-proof-010.json",
+      "original_path": ".quality/owned-consumer-observations/wheel-proof-010.json",
+      "original_sha256": "8515bf1050e2b8a9143198638772105529ed35726ce43ef7ca656aa7a77b79aa",
+      "public_sha256": "8515bf1050e2b8a9143198638772105529ed35726ce43ef7ca656aa7a77b79aa",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "author/full-native-runner-007.py",
+      "original_path": ".quality/owned-consumer-observations/full-native-runner-007.py",
+      "original_sha256": "ba30dcb75747f4c69bdac0036dc6005434df37d7d29fe98a357d3ae67128f625",
+      "public_sha256": "b5e64cf73f215ebe61f06c34c73428c2601745bcf8661ba48fabebc4fb2a8456",
+      "changed": true,
+      "transformation": "workspace_root_to_portable_root"
+    },
+    {
+      "public_path": "author/full-native-runner-009.py",
+      "original_path": ".quality/owned-consumer-observations/full-native-runner-009.py",
+      "original_sha256": "a766b8b8f4767040b2a8aaf0f06996b83ee96f8874bff589f02436560190a615",
+      "public_sha256": "31de65112bc9bc9cc829aa4846c45716b443ccd8a90ab169e5138e0e4a1dc5c2",
+      "changed": true,
+      "transformation": "workspace_root_to_portable_root"
+    },
+    {
+      "public_path": "author/final-checkpoint-011.json",
+      "original_path": ".quality/owned-consumer-observations/final-checkpoint-011.json",
+      "original_sha256": "a338fa7acd1499e2cbcca60c5d7eaa6e075090028e74365bc3587195343bbf13",
+      "public_sha256": "a338fa7acd1499e2cbcca60c5d7eaa6e075090028e74365bc3587195343bbf13",
+      "changed": false,
+      "transformation": "byte_identical"
+    },
+    {
+      "public_path": "independent/source-review.json",
+      "original_path": "coordinator/.quality/consumer-price-integration/engine-observation-source-review.json",
+      "original_sha256": "02f1115a17700310d2c39e3ead4f0529ec054773beb2bad910618187c975eb96",
+      "public_sha256": "02f1115a17700310d2c39e3ead4f0529ec054773beb2bad910618187c975eb96",
+      "changed": false,
+      "transformation": "byte_identical"
+    }
+  ],
+  "wheel_binaries": "Not vendored; exact old/current wheel digests and module-byte comparisons remain in author readiness/wheel-proof records",
+  "limits": "Original readiness and result hashes remain original-local-byte hashes; copied redacted content has distinct public_sha256, never substituted under original hashes."
+}

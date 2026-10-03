@@ -1,0 +1,28 @@
+{
+  "targeted_existing_failure": true,
+  "result": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0
+  },
+  "diagnostics": [
+    {
+      "host_error": {
+        "category": "value_error",
+        "types": [
+          "value_error"
+        ],
+        "ssl_verify_code": null,
+        "http_status": null
+      },
+      "cleanup_error": null,
+      "docker_exit_code": null,
+      "cleanup_verified": true
+    }
+  ],
+  "sources": {
+    "tests/test_trace_diagnostic.py": "0f1a75c80e3c9b6f7351e3fef7e35b51c4810b743c414dff6324b24188d6cca6",
+    "tests_isolated/diagnose_trace_worker.py": "d24ffd710a28308008a98a3655d9d592376bef686ce5e48d46d70d3bdf666af1"
+  },
+  "scope": "One bounded focused diagnostic capture; not a full-suite rerun or proof of original cause."
+}

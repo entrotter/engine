@@ -52,6 +52,56 @@ results. Public source RPC URLs are never embedded in artifacts.
 The runner admits only JSON-defined, built-in actions. It does not execute
 arbitrary Python, shell commands, downloaded agent code or LLM tool calls.
 
+## Compare a historical borrowing position
+
+`trace-position` adds fixed Aave V3 Ethereum `getUserAccountData(account)`
+reads to both owned trace branches, before and after replay. An agent developer
+can inspect whether an omitted original transaction changes an existing account's
+aggregate collateral, debt, borrowing capacity or health factor, instead of
+equating unchanged receipts with unchanged downstream state.
+
+After the bounded worker setup below, supply the versioned
+[13-transaction example plan](tests/data/aave-account-prefix.json):
+
+```bash
+export ENTROTTER_RPC_URL='https://YOUR_ARCHIVE_PROVIDER'
+PYTHONPATH=src python3 -m entrotter_engine trace-position tests/data/aave-account-prefix.json -o position.json
+```
+
+The plan has exactly `position_version`, `trace` (the unchanged trace plan) and
+one lowercase, nonzero `account`. Pool, ABI, selectors and profile are fixed;
+the input cannot select code, callbacks, RPC endpoints or other contracts.
+Default execution uses the configured immutable Docker worker with no native
+fallback; `--native` explicitly opts out of whole-process Docker limits.
+`load_position()` validates the sealed result, nested price observations and
+original trace. Export shares the existing atomic filesystem quota.
+
+Only complete views with matching initial account values, matching initial
+heads, stable nonempty pool code, a matching Pool→addresses-provider→observed-oracle
+configuration and verified original baseline receipts yield
+account differences. Missing or invalid views retain finite errors and null
+differences. Base amounts are integers in the observed USD unit of 100000000;
+threshold/LTV values use basis points and health uses WAD (1000000000000000000).
+The no-debt uint256-max health sentinel remains in raw data, with `no_debt`
+status and a null health-factor difference. No floats or monetary benefit score
+are inferred.
+
+The example covers only 13 original transactions and skips transaction12;
+the earlier 32-transaction evidence is a separate execution. Account data
+aggregates all reserves. Branch differences do not prove that WETH price is
+the sole cause, an executed loan/liquidation, profit or provider authenticity.
+Stable proxy code does not authenticate its implementation. The same shared
+150-second trace/observation and 180-second worker limits apply: 52 fixed reads
+across four phases, existing price/pool-code/configuration calls capped at two seconds and
+aggregate account calls capped at ten seconds, always within the remaining
+deadline. No retries, invented funding or state substitution are added.
+
+[Actual13 execution and complete account evidence](evidence/aave-account-impact/README.md)
+records the observed result, source and remaining limits.
+
+Getter semantics are documented in the [official Pool API](https://www.aave.com/docs/aave-v3/smart-contracts/pool);
+the fixed pool address is from the [January 4, 2024 primary address book](https://github.com/aave-dao/aave-address-book/blob/575eac6d595d5d15ba5e6ca9192a2f2a5c719022/src/AaveV3Ethereum.sol).
+
 ## Safe RPC failure diagnostics
 
 `RPCError` remains a `RuntimeError`, and `RPCRejected` remains its subclass.
@@ -110,6 +160,94 @@ forks the pinned parent twice, restores the original timestamp, coinbase,
 prevrandao, base fee and gas limit, queues the original signatures in FIFO order
 and mines one block. The candidate may skip selected original transactions;
 remaining nonces/signatures are never repaired, funded or impersonated.
+
+### Owned Aave/WETH price observations
+
+`trace-observe` is a supported fixed-profile workflow. It executes the
+same original signed prefix and collects bounded read-only Aave V3 Ethereum WETH
+views on each owned branch, before and after replay. It uses the configured
+bounded Docker worker by default; missing Docker or an invalid image fails
+without a native fallback. Use `--native` only for explicit trusted development.
+No observation endpoint is added to HTTP v0.1.
+Rebuild the configured worker image from the current checkout after updating;
+an older image without this closed job fails execution rather than falling back.
+The [actual bounded32-input replay](evidence/bounded-consumer-observations/README.md)
+records complete price views, verified baseline receipts and cleanup with the
+original time limits. Provider availability and latency still constrain execution.
+
+```bash
+export ENTROTTER_RPC_URL='https://YOUR_ARCHIVE_PROVIDER'
+PYTHONPATH=src python3 -m entrotter_engine trace-observe tests/data/canonical-mainnet-prefix.json -o observed-trace.json
+```
+
+For the recorded original32-input case, use
+`evidence/aave-consumer-price/native-006/plan.json` instead of the one-input plan.
+The [supported32-input result](evidence/owned-consumer-observations/historical-32/README.md)
+includes a sealed wrapper that can be inspected offline without an archive key.
+This is a partial block replay with one original transaction omitted, not a
+signed consumer strategy or profit demonstration.
+
+The separate wrapper has `observation_version: "0.1.0"` and profile
+`aave-v3-ethereum-weth-price`. It contains the unchanged trace-report format,
+its artifact ID, four ordered observation records and a content hash over the
+complete wrapper. The reviewed [SDK candidate](https://github.com/entrotter/sdk-python/pull/7),
+[terminal reader](https://github.com/entrotter/cli/pull/10) and
+[local viewer](https://github.com/entrotter/entrotter.github.io/pull/16) can validate
+and inspect the complete wrapper offline. These candidates remain separate from
+main-branch approval and live Pages deployment.
+
+```python
+from entrotter_engine.consumer_observations import load_observed_trace
+from entrotter_engine.trace import write_trace
+
+observed = load_observed_trace("observed-trace.json")
+print(observed["classification"])
+write_trace(observed["trace_report"], "transaction-replay.json")
+```
+
+The fixed oracle is `0x54586bE62E3c3580375aE3723C145253060Ca0C2` and the asset
+is WETH `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`. Each phase reads its owned
+head (number/hash/timestamp), oracle code identity, `getSourceOfAsset(WETH)`,
+`getAssetPrice(WETH)`, `BASE_CURRENCY` and `BASE_CURRENCY_UNIT`. The strictly
+decoded nonzero source address selects only owned-node code, `aggregator()` and
+`latestRoundData()` reads. No plan can select an address, selector, callback,
+endpoint or executable. Raw fixed-width ABI words, finite errors and code
+SHA256/length are retained. Source adapters without that ABI, missing/empty code,
+inconsistent round metadata, nonpositive feed values, non-USD currency or a unit other than `100000000`
+produce explicit unproven reasons. Historical source/aggregator identities are
+observed, not assumed from today's configuration.
+
+Feed start/update times beyond the observed owned-head timestamp remain explicitly
+unproven. Round metadata must be consistent; no maximum-age freshness policy is
+applied, so old but internally consistent answers are not automatically rejected.
+
+`complete_price_views` requires all four views, stable nonempty code/source/
+aggregator identities, equal initial heads/views and positive feed prices equal
+to Aave prices in the declared USD unit. Post-head number/timestamp must bind to
+the trace source. It does not require prices to change. `price_difference` is
+candidate-after minus baseline-after in raw `100000000` units; it is not profit
+or strategy value. `baseline_receipts_verified` is reported independently:
+complete reads do not make an unmatched replay historically verified. These
+views are separate from signed consumer actions and do not authenticate deployed
+code/provider state or establish full-block/state-root/opcode equivalence.
+
+All nine fixed queries per phase (36 maximum) have at most two seconds each and
+share the original 150-second trace deadline and owned Anvil/cache lifetimes.
+The worker request admits exactly that fixed profile and a validated trace plan,
+never a callback, selector or network destination. The host verifies the complete
+request hash, both report hashes and the nested plan against its admitted snapshot.
+Observed and ordinary trace results cannot replace one another. The observation
+guard preserves the worker's original 180-second lifetime deadline, including the
+remaining time for sealing/output; it does not restart that timer after replay.
+The explicit native interface requires a POSIX main thread and refuses an existing
+caller alarm. SIGTERM/deadline stops propagate through owned cleanup;
+KeyboardInterrupt/SystemExit are not normalized into RPC errors. Previous signal
+handlers are restored. The guard covers execution and cleanup, not later wrapper
+sealing/file export or whole-command CPU/RSS usage. Observation records and
+accepted decoded code are each bounded to 64 KiB; the unchanged RPC transport
+reads at most 4 MiB plus one byte and rejects responses above 4 MiB. The whole
+exported wrapper is at most 8 MiB and uses the shared export ledger. Checksum and
+shape binding are integrity checks, not proof of EVM or provider truth.
 
 ```bash
 export ENTROTTER_RPC_URL='https://YOUR_ARCHIVE_PROVIDER'
@@ -174,6 +312,10 @@ key share only a successfully cached result; errors, null and oversized results
 release waiters without caching. Different keys, volatile reads and receipt
 reads can progress independently within the existing four-handler limit. Cache
 and counter locks never cover upstream I/O, and waits retain the shared deadline.
+The accepting thread may hold one accepted socket for at most100 milliseconds
+while a slot closes, bounded by the same remaining deadline. It creates no fifth
+active handler; persistent overload still refuses the request. This does not
+identify the cause of earlier replay failures.
 
 The bridge uses an owned loopback child, private bounded stdin configuration,
 the existing shared150-second deadline, at most4 handlers and4096 RPC calls,
@@ -240,8 +382,8 @@ awaits CI; it is separate from host default dispatch/lifecycle coverage.
 Encoding follows [EIP-155](https://eips.ethereum.org/EIPS/eip-155),
 [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) and
 [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559). Mainnet activation is pinned
-to [go-ethereum v1.14.0](https://github.com/ethereum/go-ethereum/blob/v1.14.0/params/config.go);
-header methods use [Anvil v1.8.3](https://github.com/foundry-rs/foundry/blob/v1.8.3/crates/anvil/src/eth/api.rs).
+to [go-ethereum v1.14.0](https://raw.githubusercontent.com/ethereum/go-ethereum/v1.14.0/params/config.go);
+header methods use [Anvil v1.8.3](https://raw.githubusercontent.com/foundry-rs/foundry/v1.8.3/crates/anvil/src/eth/api.rs).
 
 ## Limits and contribution priorities
 
@@ -532,6 +674,15 @@ same checksum-verified Foundry 1.8.3 binary; build manifests also record its SHA
 The host supports Python 3.11 through 3.14; native and container runtimes are
 separately tested. No registry account or paid image tag is used.
 
+The current base pin updates the pip bootstrap wheel from26.2.1-r1 to26.2.1-r2
+for CVE-2026-97687, CVE-2026-97689 and CVE-2026-97688. Both Linux platforms
+retain all26 prior OS package names and inventory31 packages, including five
+added Brotli/OpenSSL libraries; Python remains3.14 with a newer micro revision.
+Pinned Cosign signer/issuer verification and remote base scans have passed with
+a fresh database and zero detected findings. These checks cover the base only;
+current built-worker inventory, Anvil compatibility and replay checks remain
+mandatory CI gates. Earlier image reports remain historical evidence.
+
 After building, run the advisory gate from the checkout:
 
 ```bash
@@ -558,7 +709,7 @@ real worker and complete-report equivalence checks. Never weaken filters or
 suppress findings to restore a passing job.
 
 Upstream references: [image provenance](https://images.chainguard.dev/directory/image/python/provenance),
-[Trivy Rust inventory coverage](https://github.com/aquasecurity/trivy/blob/v0.74.0/docs/guide/coverage/language/rust.md).
+[Trivy Rust inventory coverage](https://raw.githubusercontent.com/aquasecurity/trivy/v0.74.0/docs/guide/coverage/language/rust.md).
 
 
 ## Native Foundry release inventory
@@ -589,7 +740,7 @@ remain limitations. Provenance proves origin/claims, not independent code review
 or bit-for-bit reproducible compilation. The separate image gate covers detected
 OS/interpreter packages; broader security/release gates remain open.
 
-[Upstream pinned release workflow](https://github.com/foundry-rs/foundry/blob/cae51ad458f6abb64852b7709eb784352429825d/.github/workflows/release.yml).
+[Upstream pinned release workflow](https://raw.githubusercontent.com/foundry-rs/foundry/cae51ad458f6abb64852b7709eb784352429825d/.github/workflows/release.yml).
 
 ## Shared report export budget
 
@@ -703,3 +854,13 @@ than 256 KiB, gas-budget refusal, state divergence, cleanup/recovery and equalit
 with native risk decisions. Offline protocol faults do not replace those real
 executions. All integrated production modules receive the same unsuppressed
 lint/type/security checks; independent PR review remains required.
+
+Local source/test/security/wheel evidence for the supported native observation
+workflow, including retained failures and pending gates, is in
+[owned consumer observation evidence](evidence/owned-consumer-observations/README.md).
+
+
+The [bounded admission and signed base follow-up](evidence/owned-consumer-observations/remediation/README.md)
+retains the original limits, records the actual HTTP regression and final local
+354-test run, and distinguishes remote base security checks from mandatory
+current built-worker/Linux verification.

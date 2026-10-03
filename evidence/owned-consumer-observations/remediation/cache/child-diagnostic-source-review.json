@@ -1,0 +1,33 @@
+{
+  "status": "original_cleanup_failure_cause_unresolved",
+  "independent_reviewer": "review_cli_agent",
+  "files": {
+    "tests/test_trace_diagnostic.py": "0f1a75c80e3c9b6f7351e3fef7e35b51c4810b743c414dff6324b24188d6cca6",
+    "tests_isolated/diagnose_trace_worker.py": "d24ffd710a28308008a98a3655d9d592376bef686ce5e48d46d70d3bdf666af1",
+    "src/entrotter_engine/isolated.py": "61f99e799a7056f009e2181bd4df42da9c2a9a57ae8e7c642a46c46cd94fa70d",
+    ".quality/bounded-admission/full-native-001-prelaunch.json": "d668496d5a2eb5a74fa083116481fe8cfe5de665488c6281b58be7db9fb3b6fe",
+    ".quality/bounded-admission/full-native-001-terminal.json": "d9a6c048eae04669d06676c1a37ad4c441d419777fb0b4d94f1411e6ab60493a",
+    ".quality/bounded-admission/full-native-001.log": "fc4d30af7b66a993a91e1c8ef9fcbe83a99125d806bc5591a067ae44d90311e5",
+    ".quality/bounded-admission/diagnostic-targeted-001.py": "99c08ae276b6bb3891cbcc2e5676067ffe98735f944f2e2077b269a5fc8aceab",
+    ".quality/bounded-admission/diagnostic-targeted-001.json": "b033bccf69ca64e0b608eee0103eccb76266388915a606ed3df0c6899e91a70e",
+    ".quality/bounded-admission/diagnostic-targeted-001.log": "83e5880fd2b0bafd576e5e7ccd78c35bbc76f6f6887b1cf5921e7710f3b234d9"
+  },
+  "facts": [
+    "Original full suite:352/91.848s,1failure at test_trace_diagnostic.py175 cleanup_verifiedFalse; new owned-consumer EVM controls passed.",
+    "Mock isolated._cleanup performs no Docker work and succeeds; result False requires helper secondary cleanup_error from killpg/wait/stdout.close, or the mocked owner cleanup itself; the original Boolean assertion does not print result.",
+    "run_diagnostic nested finally always attempts owner cleanup and stdout closure; client shutdown catches finite secondary error without replacing primary output-limit ValueError.",
+    "Immediate-exit32KiB writer may naturally exit during host overflow handling; code alone does not prove a specific shutdown race/errno.",
+    "Root targeted001 capture1PASS0.039s has expected value_error,cleanup_errorNone,cleanup_verifiedTrue; observing wrapper adds instrumentation and no originalcause inference.",
+    "Injected existing stop_error/wait_error/owner_cleanup_error controls deliberately expect cleanup_verifiedFalse, so preserving honest secondary failure is required."
+  ],
+  "actionable_evidence_improvement": {
+    "file": "tests/test_trace_diagnostic.py",
+    "line": 175,
+    "suggestion": "Keep assertTrue, attach only finite host_error/cleanup_error/docker_exit_code/cleanup_verified metadata as assertion message or failure-only log. Preserve cleanup attempts, all deadlines and descriptor/process assertions; do not relaxFalse or infer runtimefix from successfulrepeat."
+  },
+  "limits": [
+    "No concrete runtime wait/kill/close defect confirmed; no source/docs/test changes or execution/network/CI reruns performed by independent reviewer.",
+    "Full prelaunch manifest includes test and isolated source but omits tests_isolated diagnostic helper; current helper matches GitHEAD and root targeted source hash, not a retrospectively reconstructed prelaunch entry.",
+    "No actual Docker cleanup proof from mocked diagnostic tests; no cache/base causalrelationship inferred."
+  ]
+}

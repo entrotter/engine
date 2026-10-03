@@ -1,0 +1,12 @@
+{
+  "status": "additive_existing_head_guard_regression_pass_no_runtime_changes",
+  "prior_readiness_sha256": "958568ab72df0698461f8be228270e3b0455754b94e3a1d1b28f286c90b982aa",
+  "test_sha256": "54be857459ead28e28bb3d2992796acca7ac3eee3ff1f44de3a7400fef7f1731",
+  "log_sha256": "b027f46965747e7ec0b8af8fafed076082fd5c88f4dada7151fe6cf4eb879e35",
+  "control": "Resealed wrong initial timestamp with old complete classification refused; honestly recomputed unproven classification accepted and explicit initial_heads_differ reason retained.",
+  "new_unit_methods": 19,
+  "real_owned_methods": 6,
+  "total_method_union_coverage": 25,
+  "source_policy_docs_unchanged_since_readiness004": true,
+  "run_scope": "One new offline existing-guard test only; no native/archive/model/browser/CI/production edits"
+}

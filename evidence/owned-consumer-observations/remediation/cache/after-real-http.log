@@ -1,0 +1,7 @@
+test_brief_handler_overlap_admits_next_read_without_extra_threads (test_parent_cache.ParentCacheTests.test_brief_handler_overlap_admits_next_read_without_extra_threads) ... ok
+test_persistent_handler_pressure_refuses_without_extending_deadline (test_parent_cache.ParentCacheTests.test_persistent_handler_pressure_refuses_without_extending_deadline) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.079s
+
+OK

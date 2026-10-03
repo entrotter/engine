@@ -1,0 +1,61 @@
+{
+  "status": "requires_prelaunch_fixes",
+  "reviewer": "review_cli_agent",
+  "head": "e9d629e1e4bfdcefd678fe40387e4376b1374f3c",
+  "preparation_hashes": {
+    "run.py": "bd4cdfdcc615bd2fcc11bc9e3fddafa3b64d3f54cd97c0225a183a4e4a95f110",
+    "cli-child.py": "b36db3b57c90a7c986431445b0b4e83beaf3d63f917b7ba6db4a75b2aff5d5a1",
+    "readiness.json": "37eb8e8f7406a0cd86bcc3084acf58058d7ea67589527caec3939a90d1e6d70a",
+    "plan.json": "2e5e8dee72e27c327ffd77e259962e7d96f1ea972a2f98118b508cda64c3bc94",
+    "verify-result.py": "5992b3cf74ac13c6669fbb9f5a172dd4ac493eb72df369db39f4afc6d4204eda"
+  },
+  "source_bindings_verified": 31,
+  "input_bindings_verified": 3,
+  "pinned_anvil_sha256": "2ae79126940817dc8393bbb680faa6880226ea3424593828435b7128f4c07147",
+  "findings": [
+    {
+      "priority": 2,
+      "file": "cli-child.py",
+      "lines": [
+        20,
+        22,
+        33,
+        44
+      ],
+      "trigger": "Profiling ledger write/URL parse failure during an owned __enter__/__exit__ return, or terminal ownership inspection failure.",
+      "issue": "Unprotected telemetry can escape the profile callback or finally, replace actual CLI status/error and interrupt ownership checking. At entry-return this risks preventing context acquisition/cleanup. It is not failure-safe passive instrumentation.",
+      "requested_change": "Non-raising finite secondary telemetry and atomic ledger writes; preserve real CLI error/cancellation and owned cleanup."
+    },
+    {
+      "priority": 2,
+      "file": "run.py",
+      "lines": [
+        21,
+        24
+      ],
+      "trigger": "Cancellation/wait error after Popen, or child exit racing watchdog killpg.",
+      "issue": "No unconditional known-child kill/reap finally; only TimeoutExpired is handled, and ProcessLookupError can skip reap/terminal evidence. Host probes also sample closure immediately rather than the existing bounded cleanup window.",
+      "requested_change": "Exact owned Popen cleanup finally, finite preserved primary cause and bounded closure observation, no nonzero signal to stale ledger grandchildren."
+    },
+    {
+      "priority": 3,
+      "file": "verify-result.py",
+      "lines": [
+        38
+      ],
+      "trigger": "Successful supported wrapper with row.code hash/length dictionaries.",
+      "issue": "Verifier treats each dictionary as raw hexadecimal and slices v[2:], which raises before closure verification.",
+      "requested_change": "Record validated sha256/bytes fields directly; do not claim wrapper preserves raw code bytes."
+    }
+  ],
+  "reviewed_scope": [
+    "Actual runpy CLI dispatch and unchanged fixed plan32/skip12/150s runtime/source confirmed.",
+    "Host190s/no CPU-RSS sandbox limitation and e9 source/binary hashes checked offline.",
+    "No archive/node/process/test/network execution performed.",
+    "Historical native006 raw source/receipts and supported wrapper layouts remain distinct."
+  ],
+  "limitations": [
+    "No prelaunch authorization or historical CLI success is asserted.",
+    "CA digest is manifest-declared here; root prelaunch should verify with the exact executing locked Python certifi environment."
+  ]
+}

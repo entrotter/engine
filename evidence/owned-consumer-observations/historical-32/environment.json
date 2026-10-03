@@ -1,0 +1,10 @@
+{
+  "python": "3.13.0",
+  "platform": "macOS-15.6.1-arm64-arm-64bit-Mach-O",
+  "anvil_version": "1.8.3",
+  "source_head": "e9d629e1e4bfdcefd678fe40387e4376b1374f3c",
+  "execution": "Actual engine CLI module via runpy, passive ownership profiler; original shared150s native guard; outer190s plus10s cleanup; no Docker/CPU/RSS sandbox",
+  "source_provider": "Existing workflow fixed public read-only endpoint; no key or provider value copied into evidence",
+  "model_calls": 0,
+  "mainnet_writes": 0
+}

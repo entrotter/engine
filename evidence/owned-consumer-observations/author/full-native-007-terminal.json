@@ -1,0 +1,10 @@
+{
+  "returncode": 1,
+  "cause": "completed",
+  "host_seconds": 206.451408,
+  "shared_native_test_budget_seconds": 600,
+  "signing_keys": "none",
+  "archive_environment_removed": true,
+  "export_and_evidence_state": "fresh unique ignored directories",
+  "suite_process_reaped": true
+}

@@ -1,0 +1,321 @@
+{
+  "status": "passed_remote_base_checks_only",
+  "base": "cgr.dev/chainguard/python@sha256:89281daac77a3d91ef298d70ce3b7a6ccb2ebf268c084fa9a9bda1c92e71c64d",
+  "checked_at": "2026-10-02T15:18:19.077497+00:00",
+  "signature_identity": "https://github.com/chainguard-images/images/.github/workflows/release.yaml@refs/heads/main",
+  "signature_issuer": "https://token.actions.githubusercontent.com",
+  "cosign_binary_sha256": "5cf948c2f4dfe59687bdd0b8523709067383e03982cc543475c8a7dc70e92a76",
+  "trivy_archive_sha256": "1caada5e0e2091909357c7525d3aa76f4b660b13821bc143b190c7483e31cc11",
+  "database_sha256": "fc07a783247f127f56453c76baf92eec9573767be8f1c153b57dfc3d2bfff9bf",
+  "original_findings": [
+    {
+      "id": "CVE-2026-97687",
+      "package": "py3-pip-wheel",
+      "installed": "26.2.1-r1",
+      "fixed": "26.2.1-r2",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-97689",
+      "package": "py3-pip-wheel",
+      "installed": "26.2.1-r1",
+      "fixed": "26.2.1-r2",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-97688",
+      "package": "py3-pip-wheel",
+      "installed": "26.2.1-r1",
+      "fixed": "26.2.1-r2",
+      "severity": "MEDIUM"
+    }
+  ],
+  "original_report_sha256": "1e04a62b093f13ce0c327d3c8d4b907b27933906aed8a698470807f901c07595",
+  "platforms": {
+    "amd64": {
+      "gate_evaluation": {
+        "status": "passed",
+        "image_id": "sha256:1ac9a3dcb741d8742ec0cf8d8f2c89b002a3fadb5639b1db162ffe958135a630",
+        "inventories": [
+          {
+            "type": "wolfi",
+            "class": "os-pkgs",
+            "packages": 31,
+            "findings": 0
+          }
+        ],
+        "vulnerability_count": 0,
+        "database_updated_at": "2026-10-02T12:48:00.080865328Z",
+        "database_next_update": "2026-10-03T12:48:00.080864987Z",
+        "policy": "Every detected vulnerability, including unfixed and unknown severity, fails; no suppression files or VEX",
+        "limitations": [
+          "Only detected OS/language packages are covered, not proof of absence of vulnerabilities",
+          "Native Anvil dependencies without embedded inventory remain outside this scan",
+          "Docker daemon, host kernel/VM and arbitrary user code are not audited"
+        ]
+      },
+      "prior_os_count": 26,
+      "current_os_count": 31,
+      "removed_prior_names": [],
+      "added_packages": {
+        "libbrotlicommon1": "1.2.0-r5",
+        "libbrotlidec1": "1.2.0-r5",
+        "libbrotlienc1": "1.2.0-r5",
+        "openssl-4.0-libcrypto": "4.0.3-r1",
+        "openssl-4.0-libssl": "4.0.3-r1"
+      },
+      "changed_versions": {
+        "ca-certificates-bundle": [
+          "20260611-r1",
+          "20260909-r2"
+        ],
+        "glibc-2.44": [
+          "2.44-r6",
+          "2.44-r7"
+        ],
+        "glibc-2.44-locale-posix": [
+          "2.44-r6",
+          "2.44-r7"
+        ],
+        "ld-linux-2.44": [
+          "2.44-r6",
+          "2.44-r7"
+        ],
+        "libcrypto3": [
+          "3.6.4-r7",
+          "3.6.5-r1"
+        ],
+        "libexpat1": [
+          "2.8.4-r0",
+          "2.8.5-r0"
+        ],
+        "libssl3": [
+          "3.6.4-r7",
+          "3.6.5-r1"
+        ],
+        "libuuid": [
+          "2.42.3-r4",
+          "2.42.4-r0"
+        ],
+        "ncurses": [
+          "6.6.20260912-r0",
+          "6.6.20260926-r0"
+        ],
+        "ncurses-terminfo-base": [
+          "6.6.20260912-r0",
+          "6.6.20260926-r0"
+        ],
+        "py3-pip-wheel": [
+          "26.2.1-r1",
+          "26.2.1-r2"
+        ],
+        "python-3.14": [
+          "3.14.7_git20260918-r0",
+          "3.14.8_git20261001-r0"
+        ],
+        "python-3.14-base": [
+          "3.14.7_git20260918-r0",
+          "3.14.8_git20261001-r0"
+        ]
+      },
+      "packages": {
+        "ca-certificates-bundle": "20260909-r2",
+        "gdbm": "1.26-r6",
+        "glibc-2.44": "2.44-r7",
+        "glibc-2.44-locale-posix": "2.44-r7",
+        "ld-linux-2.44": "2.44-r7",
+        "libbrotlicommon1": "1.2.0-r5",
+        "libbrotlidec1": "1.2.0-r5",
+        "libbrotlienc1": "1.2.0-r5",
+        "libbz2-1": "1.0.8-r24",
+        "libcrypto3": "3.6.5-r1",
+        "libexpat1": "2.8.5-r0",
+        "libffi": "3.8.0-r1",
+        "libgcc": "16.2.0-r1",
+        "libssl3": "3.6.5-r1",
+        "libstdc++": "16.2.0-r1",
+        "libuuid": "2.42.4-r0",
+        "libzstd1": "1.5.7-r10",
+        "mpdecimal": "4.0.1-r4",
+        "ncurses": "6.6.20260926-r0",
+        "ncurses-terminfo-base": "6.6.20260926-r0",
+        "openssl-4.0-libcrypto": "4.0.3-r1",
+        "openssl-4.0-libssl": "4.0.3-r1",
+        "openssl-provider-legacy-allowed": "4.0.2-r3",
+        "py3-pip-wheel": "26.2.1-r2",
+        "python-3.14": "3.14.8_git20261001-r0",
+        "python-3.14-base": "3.14.8_git20261001-r0",
+        "readline": "8.3-r3",
+        "sqlite-libs": "3.53.4-r2",
+        "wolfi-baselayout": "20230201-r30",
+        "xz": "5.8.4-r0",
+        "zlib": "1.3.2.1_rc20260601-r0"
+      }
+    },
+    "arm64": {
+      "gate_evaluation": {
+        "status": "passed",
+        "image_id": "sha256:df690891bc713d4049cb4efc870e0727b63dee996d875ee613345c897ad66863",
+        "inventories": [
+          {
+            "type": "wolfi",
+            "class": "os-pkgs",
+            "packages": 31,
+            "findings": 0
+          }
+        ],
+        "vulnerability_count": 0,
+        "database_updated_at": "2026-10-02T12:48:00.080865328Z",
+        "database_next_update": "2026-10-03T12:48:00.080864987Z",
+        "policy": "Every detected vulnerability, including unfixed and unknown severity, fails; no suppression files or VEX",
+        "limitations": [
+          "Only detected OS/language packages are covered, not proof of absence of vulnerabilities",
+          "Native Anvil dependencies without embedded inventory remain outside this scan",
+          "Docker daemon, host kernel/VM and arbitrary user code are not audited"
+        ]
+      },
+      "prior_os_count": 26,
+      "current_os_count": 31,
+      "removed_prior_names": [],
+      "added_packages": {
+        "libbrotlicommon1": "1.2.0-r5",
+        "libbrotlidec1": "1.2.0-r5",
+        "libbrotlienc1": "1.2.0-r5",
+        "openssl-4.0-libcrypto": "4.0.3-r1",
+        "openssl-4.0-libssl": "4.0.3-r1"
+      },
+      "changed_versions": {
+        "ca-certificates-bundle": [
+          "20260611-r1",
+          "20260909-r2"
+        ],
+        "glibc-2.44": [
+          "2.44-r6",
+          "2.44-r7"
+        ],
+        "glibc-2.44-locale-posix": [
+          "2.44-r6",
+          "2.44-r7"
+        ],
+        "ld-linux-2.44": [
+          "2.44-r6",
+          "2.44-r7"
+        ],
+        "libcrypto3": [
+          "3.6.4-r7",
+          "3.6.5-r1"
+        ],
+        "libexpat1": [
+          "2.8.4-r0",
+          "2.8.5-r0"
+        ],
+        "libssl3": [
+          "3.6.4-r7",
+          "3.6.5-r1"
+        ],
+        "libuuid": [
+          "2.42.3-r4",
+          "2.42.4-r0"
+        ],
+        "ncurses": [
+          "6.6.20260912-r0",
+          "6.6.20260926-r0"
+        ],
+        "ncurses-terminfo-base": [
+          "6.6.20260912-r0",
+          "6.6.20260926-r0"
+        ],
+        "py3-pip-wheel": [
+          "26.2.1-r1",
+          "26.2.1-r2"
+        ],
+        "python-3.14": [
+          "3.14.7_git20260918-r0",
+          "3.14.8_git20261001-r0"
+        ],
+        "python-3.14-base": [
+          "3.14.7_git20260918-r0",
+          "3.14.8_git20261001-r0"
+        ]
+      },
+      "packages": {
+        "ca-certificates-bundle": "20260909-r2",
+        "gdbm": "1.26-r6",
+        "glibc-2.44": "2.44-r7",
+        "glibc-2.44-locale-posix": "2.44-r7",
+        "ld-linux-2.44": "2.44-r7",
+        "libbrotlicommon1": "1.2.0-r5",
+        "libbrotlidec1": "1.2.0-r5",
+        "libbrotlienc1": "1.2.0-r5",
+        "libbz2-1": "1.0.8-r24",
+        "libcrypto3": "3.6.5-r1",
+        "libexpat1": "2.8.5-r0",
+        "libffi": "3.8.0-r1",
+        "libgcc": "16.2.0-r1",
+        "libssl3": "3.6.5-r1",
+        "libstdc++": "16.2.0-r1",
+        "libuuid": "2.42.4-r0",
+        "libzstd1": "1.5.7-r10",
+        "mpdecimal": "4.0.1-r4",
+        "ncurses": "6.6.20260926-r0",
+        "ncurses-terminfo-base": "6.6.20260926-r0",
+        "openssl-4.0-libcrypto": "4.0.3-r1",
+        "openssl-4.0-libssl": "4.0.3-r1",
+        "openssl-provider-legacy-allowed": "4.0.2-r3",
+        "py3-pip-wheel": "26.2.1-r2",
+        "python-3.14": "3.14.8_git20261001-r0",
+        "python-3.14-base": "3.14.8_git20261001-r0",
+        "readline": "8.3-r3",
+        "sqlite-libs": "3.53.4-r2",
+        "wolfi-baselayout": "20230201-r30",
+        "xz": "5.8.4-r0",
+        "zlib": "1.3.2.1_rc20260601-r0"
+      }
+    }
+  },
+  "scope": [
+    "Actual remote base indexes/config/manifests and both Linux platform full inventories; not a built Entrotter worker scan.",
+    "Existing evaluator/required interpreter/libc/TLS coverage and fresh database checks used unchanged.",
+    "All26 old OS package names retained;5 additions fully inventoried, no finding ignored.",
+    "No local Docker/VM/native Linux execution; Python/Anvil/worker complete runtime compatibility remains mandatory current-head CI.",
+    "Initial anonymous registry401 and cross-host blob redirect400 occurred before corrected discovery; final bytes digest-bound.",
+    "Cosign exact pinned signer/issuer command succeeded; remote scan used empty private scanner config/ignore and minimal environment with empty Docker config.",
+    "Past reports/readiness/runtime/security policy unchanged; no CI/commit/push.",
+    "Initial summary emitted before its own stdout log closed; this final artifact list binds completed logs after terminal. Historical initial summary retained separately."
+  ],
+  "files": {
+    "arm64-manifest.json": "8b2c4096fab058fd44a209fbf3ae83e66d05570fcc2e288971ac816f61f9b6c2",
+    "arm64-packages.json": "7076140b764475aad873cd607cffc5a4c805778522762befe5613da9fcbdfc7c",
+    "discover-corrected.log": "357ba8e2064d790b4d06633a1e0a2e3cab11ca8025927c245974c47a7013e02c",
+    "discover-auth-first.py": "e1539c98a0ccffeb65d93372cce88a6dbb8e4d24ce2ed2c611146e2a2fbed795",
+    "verification-setup-failure.log": "2d1f8ba677287eea22da00ee74d91e97dc2807a7c9572f63817600b1a0201ab5",
+    "signature.log": "6d9c64498e2e5a42a6a11c47aabcf5d6c8fc338e35cdcf5ef365231c2a2ba13d",
+    "py3-pip.yaml": "b32eb02fb9421b13cdf79ca9acb2e70fc04dfde561b6edae98b36562190e68e3",
+    "amd64-manifest.json": "c718c6a5ab1a3721d604dbb95ba21d6f7f45b7b7a18da7a9ceb0ed23f5c7036f",
+    "latest-index.json": "89281daac77a3d91ef298d70ce3b7a6ccb2ebf268c084fa9a9bda1c92e71c64d",
+    "amd64-packages.json": "0e5f82e320f2069be1399ed486141c630b780f2b310824a4237c367424580bca",
+    "ignore": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification-final.log": "493e9792ea81b793c707f7b797e70f61d129b0a3cad45828d3b35f25b8d31a92",
+    "discover.py": "83e050690a3e0f9a3c72d788a6e0fee5ce09ebc5d28bab53821d91ea233c2f1b",
+    "amd64-scanner.log": "beceea4d7fbec138eb749c5d7320fd250c2a2657b649ed87df0637e1d832c54b",
+    "config.yaml": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "discovery.json": "d71fe896b9547c0b72ff1e6a347f542bb9d70bf60a78431672fd16834cc59ed8",
+    "summary-pre-terminal-log-bindings.json": "d3ff3ccb13250c4bdb6289f8000e23cf81a67ee9720fb853167f2da6f1e05083",
+    "amd64-config.json": "1ac9a3dcb741d8742ec0cf8d8f2c89b002a3fadb5639b1db162ffe958135a630",
+    "wolfi-commit.json": "e43043af60293006d74ffd739053a7f96e78195f11b0d6aaad8c23cd4e3c6f63",
+    "arm64-config.json": "df690891bc713d4049cb4efc870e0727b63dee996d875ee613345c897ad66863",
+    "database.json": "ea296dcc7c2cc71b10a40e35bef5a234a1f5393aa5c28e9914bf44623cfff3d6",
+    "arm64-scanner.log": "136cbdf869bc5870095e648faf4198ff7933ec6bc2491a24eaedff74d3ad723e",
+    "candidate.txt": "2db7bd5bc0163d822dd16aef98c05140a7f8ba202c51fb5cb70ba0d8ddfdb4ae",
+    "verify.py": "e564df9567f7bf71aaae58be14d5d6f1e38db50380395b55a20ff3dc0787991b",
+    "verification.log": "2d1f8ba677287eea22da00ee74d91e97dc2807a7c9572f63817600b1a0201ab5",
+    "discover.log": "e37fc27dd8c8fb7a63e2189e439e146dad3c35b2a3edf93305b26b4e2ed6943e",
+    "signature.json": "940f2ecc7612498f63c55259d0eca8dff899377f994ef7eaba05e5dd51c018a7",
+    "discover-initial.py": "11c73aaebaa68241e8823e058b69ba496d47797624f953b25b721fcadb2360f0"
+  },
+  "current_owned_files": {
+    "container/Dockerfile": "2fc42c30c4aac2e760db25c5306def65d294236307bd09348ee8646f83a33fd1",
+    "README.md": "0825ab5ec10f2153e67ab4aac87f20dacbe7f97b6fe5cd7c3ee006da3b09fb42",
+    "STATUS.md": "5751afdb7232e9ad7a3460bc9995ed49b51f05357deec6109eabf6150636326a"
+  }
+}

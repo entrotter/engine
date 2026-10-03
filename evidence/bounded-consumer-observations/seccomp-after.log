@@ -1,0 +1,7 @@
+test_each_worker_requests_builtin_seccomp_independently_of_daemon_default (test_observed_worker.ObservedWorkerProtocolTests.test_each_worker_requests_builtin_seccomp_independently_of_daemon_default) ... ok
+test_kernel_controls_mounts_and_privileges (test_worker.IsolatedWorkerTests.test_kernel_controls_mounts_and_privileges) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.393s
+
+OK

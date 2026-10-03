@@ -78,6 +78,35 @@ jobs:
               raise RuntimeError('Original signed nonce was changed or conflict concealed')
           print(json.dumps({'artifact_id': report['artifact_id'], 'runtime_seconds': report['runtime_seconds'], 'verified_original_receipts': 4, 'nonce_conflicts': 1}))
           PY
+      - name: Read fixed owned Aave/WETH prices through the actual default worker
+        id: mainnet_observed
+        env:
+          ENTROTTER_RPC_URL: https://eth.drpc.org
+        run: |
+          python -m entrotter_engine trace-observe tests/data/canonical-mainnet-prefix.json -o .quality/trace-replay/observed-mainnet-prefix.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from entrotter_engine.consumer_observations import load_observed_trace
+          result = load_observed_trace('.quality/trace-replay/observed-mainnet-prefix.json')
+          plan = json.loads(Path('tests/data/canonical-mainnet-prefix.json').read_text())
+          report = result['trace_report']
+          if report['plan'] != plan or not report['baseline_verified']:
+              raise RuntimeError('Observed worker did not replay the exact pinned plan')
+          if not result['classification']['complete_price_views'] or len(result['observations']) != 4:
+              raise RuntimeError('Fixed historical price views remain unproven; no substitute')
+          receipt = report['baseline']['outcomes'][0]['receipt']
+          if receipt['gasUsed'] != '0x32d10' or len(receipt['logs']) != 8:
+              raise RuntimeError('Observed worker changed the pinned original receipt')
+          print(json.dumps({'artifact_id': result['artifact_id'], 'trace_artifact_id': result['trace_artifact_id'], 'runtime_seconds': report['runtime_seconds'], 'classification': result['classification']}))
+          PY
+      - name: Compare an actual historical Aave debt account through the default worker
+        id: mainnet_position
+        env:
+          ENTROTTER_RPC_URL: https://eth.drpc.org
+        run: |
+          python -m entrotter_engine trace-position tests/data/aave-account-prefix.json -o .quality/trace-replay/aave-position.json
+          python tests_isolated/check_position_result.py .quality/trace-replay/aave-position.json
       - name: Record privacy-safe bounded diagnostics after a historical replay failure
         if: ${{ failure() && (steps.mainnet_one.outcome == 'failure' || steps.mainnet_four.outcome == 'failure') }}
         env:

@@ -1,0 +1,57 @@
+{
+  "status": "passed_no_remaining_actionable_source_findings",
+  "reviewer": "review_cli_agent",
+  "files": {
+    "scripts/build_worker.py": "fe2dd9a1104582758f072413f3d0455397b5dc3f685e4df328cdc44ede9ffef8",
+    "tests/test_worker_build.py": "2e70a20cc7a428b2ce56031a63de725b5ee668dc9d1acebd78712c876d99eeec",
+    "security-reviewed.json": "4246bb3fa23b744d022b17699e7762d9783b6bbe2ec2bc4ec67199f006418aa1",
+    "scripts/check_image_security.py": "e84d1c8d37c33a176706b6cad3fe32c5f3b1f8faf96422f694cc088763ea8261",
+    ".quality/bounded-admission/manifest-final-root-review.json": "14611c622bfebf8fb9be2aec2cd8bd01b3b6c0929aa58deaad2bff44d55d5bd1",
+    ".quality/bounded-admission/manifest-final-bandit.json": "bd1aab2abc2655424ac88e72d813a6a0c21dbfceda58349b13187e91b2ba309b",
+    ".quality/bounded-admission/manifest-final-bandit.log": "82545cad2075b66a954c9474dbda750b66caab3ffdde9e60d9ac5ddac75fc25d",
+    ".quality/bounded-admission/manifest-final-lint.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    ".quality/bounded-admission/manifest-final-format.log": "cdd24684b33e5200a213c89093e8da4cb81a0de0085a4684d20923e852610123",
+    ".quality/bounded-admission/manifest-final-types.log": "5107f9446510710cfc458474a6bae8746bf7ed9a2bccb85b1de3b0a14e84c8ad",
+    ".quality/bounded-admission/base-manifest-before.log": "b10c844b72a80b77de84aacf2f1bbe73326d5d4f38c6ef5a5bf4bc4c47e73b12",
+    ".quality/bounded-admission/base-manifest-after.log": "dced0dd5af9ea10b1215f64b745810e10491080db3fa69915dfe09f1edf07074",
+    ".quality/bounded-admission/base-continuation-before.log": "4bf5309172237f9bb2a5ea0a0d5e8fe1424a3dcf9638d696693c50c191a93996",
+    ".quality/bounded-admission/base-continuation-after.log": "cc41eaca9a4373d1b47a06329531a7e6d07756fd5228331e4da535d43eb05585",
+    ".quality/bounded-admission/manifest-audit-controls.log": "bb07618a42383e6282214393dd84c9595137c8497772e604460b6a483eac0c60",
+    ".quality/bounded-admission/child-ci-isolated-7b50-cause-review.json": "995af1b362fc6735017736b47e0340a9a0162261a68b1fc1487a1cf72d8ae19e"
+  },
+  "source": "fe2dd9a1104582758f072413f3d0455397b5dc3f685e4df328cdc44ede9ffef8",
+  "test": "2e70a20cc7a428b2ce56031a63de725b5ee668dc9d1acebd78712c876d99eeec",
+  "policy": "4246bb3fa23b744d022b17699e7762d9783b6bbe2ec2bc4ec67199f006418aa1",
+  "resolved_findings": [
+    {
+      "priority": 2,
+      "scope": "Actual7b50CI defect",
+      "resolution": "Manifestbase derived from exactcopiedDockerfile, matching unchangedstrictauditguard instead of hardcodedold011base."
+    },
+    {
+      "priority": 3,
+      "scope": "Fixed-profile prelaunchlogicalinstruction ambiguity",
+      "resolution": "Conservatively reject all continuedphysical lines; source/testrecordsbefore1failure/after2basecontrolsPASS; no actualDockerparseracceptance claimed."
+    }
+  ],
+  "review": [
+    "Copiedbase parsed beforeDockerbuild and samecopiedfile contributes sourcehash/source_digest. ActualimmutablecgrPython64lowercasehex returned tobase_image; exactcurrent firstline conforms.",
+    "SinglephysicalFROM count plus backslashcontinuation refusal admits only fixedflatfirstline shape; floatingrefs/wrongrepo/nonhex/alias/multistage/ARG-leading/empty/splitFROM8variants reject beforeDockerbuild ormanifestoutput.",
+    "Validcurrent/changedpin scenarios execute realtinyhashverifiedtar extraction/contextcopy/hashes/manifest; onlydaemonidentity/Dockercommand/releaseidentity simulated. No arbitraryplanmethod/import/URL/runtimefeature added.",
+    "Every18originalbuildtestmethod AST unchanged; only newhelper+2methods added. Existingimageaudit/source/imageID/Cosignissuer/signer/allseverity/currentDB/fullinventory/findingfailure guards unchanged.",
+    "Latestactualrawfullscan26sources/25exactfingerprints/codehashes and originalrationales/0nosec/0skip/0error verified; onlybuilder sourcebinding changed, finallint/format/types26 logs pass."
+  ],
+  "author_evidence_scope": {
+    "metadata_regression": "Before1method2variant failures; prefinalwhole20tests5.094sPASS.",
+    "continued_shape_control": "NewsplitFROMnegativebefore1failure0.054s; finalbothbase2methods0.075sPASS.",
+    "existing_audit_controls": "7negativeauditcontrolsPASS0.005s; no newrealimage scan.",
+    "fullsuite": "Historical354local/7b50 remainsimmutable, currentexpected356not locallyexecuted; freshmandatory8CI stillpending.",
+    "reviewer_execution": "No tests/network/scanner/runtime/CI rerun/source/docs modifications; source/Git/AST/hash/rawreport inspection only."
+  },
+  "limitations": [
+    "Original7b50kernel25/default1+4passed butimage/nativeCargoaudit incomplete; newbuilderfix has notyet achieved freshall8CI.",
+    "No retrospectiveolderunknown352cleanup/Linuxnoncecause inferred; no runtimequota/state/header/receipt repair.",
+    "One concurrentsourcechange interrupted an initial reviewerhash assertion beforeanyreviewresultwrite; finalrecordbinds finalheldfe2/2e70/4246 and bd1 rawscan.",
+    "No mainhumanapproval/merge/deployment/historical32supportedexecution/goalcompletion claim."
+  ]
+}

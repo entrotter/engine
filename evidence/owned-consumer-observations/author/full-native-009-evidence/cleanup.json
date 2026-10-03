@@ -1,0 +1,142 @@
+{
+  "source_guardian_reaped": true,
+  "source_group_and_port_closed": true,
+  "proxy_thread_and_port_closed": true,
+  "replay_runs": [
+    {
+      "case": "test_actual_missing_aave_code_reads_unproven_without_replay_fallback",
+      "stop_phase": null,
+      "anvil_groups_ports_reaped": 2,
+      "cache_groups_ports_pipes_reaped": 1,
+      "cache_stats": [
+        {
+          "requests": 111,
+          "upstream": 49,
+          "hits": 56,
+          "entries": 23,
+          "bytes": 6396,
+          "uncached": 6,
+          "errors": 27,
+          "refused_handlers": 0
+        }
+      ]
+    },
+    {
+      "case": "test_actual_sigterm_before_after_and_candidate_stop_cleanup",
+      "stop_phase": [
+        "baseline",
+        "before"
+      ],
+      "anvil_groups_ports_reaped": 1,
+      "cache_groups_ports_pipes_reaped": 1,
+      "cache_stats": [
+        {
+          "requests": 7,
+          "upstream": 5,
+          "hits": 0,
+          "entries": 2,
+          "bytes": 3167,
+          "uncached": 3,
+          "errors": 2,
+          "refused_handlers": 0
+        }
+      ]
+    },
+    {
+      "case": "test_actual_sigterm_before_after_and_candidate_stop_cleanup",
+      "stop_phase": [
+        "baseline",
+        "after"
+      ],
+      "anvil_groups_ports_reaped": 1,
+      "cache_groups_ports_pipes_reaped": 1,
+      "cache_stats": [
+        {
+          "requests": 33,
+          "upstream": 30,
+          "hits": 0,
+          "entries": 27,
+          "bytes": 7669,
+          "uncached": 3,
+          "errors": 3,
+          "refused_handlers": 0
+        }
+      ]
+    },
+    {
+      "case": "test_actual_sigterm_before_after_and_candidate_stop_cleanup",
+      "stop_phase": [
+        "candidate",
+        "after"
+      ],
+      "anvil_groups_ports_reaped": 2,
+      "cache_groups_ports_pipes_reaped": 1,
+      "cache_stats": [
+        {
+          "requests": 63,
+          "upstream": 33,
+          "hits": 24,
+          "entries": 27,
+          "bytes": 7669,
+          "uncached": 6,
+          "errors": 7,
+          "refused_handlers": 0
+        }
+      ]
+    },
+    {
+      "case": "test_real_no_omission_reads_complete_with_zero_price_difference",
+      "stop_phase": null,
+      "anvil_groups_ports_reaped": 2,
+      "cache_groups_ports_pipes_reaped": 1,
+      "cache_stats": [
+        {
+          "requests": 66,
+          "upstream": 33,
+          "hits": 27,
+          "entries": 27,
+          "bytes": 7669,
+          "uncached": 6,
+          "errors": 6,
+          "refused_handlers": 0
+        }
+      ]
+    },
+    {
+      "case": "test_real_paired_receipts_price_effect_and_exact_original_source",
+      "stop_phase": null,
+      "anvil_groups_ports_reaped": 2,
+      "cache_groups_ports_pipes_reaped": 1,
+      "cache_stats": [
+        {
+          "requests": 63,
+          "upstream": 33,
+          "hits": 24,
+          "entries": 27,
+          "bytes": 7669,
+          "uncached": 6,
+          "errors": 6,
+          "refused_handlers": 0
+        }
+      ]
+    },
+    {
+      "case": "test_sealing_stop_occurs_after_real_owned_cleanup",
+      "stop_phase": null,
+      "anvil_groups_ports_reaped": 2,
+      "cache_groups_ports_pipes_reaped": 1,
+      "cache_stats": [
+        {
+          "requests": 63,
+          "upstream": 33,
+          "hits": 24,
+          "entries": 27,
+          "bytes": 7669,
+          "uncached": 6,
+          "errors": 6,
+          "refused_handlers": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+test_image_manifest_records_actual_copied_immutable_base (test_worker_build.WorkerBuildTests.test_image_manifest_records_actual_copied_immutable_base) ... 
+  test_image_manifest_records_actual_copied_immutable_base (test_worker_build.WorkerBuildTests.test_image_manifest_records_actual_copied_immutable_base) (base='FROM cgr.dev/chainguard/python@sha256:89281daac77a3d91ef298d70ce3b7a6ccb2ebf268c084fa9a9bda1c92e71c64d') ... FAIL
+  test_image_manifest_records_actual_copied_immutable_base (test_worker_build.WorkerBuildTests.test_image_manifest_records_actual_copied_immutable_base) (base='FROM cgr.dev/chainguard/python@sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb') ... FAIL
+
+======================================================================
+FAIL: test_image_manifest_records_actual_copied_immutable_base (test_worker_build.WorkerBuildTests.test_image_manifest_records_actual_copied_immutable_base) (base='FROM cgr.dev/chainguard/python@sha256:89281daac77a3d91ef298d70ce3b7a6ccb2ebf268c084fa9a9bda1c92e71c64d')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$WORKSPACE_ROOT/.worktrees/engine-consumer-observations/tests/test_worker_build.py", line 72, in test_image_manifest_records_actual_copied_immutable_base
+    self.assertEqual(result['base_image'],dockerfile.splitlines()[0].split()[1])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'cgr.[24 chars]a256:011e73b4e30e0fe9407a42b82a920b4fa13ebc0bf[19 chars]ca20' != 'cgr.[24 chars]a256:89281daac77a3d91ef298d70ce3b7a6ccb2ebf268[19 chars]c64d'
+- cgr.dev/chainguard/python@sha256:011e73b4e30e0fe9407a42b82a920b4fa13ebc0bf029a48b714f950df254ca20
++ cgr.dev/chainguard/python@sha256:89281daac77a3d91ef298d70ce3b7a6ccb2ebf268c084fa9a9bda1c92e71c64d
+
+
+======================================================================
+FAIL: test_image_manifest_records_actual_copied_immutable_base (test_worker_build.WorkerBuildTests.test_image_manifest_records_actual_copied_immutable_base) (base='FROM cgr.dev/chainguard/python@sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$WORKSPACE_ROOT/.worktrees/engine-consumer-observations/tests/test_worker_build.py", line 72, in test_image_manifest_records_actual_copied_immutable_base
+    self.assertEqual(result['base_image'],dockerfile.splitlines()[0].split()[1])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'cgr.[24 chars]a256:011e73b4e30e0fe9407a42b82a920b4fa13ebc0bf[19 chars]ca20' != 'cgr.[24 chars]a256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb[19 chars]bbbb'
+- cgr.dev/chainguard/python@sha256:011e73b4e30e0fe9407a42b82a920b4fa13ebc0bf029a48b714f950df254ca20
++ cgr.dev/chainguard/python@sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.023s
+
+FAILED (failures=2)

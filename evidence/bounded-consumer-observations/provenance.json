@@ -1,0 +1,181 @@
+{
+  "base_commit": "40bea57e25ab94c0d0f6136b4c3a5af4a99e6a1d",
+  "scope": "Current uncommitted reviewed candidate; actual source hashes bind execution, final commit in existing PR35",
+  "sources_sha256": {
+    "src/entrotter_engine/fixture.py": "1f771e23c8b8311bf1f5e9cc56bf30f7b369f8f617513d99024876688e809647",
+    "src/entrotter_engine/store.py": "25a6b9fe252cd0c8eef00ce5c3eb869d3a54044b00e9a67653a5c00b41749b3b",
+    "src/entrotter_engine/trace.py": "809bc631b0e8f7394e3a1185d54dd6100cb6cfffd6957de253688072e41bd033",
+    "src/entrotter_engine/runner.py": "d483df0825e3185548e68d6ead02d9e3fb89d8a12d9b0134b04b1a6a57d4d3df",
+    "src/entrotter_engine/export_budget.py": "2bebd29413cb86bf25acdc108d87b3f13a3ecd6ed447cd04a86a4e6a9e28614f",
+    "src/entrotter_engine/evm.py": "1ec41f147a517c4372bdf72fb5763bde1adc3075e462786ba656ff87c26dba55",
+    "src/entrotter_engine/artifact.py": "a76cfe6d83e28f2f15ef7fb4f9b06dc5c5d51db0c89c7fa9c9e627161527787c",
+    "src/entrotter_engine/models.py": "80de1f5ab1e52f9dd00c0f3deaa3ea1a16a0ae159eab50c0a130a2431084b7e7",
+    "src/entrotter_engine/_parent_cache.py": "56844c41bfdab2ec43e741942726b88af95702806a2a8be1476f873deb1b90da",
+    "src/entrotter_engine/isolated.py": "90dce7bedd0a2f2f57478f484f868d049cc6440427a2edff744ce8badf80973d",
+    "src/entrotter_engine/__init__.py": "11f3961a518c3a40429472d8582270a306114419f588008729d8759d8da83db6",
+    "src/entrotter_engine/api.py": "cab74cd6a4e62230e5d6ce5c386a341e290fb1658ba8fc75892d02f859ebae3c",
+    "src/entrotter_engine/rpc.py": "3e3f9c593d3a26a483c4f8f1e220bd32f959b4e87def846868b7491e70312a52",
+    "src/entrotter_engine/consumer_observations.py": "6b5abfa00998244c0e639e38763b8594167fc7403bfe84bf8614adfcc3702711",
+    "src/entrotter_engine/agent.py": "de16734bc3a9dac08d51efc7721bf5bb0c0671266df8883910dc0ac64374a01c",
+    "src/entrotter_engine/_guardian.py": "3758412adb3e8761a3c82eac89cbf5a72bac7d0dad5c492a6825b4bb2a5f9ddf",
+    "src/entrotter_engine/defi.py": "f4f5e6e50ad3745426c7d0fbc08b5fa42c79fd4daa225667821814f95acb7fde",
+    "src/entrotter_engine/parent_cache.py": "73ba002c6cce32a8a7acd6580aa432af3ebdb5aa292432f7751dbd35ac080706",
+    "src/entrotter_engine/__main__.py": "f70d068680040ca780e764b1794e6ad5e94100224c9d4d1ea1954c27a8802cd2",
+    "src/entrotter_engine/worker_protocol.py": "d258d3ae5ceb7c55f45f1b0ec5dc12f7df25b2c25a0836458f40879c2b697973",
+    "src/entrotter_engine/_isolated_worker.py": "c5e72f5bd1dc12644f384b4dee9440b907cf7b1e2289ef7af9733b70e48dd794",
+    "scripts/check_image_security.py": "e84d1c8d37c33a176706b6cad3fe32c5f3b1f8faf96422f694cc088763ea8261",
+    "scripts/check_dependency_manifest.py": "d9c90b75f8c26ef0aa3723ab07580f05c7391a78ef12fcf20b99e80ef198deef",
+    "scripts/build_worker.py": "fe2dd9a1104582758f072413f3d0455397b5dc3f685e4df328cdc44ede9ffef8",
+    "scripts/check_native_security.py": "f32a97e5c0b7fd3cd611d31f83dc98c5150b0ec6249669ac2ad17d8ca5f4c29d",
+    "scripts/check_security.py": "515db8c5988e21ff3910e93cb08c8f53dec3ce557d6a5a09377583f4fb6fe1a7"
+  },
+  "files": [
+    {
+      "file": "observed-trace.json",
+      "source": ".quality/observed-worker-32-002/observed-trace.json",
+      "bytes": 659504,
+      "sha256": "724c3786efa78f666725022955c4df53b1c22458241f8ae994e5875d690da0d1",
+      "exact_copy": true
+    },
+    {
+      "file": "historical-result.json",
+      "source": ".quality/observed-worker-32-002/result.json",
+      "bytes": 1203,
+      "sha256": "7200a7a378b9a8a4cf0a7868a4eb8b20328d9f4aafb77502a6af4284f5d2930f",
+      "exact_copy": true
+    },
+    {
+      "file": "comparison.json",
+      "source": ".quality/observed-worker-32-002/comparison.json",
+      "bytes": 313,
+      "sha256": "d2945063f4efa1cc681c44aace7db4387c9b448e4f46fdbabb083147a33f3dfc",
+      "exact_copy": true
+    },
+    {
+      "file": "cli-inspect.json",
+      "source": ".quality/observed-worker-32-002/cli-inspect.json",
+      "bytes": 4918,
+      "sha256": "0adb73539e976d3dda1194678d1ac987df7eaf61018b7bf8b5fa36d6b2096e14",
+      "exact_copy": true
+    },
+    {
+      "file": "cli-verify.json",
+      "source": ".quality/observed-worker-32-002/cli-verify.json",
+      "bytes": 798,
+      "sha256": "1a2ffcd918416b3d189dc57bf1926df3c445d61d81b0e023b907594de22e8602",
+      "exact_copy": true
+    },
+    {
+      "file": "image.json",
+      "source": ".quality/observed-worker-image-seccomp.json",
+      "bytes": 2511,
+      "sha256": "9415ec98ca414a779d1590f2878166cca89666f6b0292f7f738a45b8d9808877",
+      "exact_copy": true
+    },
+    {
+      "file": "native.log",
+      "source": ".quality/observed-worker-full-native-retry.log",
+      "bytes": 54002,
+      "sha256": "8d4c16eaf60c9871464f1b91083d1a0380b5eafc1e2403cf5f275f5f5e80cf95",
+      "exact_copy": true
+    },
+    {
+      "file": "docker.log",
+      "source": ".quality/observed-worker-full-docker-final.log",
+      "bytes": 4149,
+      "sha256": "935dfaf3c5c609955937bf790df6abdc36bbf78dc92052717ea597d75a759370",
+      "exact_copy": true
+    },
+    {
+      "file": "security.json",
+      "source": ".quality/observed-worker-bandit-current.json",
+      "bytes": 37460,
+      "sha256": "b9c58087766a4ec424780a87cc956d8d48940e86b84bce4221ccd83380a54e4b",
+      "exact_copy": true
+    },
+    {
+      "file": "security.log",
+      "source": ".quality/observed-worker-security-current.log",
+      "bytes": 117,
+      "sha256": "917e834f5fbc0d85df52527550a6fc7250ec4a88e9a33854c7408e35ef9a0fff",
+      "exact_copy": true
+    },
+    {
+      "file": "types.log",
+      "source": ".quality/observed-worker-types-final.log",
+      "bytes": 44,
+      "sha256": "5107f9446510710cfc458474a6bae8746bf7ed9a2bccb85b1de3b0a14e84c8ad",
+      "exact_copy": true
+    },
+    {
+      "file": "lint.log",
+      "source": ".quality/observed-worker-lint-final.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "exact_copy": true
+    },
+    {
+      "file": "format.log",
+      "source": ".quality/observed-worker-format-final.log",
+      "bytes": 27,
+      "sha256": "cdd24684b33e5200a213c89093e8da4cb81a0de0085a4684d20923e852610123",
+      "exact_copy": true
+    },
+    {
+      "file": "dependencies.json",
+      "source": ".quality/observed-worker-dependencies.json",
+      "bytes": 2436,
+      "sha256": "d38e5abe49c1c04eec653478382ae28562b91c03738bcabdf560e1c7bf09ca39",
+      "exact_copy": true
+    },
+    {
+      "file": "dependency-manifest.log",
+      "source": ".quality/observed-worker-dependency-manifest.log",
+      "bytes": 104,
+      "sha256": "27179731f19ca8ffdf626ce4b657f3c8c8511e24218e2b01b8586e7536e34e94",
+      "exact_copy": true
+    },
+    {
+      "file": "seccomp-after.log",
+      "source": ".quality/observed-worker-seccomp-after.log",
+      "bytes": 431,
+      "sha256": "81d82601ecbaecd3bc64d31f02109d900dfdd4ff4ff834cff7ad1cb9023868bb",
+      "exact_copy": true
+    }
+  ],
+  "private_prior_outcomes": [
+    {
+      "file": ".quality/observed-worker-seccomp-before.log",
+      "sha256": "f58a8cfc35d7d3d72974014804d361a82b8c40d38d37762fac2eecffc240b100"
+    },
+    {
+      "file": ".quality/observed-worker-full-native-current.log",
+      "sha256": "195820c83e36ae967314b92c43b65d8d71557d29d6c6341b91da848631fe9c9c"
+    },
+    {
+      "file": ".quality/observed-worker-metadata-focused.log",
+      "sha256": "e5d0e07a4e9fffc5ffe6b81ee534f796e37bc9de750f1f324b14d737c0d8b3f0"
+    },
+    {
+      "file": ".quality/observed-worker-full-docker.log",
+      "sha256": "14830b96e8b4a77559e6aa556fcc8f65e1b358f0d9717de939887e69c1eaa4f1"
+    },
+    {
+      "file": ".quality/observed-worker-kernel-diagnostic.log",
+      "sha256": "c9c0b2573f6050fccddbe726a138818f37bb7eda36b8094d9c12be372de53b6c"
+    },
+    {
+      "file": ".quality/observed-worker-32/result.json",
+      "sha256": "117717e005f5a67ae5c0fe52711b52c034d9a4f93e551e247b328b176697a4a8"
+    }
+  ],
+  "limits": [
+    "Original32 partial block, not full block/root/opcode/provider-authentication or signed consumer strategy/profit proof.",
+    "Recorded elapsed timings from one configured running Docker/archive-provider invocation; not a performance comparison or availability guarantee.",
+    "Native366 current first attempt had one macOS PermissionError in unchanged owned metadata process-group cleanup; focused target and unchanged-source full retry passed; root cause not established. Failed run retained privately.",
+    "InitialDocker26 had4 failures:3Anvil1.6-vs1.8.3 native comparison/environment mismatches and daemon unconfined seccomp. Fixed host tool selection and explicit per-container builtinseccomp; all assertions retained.",
+    "Prior32 admission was rejected by the deliberate active lifetime-test slot; no worker/RPC execution occurred. Only one executed32 attempt is claimed.",
+    "Worker image is local/not published. Native/OS package inventory sources unchanged; no fresh image OS/Cargo advisory claim here until required current-head CI.",
+    "Main approval, coordinator promotion, live Pages and formal submission remain separate."
+  ]
+}

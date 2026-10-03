@@ -1,0 +1,71 @@
+{
+  "status": "independent_source_local_native_security_packaging_review_pass_public_CI_pending",
+  "parent": "bd5527f71d3c561335e7786b6f4421572cd9aad6",
+  "author_final_checkpoint_sha256": "a338fa7acd1499e2cbcca60c5d7eaa6e075090028e74365bc3587195343bbf13",
+  "source_inputs": 60,
+  "frozen_copy_count": 58,
+  "two_internal_watchdog_originals_bound_separately": [
+    ".quality/owned-consumer-observations/full-native-runner-007.py",
+    ".quality/owned-consumer-observations/full-native-runner-009.py"
+  ],
+  "evidence_inputs": 52,
+  "source_changed": [
+    "src/entrotter_engine/trace.py",
+    "src/entrotter_engine/consumer_observations.py",
+    "src/entrotter_engine/__main__.py"
+  ],
+  "source_all_other23_production_files_unchanged": true,
+  "native_current": {
+    "tests": 349,
+    "seconds": 80.699,
+    "skips": 0,
+    "failures": 0,
+    "errors": 0,
+    "scope": "single authorized retry; all60 prelaunch hashes unchanged until terminal; no instrumentation"
+  },
+  "initial_full_failure": {
+    "tests": 349,
+    "seconds": 205.173,
+    "failures": 1,
+    "errors": 1,
+    "original_cause": "unknown"
+  },
+  "original_failure_cause": "unknown; isolated instrumented2pass and plain full349pass do not establish a cause or retrospective correction",
+  "new_test_methods": 26,
+  "actual_owned_synthetic_methods": 6,
+  "source_scan_count": 26,
+  "retained_unsuppressed_findings": 25,
+  "finding_rationales_unchanged": true,
+  "wheel_module_count": 21,
+  "wheel_sha256": "077a2bab36860c9de49d1759c7c6bcb7636ed13d008ce185bdc5424c182453f6",
+  "review_findings": [
+    {
+      "priority": 2,
+      "issue": "Future feed timestamps could claim complete views",
+      "resolution": "feed_timestamp_unproven; raw retained; resealed complete contradiction refused, honest unproven accepted; full349 passes"
+    },
+    {
+      "priority": 3,
+      "issue": "Stale wording implied absent max-age policy",
+      "resolution": "README explicitly distinguishes metadata time consistency from absent max-age policy"
+    }
+  ],
+  "inspection_scope": [
+    "Fixed9readonly methods per4phase on internallyowned RPC; exact36maximum and2s/currentremaining deadline; no callercallback/code/endpoint selector.",
+    "Separate strict content-bound version0.1 wrapper preserves nested trace/plan/source; legacy public commands/defaultworker/HTTP envelopes unchanged.",
+    "SIGTERM/ALRM and BaseException stops propagate through owned Anvil/cache cleanup; handlers/timer restored; no candidate continuation or export after stop.",
+    "RawfixedABI/code64KiB and observation64KiB, wrapper/export8MiB with sharedledger; immutabletransport4MiB+1/reject4MiB.",
+    "Initialhead number/hash/time and decodedviews compared; post number/time source bound; source/aggregator/code stable; complete reads separate from historical receipt verification/zero price difference."
+  ],
+  "limits": [
+    "No archive/model/paid/Docker/browser calls, commit/push/CI or human GitHub approval",
+    "Current wheel010 supersedes stale pre-future-time wheel004; originals retained",
+    "Supported workflow historical32-input execution remains unperformed; previous native006 research remains separate",
+    "POSIX main-thread trusted-native fixed profile only; no default worker/HTTP observation envelope",
+    "150-second signal guard covers replay/owned cleanup, not later seal/export or whole-command sandbox",
+    "No max-age freshness policy, provider authentication, signed historical consumer strategy, benefit/profit/full-G1 claim",
+    "All raw failure logs remain immutable; successful retry does not retrospectively classify original failures",
+    "Root inspected actual test/probe source and bound result bytes; root did not repeat native suite or independently resignal unknown process groups.",
+    "No signed historical consumer/strategy/profit/fullblock/provider authenticity, Docker observation support or historical execution of newCLI claim."
+  ]
+}

@@ -1,0 +1,8 @@
+test_actual_sigterm_before_after_and_candidate_stop_cleanup (test_consumer_observations_evm.ConsumerObservationEVMTests.test_actual_sigterm_before_after_and_candidate_stop_cleanup) ... ok
+test_real_cli_exports_verified_wrapper (test_consumer_observations_evm.ConsumerObservationEVMTests.test_real_cli_exports_verified_wrapper) ... ok
+test_real_paired_receipts_price_effect_and_exact_original_source (test_consumer_observations_evm.ConsumerObservationEVMTests.test_real_paired_receipts_price_effect_and_exact_original_source) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.558s
+
+OK

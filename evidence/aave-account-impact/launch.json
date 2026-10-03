@@ -1,0 +1,33 @@
+{
+  "plan_sha256": "a81b76e88be91d3ac756b1fa0dd98e4181e123542f206916e279ef395eadd2bb",
+  "image_id": "sha256:2a0f2bc417193b158ef24247d6bb9af8fa52572fa8b61a8e3a0942e95fc50d25",
+  "source_digest": "2af2329abdf190ab7d1a4135b171ee805940a4a7c486a23acaff5b9c5d815b27",
+  "source_files": {
+    "fixture.py": "1f771e23c8b8311bf1f5e9cc56bf30f7b369f8f617513d99024876688e809647",
+    "store.py": "25a6b9fe252cd0c8eef00ce5c3eb869d3a54044b00e9a67653a5c00b41749b3b",
+    "trace.py": "cd3549e8e93708cf5ac20814de49f57552a1886ab6378084cdb7772df74c0ef4",
+    "runner.py": "d483df0825e3185548e68d6ead02d9e3fb89d8a12d9b0134b04b1a6a57d4d3df",
+    "export_budget.py": "2bebd29413cb86bf25acdc108d87b3f13a3ecd6ed447cd04a86a4e6a9e28614f",
+    "evm.py": "1ec41f147a517c4372bdf72fb5763bde1adc3075e462786ba656ff87c26dba55",
+    "artifact.py": "a76cfe6d83e28f2f15ef7fb4f9b06dc5c5d51db0c89c7fa9c9e627161527787c",
+    "models.py": "80de1f5ab1e52f9dd00c0f3deaa3ea1a16a0ae159eab50c0a130a2431084b7e7",
+    "position_observations.py": "0f4608b8a86fdbda3436beb4e109be7f5ebdc156208ecd55de7c4a851cdad7ee",
+    "_parent_cache.py": "56844c41bfdab2ec43e741942726b88af95702806a2a8be1476f873deb1b90da",
+    "isolated.py": "cd74fcc8912561a3d140056b42561109ca891e2bd576466c9266b14d0dc0a120",
+    "__init__.py": "11f3961a518c3a40429472d8582270a306114419f588008729d8759d8da83db6",
+    "api.py": "cab74cd6a4e62230e5d6ce5c386a341e290fb1658ba8fc75892d02f859ebae3c",
+    "rpc.py": "3e3f9c593d3a26a483c4f8f1e220bd32f959b4e87def846868b7491e70312a52",
+    "consumer_observations.py": "6b5abfa00998244c0e639e38763b8594167fc7403bfe84bf8614adfcc3702711",
+    "agent.py": "de16734bc3a9dac08d51efc7721bf5bb0c0671266df8883910dc0ac64374a01c",
+    "_guardian.py": "3758412adb3e8761a3c82eac89cbf5a72bac7d0dad5c492a6825b4bb2a5f9ddf",
+    "defi.py": "f4f5e6e50ad3745426c7d0fbc08b5fa42c79fd4daa225667821814f95acb7fde",
+    "parent_cache.py": "73ba002c6cce32a8a7acd6580aa432af3ebdb5aa292432f7751dbd35ac080706",
+    "__main__.py": "ae2dc0c82d302e3ed27275510fbc5df59cdfef9b2487c3f9d6acd7f046b981d4",
+    "worker_protocol.py": "9633b0234322fe5e755eada3bba15033cc70b53db96b87a2b1686d99795aa62e",
+    "_isolated_worker.py": "c5e72f5bd1dc12644f384b4dee9440b907cf7b1e2289ef7af9733b70e48dd794",
+    "Dockerfile": "2fc42c30c4aac2e760db25c5306def65d294236307bd09348ee8646f83a33fd1"
+  },
+  "python": "3.13.0 (v3.13.0:60403a5409f, Oct  7 2024, 00:37:40) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "mode": "default bounded Docker, no fallback",
+  "scope": "13 original inputs/skip12; no new signatures/funding; local configuredDocker/possiblywarm image caches"
+}

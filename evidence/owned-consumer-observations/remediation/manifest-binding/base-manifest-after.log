@@ -1,0 +1,40 @@
+test_blocked_download_obeys_whole_build_budget_and_preserves_manifest (test_worker_build.WorkerBuildTests.test_blocked_download_obeys_whole_build_budget_and_preserves_manifest) ... ok
+test_corrupt_archive_is_rejected (test_worker_build.WorkerBuildTests.test_corrupt_archive_is_rejected) ... ok
+test_deadline_checks_after_slow_read_before_writing (test_worker_build.WorkerBuildTests.test_deadline_checks_after_slow_read_before_writing) ... ok
+test_early_failed_job_reaps_watchdog_before_signal_initialization (test_worker_build.WorkerBuildTests.test_early_failed_job_reaps_watchdog_before_signal_initialization) ... ok
+test_endless_output_is_bounded_and_whole_deadline_cleans_session (test_worker_build.WorkerBuildTests.test_endless_output_is_bounded_and_whole_deadline_cleans_session) ... ok
+test_endless_stream_cannot_fill_disk_or_request_unbounded_reads (test_worker_build.WorkerBuildTests.test_endless_stream_cannot_fill_disk_or_request_unbounded_reads) ... ok
+test_exact_limit_is_accepted_and_hash_is_preserved (test_worker_build.WorkerBuildTests.test_exact_limit_is_accepted_and_hash_is_preserved) ... ok
+test_fifo_without_writer_rejects_without_hanging (test_worker_build.WorkerBuildTests.test_fifo_without_writer_rejects_without_hanging) ... ok
+test_image_manifest_records_actual_copied_immutable_base (test_worker_build.WorkerBuildTests.test_image_manifest_records_actual_copied_immutable_base) ... ok
+test_invalid_budgets_are_rejected_before_allocating_resources (test_worker_build.WorkerBuildTests.test_invalid_budgets_are_rejected_before_allocating_resources) ... usage: build_worker [-h] [--archive ARCHIVE] [--output OUTPUT]
+                    [--timeout-seconds TIMEOUT_SECONDS]
+build_worker: error: --timeout-seconds must be greater than zero and at most 600
+usage: build_worker [-h] [--archive ARCHIVE] [--output OUTPUT]
+                    [--timeout-seconds TIMEOUT_SECONDS]
+build_worker: error: --timeout-seconds must be greater than zero and at most 600
+usage: build_worker [-h] [--archive ARCHIVE] [--output OUTPUT]
+                    [--timeout-seconds TIMEOUT_SECONDS]
+build_worker: error: --timeout-seconds must be greater than zero and at most 600
+usage: build_worker [-h] [--archive ARCHIVE] [--output OUTPUT]
+                    [--timeout-seconds TIMEOUT_SECONDS]
+build_worker: error: --timeout-seconds must be greater than zero and at most 600
+usage: build_worker [-h] [--archive ARCHIVE] [--output OUTPUT]
+                    [--timeout-seconds TIMEOUT_SECONDS]
+build_worker: error: --timeout-seconds must be greater than zero and at most 600
+ok
+test_local_regular_file_is_streamed_without_read_bytes (test_worker_build.WorkerBuildTests.test_local_regular_file_is_streamed_without_read_bytes) ... ok
+test_manifest_failure_preserves_prior_bytes_without_temporary_files (test_worker_build.WorkerBuildTests.test_manifest_failure_preserves_prior_bytes_without_temporary_files) ... ok
+test_native_block_cannot_delay_the_supervised_deadline (test_worker_build.WorkerBuildTests.test_native_block_cannot_delay_the_supervised_deadline) ... ok
+test_noisy_command_has_bounded_diagnostics_and_preserves_failure (test_worker_build.WorkerBuildTests.test_noisy_command_has_bounded_diagnostics_and_preserves_failure) ... ok
+test_oversized_archive_rejected_before_digest_or_extraction (test_worker_build.WorkerBuildTests.test_oversized_archive_rejected_before_digest_or_extraction) ... ok
+test_owner_sigkill_closes_lifetime_pipe_and_stops_build_session (test_worker_build.WorkerBuildTests.test_owner_sigkill_closes_lifetime_pipe_and_stops_build_session) ... ok
+test_real_stalled_http_body_is_interrupted (test_worker_build.WorkerBuildTests.test_real_stalled_http_body_is_interrupted) ... ok
+test_sigterm_cancels_and_restores_process_handlers (test_worker_build.WorkerBuildTests.test_sigterm_cancels_and_restores_process_handlers) ... ok
+test_timeout_kills_owned_command_and_term_ignoring_descendant (test_worker_build.WorkerBuildTests.test_timeout_kills_owned_command_and_term_ignoring_descendant) ... ok
+test_unpinned_or_ambiguous_base_refused_before_docker_build (test_worker_build.WorkerBuildTests.test_unpinned_or_ambiguous_base_refused_before_docker_build) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 5.094s
+
+OK

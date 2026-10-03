@@ -13,13 +13,17 @@ import re
 import stat
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, TYPE_CHECKING
 
 from .artifact import MAX_REPORT_BYTES, canonical, seal
 from .export_budget import ExportBudget
 from .evm import AnvilSession, ExecutionError
 from .rpc import RPC, RPCError, RPCRejected, safe_diagnostics
 from .parent_cache import ParentCache
+
+if TYPE_CHECKING:
+    from .consumer_observations import OwnedPriceObserver
+    from .position_observations import OwnedPositionObserver
 
 TRACE_VERSION = "0.1.0"
 SHANGHAI_TIME = 1681338455
@@ -421,6 +425,18 @@ def capture_source(plan: dict, upstream: RPC, deadline: float) -> dict:
 def replay_branch(
     captured: dict, url: str, skipped: list[int], deadline: float
 ) -> dict:
+    return _replay_branch(captured, url, skipped, deadline)
+
+
+def _replay_branch(
+    captured: dict,
+    url: str,
+    skipped: list[int],
+    deadline: float,
+    *,
+    observations: OwnedPriceObserver | OwnedPositionObserver | None = None,
+    branch: str = "baseline",
+) -> dict:
     with AnvilSession(
         captured["parent"], url, lifetime=_remaining(deadline), trace=True
     ) as session:
@@ -433,6 +449,8 @@ def replay_branch(
             or head.get("hash", "").lower() != captured["parent"]["block_hash"]
         ):
             raise ExecutionError("Owned trace fork does not match the original parent")
+        if observations is not None:
+            observations.observe(rpc, branch, "before", deadline)
         header = captured["header"]
         for method, value in (
             ("evm_setNextBlockTimestamp", header["timestamp"]),
@@ -527,7 +545,7 @@ def replay_branch(
                             if projected[field] != tx["original_receipt"][field]
                         ],
                     )
-        return {
+        result = {
             "anvil_version": session.version,
             "outcomes": outcomes,
             "matches_original_receipts": all(
@@ -535,10 +553,26 @@ def replay_branch(
                 for record in outcomes
             ),
         }
+        if observations is not None:
+            observations.observe(rpc, branch, "after", deadline)
+        return result
 
 
 def run_trace_native(plan: dict) -> dict:
     """Trusted development only; no whole-process CPU/RSS sandbox or fallback."""
+    return _run_trace_native(plan)
+
+
+def _run_trace_native(
+    plan: dict, observations: OwnedPriceObserver | OwnedPositionObserver | None = None
+) -> dict:
+    if observations is not None:
+        from .consumer_observations import OwnedPriceObserver
+
+        from .position_observations import OwnedPositionObserver
+
+        if type(observations) not in {OwnedPriceObserver, OwnedPositionObserver}:
+            raise ValueError("Only built-in owned observers are supported")
     plan = json.loads(canonical(plan))
     validate_plan(plan)
     url = os.environ.get("ENTROTTER_RPC_URL")
@@ -551,10 +585,28 @@ def run_trace_native(plan: dict) -> dict:
     try:
         captured = capture_source(plan, RPC(url), deadline)
         with ParentCache(url, captured["parent"], deadline) as archive:
-            baseline = replay_branch(captured, archive.url, [], deadline)
-            candidate = replay_branch(
-                captured, archive.url, plan["skip_indices"], deadline
-            )
+            if observations is None:
+                baseline = replay_branch(captured, archive.url, [], deadline)
+                candidate = replay_branch(
+                    captured, archive.url, plan["skip_indices"], deadline
+                )
+            else:
+                baseline = _replay_branch(
+                    captured,
+                    archive.url,
+                    [],
+                    deadline,
+                    observations=observations,
+                    branch="baseline",
+                )
+                candidate = _replay_branch(
+                    captured,
+                    archive.url,
+                    plan["skip_indices"],
+                    deadline,
+                    observations=observations,
+                    branch="candidate",
+                )
     except RPCError as error:
         diagnostic = safe_diagnostics(error)
         code, method = diagnostic["code"], diagnostic["method"] or "unknown"

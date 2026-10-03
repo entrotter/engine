@@ -21,7 +21,7 @@ def main():
         raw = sys.stdin.buffer.read(MAX_AGENT_INPUT + 1)
         if not raw or len(raw) > MAX_AGENT_INPUT:
             raise ValueError("Worker input limit exceeded")
-        result = execute_request(raw)
+        result = execute_request(raw, _worker_alarm=True)
         output = canonical(result)
         if len(output) > MAX_OUTPUT:
             raise ValueError("Worker output limit exceeded")

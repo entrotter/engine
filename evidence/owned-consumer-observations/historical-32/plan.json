@@ -1,0 +1,12 @@
+{
+  "trace_version": "0.1.0",
+  "source": {
+    "chain_id": 1,
+    "block_number": 18999892,
+    "block_hash": "0xafd6a8c681f5e3b6ae9cba963e4b8dd7e3c9bf76fe45e0c3e145ccb2918b2ba6"
+  },
+  "through_index": 31,
+  "skip_indices": [
+    12
+  ]
+}

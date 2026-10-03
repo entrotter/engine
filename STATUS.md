@@ -1,5 +1,21 @@
 # Engine candidate status
 
+## 2026-10-03 — Fixed base-image advisory candidate, CI pending
+
+The Dockerfile now selects a signature-verified immutable public Chainguard
+Python base with pip bootstrap wheel26.2.1-r2. This addresses the three observed
+CVE-2026-97687/97689/97688 findings without suppressing any advisory. Full remote
+amd64 and arm64 base scans use pinned Trivy0.74.0, a fresh database and unchanged
+all-severity/required-inventory checks; each inventories31 OS packages with zero
+detected findings. All26 former package names remain, with five additional
+Brotli/OpenSSL libraries and a newer Python3.14 micro revision. Existing Cosign
+3.1.3 identity/issuer requirements pass for the exact new index digest.
+
+This is remote base evidence, not an executed built-worker result. The current
+image/source binding, Anvil/worker compatibility, complete replay and full native
+security gates still require new-head CI. Old image and failure reports remain
+immutable; no merge, deployment or historical replay cause is inferred.
+
 ## 2026-10-02 — Changed-source native32-prefix evidence, publication prepared
 
 After independent source/package and frozen prelaunch review, one root-owned
@@ -331,3 +347,254 @@ controlled tests are distinct from the actual native closure evidence. See
 [raw evidence, source and reproduction scope](evidence/aave-consumer-price/README.md).
 Public-layout verification, fresh exact-headCI and human main approval remain
 separate gates. No candidate Pages, new model/video or submission claim.
+
+## October 2 — Supported owned consumer observations (local candidate)
+
+The separate native `trace-observe --native` CLI and
+`consumer_observations.run_trace_observed_native` export version0.1.0 wrappers
+containing the original trace report and four bounded fixed Aave/WETH view phases.
+The actual Aave source is decoded on each owned node rather than assuming the
+historical2024 proxy. Unsupported ABI/code/source/currency/unit remains unproven.
+Price-read completeness and raw price difference are separate from historical
+baseline receipt verification, signed consumer actions and economic benefit.
+
+Local pinned Anvil1.8.3 controls cover signed synthetic oracle update20 versus
+omission10 with an actual consumer revert, no-omission price difference0, missing
+Aave code/unproven reads, native CLI export, SIGTERM before/after branch views and
+sealing interruption after owned cleanup. Source-only synthetic genesis/code
+adapters are explicit; there are no replay state/nonce/signature repairs or
+archive calls. Six actual owned test methods pass, with recorded guardian/cache
+group/port/pipe closure. Eighteen unit methods cover strict ABI/head/content
+binding, bounds, finite hostile errors and cancellation through actual RPC
+normalization. The24-method targeted run initially has one wrong expected error
+count (six versus actual seven); its corrected single control passes separately.
+Earlier19-method pass and the exact failed24 log remain retained privately.
+
+Existing30 trace/protocol compatibility tests pass3.702s without skips. Full
+26-source lint/format/mypy passes; the complete unsuppressed Bandit scan retains
+all25 original exact findings/rationales and0 skipped rules. Only changed/new
+source hashes are refreshed. The new module is packaged in a freshly built
+wheel. Full native suite, independent source review, exact-head CI, historical
+execution of this supported workflow and protected-main human approval remain
+pending. Prior native006 research evidence is unchanged and does not constitute
+execution of this new command. No Docker/model/browser/Pages/submission claim.
+
+### Supported workflow final local checkpoint
+
+The preceding targeted counts and initial wheel describe the earlier local
+checkpoint. Two additional resealed controls now refuse mismatched initial-head
+timestamps and mark future feed timestamps `feed_timestamp_unproven`; raw views
+remain preserved. Round consistency and future-time sanity do not implement a
+maximum-age freshness policy. The final new-method count is26:20 unit controls
+and six real owned synthetic methods.
+
+The first full native run007 failed:349 tests/205.173s, one failure and one error
+in unchanged diagnostic cleanup controls. Its raw log is retained. An instrumented
+repeat of only those two controls passes3.253s and does not identify the original
+cause. One authorized plain full retry009, with identical production/tests/docs/
+security digests, then passes all349 tests80.699s with0 skips. No runtime or test
+fix, signal instrumentation, archive call or budget increase was applied for this
+retry; no causal or speed claim follows from the different durations.
+
+Current26-source lint/format/mypy and the full unsuppressed Bandit scan pass with
+all25 exact prior findings/rationales retained. The new current wheel010 contains
+all21 modules byte-identical to source; earlier wheel004 is retained as historical
+pre-future-timestamp evidence. Actual synthetic results include signed source
+transactions, adverse consumer reversion, finite unsupported views, cancellation
+and owned Anvil/cache closure. Source-only fixture adapters are explicit.
+
+Independent final source approval, public packaging/exact-head CI, execution of
+this supported command against the historical32-input case, default-worker
+wrapper support and protected-main human approval remain separate pending gates.
+Normal trace/default-worker/HTTP envelopes remain unchanged. The150s signal guard
+covers replay and owned cleanup; wrapper sealing/export happen afterward. No
+whole-command sandbox, signed historical consumer action, profit, provider
+state authentication or broader G1 completion is claimed.
+
+The reviewed local checkpoint and retained failed/successful runs are now collected
+in [owned consumer observation evidence](evidence/owned-consumer-observations/README.md).
+Public-package review and exact-head CI are still pending; adding these copies
+does not repeat the historical research trial or test suite.
+
+### First public CI and failure-preserving test correction
+
+Public candidate d300a24 passes quality and all four Python unit jobs; native,
+isolated and documentation jobs fail. Native349/82.348s rejects a sender nonce
+read in the missing-code control; a secondary expected-two-node assertion masks
+that primary error and skips subsequent cache checks. The original rejection's
+cause remains unknown. The test helper now checks all actually owned resources
+before count checks and preserves unexpected primary errors. Intended-stop
+cleanup failures still fail. Production/scripts/policy and original evidence
+remain unchanged. Existing missing-code and a new actual primary-error regression
+each pass once; the latter closes one replay node and one cache while preserving
+the exact primary exception and keeping diagnostics free of private text/URLs.
+Current27-method/whole350 verification is pending fresh mandatory CI.
+
+Nine observed existing503 source links are repaired with matching versioned raw
+files and three explicit source line ranges; all8unique targets pass the same
+pinned checker with independent source review. Isolated CI's Docker metadata
+verification failure remains unclassified; no controller or gate is relaxed.
+See [focused logs, independent review and limits](evidence/owned-consumer-observations/followup/README.md).
+Historical349 success is distinct from latest350 validation. Human main approval,
+supported historical32 execution and deployment remain separate pending gates.
+
+
+### October3 — Bounded admission and signed base remediation
+
+Current native observation follow-up preserves four active cache handlers and
+the shared trace deadline, adding at most100ms bounded admission for transient
+slot overlap with explicit four-socket listen backlog. Actual HTTP before/after
+controls and26 cache tests support the change; original Linux nonce rejection
+cause remains unproven. The signed immutable Python base89281daa replaces the
+old base with three pip-wheel findings; both remote platforms retain all26 old
+OS names and scan31 packages/zero reported findings. Current built-worker/Linux
+Anvil compatibility is still required by mandatory CI. No finding is ignored.
+
+A full352 run failed one diagnostic cleanup assertion with unknown cause. Its
+raw record is preserved. Finite secondary diagnostics and an actual overflowing
+live-client control were added. Independent review found an assertion could skip
+test rescue; try/finally plus false-success fault injection corrects it. Prefinal
+353/82.985s passes; final354/79.788s passes with zero skips and all75 prelaunch
+inputs unchanged. Eight owned replay cleanup records and three strict synthetic
+wrappers are verified,21 wheel modules match current source. Production security
+retains26 sources/all25 reviewed findings without suppression. No new archive or
+model call, historical32 result, main merge, deployment or formal submission is
+claimed. See [raw outcomes, provenance and reviews](evidence/owned-consumer-observations/remediation/README.md).
+Fresh exact-head mandatory CI and protected-main independent human review remain
+required; historical and current outcomes are distinct.
+
+
+### Copied-base manifest binding
+
+Public7b50 passes seven mandatory checks, including native354/83.227s with zero
+skips and all four unit versions354/40 declared Anvil skips. Quality/source/wheel/
+Python/research and20-doc/208-link artifacts are reviewed. Isolated25/218.049s and
+default one/four replay pass, then the unchanged image guard correctly rejects
+old011 metadata against new892 Dockerfile. The builder had a stale constant;
+image/Cargo audits were not reached. New preparation derives the fixed flat
+single-stage immutable base from copied Dockerfile before launch. Two metadata/
+prelaunch controls use real copying/hashes with simulated Docker;20 build methods
+pass before the independent continuation correction, and both base controls pass
+after it. All eight malformed/floating/multiple/continued variants refuse before
+launch. Final26-source scan retains all25 findings/reasons and original audit
+guards. Current whole356/eight CI and real image audit remain pending; parent354
+results are historical. See [cause, controls and final reviews](evidence/owned-consumer-observations/remediation/manifest-binding/README.md).
+
+### October3 — Supported CLI reproduces the original32-input consumer case
+
+Enginee9d629e supersedes the preceding pending356/image-audit checkpoint: all8
+original mandatory CI runs pass and complete raw source/artifact reviews agree.
+Native356/85.466s has zero skips; unit3.11–3.14 each356 has40 explicit Anvil skips;
+actual isolated25/218.122s and default1/four replay pass. Current copied worker22
+inputs/base892/source digest agree. Unsuppressed26-source/25retained findings,
+21wheel modules,42Python/31OS/1126signedCargo identities have0 reported advisories;
+21documents/222links pass. Database/tool binaries are not exported for independent
+rehash;172nonCargo entries remain outside advisory coverage. Main still requires
+strict/admin-enforced independent human approval.
+
+The actual supported trace-observe native CLI now executes original32-of181
+block18999892/skip12 once, exporting a strict sealed wrapper. All32 complete
+baseline receipts and both full branch outcomes match original/native006 evidence.
+Candidate executes31; later19 changes remain index-1/cumulativegas-336752 only.
+All4 raw Aave consumer prices equal their producer answer: baseline257082415000
+to256292441874, candidate unchanged257082415000, USD unit100000000. Both initial
+heads/getters and stable nonempty oracle/source identities are verified. Replay
+127.599511s/CLI127.803665s/host127.921839s retains original150s;31source/5input hashes
+stay unchanged. Passive lifecycle profiling makes no production/RPC/state/limit
+changes and does not support a speed claim. Owned2Anvil+one cache groups/ports/
+pipes close, with independent host group/port probes. Cache1879/970upstream/903hits
+retains6 aggregate errors of unknown cause and0refusals. Initial telemetry/host/
+verifier preparation findings and five passing fault controls are preserved;
+fixes precede the sole archive attempt. Initial overwritten readiness bytes are
+explicitly unavailable; later raw readiness/reviews are retained.
+
+See [usable offline wrapper, exact command, raw outcomes and scope](evidence/owned-consumer-observations/historical-32/README.md).
+Read-only dependence is not a signed consumer strategy, profit, authenticated
+provider/deployed code, full-block/root/opcode or default Docker32 result. New
+documentation/evidence publication checks, protected-main review, deployment and
+formal submission remain separate. No model call or upstream transaction broadcast was
+added. Goal remains active through the official October13 15:59JST deadline;
+Discord excluded.
+# October 3 — default bounded fixed-price observations
+
+Published4fdb664/PR35 with all31 remote Gitblobs verified and independent final
+review297assertions/99inputs (SHAe99a429e840f2e5f53d3397724ad29bf1fdeb7d7f3f27c3c5ab619eb3af0dcac).
+Its real isolated historical/security job37101478969 and quality/docs pass.
+Original unit/EVM jobs fail at the new fake-client tests because a full wrapper
+in one environment value exceeds Linux MAX_ARG_STRLEN; two actual bounded Linux
+host probes reproduce errno7/both failures, then pass after owned response-file
+transport. Full fixtures/controls and all production/image sources are retained.
+Focused current protocol/metadata40 tests pass; no archive/model/Docker-suite
+repeat is needed for this test-only repair. Corrected-head CI remains required.
+
+The normal `trace-observe` CLI and `run_trace_observed` Python entry now use the
+existing Docker worker. A closed fixed-profile JSON job retains256KiB input,
+8MiB output, full request-hash/profile/nested-plan binding, shared admission and
+exact owned cleanup. Native remains explicit; no HTTP endpoint or executable
+extension is added. Observation150s and original worker180s deadlines compose
+without resetting the outer lifetime. Independent review found and fixed clock
+sampling order so scheduling cannot extend the inherited deadline. Native caller
+alarm refusal and BaseException cancellation remain unchanged.
+
+Actual default host Docker replay of32 original signed inputs at Ethereum
+block18999892 passed:32 verified baseline receipts, one omitted candidate input,
+complete four price phases and raw price difference789973126 in100000000 USD
+units. Replay141.443232s/host142.447272s fit original limits; shared worker slot
+is absent afterward. Full baseline/candidate outcomes, plan, raw ABI views and
+classification equal historical native evidence. Both offline CLI readers using
+SDKeb inspect the new wrapper. This is partial-block price dependence, not a
+signed consumer strategy, profit or provider/full-block/root/opcode proof.
+
+Native366/84.525s and actual Docker26/246.103s pass. The first current native366
+attempt had an unchanged metadata cleanup PermissionError on macOS; focused and
+full unchanged-source retry pass, with original failure retained and cause
+unestablished. Initial Docker suite exposed three mismatched host Anvil1.6 vs
+image1.8.3 comparisons and daemon-default unconfined seccomp. Host selection was
+corrected to1.8.3 and every worker now explicitly requests seccomp=builtin;
+actual kernel filtering passes without changing global settings or assertions.
+One concurrent32 admission was refused before execution; only one executed
+historical32 attempt is claimed.
+
+Full26source/script Ruff/mypy/Bandit retain25 findings/0skips,42locked Python
+identities/0reported advisories. Actual final local image840d03 has22exact source
+inputs, unchanged base892 and pinned Anvil1.8.3. New required CI adds real default
+observed historical one-input validation while preserving existing one/four
+replays, security and lifecycle gates. New current-head CI, fresh image OS/Cargo
+queries, final artifact-bound independent review, main approval, coordinator
+promotion, live Pages and formal submission remain separate. Goal stays active
+through the official deadline; no model/video/broadcast/paid/Discord work.
+See [exact current evidence](evidence/bounded-consumer-observations/README.md).
+
+
+## October 3 — Historical Aave account impact through the default worker
+
+The separate trace-position format now compares a bounded existing account with
+fixed Pool/provider/oracle/ABI queries on all four owned phases. Default Docker
+request binds complete version/trace/account/profile; full result binds nested
+price/trace seals, account and phase heads. Preserved v0.1 scenario/trace/price
+formats, resources, original signatures, missing-state behavior and 150/180 caps.
+Independent prelaunch found the account-unit relation unproven; two fixed returned
+configuration getters now require matching historical provider/observed oracle
+before any unit/difference claim. Unproven data has null differences; no-debt
+uintmax health remains raw with no_debt status/null normalized difference.
+
+One actual default13 replay passes: all13 original baseline receipts byte-match
+priornative32 first13, candidate12exec/skip12, four fullprice/account/config/code
+views error-free and initialaccount/head equal. Availableborrowbase difference
+81628966124 (USD816.28966124), healthWAD3852169807877337; both aboveone. Trace
+92.565119s/host95.486630s, exactimage2a0f2bc/source2af2329a23inputs, ownedslot absent.
+Prelaunch harness wrongDockerfile-path failure retained; no actual restart.
+
+Full27source Ruff/mypy/fullBandit25existingfindings0new pass;42tool locks/runtime
+empty unchanged. Fullnative379/97.300s passes/0skips; later test-only quota variable
+repair and additional closed hostbinding case pass final15/8.395s after host and checker-source binding, not a local
+full381 claim. Previousfull374/103.769s has1 unchangedmacOS diagnosticcleanup
+os_error, focused1pass and later379pass; cause remainsunknown. Legacy33controls
+pass. Finalsame-image Docker26 passes with pinnedhostAnvil1.8.3 after initial
+unpinnedhost26/3comparisonfailures; initialfailure retained, no image/resource
+change. Finalwheel395276f9 binds22modules/all26RECORD/fullREADME and actual-I
+installedread/CLIhelp; initial inheritedPYTHONPATH pip setup corrected. Docs24/293
+allpass after badPoolfragment fix/noexclusions. Finalstage review, exacthead8CI/publication, coordinator
+promotion/humanmain/Pages/submission remain separate. No signedloan/liquidation/
+profit, soleWETHcausality or freshmodel/browser claimed. See
+[evidence](evidence/aave-account-impact/README.md). Goalactive; Discordexcluded.

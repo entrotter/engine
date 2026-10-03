@@ -1,0 +1,190 @@
+{
+  "observed_at": "2026-10-02T15:31:58.952440+00:00",
+  "reviewer": "root independent of base remediation author",
+  "status": "remote_base_evidence_verified; latest_full_native_failed",
+  "summary_sha256": "04a97ff87a4ae3447660ec61d724815c207f3adf9490b267e3ab86ccc05d9658",
+  "bound_raw_files": 28,
+  "index_and_both_platforms": {
+    "amd64": {
+      "full_strict_policy": {
+        "status": "passed",
+        "image_id": "sha256:1ac9a3dcb741d8742ec0cf8d8f2c89b002a3fadb5639b1db162ffe958135a630",
+        "inventories": [
+          {
+            "type": "wolfi",
+            "class": "os-pkgs",
+            "packages": 31,
+            "findings": 0
+          }
+        ],
+        "vulnerability_count": 0,
+        "database_updated_at": "2026-10-02T12:48:00.080865328Z",
+        "database_next_update": "2026-10-03T12:48:00.080864987Z",
+        "policy": "Every detected vulnerability, including unfixed and unknown severity, fails; no suppression files or VEX",
+        "limitations": [
+          "Only detected OS/language packages are covered, not proof of absence of vulnerabilities",
+          "Native Anvil dependencies without embedded inventory remain outside this scan",
+          "Docker daemon, host kernel/VM and arbitrary user code are not audited"
+        ]
+      },
+      "packages": {
+        "ca-certificates-bundle": "20260909-r2",
+        "gdbm": "1.26-r6",
+        "glibc-2.44": "2.44-r7",
+        "glibc-2.44-locale-posix": "2.44-r7",
+        "ld-linux-2.44": "2.44-r7",
+        "libbrotlicommon1": "1.2.0-r5",
+        "libbrotlidec1": "1.2.0-r5",
+        "libbrotlienc1": "1.2.0-r5",
+        "libbz2-1": "1.0.8-r24",
+        "libcrypto3": "3.6.5-r1",
+        "libexpat1": "2.8.5-r0",
+        "libffi": "3.8.0-r1",
+        "libgcc": "16.2.0-r1",
+        "libssl3": "3.6.5-r1",
+        "libstdc++": "16.2.0-r1",
+        "libuuid": "2.42.4-r0",
+        "libzstd1": "1.5.7-r10",
+        "mpdecimal": "4.0.1-r4",
+        "ncurses": "6.6.20260926-r0",
+        "ncurses-terminfo-base": "6.6.20260926-r0",
+        "openssl-4.0-libcrypto": "4.0.3-r1",
+        "openssl-4.0-libssl": "4.0.3-r1",
+        "openssl-provider-legacy-allowed": "4.0.2-r3",
+        "py3-pip-wheel": "26.2.1-r2",
+        "python-3.14": "3.14.8_git20261001-r0",
+        "python-3.14-base": "3.14.8_git20261001-r0",
+        "readline": "8.3-r3",
+        "sqlite-libs": "3.53.4-r2",
+        "wolfi-baselayout": "20230201-r30",
+        "xz": "5.8.4-r0",
+        "zlib": "1.3.2.1_rc20260601-r0"
+      }
+    },
+    "arm64": {
+      "full_strict_policy": {
+        "status": "passed",
+        "image_id": "sha256:df690891bc713d4049cb4efc870e0727b63dee996d875ee613345c897ad66863",
+        "inventories": [
+          {
+            "type": "wolfi",
+            "class": "os-pkgs",
+            "packages": 31,
+            "findings": 0
+          }
+        ],
+        "vulnerability_count": 0,
+        "database_updated_at": "2026-10-02T12:48:00.080865328Z",
+        "database_next_update": "2026-10-03T12:48:00.080864987Z",
+        "policy": "Every detected vulnerability, including unfixed and unknown severity, fails; no suppression files or VEX",
+        "limitations": [
+          "Only detected OS/language packages are covered, not proof of absence of vulnerabilities",
+          "Native Anvil dependencies without embedded inventory remain outside this scan",
+          "Docker daemon, host kernel/VM and arbitrary user code are not audited"
+        ]
+      },
+      "packages": {
+        "ca-certificates-bundle": "20260909-r2",
+        "gdbm": "1.26-r6",
+        "glibc-2.44": "2.44-r7",
+        "glibc-2.44-locale-posix": "2.44-r7",
+        "ld-linux-2.44": "2.44-r7",
+        "libbrotlicommon1": "1.2.0-r5",
+        "libbrotlidec1": "1.2.0-r5",
+        "libbrotlienc1": "1.2.0-r5",
+        "libbz2-1": "1.0.8-r24",
+        "libcrypto3": "3.6.5-r1",
+        "libexpat1": "2.8.5-r0",
+        "libffi": "3.8.0-r1",
+        "libgcc": "16.2.0-r1",
+        "libssl3": "3.6.5-r1",
+        "libstdc++": "16.2.0-r1",
+        "libuuid": "2.42.4-r0",
+        "libzstd1": "1.5.7-r10",
+        "mpdecimal": "4.0.1-r4",
+        "ncurses": "6.6.20260926-r0",
+        "ncurses-terminfo-base": "6.6.20260926-r0",
+        "openssl-4.0-libcrypto": "4.0.3-r1",
+        "openssl-4.0-libssl": "4.0.3-r1",
+        "openssl-provider-legacy-allowed": "4.0.2-r3",
+        "py3-pip-wheel": "26.2.1-r2",
+        "python-3.14": "3.14.8_git20261001-r0",
+        "python-3.14-base": "3.14.8_git20261001-r0",
+        "readline": "8.3-r3",
+        "sqlite-libs": "3.53.4-r2",
+        "wolfi-baselayout": "20230201-r30",
+        "xz": "5.8.4-r0",
+        "zlib": "1.3.2.1_rc20260601-r0"
+      }
+    }
+  },
+  "signature_scope": "Original successful exact pinned Cosign identity/issuer verification result inspected, metadata and byte hashes checked; no repeated signature/network scan",
+  "original_findings_retained": [
+    {
+      "id": "CVE-2026-97687",
+      "package": "py3-pip-wheel",
+      "installed": "26.2.1-r1",
+      "fixed": "26.2.1-r2",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-97689",
+      "package": "py3-pip-wheel",
+      "installed": "26.2.1-r1",
+      "fixed": "26.2.1-r2",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-97688",
+      "package": "py3-pip-wheel",
+      "installed": "26.2.1-r1",
+      "fixed": "26.2.1-r2",
+      "severity": "MEDIUM"
+    }
+  ],
+  "native": {
+    "tests": 352,
+    "failures": 1,
+    "errors": 0,
+    "skips": 0,
+    "test": "test_trace_diagnostic.DiagnosticHostTests.test_output_limit_stops_client_and_attempts_owner_cleanup",
+    "failure": "cleanup_verified False; secondary category not recorded by original assertion, root cause unknown",
+    "terminal_sha256": "d9a6c048eae04669d06676c1a37ad4c441d419777fb0b4d94f1411e6ab60493a",
+    "log_sha256": "fc4d30af7b66a993a91e1c8ef9fcbe83a99125d806bc5591a067ae44d90311e5",
+    "all75_inputs_unchanged": true,
+    "focused_followup": "1pass/cleanup_errorNone; does not explain original failure"
+  },
+  "wheel": {
+    "wheel_sha256": "ae790194a6daf3d6bbb6bcfabd22a59ea176efe9ce6ac664eb08dde858a2cb92",
+    "all21module_bytes_equal_current_source": true,
+    "module_sha256": {
+      "entrotter_engine/__init__.py": "11f3961a518c3a40429472d8582270a306114419f588008729d8759d8da83db6",
+      "entrotter_engine/__main__.py": "647c3c8138a47cfb4b3bd833537ce2d624c0ba3d28f375ba4f218b5523ec4e1b",
+      "entrotter_engine/_guardian.py": "3758412adb3e8761a3c82eac89cbf5a72bac7d0dad5c492a6825b4bb2a5f9ddf",
+      "entrotter_engine/_isolated_worker.py": "ec3ae2219ce1bce01e9d9aa97d67a0f1cbc354abcdda3e5514d028b0dfc271de",
+      "entrotter_engine/_parent_cache.py": "56844c41bfdab2ec43e741942726b88af95702806a2a8be1476f873deb1b90da",
+      "entrotter_engine/agent.py": "de16734bc3a9dac08d51efc7721bf5bb0c0671266df8883910dc0ac64374a01c",
+      "entrotter_engine/api.py": "cab74cd6a4e62230e5d6ce5c386a341e290fb1658ba8fc75892d02f859ebae3c",
+      "entrotter_engine/artifact.py": "a76cfe6d83e28f2f15ef7fb4f9b06dc5c5d51db0c89c7fa9c9e627161527787c",
+      "entrotter_engine/consumer_observations.py": "ef05dd36b0c5e88afe2dd703d08cec554d1de4c08c68ee1108cda1439abe6e83",
+      "entrotter_engine/defi.py": "f4f5e6e50ad3745426c7d0fbc08b5fa42c79fd4daa225667821814f95acb7fde",
+      "entrotter_engine/evm.py": "1ec41f147a517c4372bdf72fb5763bde1adc3075e462786ba656ff87c26dba55",
+      "entrotter_engine/export_budget.py": "2bebd29413cb86bf25acdc108d87b3f13a3ecd6ed447cd04a86a4e6a9e28614f",
+      "entrotter_engine/fixture.py": "1f771e23c8b8311bf1f5e9cc56bf30f7b369f8f617513d99024876688e809647",
+      "entrotter_engine/isolated.py": "61f99e799a7056f009e2181bd4df42da9c2a9a57ae8e7c642a46c46cd94fa70d",
+      "entrotter_engine/models.py": "80de1f5ab1e52f9dd00c0f3deaa3ea1a16a0ae159eab50c0a130a2431084b7e7",
+      "entrotter_engine/parent_cache.py": "73ba002c6cce32a8a7acd6580aa432af3ebdb5aa292432f7751dbd35ac080706",
+      "entrotter_engine/rpc.py": "3e3f9c593d3a26a483c4f8f1e220bd32f959b4e87def846868b7491e70312a52",
+      "entrotter_engine/runner.py": "d483df0825e3185548e68d6ead02d9e3fb89d8a12d9b0134b04b1a6a57d4d3df",
+      "entrotter_engine/store.py": "25a6b9fe252cd0c8eef00ce5c3eb869d3a54044b00e9a67653a5c00b41749b3b",
+      "entrotter_engine/trace.py": "809bc631b0e8f7394e3a1185d54dd6100cb6cfffd6957de253688072e41bd033",
+      "entrotter_engine/worker_protocol.py": "7f5f1320aab5c4fe987ba7d4af06ac83d9d08fef4f51912108950ffe2bfbb313"
+    }
+  },
+  "limits": [
+    "Remote base scan is not an audit of built Entrotter worker or Linux Anvil compatibility.",
+    "Latest full suite failed; no blanket rerun, no claim all checks pass.",
+    "Cache source review/Mac EVM pass do not establish original Linux fault cause.",
+    "Changes remain local; existing public PR35 head9a68 and6success/2failure retained."
+  ]
+}

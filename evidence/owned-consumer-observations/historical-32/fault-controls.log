@@ -1,0 +1,12 @@
+test_host_cancellation_reaps_actual_owned_child (__main__.FaultControls.test_host_cancellation_reaps_actual_owned_child) ... ok
+test_host_deadline_exit_race_reaps_actual_owned_child (__main__.FaultControls.test_host_deadline_exit_race_reaps_actual_owned_child) ... ok
+test_telemetry_baseexception_stop_propagates (__main__.FaultControls.test_telemetry_baseexception_stop_propagates) ... ok
+test_telemetry_invalid_port_remains_secondary (__main__.FaultControls.test_telemetry_invalid_port_remains_secondary) ... ok
+test_telemetry_io_failure_does_not_replace_return (__main__.FaultControls.test_telemetry_io_failure_does_not_replace_return) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.042s
+
+OK
+{"code": -15, "cause": "host_cancelled", "host_cleanup_errors": [], "host_seconds": 0.0028048751410096884, "cli_reaped": true, "original_product_cap_seconds": 150, "host_watchdog_seconds": 190, "native_no_CPU_RSS_sandbox": true, "sources_unchanged": true, "inputs_unchanged": true, "owned_host_observations": [], "no_signals_to_grandchild_identifiers": true}
+{"code": -15, "cause": "host_watchdog190s", "host_cleanup_errors": [], "host_seconds": 0.002173834014683962, "cli_reaped": true, "original_product_cap_seconds": 150, "host_watchdog_seconds": 190, "native_no_CPU_RSS_sandbox": true, "sources_unchanged": true, "inputs_unchanged": true, "owned_host_observations": [], "no_signals_to_grandchild_identifiers": true}

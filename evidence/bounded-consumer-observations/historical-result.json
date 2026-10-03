@@ -1,0 +1,31 @@
+{
+  "scope": "Actual host default Docker CLI original32 partial Ethereum replay; no native fallback/fixture/provider overrides; fixed150s trace and180s worker limits",
+  "exit_code": 0,
+  "wall_seconds": 142.4472716250457,
+  "plan_sha256": "2e5e8dee72e27c327ffd77e259962e7d96f1ea972a2f98118b508cda64c3bc94",
+  "image_id": "sha256:840d03df90859a63d5a3e1f8403a68c27681577d41d6c9f82669c0c730febc4e",
+  "provider": "https://eth.drpc.org",
+  "output_exists": true,
+  "wrapper_sha256": "724c3786efa78f666725022955c4df53b1c22458241f8ae994e5875d690da0d1",
+  "artifact_id": "46f8bb711b540b4c91a7211324616840bb7bd67cb47aa17e85cecd0f26e5857f",
+  "trace_artifact_id": "e393c6a62f0e285b17433d17ec3b8a4528e325f7c391aa3f98a9fcbef76f6e51",
+  "classification": {
+    "baseline_price": 256292441874,
+    "baseline_receipts_verified": true,
+    "candidate_price": 257082415000,
+    "complete_price_views": true,
+    "price_difference": 789973126,
+    "unproven_reasons": []
+  },
+  "baseline_verified": true,
+  "baseline_count": 32,
+  "candidate_count": 32,
+  "trace_runtime_seconds": 141.443232,
+  "four_prices": [
+    257082415000,
+    256292441874,
+    257082415000,
+    257082415000
+  ],
+  "owned_slot_removed": true
+}

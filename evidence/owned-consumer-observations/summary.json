@@ -1,0 +1,61 @@
+{
+  "status": "independently_reviewed_local_candidate_public_package_and_exact_head_CI_pending",
+  "base": "bd5527f71d3c561335e7786b6f4421572cd9aad6",
+  "branch": "feat/owned-consumer-observations",
+  "native": {
+    "first_full007": {
+      "tests": 349,
+      "seconds": 205.173,
+      "failures": 1,
+      "errors": 1,
+      "cause": "unknown"
+    },
+    "instrumented008": {
+      "tests": 2,
+      "seconds": 3.253,
+      "failures": 0,
+      "errors": 0,
+      "original_cause_proof": false
+    },
+    "plain_full009": {
+      "tests": 349,
+      "seconds": 80.699,
+      "skips": 0,
+      "failures": 0,
+      "errors": 0,
+      "all60_prelaunch_inputs_unchanged": true
+    }
+  },
+  "new_methods": {
+    "unit": 20,
+    "actual_owned_synthetic": 6
+  },
+  "security": {
+    "sources": 26,
+    "findings": 25,
+    "skips": 0,
+    "errors": 0,
+    "prior_exact_fingerprints_and_rationales_retained": true
+  },
+  "current_wheel": {
+    "modules": 21,
+    "all_module_bytes_equal_current_source": true,
+    "sha256": "077a2bab36860c9de49d1759c7c6bcb7636ed13d008ce185bdc5424c182453f6",
+    "old_wheel004": "Historical pre-future-timestamp build, not final source proof"
+  },
+  "author_checkpoint_original_sha256": "a338fa7acd1499e2cbcca60c5d7eaa6e075090028e74365bc3587195343bbf13",
+  "independent_source_review_sha256": "02f1115a17700310d2c39e3ead4f0529ec054773beb2bad910618187c975eb96",
+  "provenance_sha256": "5b2a8c06f93d5f8bc685516dea207412f9cb1cefe5357149ebd39e525ba46ef2",
+  "copy_count": 54,
+  "byte_identical_copies": 46,
+  "path_only_redacted_copies": 8,
+  "limits": [
+    "Supported CLI historical32-input execution has not run; prior native006 research is distinct",
+    "Trusted-native POSIX main-thread fixed profile; no default-worker/HTTP observation envelope",
+    "150s guard replay/owned cleanup only; seal/export later; no CPU/RSS/whole-command sandbox claim",
+    "Raw code/view acceptance64KiB vs immutable RPC transport4MiB",
+    "No max-age freshness policy, provider authentication, signed historical consumer strategy, economic benefit/profit or complete G1 claim",
+    "Root reviewed stored source/results; no independent repeat of real Anvil tests or resignal of unknown groups",
+    "Public package review and fresh exact-head mandatory CI/human main approval remain pending"
+  ]
+}

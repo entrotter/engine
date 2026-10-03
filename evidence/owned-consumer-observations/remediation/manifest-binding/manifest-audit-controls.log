@@ -1,0 +1,12 @@
+test_complete_matching_inventory_with_current_database_passes (test_image_security.ImageSecurityPolicyTests.test_complete_matching_inventory_with_current_database_passes) ... ok
+test_empty_partial_or_unsupported_os_coverage_fails (test_image_security.ImageSecurityPolicyTests.test_empty_partial_or_unsupported_os_coverage_fails) ... ok
+test_every_finding_fails_including_low_unknown_and_unfixed (test_image_security.ImageSecurityPolicyTests.test_every_finding_fails_including_low_unknown_and_unfixed) ... ok
+test_malformed_inventory_cannot_be_a_zero_finding_success (test_image_security.ImageSecurityPolicyTests.test_malformed_inventory_cannot_be_a_zero_finding_success) ... ok
+test_modified_tool_is_rejected_before_execution (test_image_security.ImageSecurityPolicyTests.test_modified_tool_is_rejected_before_execution) ... ok
+test_stale_future_expired_or_unversioned_database_fails (test_image_security.ImageSecurityPolicyTests.test_stale_future_expired_or_unversioned_database_fails) ... ok
+test_wrong_image_type_scanner_or_schema_fails (test_image_security.ImageSecurityPolicyTests.test_wrong_image_type_scanner_or_schema_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.005s
+
+OK

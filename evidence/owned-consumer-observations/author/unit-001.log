@@ -1,0 +1,19 @@
+test_cli_requires_native_and_never_defaults_to_worker (test_consumer_observations.ConsumerObservationTests.test_cli_requires_native_and_never_defaults_to_worker) ... ok
+test_cli_stop_no_export (test_consumer_observations.ConsumerObservationTests.test_cli_stop_no_export) ... ok
+test_fixed_dynamic_source_and_nine_reads_with_timeout_restore (test_consumer_observations.ConsumerObservationTests.test_fixed_dynamic_source_and_nine_reads_with_timeout_restore) ... ok
+test_four_unique_phases_duplicate_and_fifth_never_read (test_consumer_observations.ConsumerObservationTests.test_four_unique_phases_duplicate_and_fifth_never_read) ... ok
+test_fully_resealed_contradictions_refused (test_consumer_observations.ConsumerObservationTests.test_fully_resealed_contradictions_refused) ... ok
+test_guard_restores_handlers_and_stops_signal (test_consumer_observations.ConsumerObservationTests.test_guard_restores_handlers_and_stops_signal) ... ok
+test_hostile_error_finite_and_no_source_no_dependent_calls (test_consumer_observations.ConsumerObservationTests.test_hostile_error_finite_and_no_source_no_dependent_calls) ... ok
+test_invalid_phase_and_deadline_refuse_before_rpc (test_consumer_observations.ConsumerObservationTests.test_invalid_phase_and_deadline_refuse_before_rpc) ... ok
+test_no_caller_callback_admission (test_consumer_observations.ConsumerObservationTests.test_no_caller_callback_admission) ... ok
+test_stop_through_actual_rpc_mapping_restores_timeout (test_consumer_observations.ConsumerObservationTests.test_stop_through_actual_rpc_mapping_restores_timeout) ... ok
+test_strict_abi_and_code_bounds (test_consumer_observations.ConsumerObservationTests.test_strict_abi_and_code_bounds) ... ok
+test_thread_context_refused_before_execution (test_consumer_observations.ConsumerObservationTests.test_thread_context_refused_before_execution) ... ok
+test_unsupported_source_unit_and_unverified_replay_stay_unproven (test_consumer_observations.ConsumerObservationTests.test_unsupported_source_unit_and_unverified_replay_stay_unproven) ... ok
+test_wrapper_receipt_preservation_classification_and_export (test_consumer_observations.ConsumerObservationTests.test_wrapper_receipt_preservation_classification_and_export) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.236s
+
+OK

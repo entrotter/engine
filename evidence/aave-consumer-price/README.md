@@ -114,7 +114,7 @@ and their failed runs remain unchanged. This experiment does not prove speed or
 the causes of earlier timeouts.
 
 The [historical address-book metadata](references/historical-reference-summary.json)
-points to the [January4 primary source](https://github.com/aave-dao/aave-address-book/blob/575eac6d595d5d15ba5e6ca9192a2f2a5c719022/src/AaveV3Ethereum.sol).
+points to the [January4 primary source](https://raw.githubusercontent.com/aave-dao/aave-address-book/575eac6d595d5d15ba5e6ca9192a2f2a5c719022/src/AaveV3Ethereum.sol).
 Current source is [reference metadata only](references/current-reference-manifest.json);
 its WETH source differs from the historical proxy. Neither source authenticates
 the fork state. Current AaveOracle code is BUSL-1.1: no third-party source or

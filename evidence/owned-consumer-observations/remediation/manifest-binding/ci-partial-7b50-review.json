@@ -1,0 +1,12 @@
+{
+  "head": "7b50af23e608ea219e08833c6ff23cf736c8563d",
+  "required7success1failure": true,
+  "quality": "26exactsource/25retainedfindings/21wheelmodules/42lockedPythonidentities0reportedvulns/33researchcontrols",
+  "docs": "20exactdocs/208links0errors0timeouts",
+  "native": "354/83.227s/0skips",
+  "units": "3.11\u20133.14 each354/40Anvilskips",
+  "isolated": "25/218.049s anddefault1/4replay passed; audit guard correct mismatch refusal; image/Cargo audits incomplete",
+  "complete_synthetic_merge_tree_equal": true,
+  "merge_sha": "c2a0a2dcb1e503d22c789f24cba0e60313d5f82f",
+  "review_error_preserved": "Initial local parser treated cachecontrol[filecache] extra as package-name; corrected normalization only, not product/securitypolicy."
+}

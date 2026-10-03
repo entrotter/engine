@@ -1,0 +1,38 @@
+{
+  "status": "passed_no_remaining_actionable_findings_in_test_delta",
+  "reviewer": "review_cli_agent",
+  "files": {
+    "tests/test_trace_diagnostic.py": "2e39634293efc38badadb15956b1fb0068dff4209847d31f8b82f4f92454cf1c",
+    "tests_isolated/diagnose_trace_worker.py": "d24ffd710a28308008a98a3655d9d592376bef686ce5e48d46d70d3bdf666af1",
+    ".quality/bounded-admission/child-diagnostic-delta-review.json": "391111bd217424f913b30d95bebec3ae3fec322f417bc3a3d03c07e3ceb0c50b",
+    ".quality/bounded-admission/diagnostic-controls-003.log": "390a6a83e7899034ed52683d6bbe68f4fbdd77607bb133807781fc197fc0361c",
+    ".quality/bounded-admission/full-native-001.log": "fc4d30af7b66a993a91e1c8ef9fcbe83a99125d806bc5591a067ae44d90311e5",
+    ".quality/bounded-admission/full-native-001-terminal.json": "d9a6c048eae04669d06676c1a37ad4c441d419777fb0b4d94f1411e6ab60493a",
+    ".quality/bounded-admission/full-native-002.log": "abd46b56aebb8eb8d9c1db038d73fee8e8c3cb0cfc994c7010657ceeedbde496",
+    ".quality/bounded-admission/full-native-002-terminal.json": "38738b1850becc349c94a667e5017eb2ff565e68507ae77eeef188a0aad4d9d9",
+    ".quality/bounded-admission/full-native-002-prelaunch.json": "fdc477a4043cad31e8f8693898bbaf2d8c3f03bc466b07b49e885d32bc03c876"
+  },
+  "resolved_prior_finding": {
+    "priority": 3,
+    "prior_review_sha256": "391111bd217424f913b30d95bebec3ae3fec322f417bc3a3d03c07e3ceb0c50b",
+    "resolution": "Per-process assertions are enclosed in try/finally; exact ownedPopen fallback kill/reap executes even if verified-closure assertions fail."
+  },
+  "review": [
+    "NestedPopen mock is sound: outerspawn captures realPopen beforepatch; innerlaunch captures outerspawn mock then uses it to launch exactlyone actualchild, recorded in bothlists. No recursion or arbitraryexecutable introduced.",
+    "PermissionError injected only within diagnosticrun stop-error context; falsecleanup wrapper preserves host/secondaryfiniteerror and declaresTrue to deliberatelytrigger newpoll assertion. The injected killpg patch is restored before helperfinally, so rescue uses realownedgroup SIGKILL/wait2.",
+    "New regression requires the precise liveclient AssertionError and then pollnotNone/stdoutclosed. A successfulrun cannot silently substitute for the expectedfailure.",
+    "Finite assertion output contains only existing4validatederror/exit/verificationfields. No raw messages/privateURL/stdout/stderr are added. Originalsecret-exclusion and all originalassertions remain.",
+    "AST allotheroriginalmethod bodies unchanged; onlyhelper/immediateoverflow diagnosticmessage changed and twoadditiveactualclient tests. Runtimehelper byte-identical GitHEAD; caps/lifecycle/sharedslot/signer/scanner/plan untouched."
+  ],
+  "observed_author_evidence": {
+    "focused": "diagnostic-controls-003.log:17tests/0.921s/OK, read only; root owns session95471 and terminalstatus reporting.",
+    "prior_full": "full-native-002.log:353tests/82.985s/OK; terminal host83.187147s,returncode0. This is pre-final test-only correction proof.",
+    "frozen_inputs": "All75 full-native-002 prelaunch inputs remain current except this intentionally changedtest file; no current354full-suite claim.",
+    "retained_failure": "full-native-001:352/91.848s/1cleanup_verifiedfailure remains immutable, exactoriginalcause unknown."
+  },
+  "limits": [
+    "No reviewertests/network/scanner/runtime/CI rerun or product/doc/source edits.",
+    "Mockcontainercleanup is not actualDockerproof. Currentfinalmethod suite count354/native/Linux mandatoryCI pending.",
+    "No retrospectiveoriginalcausefix/mainapproval/deployment/goalcompletion claim."
+  ]
+}

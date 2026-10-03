@@ -1,0 +1,37 @@
+test_archive_failure_and_pin_divergence (test_trace.CanonicalLocalIntegration.test_archive_failure_and_pin_divergence) ... ok
+test_error_inside_trace_context_closes_node (test_trace.CanonicalLocalIntegration.test_error_inside_trace_context_closes_node) ... ok
+test_paired_replay_original_success_revert_and_logs (test_trace.CanonicalLocalIntegration.test_paired_replay_original_success_revert_and_logs) ... ok
+test_real_signature_reconstruction_all_types (test_trace.CanonicalLocalIntegration.test_real_signature_reconstruction_all_types) ... ok
+test_rejection_and_owned_node_cleanup (test_trace.CanonicalLocalIntegration.test_rejection_and_owned_node_cleanup) ... ok
+test_failed_mine_restores_timeout_and_exits_owned_context (test_trace.TraceMineDeadlineTests.test_failed_mine_restores_timeout_and_exits_owned_context) ... ok
+test_mine_never_gets_a_fresh_budget_when_deadline_is_near (test_trace.TraceMineDeadlineTests.test_mine_never_gets_a_fresh_budget_when_deadline_is_near) ... ok
+test_slow_mine_uses_remaining_primitive_budget_then_restores_reads (test_trace.TraceMineDeadlineTests.test_slow_mine_uses_remaining_primitive_budget_then_restores_reads) ... ok
+test_access_list_order_and_bounds (test_trace.TraceValidationTests.test_access_list_order_and_bounds) ... ok
+test_caller_mutation_cannot_change_admitted_plan (test_trace.TraceValidationTests.test_caller_mutation_cannot_change_admitted_plan) ... ok
+test_default_trace_has_no_native_fallback (test_trace.TraceValidationTests.test_default_trace_has_no_native_fallback) ... ok
+test_exact_plan_boundaries (test_trace.TraceValidationTests.test_exact_plan_boundaries) ... ok
+test_invalid_plan_refused_before_network_or_node (test_trace.TraceValidationTests.test_invalid_plan_refused_before_network_or_node) ... ok
+test_legacy_and_typed_encoding_vectors (test_trace.TraceValidationTests.test_legacy_and_typed_encoding_vectors) ... ok
+test_missing_archive_is_explicit (test_trace.TraceValidationTests.test_missing_archive_is_explicit) ... ok
+test_missing_state_and_bad_source_never_substitute_fixture (test_trace.TraceValidationTests.test_missing_state_and_bad_source_never_substitute_fixture) ... ok
+test_no_urls_code_or_source_guessing (test_trace.TraceValidationTests.test_no_urls_code_or_source_guessing) ... ok
+test_normal_and_upstream_transports_still_refuse_raw (test_trace.TraceValidationTests.test_normal_and_upstream_transports_still_refuse_raw) ... ok
+test_quantity_and_bytes (test_trace.TraceValidationTests.test_quantity_and_bytes) ... ok
+test_receipt_compares_ordered_bytes_but_not_block_hash (test_trace.TraceValidationTests.test_receipt_compares_ordered_bytes_but_not_block_hash) ... ok
+test_rlp_boundary_vectors (test_trace.TraceValidationTests.test_rlp_boundary_vectors) ... ok
+test_unsupported_signatures_and_budgets (test_trace.TraceValidationTests.test_unsupported_signatures_and_budgets) ... ok
+test_timeout_and_output_limit_clean_owned_worker (test_trace_worker_protocol.TraceHostProtocolTests.test_timeout_and_output_limit_clean_owned_worker) ... ok
+test_valid_response_binding_and_cleanup (test_trace_worker_protocol.TraceHostProtocolTests.test_valid_response_binding_and_cleanup) ... ok
+test_wrong_extra_corrupt_and_resealed_foreign_plan (test_trace_worker_protocol.TraceHostProtocolTests.test_wrong_extra_corrupt_and_resealed_foreign_plan) ... ok
+test_cli_bounded_default_and_explicit_native (test_trace_worker_protocol.TraceWorkerProtocolTests.test_cli_bounded_default_and_explicit_native) ... ok
+test_exact_envelope_and_full_input_hash (test_trace_worker_protocol.TraceWorkerProtocolTests.test_exact_envelope_and_full_input_hash) ... ok
+test_foreign_or_corrupt_artifact_refused (test_trace_worker_protocol.TraceWorkerProtocolTests.test_foreign_or_corrupt_artifact_refused) ... ok
+test_input_file_size_type_and_version (test_trace_worker_protocol.TraceWorkerProtocolTests.test_input_file_size_type_and_version) ... ok
+test_invalid_envelopes_cannot_launch_nodes (test_trace_worker_protocol.TraceWorkerProtocolTests.test_invalid_envelopes_cannot_launch_nodes) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 3.702s
+
+OK
+{"artifact_id": "9483fc6fff642f486094a3b913617d8716f4fd2e2f712c952db2d3efa557eef7", "execution_kind": "canonical_transaction_prefix_replay", "baseline_verified": false, "output": "unused"}
+{"artifact_id": "9483fc6fff642f486094a3b913617d8716f4fd2e2f712c952db2d3efa557eef7", "execution_kind": "canonical_transaction_prefix_replay", "baseline_verified": false, "output": "unused"}

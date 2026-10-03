@@ -1,0 +1,11 @@
+{
+  "full_baseline_outcomes_equal_prior_native": true,
+  "full_candidate_outcomes_equal_prior_native": true,
+  "same_plan": true,
+  "same_classification": true,
+  "same_raw_four_views": true,
+  "CLI_classification_equal": true,
+  "CLI_trace_id_equal": true,
+  "CLI_verified": true,
+  "CLI_observation_count": 4
+}

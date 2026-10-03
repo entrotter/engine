@@ -1,0 +1,51 @@
+{
+  "cli_code": 0,
+  "primary": null,
+  "command_seconds": 127.803665000014,
+  "passive_profile_only": true,
+  "owned": [
+    {
+      "kind": "ParentCache",
+      "pid": 4158,
+      "port": 59509,
+      "owner_reaped": true,
+      "returncode": 0,
+      "group_absent": true,
+      "port_closed": true,
+      "pipes_closed": true,
+      "stats": {
+        "requests": 1879,
+        "upstream": 970,
+        "hits": 903,
+        "entries": 964,
+        "bytes": 2647997,
+        "uncached": 6,
+        "errors": 6,
+        "refused_handlers": 0
+      }
+    },
+    {
+      "kind": "AnvilSession",
+      "pid": 4159,
+      "port": 59510,
+      "owner_reaped": true,
+      "returncode": 0,
+      "group_absent": true,
+      "port_closed": true,
+      "pipes_closed": true,
+      "stats": null
+    },
+    {
+      "kind": "AnvilSession",
+      "pid": 4744,
+      "port": 61632,
+      "owner_reaped": true,
+      "returncode": 0,
+      "group_absent": true,
+      "port_closed": true,
+      "pipes_closed": true,
+      "stats": null
+    }
+  ],
+  "telemetry_errors": []
+}

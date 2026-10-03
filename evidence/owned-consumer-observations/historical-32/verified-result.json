@@ -1,0 +1,142 @@
+{
+  "status": "passed",
+  "head": "e9d629e1e4bfdcefd678fe40387e4376b1374f3c",
+  "wrapper_artifact_id": "9084b6952866470fd20c3cbffab310feca5cacba5ba39cfaa9c6ffbb5caf80e9",
+  "wrapper_sha256": "7010848300c353310fb78dab7f377daea4226633e49af3c1a384bcb3a579ba9d",
+  "trace_artifact_id": "c4050aeb2f7db54bf17354da3756356ae809b8be9fabccacdb26745ae209826f",
+  "trace_report_sha256": "245d52672445bf16e8f19f685790e99f34e1a625a2aa5b98e5c36e15cbdfb82f",
+  "original_inputs": 32,
+  "full_block_inputs": 181,
+  "baseline_complete_receipts_equal": 32,
+  "candidate_executed": 31,
+  "skipped_index": 12,
+  "later_structural_receipt_differences": 19,
+  "consumer_raw_price_equals_producer_all4": true,
+  "prices": [
+    {
+      "branch": "baseline",
+      "phase": "before",
+      "consumer_price": 257082415000,
+      "producer_answer": 257082415000,
+      "head": {
+        "hash": "0xa818cfc5b0e63724a8c98bdd7df17ee0d0288954ea69ab0326bfdfa85caae3df",
+        "number": 18999891,
+        "timestamp": 1705172123
+      },
+      "code_identities": {
+        "oracle_code": {
+          "bytes": 3405,
+          "sha256": "dc8079e555204e0b2d7dc8382d6ebd71901f0b43e5940463e22b75b810a37728"
+        },
+        "source_code": {
+          "bytes": 9571,
+          "sha256": "ed698309290de3517c7201fcad9a9dbd4b8cde4a72c9add23129201f299c6f2b"
+        }
+      }
+    },
+    {
+      "branch": "baseline",
+      "phase": "after",
+      "consumer_price": 256292441874,
+      "producer_answer": 256292441874,
+      "head": {
+        "hash": "0xe8e2d184d92dd5b88e0a67321e22c1158ab95ac0e246dc4b721496a81d8c7ef6",
+        "number": 18999892,
+        "timestamp": 1705172135
+      },
+      "code_identities": {
+        "oracle_code": {
+          "bytes": 3405,
+          "sha256": "dc8079e555204e0b2d7dc8382d6ebd71901f0b43e5940463e22b75b810a37728"
+        },
+        "source_code": {
+          "bytes": 9571,
+          "sha256": "ed698309290de3517c7201fcad9a9dbd4b8cde4a72c9add23129201f299c6f2b"
+        }
+      }
+    },
+    {
+      "branch": "candidate",
+      "phase": "before",
+      "consumer_price": 257082415000,
+      "producer_answer": 257082415000,
+      "head": {
+        "hash": "0xa818cfc5b0e63724a8c98bdd7df17ee0d0288954ea69ab0326bfdfa85caae3df",
+        "number": 18999891,
+        "timestamp": 1705172123
+      },
+      "code_identities": {
+        "oracle_code": {
+          "bytes": 3405,
+          "sha256": "dc8079e555204e0b2d7dc8382d6ebd71901f0b43e5940463e22b75b810a37728"
+        },
+        "source_code": {
+          "bytes": 9571,
+          "sha256": "ed698309290de3517c7201fcad9a9dbd4b8cde4a72c9add23129201f299c6f2b"
+        }
+      }
+    },
+    {
+      "branch": "candidate",
+      "phase": "after",
+      "consumer_price": 257082415000,
+      "producer_answer": 257082415000,
+      "head": {
+        "hash": "0x1732adeeead9a5b1c6a8b673b06a611774c1395efbcfb495a00f2cb3a58eab92",
+        "number": 18999892,
+        "timestamp": 1705172135
+      },
+      "code_identities": {
+        "oracle_code": {
+          "bytes": 3405,
+          "sha256": "dc8079e555204e0b2d7dc8382d6ebd71901f0b43e5940463e22b75b810a37728"
+        },
+        "source_code": {
+          "bytes": 9571,
+          "sha256": "ed698309290de3517c7201fcad9a9dbd4b8cde4a72c9add23129201f299c6f2b"
+        }
+      }
+    }
+  ],
+  "classification": {
+    "baseline_price": 256292441874,
+    "baseline_receipts_verified": true,
+    "candidate_price": 257082415000,
+    "complete_price_views": true,
+    "price_difference": 789973126,
+    "unproven_reasons": []
+  },
+  "replay_seconds": 127.599511,
+  "command_seconds": 127.803665000014,
+  "host_seconds": 127.92183858319186,
+  "original_replay_cap_seconds": 150,
+  "cache": {
+    "requests": 1879,
+    "upstream": 970,
+    "hits": 903,
+    "entries": 964,
+    "bytes": 2647997,
+    "uncached": 6,
+    "errors": 6,
+    "refused_handlers": 0
+  },
+  "owned_three_groups_ports_pipes_closed": true,
+  "evidence_sha256": {
+    "readiness.json": "57d3359655a5964db816977d792085e26952c050a9e004a2a0ce613184152626",
+    "plan.json": "2e5e8dee72e27c327ffd77e259962e7d96f1ea972a2f98118b508cda64c3bc94",
+    "cli-child.py": "72a86a72f628fc07e106ec5cc6f6822b8f98149ed408a6243db21e13d4cedc73",
+    "run.py": "e6c340d619b0a52ea7f2b9945facaf72407977eb568c6d1d8ab5c91fe1a7ca82",
+    "stdout.log": "7d412afaff2d27a271f2cf624fbead45df89120573e83c02b0fa3a71265bc831",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "child-terminal.json": "91af61969ea41d3d62de6f5de468a00bb0a5874521e0e41a0d20b548c8bde937",
+    "host-terminal.json": "fb34b6e6d8077f849688ae5f96faf6b45e812eec164a02dc7984e76b7fc7f40c",
+    "owned-ledger.json": "390823a6da65b58c2d42a9e494eb91635ad4737c0b199a1b8dda36e824b93049"
+  },
+  "limits": [
+    "Read-only Aave price dependence; no signed consumer action/strategy/profit.",
+    "Native explicit mode, not CPU/RSS sandbox or default Docker32.",
+    "Partial32 of181, no fullblock/root/opcode proof or provider authentication.",
+    "Passive Python lifecycle profile records ownership; no runtime function replacement or extra RPC, timing not a speed benchmark.",
+    "Cache aggregate errors, if any, retain unknown cause."
+  ]
+}

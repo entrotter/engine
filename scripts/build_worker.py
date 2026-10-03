@@ -351,6 +351,7 @@ def prepare_image(
         shutil.copyfile(path, package / path.name)
         sources[path.name] = hashlib.sha256(path.read_bytes()).hexdigest()
     shutil.copyfile(ROOT / "container/Dockerfile", context / "Dockerfile")
+    base_image = pinned_base_image(context / "Dockerfile")
     sources["Dockerfile"] = hashlib.sha256(
         (context / "Dockerfile").read_bytes()
     ).hexdigest()
@@ -384,9 +385,27 @@ def prepare_image(
         "anvil_binary_sha256": anvil_digest,
         "architecture": architecture,
         "published": False,
-        "base_image": "cgr.dev/chainguard/python@sha256:011e73b4e30e0fe9407a42b82a920b4fa13ebc0bf029a48b714f950df254ca20",
+        "base_image": base_image,
     }
     write_manifest(root / "manifest.json", result)
+
+
+def pinned_base_image(dockerfile: Path) -> str:
+    """Bind provenance to the copied flat, single-stage immutable Python base."""
+    lines = dockerfile.read_text().splitlines()
+    first = lines[0] if lines else ""
+    prefix = "FROM cgr.dev/chainguard/python@sha256:"
+    digest = first.removeprefix(prefix)
+    directives = [line.split(maxsplit=1)[0].upper() for line in lines if line.strip()]
+    if (
+        not first.startswith(prefix)
+        or len(digest) != 64
+        or any(character not in "0123456789abcdef" for character in digest)
+        or directives.count("FROM") != 1
+        or any(line.rstrip().endswith("\\") for line in lines)
+    ):
+        raise ValueError("Worker Dockerfile must use one immutable pinned base")
+    return first.removeprefix("FROM ")
 
 
 if __name__ == "__main__":

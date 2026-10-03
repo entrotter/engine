@@ -17,6 +17,63 @@ class BoundedCanonicalReplay(unittest.TestCase):
     def setUpClass(cls):
         cls.image = os.environ['ENTROTTER_WORKER_IMAGE']
 
+    def test_actual_observed_entrypoint_replays_and_preserves_unproven_prices(self):
+        from entrotter_engine.consumer_observations import verify_observed_trace
+
+        fixture = json.loads((ROOT / 'tests/data/canonical-local-inputs.json').read_text())
+        code = '''import io,json,os,socket
+from unittest.mock import patch
+from urllib.parse import urlsplit
+from entrotter_engine.evm import AnvilSession
+from entrotter_engine.rpc import RPC
+from entrotter_engine.worker_protocol import encode_observed_trace_request
+from entrotter_engine._isolated_worker import main
+fixture=FIXTURE
+nodes=[]
+def replay_node(*args,**kwargs):
+    node=AnvilSession(*args,**kwargs);nodes.append(node);return node
+with AnvilSession(trace=True) as source:
+    rpc=source.rpc
+    setup=RPC(rpc.url,local=True)
+    setup.call('anvil_setBalance',[fixture['actor'],hex(int(fixture['actor_balance_wei']))])
+    for address,bytecode in fixture['local_contracts'].items():setup.call('anvil_setCode',[address,bytecode])
+    rpc.call('evm_setNextBlockTimestamp',[fixture['parent_timestamp']]);rpc.call('evm_mine')
+    for raw in fixture['raw_transactions']:rpc.call('eth_sendRawTransaction',[raw])
+    rpc.call('evm_setNextBlockTimestamp',[fixture['target_timestamp']]);rpc.call('evm_mine')
+    block=rpc.call('eth_getBlockByNumber',['latest',False])
+    plan={'trace_version':'0.1.0','source':{'chain_id':1,'block_number':int(block['number'],16),'block_hash':block['hash']},'through_index':2,'skip_indices':[0]}
+    raw=encode_observed_trace_request(plan)
+    os.environ['ENTROTTER_RPC_URL']=rpc.url
+    output=io.BytesIO()
+    stdout=io.TextIOWrapper(output,encoding='utf-8')
+    with patch('sys.stdin',io.TextIOWrapper(io.BytesIO(raw))),patch('sys.stdout',stdout),patch('entrotter_engine.trace.AnvilSession',side_effect=replay_node):
+        status=main()
+    stdout.flush()
+    result=json.loads(output.getvalue())
+    if status!=0:raise RuntimeError('Observed entrypoint failed')
+for node in nodes:
+    assert node.process.poll() is not None
+    with socket.socket() as connection:
+        connection.settimeout(.2)
+        assert connection.connect_ex(('127.0.0.1',urlsplit(node.rpc.url).port))!=0
+    try:os.killpg(node.process.pid,0)
+    except ProcessLookupError:pass
+    else:raise AssertionError('Owned group remains')
+print(json.dumps({'envelope':result,'request_id':__import__('hashlib').sha256(raw).hexdigest(),'closed_nodes':len(nodes)}))
+'''.replace('FIXTURE', repr(fixture))
+        result, _ = self.probe(code)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        output = json.loads(result.stdout)
+        self.assertEqual(output['envelope']['request_id'], output['request_id'])
+        self.assertEqual(output['closed_nodes'], 2)
+        observed = output['envelope']['report']
+        self.assertTrue(verify_observed_trace(observed))
+        self.assertTrue(observed['trace_report']['baseline_verified'])
+        self.assertEqual([o['status'] for o in observed['trace_report']['candidate']['outcomes']], ['skipped', 'nonce_conflict', 'nonce_conflict'])
+        self.assertEqual(len(observed['observations']), 4)
+        self.assertFalse(observed['classification']['complete_price_views'])
+        self.assertIsNone(observed['classification']['price_difference'])
+
     def test_actual_worker_reconstructs_original_receipts_and_nonce_conflicts(self):
         fixture=json.loads((ROOT/'tests/data/canonical-local-inputs.json').read_text())
         code='''import json,os

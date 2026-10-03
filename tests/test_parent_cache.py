@@ -17,6 +17,8 @@ from entrotter_engine._parent_cache import (
     MAX_CACHE,
     MAX_ENTRY,
     MAX_REQUESTS,
+    Server,
+    Handler,
     result_bytes,
 )
 from entrotter_engine.parent_cache import ParentCache
@@ -168,6 +170,92 @@ class ParentCacheTests(unittest.TestCase):
         for thread in threads:
             thread.join(5)
             self.assertFalse(thread.is_alive(), 'Bounded reply thread remained active')
+
+    def test_brief_handler_overlap_admits_next_read_without_extra_active_handlers(self):
+        bridge = Bridge(self.provider.url, PARENT, time.monotonic() + 30)
+        server = Server(bridge, "0" * 32)
+        entered = threading.Event()
+        condition = threading.Condition()
+        active = 0
+        peak = 0
+        accepted = 0
+        handle = Handler.handle
+        dispatch = server.process_request
+        idle = []
+
+        def counted(handler):
+            nonlocal active, peak
+            with condition:
+                active += 1
+                peak = max(peak, active)
+                condition.notify_all()
+            try:
+                handle(handler)
+            finally:
+                with condition:
+                    active -= 1
+                    condition.notify_all()
+
+        def accepting(connection, address):
+            nonlocal accepted
+            accepted += 1
+            if accepted == 5:
+                entered.set()
+            dispatch(connection, address)
+
+        def release_one():
+            if entered.wait(2):
+                time.sleep(0.02)
+                idle[0].shutdown(socket.SHUT_RDWR)
+                idle[0].close()
+
+        serving = threading.Thread(target=server.serve_forever)
+        releaser = threading.Thread(target=release_one)
+        try:
+            with (
+                patch.object(Handler, "handle", counted),
+                patch.object(server, "process_request", side_effect=accepting),
+            ):
+                serving.start()
+                for _ in range(4):
+                    idle.append(socket.create_connection(server.server_address, timeout=1))
+                with condition:
+                    self.assertTrue(condition.wait_for(lambda: active == 4, timeout=2))
+                releaser.start()
+                url = "http://127.0.0.1:" + str(server.server_port) + "/" + "0" * 32
+                value = json.loads(post(url, request("eth_chainId", [], rid=5)))
+                self.assertEqual(value, {"jsonrpc": "2.0", "id": 5, "result": "0x01"})
+                self.assertEqual(bridge.stats["refused_handlers"], 0)
+                self.assertEqual(peak, 4)
+                self.assertEqual(bridge.stats["upstream"], 1)
+        finally:
+            if releaser.ident is not None:
+                releaser.join(2)
+            for connection in idle:
+                connection.close()
+            server.shutdown()
+            server.server_close()
+            serving.join(2)
+        self.assertFalse(serving.is_alive())
+        self.assertFalse(releaser.is_alive())
+
+    def test_persistent_handler_pressure_refuses_without_extending_deadline(self):
+        bridge = Bridge(self.provider.url, PARENT, time.monotonic() + 0.02)
+        server = Server(bridge, "0" * 32)
+        for _ in range(4):
+            self.assertTrue(server.slots.acquire(blocking=False))
+        connection, peer = socket.socketpair()
+        started = time.monotonic()
+        try:
+            server.process_request(connection, ("127.0.0.1", 1))
+            self.assertEqual(bridge.stats["refused_handlers"], 1)
+            self.assertLess(time.monotonic() - started, 0.2)
+            peer.settimeout(0.2)
+            self.assertEqual(peer.recv(1), b"")
+        finally:
+            connection.close()
+            peer.close()
+            server.server_close()
 
     def duplicate_replies(self, bridge, first, second):
         responses={};initial=len(self.provider.calls)

@@ -1,0 +1,63 @@
+{
+  "status": "no_actionable_findings_in_focused_source_review",
+  "reviewer": "independent child review_cli_agent",
+  "source_hashes": {
+    "src/entrotter_engine/_parent_cache.py": "56844c41bfdab2ec43e741942726b88af95702806a2a8be1476f873deb1b90da",
+    "tests/test_parent_cache.py": "689688e0bc83ab1203dc12a875b9c83641f1a65d1dbdf9b40f099766c73f53dc",
+    "security-reviewed.json": "2abe1bd0759add985d1fa4fbb539998e311de317cb849f86b1c21393e069dd98",
+    "container/Dockerfile": "2fc42c30c4aac2e760db25c5306def65d294236307bd09348ee8646f83a33fd1",
+    "README.md": "0825ab5ec10f2153e67ab4aac87f20dacbe7f97b6fe5cd7c3ee006da3b09fb42",
+    "STATUS.md": "5751afdb7232e9ad7a3460bc9995ed49b51f05357deec6109eabf6150636326a"
+  },
+  "actual_inspection": [
+    "Cache runtime delta: explicit request_queue_size=MAX_HANDLERS fixes requested backlog independently of Python defaults; accepting thread waits for one semaphore slot for min(100ms, remainingdeadline), refuses if expired/sustained pressure; no fifth active handler, newthread/pendingqueue/method/cachecapacity extension.",
+    "Whole cache AST outside changed Server.process_request/newconstant/explicitbacklog identical to HEAD; per-key coalescing/cache/raw-token/owned-read/proxy/deadline machinery preserved.",
+    "Real HTTP regression fills four idle handlers, releases one after fifth accept, preserves originalresponse/freshID/upstream1 and peakactive4; sustaineddeadline socketpair control preserves refusal/closedpeer.",
+    "Policy changes exactly current cache source digest; all26source bindings valid; all25 findings/rationales exact equal HEAD, fullrawBandit25/errors0 retained.",
+    "Read root author raw before/after/nativecontrol/fullparentcache andstaticlogs; no child tests/scanner/runtime/process/network rerun.",
+    "Own base/docs edits held: Dockerfile verifiedimmutablebase; README details100ms and remote31OS scope; STATUS currentbase pendingactualworkerCI; no historical evidence changes."
+  ],
+  "author_evidence": {
+    "before-real-http.log": {
+      "sha256": "0659f2e9a20dd9db0045b211b202dcc99534ab1919d64b8ea51c1cf4591004f9",
+      "tail": "equest.py\", line 1323, in do_open\n    r = h.getresponse()\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py\", line 1428, in getresponse\n    response.begin()\n    ~~~~~~~~~~~~~~^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py\", line 331, in begin\n    version, status, reason = self._read_status()\n                              ~~~~~~~~~~~~~~~~~^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py\", line 292, in _read_status\n    line = str(self.fp.readline(_MAXLINE + 1), \"iso-8859-1\")\n               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py\", line 719, in readinto\n    return self._sock.recv_into(b)\n           ~~~~~~~~~~~~~~~~~~~~^^^\nConnectionResetError: [Errno 54] Connection reset by peer\n\n----------------------------------------------------------------------\nRan 2 tests in 1.517s\n\nFAILED (errors=1)\n"
+    },
+    "after-real-http.log": {
+      "sha256": "653e5ff99b7f6baf3a4871db6063d874763d4d7a413e31038d8314c9e04b7ffd",
+      "tail": "test_brief_handler_overlap_admits_next_read_without_extra_threads (test_parent_cache.ParentCacheTests.test_brief_handler_overlap_admits_next_read_without_extra_threads) ... ok\ntest_persistent_handler_pressure_refuses_without_extending_deadline (test_parent_cache.ParentCacheTests.test_persistent_handler_pressure_refuses_without_extending_deadline) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 1.079s\n\nOK\n"
+    },
+    "parent-cache-suite.log": {
+      "sha256": "70c0d6f4f1bf927c6112469cb00f86a5736e8eb50c6be6b6e7bb0fa9a188f365",
+      "tail": "he.ParentCacheTests.test_receipt_and_volatile_reads_remain_independently_concurrent) ... ok\ntest_receipt_fallback_always_forwards_without_cache (test_parent_cache.ParentCacheTests.test_receipt_fallback_always_forwards_without_cache) ... ok\ntest_request_limits_unknown_writes_and_duplicate_keys (test_parent_cache.ParentCacheTests.test_request_limits_unknown_writes_and_duplicate_keys) ... ok\ntest_same_key_waiter_admitted_during_read_and_coalesces_raw_result (test_parent_cache.ParentCacheTests.test_same_key_waiter_admitted_during_read_and_coalesces_raw_result) ... ok\ntest_strict_response_ids_duplicate_keys_and_untrusted_types (test_parent_cache.ParentCacheTests.test_strict_response_ids_duplicate_keys_and_untrusted_types) ... ok\ntest_wait_failure_still_kills_reaps_and_closes_owned_process (test_parent_cache.ParentCacheTests.test_wait_failure_still_kills_reaps_and_closes_owned_process) ... ok\n\n----------------------------------------------------------------------\nRan 26 tests in 23.817s\n\nOK\n"
+    },
+    "owned-missing-code-after.log": {
+      "sha256": "358c0d5f67a8f2391171b5c7df77b98c77c3c8fb6b4569887a24d9c7f2bb2dcf",
+      "tail": "test_actual_missing_aave_code_reads_unproven_without_replay_fallback (test_consumer_observations_evm.ConsumerObservationEVMTests.test_actual_missing_aave_code_reads_unproven_without_replay_fallback) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 1.659s\n\nOK\n"
+    },
+    "security-before-policy-refresh.log": {
+      "sha256": "97c2a1a871cf8394c3bbb6902c245eb37fb45c685d3b5c797420e7c30d31c411",
+      "tail": "Traceback (most recent call last):\n  File \"$WORKSPACE_ROOT/.worktrees/engine-consumer-observations/scripts/check_security.py\", line 106, in <module>\n    main()\n    ~~~~^^\n  File \"$WORKSPACE_ROOT/.worktrees/engine-consumer-observations/scripts/check_security.py\", line 96, in main\n    raise ValueError(\n        \"Production sources changed; refresh the security review with the full scan\"\n    )\nValueError: Production sources changed; refresh the security review with the full scan\n"
+    },
+    "security-evaluation.json": {
+      "sha256": "dc4d0b5bd56fc7dcbcfcf520480cc1fcf855dee4da0911f7983c62760e8c2e8e",
+      "tail": "{\n  \"scan\": \"all26sources/25exactfindings retained/0nosec/0skips/0errors\",\n  \"refreshed_source\": {\n    \"src/entrotter_engine/_parent_cache.py\": \"4298ac9093ac11c31ce0e54f7b34ecdb4cc61e15bc10868e7a1524e4a628c5e0\"\n  },\n  \"finding_rationales_unchanged\": true,\n  \"scan_sha256\": \"3a3cc6fd1ae5db00b835b0934236d3d0e1853dd1e6f3d5d6503cc4ec4a4da484\"\n}\n"
+    },
+    "lint.log": {
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": "All checks passed!\n"
+    },
+    "format.log": {
+      "sha256": "cdd24684b33e5200a213c89093e8da4cb81a0de0085a4684d20923e852610123",
+      "tail": "26 files already formatted\n"
+    },
+    "types.log": {
+      "sha256": "5107f9446510710cfc458474a6bae8746bf7ed9a2bccb85b1de3b0a14e84c8ad",
+      "tail": "Success: no issues found in 26 source files\n"
+    }
+  },
+  "limits": [
+    "Original Linux missing-code admission failure underlyingcause remains unproven; macOS control and targetedHTTP evidence do not retroactively identify it.",
+    "Root full352native/newwheel/currentCI still pending at review; remotebase scans do not prove currentbuiltworkercompatibility.",
+    "This code review is not independent humanGitHubapproval, deployment or whole-goal completion."
+  ]
+}

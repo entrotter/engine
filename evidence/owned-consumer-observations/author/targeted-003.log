@@ -1,0 +1,38 @@
+test_cli_requires_native_and_never_defaults_to_worker (test_consumer_observations.ConsumerObservationTests.test_cli_requires_native_and_never_defaults_to_worker) ... ok
+test_cli_stop_no_export (test_consumer_observations.ConsumerObservationTests.test_cli_stop_no_export) ... ok
+test_empty_code_and_malformed_supported_getters_are_unproven (test_consumer_observations.ConsumerObservationTests.test_empty_code_and_malformed_supported_getters_are_unproven) ... FAIL
+test_fifo_loader_refuses_without_blocking (test_consumer_observations.ConsumerObservationTests.test_fifo_loader_refuses_without_blocking) ... ok
+test_fixed_dynamic_source_and_nine_reads_with_timeout_restore (test_consumer_observations.ConsumerObservationTests.test_fixed_dynamic_source_and_nine_reads_with_timeout_restore) ... ok
+test_four_unique_phases_duplicate_and_fifth_never_read (test_consumer_observations.ConsumerObservationTests.test_four_unique_phases_duplicate_and_fifth_never_read) ... ok
+test_fully_resealed_contradictions_refused (test_consumer_observations.ConsumerObservationTests.test_fully_resealed_contradictions_refused) ... ok
+test_guard_restores_handlers_and_stops_signal (test_consumer_observations.ConsumerObservationTests.test_guard_restores_handlers_and_stops_signal) ... ok
+test_hostile_error_finite_and_no_source_no_dependent_calls (test_consumer_observations.ConsumerObservationTests.test_hostile_error_finite_and_no_source_no_dependent_calls) ... ok
+test_invalid_phase_and_deadline_refuse_before_rpc (test_consumer_observations.ConsumerObservationTests.test_invalid_phase_and_deadline_refuse_before_rpc) ... ok
+test_late_success_does_not_continue_past_shared_deadline (test_consumer_observations.ConsumerObservationTests.test_late_success_does_not_continue_past_shared_deadline) ... ok
+test_no_caller_callback_admission (test_consumer_observations.ConsumerObservationTests.test_no_caller_callback_admission) ... ok
+test_read_completeness_separate_from_replay_verification (test_consumer_observations.ConsumerObservationTests.test_read_completeness_separate_from_replay_verification) ... ok
+test_stop_through_actual_rpc_mapping_restores_timeout (test_consumer_observations.ConsumerObservationTests.test_stop_through_actual_rpc_mapping_restores_timeout) ... ok
+test_strict_abi_and_code_bounds (test_consumer_observations.ConsumerObservationTests.test_strict_abi_and_code_bounds) ... ok
+test_thread_context_refused_before_execution (test_consumer_observations.ConsumerObservationTests.test_thread_context_refused_before_execution) ... ok
+test_unsupported_source_unit_and_unverified_replay_stay_unproven (test_consumer_observations.ConsumerObservationTests.test_unsupported_source_unit_and_unverified_replay_stay_unproven) ... ok
+test_wrapper_receipt_preservation_classification_and_export (test_consumer_observations.ConsumerObservationTests.test_wrapper_receipt_preservation_classification_and_export) ... ok
+test_actual_missing_aave_code_reads_unproven_without_replay_fallback (test_consumer_observations_evm.ConsumerObservationEVMTests.test_actual_missing_aave_code_reads_unproven_without_replay_fallback) ... ok
+test_actual_sigterm_before_after_and_candidate_stop_cleanup (test_consumer_observations_evm.ConsumerObservationEVMTests.test_actual_sigterm_before_after_and_candidate_stop_cleanup) ... ok
+test_real_cli_exports_verified_wrapper (test_consumer_observations_evm.ConsumerObservationEVMTests.test_real_cli_exports_verified_wrapper) ... ok
+test_real_no_omission_reads_complete_with_zero_price_difference (test_consumer_observations_evm.ConsumerObservationEVMTests.test_real_no_omission_reads_complete_with_zero_price_difference) ... ok
+test_real_paired_receipts_price_effect_and_exact_original_source (test_consumer_observations_evm.ConsumerObservationEVMTests.test_real_paired_receipts_price_effect_and_exact_original_source) ... ok
+test_sealing_stop_occurs_after_real_owned_cleanup (test_consumer_observations_evm.ConsumerObservationEVMTests.test_sealing_stop_occurs_after_real_owned_cleanup) ... ok
+
+======================================================================
+FAIL: test_empty_code_and_malformed_supported_getters_are_unproven (test_consumer_observations.ConsumerObservationTests.test_empty_code_and_malformed_supported_getters_are_unproven)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/Entrotter/.worktrees/engine-consumer-observations/tests/test_consumer_observations.py", line 297, in test_empty_code_and_malformed_supported_getters_are_unproven
+    self.assertEqual(len(collector.rows[0]["errors"]), 6)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 7 != 6
+
+----------------------------------------------------------------------
+Ran 24 tests in 5.570s
+
+FAILED (failures=1)

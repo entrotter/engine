@@ -1,0 +1,64 @@
+{
+  "status": "independent_test_cleanup_fix_and_doc_source_review_pass_latest_CI_pending",
+  "observed_at": "2026-10-02T14:54:46.312770+00:00",
+  "base": "d300a24fe2aaa0a9d23dc36383108f426f87e159",
+  "test_sha256": "b31c647b3ec9a7a86fb4b8611cf76c676d1b4201c55360d474edd82b86399e58",
+  "production_scripts_policy_unchanged": true,
+  "initial_EVM_CI": {
+    "run": 37020975655,
+    "tests": 349,
+    "seconds": 82.348,
+    "failures": 1,
+    "primary": "Canonical trace eth_getTransactionCount rejected",
+    "secondary": "two-node assertion masked primary and skipped later cache assertions",
+    "original_nonce_rejection_cause": "unknown"
+  },
+  "fix": "Inspect all actually owned resources before count; preserve unexpected primary exceptions; intended cancellation cleanup failure still fails the test. Fixed finite diagnostics exclude raw URLs, request values and upstream messages.",
+  "focused_actual": {
+    "existing_missing_code": {
+      "tests": 1,
+      "seconds": 1.464,
+      "owned_replay_nodes": 2,
+      "owned_cache": 1,
+      "passed": true
+    },
+    "new_primary_failure_regression": {
+      "tests": 1,
+      "seconds": 1.302,
+      "owned_replay_nodes": 1,
+      "owned_cache": 1,
+      "original_exception_identity_preserved": true,
+      "all_closure_checks_completed": true,
+      "private_text_and_URL_absent": true,
+      "passed": true
+    }
+  },
+  "current_suite": {
+    "unit_methods": 20,
+    "owned_synthetic_methods": 7,
+    "whole_native_tests_expected": 350,
+    "whole_current_native_suite_pass_claim": false
+  },
+  "metadata_scope_discrepancy": "New regression terminal retains an old copied descriptive missing-code label. Actual frozen command and log bind the new regression; original terminal remains immutable.",
+  "log_sha256": {
+    "ci-evm-focused-after.log": "5942fd0aa72527ec3f03a5d8c0553915599c24ef9d7d5f6edac88d2154bab007",
+    "ci-evm-primary-regression-after.log": "17895e5bd599eb132636a966563971a046aa0761df5c3359216a437317392a12"
+  },
+  "readiness_original_sha256": "67c31cb13ae859f5a576076f85f28314ecfa3c8b0a2c5feea1db74a58e1387f7",
+  "doc_fix": {
+    "URLs": 9,
+    "documents": 5,
+    "unique_raw_targets": 8,
+    "preserved_line_ranges": 3,
+    "same_owner_ref_path_and_source_blob": true,
+    "unchanged_pinned_checker_targets_passed": 8,
+    "independent_review_sha256": "2dd0aae12ff8a860a8843a4ff7f08808de86240408bd57d9df02ca2842b0123f"
+  },
+  "limits": [
+    "The two successful focused runs do not explain the original Linux nonce failure",
+    "Initial isolated Docker metadata verification also failed; category/cause unknown, no quota/gate relaxed",
+    "Previous plain full349 pass is historical to the new test-only change; fresh whole350 mandatory CI required",
+    "Public package and production observations remain unchanged; supported historical32 command unexecuted",
+    "No main merge, human approval, deployment or archive/model call"
+  ]
+}

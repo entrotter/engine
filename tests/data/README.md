@@ -1,7 +1,7 @@
 # Frozen local agent replay fixture
 
 `agent-recorded-local.json` is a byte-for-byte copy of the public
-[recorded local model report](https://github.com/entrotter/entrotter/blob/062cce134ad1e55396587992823654705a669849/evidence/agent-local-codex.json).
+[recorded local model report](https://raw.githubusercontent.com/entrotter/entrotter/062cce134ad1e55396587992823654705a669849/evidence/agent-local-codex.json).
 Its artifact ID is
 `1d1de88d01cbe23c494f6a6f7ee7127d63629baac071def58c067506ddf5893b`.
 It originated with engine `bb8b3e8d32c7cbd49629d337758f30bfdf805045`
